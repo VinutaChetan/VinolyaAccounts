@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @bank.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @bank.address %>
+</p>
+
+<p>
+  <strong>Manager:</strong>
+  <%= @bank.manager %>
+</p>
+
+<p>
+  <strong>Contact details:</strong>
+  <%= @bank.contact_details %>
+</p>
+
+<p>
+  <strong>Branch:</strong>
+  <%= @bank.branch.name %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @bank.company.name %>
+</p>
+
+<% if current_user.is_admin? %>
+  <%= link_to 'Edit', edit_bank_path(@bank) %> |
+<%end%>  
+<%= link_to 'Back', banks_path %>

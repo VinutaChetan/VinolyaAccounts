@@ -1,0 +1,46 @@
+<%= form_for(@account) do |f| %>
+  <% if @account.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@account.errors.count, "error") %> prohibited this account from being saved:</h2>
+
+      <ul>
+      <% @account.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :acc_no %><br>
+    <%= f.text_field :acc_no %>
+  </div>
+  <div class="field">
+    <%= f.label :opening_balance %><br>
+    <%= f.text_field :opening_balance %>
+  </div>
+  <div class="field">
+    <%= f.label :bank_id %><br>
+    <%= f.collection_select :bank_id,Bank.all,:id,:name, prompt:"select Bank" %><br/>
+  </div>
+  <div class="field">
+    <%= f.label :branch_id %><br>
+    <%= f.collection_select :branch_id,Branch.all,:id,:name, prompt:"select Branch" %><br/>
+  </div>
+  <div class="field">
+    <%= f.label :acc_type %><br>
+
+    <%= f.radio_button :acc_type, 'Current', :checked => true %> 
+    <%= f.label :Current %>
+    
+    <%= f.radio_button :acc_type, 'Over Draft' %>
+    <%= f.label :OverDraft %>
+  </div>
+  <div class="field">
+    <%= f.label :current_balance %><br>
+    <%= f.text_field :current_balance %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

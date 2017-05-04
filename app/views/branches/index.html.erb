@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+<h1>Listing Branches</h1>
+
+<table class ="table table-striped" id="myTable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @branches.each do |branch| %>
+      <tr>
+        <td><%= branch.name %></td>
+        <td><%= link_to 'Show', branch %></td>
+        <% if current_user.is_admin? %>
+          <td><%= link_to 'Edit', edit_branch_path(branch) %></td>
+          <td><%= link_to 'Destroy', branch, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>  
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% if current_user.is_admin? %>
+  <%= link_to 'New Branch', new_branch_path %>
+<%end%>
