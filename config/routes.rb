@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
+  get 'companies/fake'
+  resources :transactions
+  resources :perticulars
   devise_for :users
   resources :accounts
   resources :banks
   resources :branches
   resources :companies
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

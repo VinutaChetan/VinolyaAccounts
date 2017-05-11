@@ -15,10 +15,12 @@
       <tr>
         <td><%= company.name %></td>
         <td><%= link_to 'Show', company %></td>
-        <% if current_user.is_admin? %>
+        <% if can? :upadte, company %> 
           <td><%= link_to 'Edit', edit_company_path(company) %></td>
+        <%end%>
+        <% if can? :destroy, company %>   
           <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <%end%>  
+        <%end%>    
       </tr>
     <% end %>
   </tbody>
@@ -26,6 +28,6 @@
 
 <br>
 
-<% if current_user.is_admin? %>
+<% if current_user.is_admin?%>
   <%= link_to 'New Company', new_company_path %>
 <%end%>

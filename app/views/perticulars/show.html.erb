@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @perticular.name %>
+</p>
+
+<% if current_user.is_admin?%>
+	<%= link_to 'Edit', edit_perticular_path(@perticular) %> |
+<%end%>
+<%= link_to 'Back', perticulars_path %>

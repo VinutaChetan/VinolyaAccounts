@@ -22,6 +22,7 @@ class CompaniesController < ApplicationController
   def edit
   end
 
+
   # POST /companies
   # POST /companies.json
   def create

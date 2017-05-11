@@ -1,0 +1,90 @@
+<p id="notice"><%= notice %></p>
+  
+<h1>Listing Transactions</h1>
+
+
+<%Transaction.list_view.each do |key,month| %>
+      <h2><%= key  %> transactions</h2><br/>
+       <% month.each do |mon| %>
+          <%mon.each do |key,value|%>
+              <h3><%=key%></h3><br/>
+              <% if value == []%>
+                  <h3>No Transactions Found</h3>
+              <%else%>    
+                <div class="container">
+                  <table class ="table table-striped" id="myTable">
+                    <thead>
+                      <tr>
+                        <th>Transaction date</th>
+                        <th>Account Number</th>
+                        <th>Perticular</th>
+                        <th>Transaction type</th>
+                        <th>Amount</th>
+                        <th>Remark</th>
+                        <th>Transaction kind</th> 
+                      </tr>
+                    </thead>
+
+                    <tbody id="myTable">
+
+                      <% value.order(:transaction_date) .each do |val| %>
+                       
+                      <tr>
+                        <td><%= val.transaction_date.to_s(:long) %></td>
+                        <td><%=val.account.acc_no%>
+                        <td><%= val.perticular_id %></td>
+                        <td><%= val.transaction_type %></td>
+                        <td><%= val.amount%></td>
+                        <td><%= val.remark %></td>
+                        <td><%= val.transaction_kind %></td>
+                      </tr> 
+                      <%end%>
+                    </tbody>
+                  </table>
+              <% end %><br/>
+
+              
+
+              <%if value == []%>
+                 <h2> "No chart Found"</h2>
+              <%else %>  
+              <% data ={}
+             
+              sum_debit=0
+              sum_credit=0
+
+             value.each do |val|
+              if(val.transaction_type=="debit")
+                sum_debit=sum_debit+val.amount
+              else 
+                sum_credit=sum_credit+val.amount
+              end 
+              data["debit"] =sum_debit
+              data["credit"]=sum_credit
+            end %>
+           <%end%>
+            
+            <%=bar_chart(data) %>
+            <%=pie_chart(data) %>
+
+         
+          <%end%>
+       <%end%>
+<%end%> 
+
+
+
+<br>
+
+<% if current_user.is_admin?%>
+  <%= link_to 'New Transaction', new_transaction_path %>
+<%end%>
+
+
+
+
+
+
+
+
+

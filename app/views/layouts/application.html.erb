@@ -4,6 +4,7 @@
   <title>VinolyaAccounts</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
 
   <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <link href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -47,9 +48,13 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+        <li><%=link_to "Company",companies_path %></li>
         <li><%=link_to "Bank",banks_path %></li>
         <li><%=link_to "Branch",branches_path %></li>
         <li><%=link_to "Account",accounts_path %></li>
+        <li><%=link_to "Particular",perticulars_path%></li>
+
+        <li><%=link_to "Transaction",transactions_path%></li> 
       </ul>
       <form class="navbar-form navbar-left">
         <div class="form-group">

@@ -3,15 +3,20 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
+gem 'will_paginate', '~> 3.1.0'
+gem 'faker', git: 'https://github.com/stympy/faker.git'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', group: :development 
-gem 'pg', group: :production
+gem 'sqlite3'
+gem 'chartkick', '~> 1.2.4'
+#gem 'sqlite3', group: :development 
+#gem 'pg', group: :production
 #devise authentication
 gem 'devise','~>3.4.0'
 #for role managment(authorization)
 gem 'cancancan'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+gem 'nokogiri', '~> 1.6', '>= 1.6.7'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views

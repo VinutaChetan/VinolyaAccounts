@@ -30,7 +30,7 @@
   <%= @bank.company.name %>
 </p>
 
-<% if current_user.is_admin? %>
+<% if current_user.is_admin?%>
   <%= link_to 'Edit', edit_bank_path(@bank) %> |
-<%end%>  
+<%end%> 
 <%= link_to 'Back', banks_path %>

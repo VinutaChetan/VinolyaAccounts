@@ -1,0 +1,55 @@
+<%= form_for(@transaction) do |f| %>
+  <% if @transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+      <ul>
+      <% @transaction.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :transaction_date %><br>
+    <%= f.date_select :transaction_date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :account_id %><br>
+    <%=f.collection_select :account_id,Account.all,:id,:acc_no,prompt:"Select acc_no"%>
+  </div>
+
+  <div class="field">
+    <%= f.label :perticular_id %><br>
+    <%=f.collection_select :perticular_id,Perticular.all,:id,:name,prompt:"Select perticular"%>
+  </div>
+  
+  <div class="field">
+    <%= f.label :transaction_type %><br>
+
+    <%= f.radio_button :transaction_type, 'debit', :checked => true %> 
+    <%= f.label :Debit %>
+    
+    <%= f.radio_button :transaction_type, 'credit' %> 
+    <%= f.label :Credit %>
+  </div>
+
+  <div class="field">
+    <%= f.label :remark %><br>
+    <%= f.text_area :remark %>
+  </div>
+
+  <div class="field">
+    <%= f.label :transaction_kind %><br>
+    <%=f.select :transaction_kind,["Cash","Cheque","RTGS"],prompt:"select Kind"%><br/>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+
+

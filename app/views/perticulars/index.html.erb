@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Particulars</h1>
+
+<table class ="table table-striped" id="myTable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @perticulars.each do |perticular| %>
+      <tr>
+        <td><%= perticular.name %></td>
+        <td><%= link_to 'Show', perticular %></td>
+        <% if can? :update,perticular %> 
+          <td><%= link_to 'Edit', edit_perticular_path(perticular) %></td>
+        <%end%>
+        <% if can? :destroy, perticular %> 
+          <td><%= link_to 'Destroy', perticular, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% if current_user.is_admin?%>
+  <%= link_to 'New Perticular', new_perticular_path %>
+<%end%>

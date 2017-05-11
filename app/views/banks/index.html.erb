@@ -1,5 +1,4 @@
 <p id="notice"><%= notice %></p>
-
 <h1>Listing Banks</h1>
 
 <table class ="table table-striped" id="myTable">
@@ -25,8 +24,10 @@
         <td><%= bank.branch.name %></td>
         <td><%= bank.company.name %></td>
         <td><%= link_to 'Show', bank %></td>
-        <% if current_user.is_admin? %>
+        <% if can? :update, bank %>
           <td><%= link_to 'Edit', edit_bank_path(bank) %></td>
+         <%end%>
+         <% if can? :destroy, bank %>  
           <td><%= link_to 'Destroy', bank, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <%end%>  
       </tr>
@@ -36,6 +37,16 @@
 
 <br>
 
+
+
 <% if current_user.is_admin? %>
   <%= link_to 'New Bank', new_bank_path %>
 <%end%>
+
+
+
+
+
+
+
+

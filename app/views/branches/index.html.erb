@@ -14,10 +14,12 @@
       <tr>
         <td><%= branch.name %></td>
         <td><%= link_to 'Show', branch %></td>
-        <% if current_user.is_admin? %>
+        <% if can? :update, branch %> 
           <td><%= link_to 'Edit', edit_branch_path(branch) %></td>
+        <%end %> 
+        <% if can? :destroy, branch %> 
           <td><%= link_to 'Destroy', branch, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <%end%>  
+        <%end%>    
       </tr>
     <% end %>
   </tbody>
@@ -25,6 +27,6 @@
 
 <br>
 
-<% if current_user.is_admin? %>
+<% if current_user.is_admin?%>
   <%= link_to 'New Branch', new_branch_path %>
 <%end%>

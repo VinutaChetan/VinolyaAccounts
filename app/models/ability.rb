@@ -3,11 +3,11 @@ class Ability
 
   def initialize(user)
     if user.role == "admin"
-        can :manage,[Company,Bank,Branch,Account]
+        can :manage,[Company,Bank,Branch,Account,Perticular,Transaction]
     elsif user.role == "finance"
         can [:create,:read,:update] ,[Account]
     else 
-        can [:read],[Company,Bank,Branch,Account]          
+        can [:read],[Company,Bank,Branch,Account,Perticular,Transaction]          
     end    
     
     # Define abilities for the passed in user here. For example:
