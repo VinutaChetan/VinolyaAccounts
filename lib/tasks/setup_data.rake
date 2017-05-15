@@ -1,18 +1,25 @@
 task :setup_data => :environment do 
 	 
 
-	10.times do 
- 		branch=Branch.new
- 		z=0
- 		while z!=1 do 
- 			branch.name=Faker::Address.street_name	
- 			k=Branch.uniq.pluck(:name)
- 			if  !(k.include?branch.name)
- 				branch.save 
- 				z=1
- 			end	
-		end	
-	end
+	 9.times do 
+		company=Company.new
+		company.name=Faker::Company.name
+		company.save 
+	end 
+
+
+	# 10.times do 
+ # 		branch=Branch.new
+ # 		z=0
+ # 		while z!=1 do 
+ # 			branch.name=Faker::Address.street_name	
+ # 			k=Branch.uniq.pluck(:name)
+ # 			if  !(k.include?branch.name)
+ # 				branch.save 
+ # 				z=1
+ # 			end	
+	# 	end	
+	# end
 
 	9.times do 
 		bank=Bank.new
