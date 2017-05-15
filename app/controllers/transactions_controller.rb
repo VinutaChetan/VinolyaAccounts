@@ -6,10 +6,16 @@ class TransactionsController < ApplicationController
   # GET /transactions.json
   def index
     @transactions = Transaction.all
-    #@transactions = Transaction.find(:all,:order=>'transaction_date,id',:limit=>100)
+
     @transaction_months= @transactions.group_by{|t| t.transaction_date.beginning_of_month }
    
   end
+
+  def yearwise 
+    # binding.pry
+    #@transactions=Transaction.where("transaction_date = ?", params[:year])
+    # binding.pry
+  end  
 
   # GET /transactions/1
   # GET /transactions/1.json

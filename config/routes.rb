@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   get 'companies/fake'
+  get 'transactions/yearwise'
+  get 'transactions/monthwise'
+  
   resources :transactions
   resources :perticulars
   devise_for :users

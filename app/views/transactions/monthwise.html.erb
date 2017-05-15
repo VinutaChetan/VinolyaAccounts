@@ -1,0 +1,74 @@
+<%#Code for Breadcrumbs%>
+<!-- <h1>Listing Transactions</h1><br/>
+<ol class="breadcrumb">
+  <li><%#= link_to "Transactions",transactions_path%></li>
+  <%#Transaction.list_view.each do |key,month| %>
+     <li> <%#= link_to key ,transactions_yearwise_path(:year => key),class:"btn btn-info"%></li>
+  <%#end%>
+  
+</ol> -->
+<%#end of Breadcrumbs%>
+
+<%= link_to "Back",transactions_yearwise_path(:year=>params[:year])%><br>
+
+ <div class="container">
+        <table class ="table table-striped" id="myTable">
+            <thead>
+                <tr>
+                    <th>Transaction date</th>
+                    <th>Account Number</th>
+                    <th>Perticular</th>
+                    <th>Transaction type</th>
+                    <th>Amount</th>
+                    <th>Remark</th>
+                    <th>Transaction kind</th>                               
+                </tr>    
+            </thead>
+                <tbody id="myTable">
+                <% Transaction.list_view[params[:year].to_i][0][params[:month]].each do |trans| %>
+                <tr>
+                    <td>  <%=trans.transaction_date%></td>
+                    <td>  <%=trans.account_id%></td>
+                    <td>  <%=trans.perticular_id%></td>
+                    <td>  <%=trans.transaction_type%></td>
+                    <td>  <%=trans.amount%></td>
+                    <td>  <%=trans.remark%></td>
+                    <td>  <%=trans.transaction_kind%><td>
+                </tr>
+                <%end%> <br/><br/>   
+                </tbody> 
+        </table> 
+ 	</div>                     
+	    
+        	<% data={} 
+           	 	sum_debit=0
+              	sum_credit=0
+              
+            Transaction.list_view[params[:year].to_i][0][params[:month]].each do |trans|
+              if(trans.transaction_type=="debit")
+               	sum_debit=sum_debit+trans.amount 
+              else 
+                sum_credit=sum_credit+trans.amount	
+              end 
+              data["debit"] =sum_debit
+              data["credit"]=sum_credit
+              %>
+        	<%end%>
+            
+            <%=bar_chart(data) %>
+            <%=pie_chart(data) %>
+
+
+
+
+						
+                    
+      
+
+		
+	
+
+        
+
+	
+

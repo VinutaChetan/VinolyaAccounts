@@ -77,6 +77,24 @@
 </nav>
 <%end%>
 
+<ul class="breadcrumb"> 
+    <%if controller.controller_name=="transactions"%>
+        <li><%=link_to "transaction",transactions_path%><span class="divider">>></span></li> 
+    <%end%> 
+
+
+    <%if controller.controller_name=="transactions" and controller.action_name=="yearwise" %>
+      
+      <%= link_to params[:year],transactions_yearwise_path(:year => params[:year]),class:"btn btn-info"%><span class="divider">>></span><break> 
+        
+      <%end%>
+
+    <%if controller.controller_name=="transactions" and controller.action_name=="monthwise"%>
+      <%= link_to params[:year],transactions_yearwise_path(:year => params[:year]),class:"btn btn-info"%><span class="divider">>></span><break> 
+           
+      <%=link_to params[:month],transactions_monthwise_path(:year=> params[:year],:month => params[:month])%></li> 
+    <%end%>
+</ul>
  	
  	<div class="alert alert danger"><%= alert %></p>
 <%= yield %>
