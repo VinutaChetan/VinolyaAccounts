@@ -1,12 +1,11 @@
 task :setup_data => :environment do 
 	 
 
-	 9.times do 
-		company=Company.new
-		company.name=Faker::Company.name
-		company.save 
-	end 
-
+	 # 9.times do 
+		# company=Company.new
+		# company.name=Faker::Company.name
+		# company.save 
+	 # end 
 
 	# 10.times do 
  # 		branch=Branch.new
@@ -20,6 +19,12 @@ task :setup_data => :environment do
  # 			end	
 	# 	end	
 	# end
+
+	9.times do 
+		perticular=Perticular.new
+		perticular.name=Faker::Name.name 
+		perticular.save 
+	 end 
 
 	9.times do 
 		bank=Bank.new
