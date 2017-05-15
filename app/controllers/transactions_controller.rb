@@ -11,12 +11,6 @@ class TransactionsController < ApplicationController
    
   end
 
-  def yearwise 
-    # binding.pry
-    #@transactions=Transaction.where("transaction_date = ?", params[:year])
-    # binding.pry
-  end  
-
   # GET /transactions/1
   # GET /transactions/1.json
   def show
@@ -79,6 +73,6 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:transaction_date, :perticular_id, :transaction_type, :remark, :transaction_kind,:account_id)
+      params.require(:transaction).permit(:transaction_date, :perticular_id, :transaction_type,:amount,:remark, :transaction_kind,:account_id)
     end
 end

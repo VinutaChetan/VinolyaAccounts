@@ -28,7 +28,7 @@
           <%mon.each do |key,value|%>
               <h3><%=key%></h3><br/>
               <% if value == []%>
-                  <h3>No Transactions Found</h3>
+                  <h2>No Transactions Found</h2>
               <%else%>    
                 <div class="container">
                   <table class ="table table-striped" id="myTable">
@@ -41,6 +41,7 @@
                         <th>Amount</th>
                         <th>Remark</th>
                         <th>Transaction kind</th> 
+
                       </tr>
                     </thead>
 
@@ -83,9 +84,12 @@
             end %>
            <%end%>
             
-            <%=bar_chart(data) %>
-            <%=pie_chart(data) %>
-
+            <%if data={}%> 
+                <h2>No data</h2> 
+            <%else%>
+                <%=bar_chart(data) %>
+                <%=pie_chart(data) %>
+            <%end%>
          
           <%end%>
        <%end%>

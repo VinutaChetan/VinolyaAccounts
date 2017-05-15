@@ -4,6 +4,8 @@ class Transaction < ActiveRecord::Base
 	belongs_to :account
 	validates_presence_of :transaction_date,:perticular_id,:transaction_type,:transaction_kind
 
+	after_create :add_acc_balance
+
 	def self.list_view
 		transaction=Transaction.order('transaction_date ASC').first
 		start_year=transaction.transaction_date.year
@@ -22,5 +24,17 @@ class Transaction < ActiveRecord::Base
 		end
 		return data
 	end	
+
+	def add_acc_balance
+		if (self.transaction_type=="credit")
+			account=Account.find_by(id: self.account.id)
+			account.current_balance =self.amount+account.current_balance
+			account.save
+		else 
+			account=Account.find_by(id: self.account.id)
+			account.current_balance =account.current_balance-self.amount
+			account.save
+		end
+	end		
 
 end

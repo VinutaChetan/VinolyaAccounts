@@ -9,9 +9,14 @@
 </ol> -->
 <%#end of Breadcrumbs%>
 
-<%= link_to "Back",transactions_yearwise_path(:year=>params[:year])%><br>
+<%= link_to "Back",transactions_yearwise_path(:year=>params[:year])%><br/><br/>
 
- <div class="container">
+<div class="container">
+<div class="row">
+  <div class="col-sm-6 col-md-7">
+  <%if Transaction.list_view[params[:year].to_i][0][params[:month]].empty? %>
+        <b><h3>No Transactions found </h3></b>
+  <%else %>
         <table class ="table table-striped" id="myTable">
             <thead>
                 <tr>
@@ -38,8 +43,10 @@
                 <%end%> <br/><br/>   
                 </tbody> 
         </table> 
- 	</div>                     
-	    
+ 	</div>
+                   
+	
+  <div class="col-sm-4 col-sm-offset-2 col-md-5 col-md-offset-0"> 
         	<% data={} 
            	 	sum_debit=0
               	sum_credit=0
@@ -54,11 +61,14 @@
               data["credit"]=sum_credit
               %>
         	<%end%>
-            
+          
             <%=bar_chart(data) %>
             <%=pie_chart(data) %>
-
-
+        
+    <%end%>        
+  </div>          
+</div>
+</div>
 
 
 						

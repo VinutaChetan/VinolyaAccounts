@@ -14,6 +14,8 @@ gem 'chartkick', '~> 1.2.4'
 gem 'devise','~>3.4.0'
 #for role managment(authorization)
 gem 'cancancan'
+#gem for chosen select
+gem 'chosen-rails'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 gem 'nokogiri', '~> 1.6', '>= 1.6.7'

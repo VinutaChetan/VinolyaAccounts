@@ -18,12 +18,13 @@
 
   <div class="field">
     <%= f.label :account_id %><br>
-    <%=f.collection_select :account_id,Account.all,:id,:acc_no,prompt:"Select acc_no"%>
+    <%=f.collection_select :account_id,Account.all,:id,:acc_no,{prompt:"Select acc_no"},{ class: 'chosen-select' }%>
   </div>
+
 
   <div class="field">
     <%= f.label :perticular_id %><br>
-    <%=f.collection_select :perticular_id,Perticular.all,:id,:name,prompt:"Select perticular"%>
+    <%=f.collection_select :perticular_id,Perticular.all,:id,:name,{prompt:"Select perticular"},{ class: 'chosen-select' }%>
   </div>
   
   <div class="field">
@@ -34,6 +35,11 @@
     
     <%= f.radio_button :transaction_type, 'credit' %> 
     <%= f.label :Credit %>
+  </div>
+
+  <div class="field">
+    <%= f.label :amount %><br>
+    <%= f.text_area :amount %>
   </div>
 
   <div class="field">
