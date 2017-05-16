@@ -1,0 +1,54 @@
+<%=link_to 'Back',accounts_yearwise_acc_path(:year=>params[:year],:account_id=>[@account.id])%>
+
+<%if @account.transactions.list_view[params[:year].to_i][0][params[:month]].empty?%>
+	<b><h3>No Transactions found </h3></b>
+<%else %>
+        <table class ="table table-striped" id="myTable">
+            <thead>
+                <tr>
+                    <th>Transaction date</th>
+                    <th>Account Number</th>
+                    <th>Perticular</th>
+                    <th>Transaction type</th>
+                    <th>Amount</th>
+                    <th>Remark</th>
+                    <th>Transaction kind</th>                               
+                </tr>    
+            </thead>
+                <tbody id="myTable">
+                <% @account.transactions.list_view[params[:year].to_i][0][params[:month]].each do |trans| %>
+                <tr>
+                    <td>  <%=trans.transaction_date%></td>
+                    <td>  <%=trans.account_id%></td>
+                    <td>  <%=trans.perticular_id%></td>
+                    <td>  <%=trans.transaction_type%></td>
+                    <td>  <%=trans.amount%></td>
+                    <td>  <%=trans.remark%></td>
+                    <td>  <%=trans.transaction_kind%><td>
+                </tr>
+                <%end%> <br/><br/>   
+                </tbody> 
+        </table>
+
+        <div class="col-sm-4 col-sm-offset-2 col-md-5 col-md-offset-0"> 
+        	<% data={} 
+           	 	sum_debit=0
+              	sum_credit=0
+              
+            @account.transactions.list_view[params[:year].to_i][0][params[:month]].each do |trans|
+              if(trans.transaction_type=="debit")
+               	sum_debit=sum_debit+trans.amount 
+              else 
+                sum_credit=sum_credit+trans.amount	
+              end 
+              data["debit"] =sum_debit
+              data["credit"]=sum_credit
+              %>
+        	<%end%>
+          
+            <%=bar_chart(data) %>
+            <%=pie_chart(data) %>
+        
+    <%end%>        
+  
+

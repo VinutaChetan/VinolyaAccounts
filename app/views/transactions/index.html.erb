@@ -16,21 +16,10 @@
 
 <% if current_user.is_admin?%>
   <%= link_to 'New Transaction', new_transaction_path %>
-<%end%><br/>
+<%end%><br/><br/>
 
 
-----------------------------------------------------------------------------
-
-<%Transaction.list_view.each do |key,month| %>
-
-<h2><%= key  %> transactions</h2><br/>
-       <% month.each do |mon| %>
-          <%mon.each do |key,value|%>
-              <h3><%=key%></h3><br/>
-              <% if value == []%>
-                  <h2>No Transactions Found</h2>
-              <%else%>    
-                <div class="container">
+<div class="container">
                   <table class ="table table-striped" id="myTable">
                     <thead>
                       <tr>
@@ -47,7 +36,7 @@
 
                     <tbody id="myTable">
 
-                      <% value.order(:transaction_date) .each do |val| %>
+                      <%@transactions.order('transaction_date DESC').limit(20).each do |val|%>
                        
                       <tr>
                         <td><%= val.transaction_date.to_s(:long) %></td>
@@ -61,39 +50,7 @@
                       <%end%>
                     </tbody>
                   </table>
-              <% end %><br/>
-
-              
-
-              <%if value == []%>
-                 <h2> No chart Found</h2>
-              <%else %>  
-              <% data ={}
-             
-              sum_debit=0
-              sum_credit=0
-
-             value.each do |val|
-              if(val.transaction_type=="debit")
-                sum_debit=sum_debit+val.amount
-              else 
-                sum_credit=sum_credit+val.amount
-              end 
-              data["debit"] =sum_debit
-              data["credit"]=sum_credit
-            end %>
-           <%end%>
-            
-            <%if data={}%> 
-                <h2>No data</h2> 
-            <%else%>
-                <%=bar_chart(data) %>
-                <%=pie_chart(data) %>
-            <%end%>
-         
-          <%end%>
-       <%end%>
-<%end%>       
+   </div>               
 
 
 

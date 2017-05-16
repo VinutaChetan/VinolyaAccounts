@@ -11,7 +11,16 @@ class AccountsController < ApplicationController
   # GET /accounts/1
   # GET /accounts/1.json
   def show
+
   end
+
+  def yearwise_acc
+    @account= Account.find_by(id: params[:account_id])
+  end  
+
+  def monthwise_acc
+    @account= Account.find_by(id: params[:account_id])
+  end  
 
   # GET /accounts/new
   def new

@@ -8,4 +8,8 @@
 <% if current_user.is_admin?%>
 	<%= link_to 'Edit', edit_perticular_path(@perticular) %> |
 <%end%>
-<%= link_to 'Back', perticulars_path %>
+<%= link_to 'Back', perticulars_path %><br/><br/>
+
+<%@perticular.transactions.list_view.each do |key,month| %>
+      <%=link_to key,perticulars_yearwise_perticular_path(:year => key,:perticular_id =>@perticular.id),class:"btn btn-info"%>
+<%end%>   <br/><br/> 

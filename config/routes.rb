@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   get 'companies/fake'
   get 'transactions/yearwise'
   get 'transactions/monthwise'
+  get 'accounts/yearwise_acc'
+  get 'accounts/monthwise_acc'
+  get 'perticulars/yearwise_perticular'
+  get 'perticulars/monthwise_perticular'
   
   resources :transactions
   resources :perticulars

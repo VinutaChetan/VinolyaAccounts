@@ -13,6 +13,14 @@ class PerticularsController < ApplicationController
   def show
   end
 
+  def yearwise_perticular
+     @perticular = Perticular.find_by(id: params[:perticular_id]) 
+  end 
+
+  def monthwise_perticular
+     @perticular = Perticular.find_by(id: params[:perticular_id]) 
+  end  
+
   # GET /perticulars/new
   def new
     @perticular = Perticular.new
