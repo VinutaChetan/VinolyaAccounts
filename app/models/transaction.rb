@@ -50,7 +50,7 @@ class Transaction < ActiveRecord::Base
 		#take one empty hash
 		data = {}
 		data_debit={}
-		cr_dr={}
+		#Scr_dr={}
 		#check condition that first year date should be less than or equal to todats year
 		while(start_year<=end_year)
 			#empty hash
