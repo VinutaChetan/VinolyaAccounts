@@ -37,7 +37,7 @@ class PerticularsController < ApplicationController
 
     respond_to do |format|
       if @perticular.save
-        format.html { redirect_to @perticular, notice: 'Perticular was successfully created.' }
+        format.html { redirect_to perticulars_path, notice: 'Perticular was successfully created.' }
         format.json { render :show, status: :created, location: @perticular }
       else
         format.html { render :new }

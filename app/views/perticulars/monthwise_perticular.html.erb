@@ -8,10 +8,10 @@
 	<table class ="table table-striped" id="myTable">
             <thead>
                 <tr>
-                    <th>Transaction date</th>
+                    <th>Transaction Date</th>
                     <th>Account Number</th>
-                    <th>Perticular</th>
-                    <th>Transaction type</th>
+                    <th>Particular</th>
+                    <th>Transaction Type</th>
                     <th>Amount</th>
                     <th>Remark</th>
                     <th>Transaction kind</th>                               
@@ -22,7 +22,7 @@
                 <tr>
                     <td>  <%=trans.transaction_date%></td>
                     <td>  <%=trans.account.acc_no%></td>
-                    <td>  <%=trans.perticular_id%></td>
+                    <td>  <%=trans.perticular.name%></td>
                     <td>  <%=trans.transaction_type%></td>
                     <td>  <%=trans.amount%></td>
                     <td>  <%=trans.remark%></td>

@@ -11,6 +11,6 @@
 <%= link_to 'Back', perticulars_path %><br/><br/>
 
 
-<%#@perticular.transactions.list_view.each do |key,month| %>
-      <%#=link_to key,perticulars_yearwise_perticular_path(:year => key,:perticular_id =>@perticular.id),class:"btn btn-info"%>
-<%#end%>   <!-- <br/><br/>  -->
+<%@perticular.transactions.list_view.each do |key,month| %>
+      <%=link_to key,perticulars_yearwise_perticular_path(:year => key,:perticular_id =>@perticular.id),class:"btn btn-info"%>
+<%end%>   <br/><br/> 

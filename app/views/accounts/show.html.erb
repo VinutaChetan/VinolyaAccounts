@@ -36,9 +36,9 @@
 <%= link_to 'Back', accounts_path %><br/><br/>
 
 
-<%#@account.transactions.list_view.each do |key,month| %>
-      <%#=link_to key,accounts_yearwise_acc_path(:year => key,:account_id =>@account.id),class:"btn btn-info"%>
-<%#end%>  <!--  <br/><br/>  -->
+<%@account.transactions.list_view.each do |key,month| %>
+      <%=link_to key,accounts_yearwise_acc_path(:year => key,:account_id =>@account.id),class:"btn btn-info"%>
+<%end%>   <br/><br/> 
 
 
 
