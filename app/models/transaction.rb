@@ -9,6 +9,10 @@ class Transaction < ActiveRecord::Base
 	def self.list_view
 
 		transaction=Transaction.order('transaction_date ASC').first
+		
+		if transaction == nil
+			return "No Transaction found"
+		else
 		start_year=transaction.transaction_date.year
 		end_year=Date.today.year
     	months = ['January','February','March','April','May','June','July','August','September','October','November','December']
@@ -24,6 +28,7 @@ class Transaction < ActiveRecord::Base
 			start_year = start_year + 1
 		end
 		return data
+		end
 	end	
 
 	def add_acc_balance
