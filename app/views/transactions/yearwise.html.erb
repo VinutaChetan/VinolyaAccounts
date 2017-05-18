@@ -13,18 +13,61 @@
   <%#end%>
 </ol> -->
 <%#end of Breadcrumbs%>
+<%#Transaction.list_amount[params[:year].to_i].each do |months,amounts|%>
+  
+  <%#=months.each do |month,amount|%>
+      <%#amount%>
+  <%#end%>
+<%#end%>
+
+<%# Total credit amount of perticular year%>
+<%Transaction.list_cr_amount[params[:year].to_i].each do |months,amounts|%>
+
+<% a = 0 %>
+<%months.each do |month,amount|%>
+      <%amount%>
+      <%a = a + amount %>
+  <%end%>
+<% a %>
+<% data ={}
+  data["credit"]=a
+  %>
+  <%=column_chart(data) %>
+
+<br/><br/>
+
+<%end%>
+
+<%# Total debit amount of perticular year%>
+<%Transaction.list_dr_amount[params[:year].to_i].each do |months,amounts|%>
+
+<% a = 0 %>
+<%months.each do |month,amount|%>
+      <%amount%>
+      <%a = a + amount %>
+  <%end%>
+<% a %>
+<% data ={}
+  data["debit"]=a
+  %>
+  <%=column_chart(data) %>
+
+<br/><br/>
+
+<%end%>
+
 
 <%= link_to "Back",transactions_path%><br><br/>
 
-<% Transaction.list_view[params[:year].to_i].each do |months| %>
-    <%months.each do |key,value|%>
+<% Transaction.list_view[params[:year].to_i].each do |year| %>
+    <%year.each do |key,value|%>
         <%=link_to key,transactions_monthwise_path(:year=> params[:year],:month => key),class:"btn btn-info"%>
     <%end%>
 <%end%> <br/> <br/>      
 
 <br/>
-<% Transaction.list_view[params[:year].to_i].each do |months| %>
-    <%months.each do |key,value|%>
+<% Transaction.list_view[params[:year].to_i].each do |year| %>
+    <%year.each do |key,value|%>
         <h3><b><%=link_to key,transactions_monthwise_path(:year=> params[:year],:month => key)%></b></h3>
         <h2><b><%key%></b></h2>
         <% if value == []%>
@@ -79,14 +122,15 @@
               data["debit"] =sum_debit
               data["credit"]=sum_credit
             end %>
-           <%end%>
+         
             
             <%=bar_chart(data) %>
             <%=pie_chart(data) %>
-                         
+         <%end%>                  
     <%end%>
 <%end%>
-     
+
+
 
 
 
