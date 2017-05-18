@@ -90,7 +90,7 @@
                       <%value.each do |trans|%>
                         <tr>
                           <td>  <%=trans.transaction_date%></td>
-                          <td>  <%=trans.account_id%></td>
+                          <td>  <%=trans.account.acc_no%></td>
                           <td>  <%=trans.perticular_id%></td>
                           <td>  <%=trans.transaction_type%></td>
                           <td>  <%=trans.amount%></td>

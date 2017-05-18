@@ -49,7 +49,7 @@ class Transaction < ActiveRecord::Base
     	months = ['January','February','March','April','May','June','July','August','September','October','November','December']
 		#take one empty hash
 		data = {}
-		data_debit={}
+		#data_debit={}
 		#Scr_dr={}
 		#check condition that first year date should be less than or equal to todats year
 		while(start_year<=end_year)
@@ -71,7 +71,7 @@ class Transaction < ActiveRecord::Base
 			end
 			#putting key as start_year and value as monthwise transactions strat_year as a key and datamonth contains key as month and value as monthwise transactions
 			data[start_year] = [data_month]
-			data_debit[start_year] = [data_mon_debit]
+			#data_debit[start_year] = [data_mon_debit]
 			
 			#year should be increse to next index
 			start_year = start_year + 1
@@ -80,7 +80,7 @@ class Transaction < ActiveRecord::Base
 		# types=["credit","debit"]
 		# cr_dr[types]=
 		return data
-		return data_debit
+		#return data_debit
 		#return cr_dr
 	end	
 

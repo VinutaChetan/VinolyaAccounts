@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'perticulars/monthwise_perticular'
   
   resources :transactions
-  resources :perticulars
+  resources :perticulars 
   devise_for :users
   resources :accounts
   resources :banks
