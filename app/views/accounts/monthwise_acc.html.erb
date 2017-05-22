@@ -1,5 +1,8 @@
 <%=link_to 'Back',accounts_yearwise_acc_path(:year=>params[:year],:account_id=>[@account.id])%>
 
+<div class="container">
+<div class="row">
+  <div class="col-sm-6 col-md-7">
 <%if @account.transactions.list_view[params[:year].to_i][0][params[:month]].empty?%>
 	<b><h3>No Transactions found </h3></b>
 <%else %>
@@ -16,7 +19,7 @@
                 </tr>    
             </thead>
                 <tbody id="myTable">
-                <% @account.transactions.list_view[params[:year].to_i][0][params[:month]].each do |trans| %>
+                <% @account.transactions.list_view[params[:year].to_i][0][params[:month]].order('transaction_date DESC').each do |trans| %>
                 <tr>
                     <td>  <%=trans.transaction_date%></td>
                     <td>  <%=trans.account_id%></td>
@@ -29,6 +32,7 @@
                 <%end%> <br/><br/>   
                 </tbody> 
         </table>
+ </div>       
 
         <div class="col-sm-4 col-sm-offset-2 col-md-5 col-md-offset-0"> 
         	<% data={} 
@@ -46,9 +50,12 @@
               %>
         	<%end%>
           
-            <%=bar_chart(data) %>
+            <%=column_chart(data) %>
             <%=pie_chart(data) %>
-        
-    <%end%>        
+<%end%> 
+</div> 
+</div>
+</div>  
+
   
 

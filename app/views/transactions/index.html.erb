@@ -6,6 +6,12 @@
 <!-- </ol> -->
 <%#end of Breadcrumbs%>
 
+<script>
+$(document).ready(function(){
+    $('#myTable').DataTable();
+});
+</script>
+
 <p id="notice"><%= notice %></p>
  
 <%Transaction.list_view.each do |key,month| %>
@@ -24,8 +30,9 @@
                     <thead>
                       <tr>
                         <th>Transaction date</th>
+                        <th>Company Name</th>
                         <th>Account Number</th>
-                        <th>Perticular</th>
+                        <th>Particular</th>
                         <th>Transaction type</th>
                         <th>Amount</th>
                         <th>Remark</th>
@@ -40,8 +47,9 @@
                        
                       <tr>
                         <td><%= val.transaction_date.to_s(:long) %></td>
+                        <td><%=val.company.name%></td>
                         <td><%=val.account.acc_no%>
-                        <td><%= val.perticular_id %></td>
+                        <td><%= val.perticular.name %></td>
                         <td><%= val.transaction_type %></td>
                         <td><%= val.amount%></td>
                         <td><%= val.remark %></td>

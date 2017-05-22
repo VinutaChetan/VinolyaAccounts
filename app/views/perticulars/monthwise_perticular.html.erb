@@ -1,7 +1,9 @@
-<%=link_to 'Back',perticulars_yearwise_perticular_path(:year=>params[:year],:perticular_id=>[@perticular.id])%>
-
+<%=link_to 'Back',perticulars_yearwise_perticular_path(:year=>params[:year],:perticular_id=>[@perticular.id])%><br/>
+<br/>
+<b>Particular Name : <%=@perticular.name%></b>
 <div class="container">
-
+<div class="row">
+  <div class="col-sm-6 col-md-7">
 <%if @perticular.transactions.list_view[params[:year].to_i][0][params[:month]].empty?%>
 	<b><h3>No Transactions found </h3></b>
 <%else %>
@@ -18,7 +20,7 @@
                 </tr>    
             </thead>
                 <tbody id="myTable">
-                <% @perticular.transactions.list_view[params[:year].to_i][0][params[:month]].each do |trans| %>
+                <% @perticular.transactions.list_view[params[:year].to_i][0][params[:month]].order('transaction_date DESC').each do |trans| %>
                 <tr>
                     <td>  <%=trans.transaction_date%></td>
                     <td>  <%=trans.account.acc_no%></td>
@@ -49,9 +51,11 @@
               data["credit"]=sum_credit
             end%>
           
-            <%=bar_chart(data) %>
+            <%=column_chart(data) %>
             <%=pie_chart(data) %>
         
     	      
   </div>
  <%end%> 
+ </div>
+ </div>  

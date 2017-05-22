@@ -6,6 +6,9 @@ gem 'rails', '4.2.3'
 gem 'will_paginate', '~> 3.1.0'
 
 # Use sqlite3 as the database for Active Record
+#gems for datepicker
+#gem 'momentjs-rails', '>= 2.9.0'
+#gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 
 gem 'chartkick', '~> 1.2.4'
 #gem 'sqlite3', group: :development 
@@ -16,6 +19,7 @@ gem 'devise','~>3.4.0'
 gem 'cancancan'
 #gem for chosen select
 gem 'chosen-rails'
+gem 'jquery-ui-rails'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 gem 'nokogiri', '~> 1.6', '>= 1.6.7'

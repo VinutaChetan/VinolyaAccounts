@@ -1,6 +1,6 @@
 class Transaction < ActiveRecord::Base
 	belongs_to :perticular
-
+	belongs_to :company
 	belongs_to :account
 	validates_presence_of :transaction_date,:perticular_id,:transaction_type,:transaction_kind
 

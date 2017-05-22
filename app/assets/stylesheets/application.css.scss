@@ -14,3 +14,15 @@
  *= require_self
  *= require chosen
  */
+ 
+
+.scroll {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 500px;
+}
+
+.table-header{
+	position: fixed;
+}
+

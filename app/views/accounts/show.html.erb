@@ -20,6 +20,7 @@
   <%= @account.branch.name%>
 </p>
 
+
 <p>
   <strong>Acc type:</strong>
   <%= @account.acc_type %>
@@ -29,6 +30,12 @@
   <strong>Current balance:</strong>
   <%= @account.current_balance %>
 </p>
+
+<p>
+  <strong>company:</strong>
+  <%= @account.company.name%>
+</p>
+
 
 <% if current_user.is_admin?%>
   <%= link_to 'Edit', edit_account_path(@account) %> |
@@ -42,7 +49,7 @@
 <%end%>   <br/><br/> 
 <%end%>
 
-
+<%=link_to "Back to #{@account.bank.name}",bank_path(@account.bank.id)%>
 
 
 

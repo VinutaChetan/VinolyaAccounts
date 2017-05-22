@@ -1,4 +1,9 @@
 <p id="notice"><%= notice %></p>
+
+<% if current_user.is_admin? %>
+  <%= link_to 'New Bank', new_bank_path %>
+<%end%>
+<br/>
 <h1>Listing Banks</h1>
 
 <table class ="table table-striped" id="myTable">
@@ -7,7 +12,7 @@
       <th>Name</th>
       <th>Address</th>
       <th>Manager</th>
-      <th>Contact details</th>
+      <th>Contact Details</th>
       <th>Branch</th>
       <th>Company</th>
       <th colspan="3"></th>
@@ -15,7 +20,7 @@
   </thead>
 
   <tbody>
-    <% @banks.each do |bank| %>
+    <% @banks.order('created_at DESC').each do |bank| %>
       <tr>
         <td><%= bank.name %></td>
         <td><%= bank.address %></td>
@@ -39,9 +44,6 @@
 
 
 
-<% if current_user.is_admin? %>
-  <%= link_to 'New Bank', new_bank_path %>
-<%end%>
 
 
 

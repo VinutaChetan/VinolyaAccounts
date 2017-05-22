@@ -11,9 +11,16 @@
     </div>
   <% end %>
 
+
+
   <div class="field">
     <%= f.label :transaction_date %><br>
     <%= f.date_select :transaction_date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :company_id %><br>
+    <%=f.collection_select :company_id,Company.all,:id,:name,{prompt:"Select Company"},{ class: 'chosen-select' }%>
   </div>
 
   <div class="field">
@@ -39,7 +46,7 @@
 
   <div class="field">
     <%= f.label :amount %><br>
-    <%= f.text_area :amount %>
+    <%= f.text_field :amount %>
   </div>
 
   <div class="field">

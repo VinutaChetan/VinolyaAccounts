@@ -15,18 +15,27 @@
     <%= f.label :acc_no %><br>
     <%= f.text_field :acc_no %>
   </div>
+
   <div class="field">
     <%= f.label :opening_balance %><br>
     <%= f.text_field :opening_balance %>
   </div>
+
   <div class="field">
     <%= f.label :bank_id %><br>
     <%= f.collection_select :bank_id,Bank.all,:id,:name, prompt:"select Bank" %><br/>
   </div>
+
   <div class="field">
     <%= f.label :branch_id %><br>
-    <%= f.collection_select :branch_id,Branch.all,:id,:name, prompt:"select Branch" %><br/>
+    <%= f.collection_select :branch_id,Branch.all,:id,:name,{prompt:"Select branch"},{ class: 'chosen-select' }%><br/>
   </div>
+
+  <div class="field">
+    <%= f.label :company_id %><br>
+    <%= f.collection_select :company_id,Company.all,:id,:name, {prompt:"Select company"},{ class: 'chosen-select' } %><br/>
+  </div>
+
   <div class="field">
     <%= f.label :acc_type %><br>
 

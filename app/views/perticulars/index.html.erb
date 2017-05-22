@@ -1,7 +1,19 @@
+<script>
+$(document).ready(function(){
+    $('#myTable').DataTable();
+});
+</script>
+
+
 <p id="notice"><%= notice %></p>
+
+<% if current_user.is_admin?%>
+  <%= link_to 'New Particular', new_perticular_path %>
+<%end%><br/>
 
 <h1>Listing Particulars</h1>
 
+<div class="container">
 <table class ="table table-striped" id="myTable">
   <thead>
     <tr>
@@ -11,7 +23,7 @@
   </thead>
 
   <tbody>
-    <% @perticulars.each do |perticular| %>
+    <% @perticulars.order('created_at DESC').each do |perticular| %>
       <tr>
         <td><%= perticular.name %></td>
         <td><%= link_to 'Show', perticular %></td>
@@ -25,9 +37,6 @@
     <% end %>
   </tbody>
 </table>
-
+</div>
 <br>
 
-<% if current_user.is_admin?%>
-  <%= link_to 'New Perticular', new_perticular_path %>
-<%end%>

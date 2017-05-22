@@ -1,4 +1,9 @@
 <p id="notice"><%= notice %></p>
+
+<% if current_user.is_admin?%>
+  <%= link_to 'New Branch', new_branch_path %>
+<%end%>
+<br/>
 <h1>Listing Branches</h1>
 
 <table class ="table table-striped" id="myTable">
@@ -10,7 +15,7 @@
   </thead>
 
   <tbody>
-    <% @branches.each do |branch| %>
+    <% @branches.order('created_at DESC').each do |branch| %>
       <tr>
         <td><%= branch.name %></td>
         <td><%= link_to 'Show', branch %></td>
@@ -27,6 +32,3 @@
 
 <br>
 
-<% if current_user.is_admin?%>
-  <%= link_to 'New Branch', new_branch_path %>
-<%end%>

@@ -30,7 +30,20 @@
   <%= @bank.company.name %>
 </p>
 
+<p>
+  <strong>Accounts related to this bank:</strong>
+  <%if  @bank.accounts == nil%>
+      No Accounts found 
+  <% else%>    
+    <% @bank.accounts.each do |acc| %>  
+    <li><%=link_to acc.acc_no,account_path(acc.id)%></li><br/>
+    <%end%>
+  <%end%>
+</p>
+
 <% if current_user.is_admin?%>
   <%= link_to 'Edit', edit_bank_path(@bank) %> |
 <%end%> 
 <%= link_to 'Back', banks_path %>
+
+
