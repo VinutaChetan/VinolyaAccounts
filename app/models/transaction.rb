@@ -17,12 +17,15 @@ class Transaction < ActiveRecord::Base
 		end_year=Date.today.year
     	months = ['January','February','March','April','May','June','July','August','September','October','November','December']
 		data = {}
+
 		while(start_year<=end_year)
 			data_month = {}
 			months.each_with_index do |month, index|
+				
 				query_start_date = Date.parse("#{start_year}-#{index + 1}-1")
 				query_end_date = query_start_date.end_of_month
 				data_month[month] = Transaction.where('transaction_date >= ? AND transaction_date <= ?',query_start_date, query_end_date)
+			
 			end
 			data[start_year] = [data_month]
 			start_year = start_year + 1

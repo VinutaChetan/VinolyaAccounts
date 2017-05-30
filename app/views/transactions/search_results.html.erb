@@ -1,0 +1,38 @@
+<table class ="table table-striped" id="myTable" >
+           
+            <thead>
+                <tr>
+                	<th>SI.no</th>
+                    <th>Transaction Date</th>
+                    <th>Company Name</th>
+                    <th>Account Number</th>
+                    <th>Particular</th>
+                    <th>Transaction Type</th>
+                    <th>Amount</th>
+                    <th>Remark</th>
+                    <th>Transaction Kind</th>                               
+                </tr>    
+            </thead>
+            
+            <tbody id="myTable" >
+            	
+            	<% @transactions.each_with_index do |trans,index|%>
+				<tr>
+					<td>  <%=index+1%></td>
+                    <td>  <%=trans.transaction_date%></td>
+                    <td>  <%=trans.company.name%></td>
+                    <td>  <%=trans.account.acc_no%></td>
+                    <td>  <%=trans.perticular.name%></td>
+                    <td>  <%=trans.transaction_type%></td>
+                    <td>  <%=trans.amount%></td>
+                    <td>  <%=trans.remark%></td>
+                    <td>  <%=trans.transaction_kind%><td>
+                </tr>
+                <%end%> <br/><br/> 
+                   
+            </tbody>
+</table> 
+
+
+
+<%=link_to "back",transactions_path%>

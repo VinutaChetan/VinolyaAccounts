@@ -5,7 +5,7 @@ class BanksController < ApplicationController
   # GET /banks
   # GET /banks.json
   def index
-    @banks = Bank.all
+    @banks = Bank.all.includes(:branch,:company)
   end
 
   # GET /banks/1
@@ -70,6 +70,6 @@ class BanksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bank_params
-      params.require(:bank).permit(:name, :address, :manager, :contact_details, :branch_id, :company_id)
+      params.require(:bank).permit(:name, :address, :manager, :contact_details, :branch_id, :company_id,:link)
     end
 end

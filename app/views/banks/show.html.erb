@@ -36,10 +36,16 @@
       No Accounts found 
   <% else%>    
     <% @bank.accounts.each do |acc| %>  
-    <li><%=link_to acc.acc_no,account_path(acc.id)%></li><br/>
+    <li><%=link_to acc.acc_no,bank_account_path(@bank,acc.id)%></li><br/>
     <%end%>
   <%end%>
 </p>
+
+<p>
+  <strong>Link:</strong>
+  <%= @bank.link %>
+</p>
+
 
 <% if current_user.is_admin?%>
   <%= link_to 'Edit', edit_bank_path(@bank) %> |

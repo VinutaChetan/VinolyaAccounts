@@ -5,7 +5,8 @@
 
       <ul>
       <% @bank.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <div class="alert alert-danger" role="alert"><li><%= message %></li></div>
+        
       <% end %>
       </ul>
     </div>
@@ -34,6 +35,10 @@
   <div class="field">
     <%= f.label :company_id %><br>
     <%= f.collection_select :company_id,Company.all,:id,:name, {prompt:"Select company name"},{ class: 'chosen-select' }%><br/>
+  </div>
+  <div class="field">
+    <%= f.label :link %><br>
+    <%= f.text_field :link %>
   </div>
   <div class="actions">
     <%= f.submit %>

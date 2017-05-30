@@ -2,16 +2,21 @@ Rails.application.routes.draw do
   get 'companies/fake'
   get 'transactions/yearwise'
   get 'transactions/monthwise'
+  get 'transactions/search_results'
   get 'accounts/yearwise_acc'
   get 'accounts/monthwise_acc'
   get 'perticulars/yearwise_perticular'
   get 'perticulars/monthwise_perticular'
+
+  get 'companies/select_accounts'
   
   resources :transactions
   resources :perticulars 
   devise_for :users
   resources :accounts
-  resources :banks
+  resources :banks do 
+    resources :accounts,only: [:show]
+  end 
   resources :branches
   resources :companies
   

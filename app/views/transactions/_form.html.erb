@@ -11,15 +11,22 @@
     </div>
   <% end %>
 
-
-
+   
+        <label>Transaction Date</label><br/>
+     
+       <div class="col-sm-10">
+       <div class="input-group">
+        <div class="input-group-addon">
+         <i class="fa fa-calendar"></i>
+        </div>
+        
+        <%= f.text_field :transaction_date, class: "form-control", id: "date" ,placeholder: "yyyy/mm/dd"%>
+       </div>
+     </div><br/>
+     <br/>
+     
   <div class="field">
-    <%= f.label :transaction_date %><br>
-    <%= f.date_select :transaction_date %>
-  </div>
-
-  <div class="field">
-    <%= f.label :company_id %><br>
+    <%=f.label :company_id %><br>
     <%=f.collection_select :company_id,Company.all,:id,:name,{prompt:"Select Company"},{ class: 'chosen-select' }%>
   </div>
 
@@ -62,6 +69,33 @@
     <%= f.submit %>
   </div>
 <% end %>
+
+
+<script>
+var companyHandle = document.getElementById('transaction_company_id');
+var accountHandle = document.getElementById('transaction_account_id');
+
+companyHandle.onchange = function(){
+  accountHandle.innerHTML = "";
+  var request = new XMLHttpRequest();
+  request.open('GET','/companies/select_accounts.json?company_id=' + companyHandle.value)
+  request.onreadystatechange = function(){
+    if(request.readyState === 4 && request.status === 200){
+      var response = JSON.parse(request.responseText);
+      response.forEach(function(account){
+        var newElement = document.createElement('option');
+        newElement.value = account.id;
+        var newText = document.createTextNode(account.acc_no)
+        newElement.appendChild(newText);
+        accountHandle.appendChild(newElement);
+      });
+    }
+  }
+  request.send();
+};
+
+
+</script>
 
 
 

@@ -11,32 +11,46 @@
 
 <%= link_to "Back",transactions_yearwise_path(:year=>params[:year])%><br/><br/>
 
+<!-- Searching-->
+<b>Note : Enter searching days in the format yyyy/mm/dd</b><br/><br/>
+<%=form_tag transactions_search_results_path,method: :get do %>
+ <label>Start Date:</label>
+ <%= text_field_tag :start%>
+  
+ <label>End Date:</label> 
+  <%= text_field_tag :end%>
+  
+  <%=submit_tag  "Search"%> 
+  
+<%end%> 
+
+
 <div class="container">
 <div class="row">
   <div class="col-sm-6 col-md-7 table-scroll">
-  <%if Transaction.list_view[params[:year].to_i][0][params[:month]].empty? %>
-        <b><h3>No Transactions found </h3></b>
-  <%else %>
+  <% Transaction.list_view[params[:year].to_i][0][params[:month]] %>
        <div class="scroll">
         <table class ="table table-striped" id="myTable" >
            
             <thead>
                 <tr>
-                    <th>Transaction Date</th>
-                    <th>Company Name</th>
-                    <th>Account Number</th>
-                    <th>Particular</th>
-                    <th>Transaction Type</th>
-                    <th>Amount</th>
-                    <th>Remark</th>
-                    <th>Transaction Kind</th>                               
+                    <th class="text-success">SI.no</th>
+                    <th class="text-success">Transaction Date</th>
+                    <th class="text-success">Company Name</th>
+                    <th class="text-success">Account Number</th>
+                    <th class="text-success">Particular</th>
+                    <th class="text-success">Transaction Type</th>
+                    <th class="text-success">Amount</th>
+                    <th class="text-success">Remark</th>
+                    <th class="text-success">Transaction Kind</th>                               
                 </tr>    
             </thead>
               
             <tbody id="myTable" >
               
-                <% Transaction.list_view[params[:year].to_i][0][params[:month]].order('transaction_date DESC').each do |trans| %>
+                <% Transaction.list_view[params[:year].to_i][0][params[:month]].order('transaction_date DESC').each_with_index do |trans,index| %>
                 <tr>
+                    <td>   <%=index+1%></td>
                     <td>  <%=trans.transaction_date%></td>
                     <td>  <%=trans.company.name%></td>
                     <td>  <%=trans.account.acc_no%></td>
@@ -70,10 +84,11 @@
               %>
         	
           <%end%>
+            
             <%=column_chart(data) %>
             <%=pie_chart(data) %>
          
-    <%end%>        
+        
   </div>          
 </div>
 </div>

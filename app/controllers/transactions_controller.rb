@@ -5,10 +5,8 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = Transaction.all
-
-    @transaction_months= @transactions.group_by{|t| t.transaction_date.beginning_of_month }
-   
+    
+      @transactions = Transaction.all.includes(:company,:account,:perticular)
   end
 
   # GET /transactions/1
@@ -65,6 +63,10 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def search_results
+    @transactions=Transaction.where("transaction_date BETWEEN ? AND ?",params[:start],params[:end])
+  end 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_transaction
@@ -73,6 +75,6 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:transaction_date, :perticular_id, :transaction_type,:amount,:remark, :transaction_kind,:account_id)
+      params.require(:transaction).permit(:transaction_date,:company_id, :perticular_id, :transaction_type,:amount,:remark, :transaction_kind,:account_id)
     end
 end

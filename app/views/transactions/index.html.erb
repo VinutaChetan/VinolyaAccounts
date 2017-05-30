@@ -6,46 +6,48 @@
 <!-- </ol> -->
 <%#end of Breadcrumbs%>
 
-<script>
-$(document).ready(function(){
-    $('#myTable').DataTable();
-});
-</script>
-
 <p id="notice"><%= notice %></p>
  
 <%Transaction.list_view.each do |key,month| %>
-      <%= link_to key ,transactions_yearwise_path(:year => key),class:"btn btn-info"%>
+  
+      <%= link_to key ,transactions_yearwise_path(:year => key),class:"btn btn-success"%>
+      
 <%end%><br/>
   
 <br/>
 
 <% if current_user.is_admin?%>
+<button type="button" class="btn btn-info">
   <%= link_to 'New Transaction', new_transaction_path %>
+</button>  
 <%end%><br/><br/>
 
-
+<%if @transactions.empty? %>
+  <p>No transactions found </p>
+<%else %>
 <div class="container">
                   <table class ="table table-striped" id="myTable">
                     <thead>
                       <tr>
-                        <th>Transaction date</th>
-                        <th>Company Name</th>
-                        <th>Account Number</th>
-                        <th>Particular</th>
-                        <th>Transaction type</th>
-                        <th>Amount</th>
-                        <th>Remark</th>
-                        <th>Transaction kind</th> 
+                        <th class="text-success">SI.no</th>
+                        <th class="text-success">Transaction Date</th>
+                        <th class="text-success">Company Name</th>
+                        <th class="text-success">Account Number</th>
+                        <th class="text-success">Particular</th>
+                        <th class="text-success">Transaction type</th>
+                        <th class="text-success">Amount</th>
+                        <th class="text-success">Remark</th>
+                        <th class="text-success">Transaction kind</th> 
 
                       </tr>
                     </thead>
 
                     <tbody id="myTable">
 
-                      <%@transactions.order('transaction_date DESC').limit(20).each do |val|%>
+                      <%@transactions.order('created_at DESC').limit(20).each_with_index do |val,index|%>
                        
                       <tr>
+                        <td><%=index+1%></td>
                         <td><%= val.transaction_date.to_s(:long) %></td>
                         <td><%=val.company.name%></td>
                         <td><%=val.account.acc_no%>
@@ -57,8 +59,14 @@ $(document).ready(function(){
                       </tr> 
                       <%end%>
                     </tbody>
-                  </table>
-   </div>               
+                  </table>             
+   </div>
+   <%end%>   
+
+   <script type="text/javascript">
+   $('#myTable').DataTable();  
+</script>
+            
 
 
 

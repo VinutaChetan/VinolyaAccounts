@@ -4,7 +4,26 @@
 <b></b><br/>
 <br/>
 <% @perticular.transactions.list_view[params[:year].to_i].each do |months| %>
-	<%months.each do |key,value|%>
+	<% if params[:year].to_i == Date.today.year %>
+      <%months.each do |key,value|%>
+		<%=link_to key,perticulars_monthwise_perticular_path(:year=>params[:year],:perticular_id =>@perticular.id,:month=> key),class:"btn btn-info"%>
+		<% if key== Date::MONTHNAMES[Date.today.end_of_month.month ]  %>
+            <%break%> 
+        <%end%> 
+	<%end%>
+	<%else%>
+		<% @perticular.transactions.list_view[params[:year].to_i].each do |months| %>
+		<%months.each do |key,value|%>
 		<%=link_to key,perticulars_monthwise_perticular_path(:year=>params[:year],:perticular_id =>@perticular.id,:month=> key),class:"btn btn-info"%>
 	<%end%>
 <%end%>	
+
+<%end%>
+
+<%end%>	
+
+<%# @perticular.transactions.list_view[params[:year].to_i].each do |months| %>
+	<%#months.each do |key,value|%>
+		<%#=link_to key,perticulars_monthwise_perticular_path(:year=>params[:year],:perticular_id =>@perticular.id,:month=> key),class:"btn btn-info"%>
+	<%#end%>
+<%#end%>	

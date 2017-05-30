@@ -1,24 +1,26 @@
-<script>
-$(document).ready(function(){
-    $('#myTable').DataTable();
-});
-</script>
-
-
 <p id="notice"><%= notice %></p>
 
 <% if current_user.is_admin?%>
+<button type="button" class="btn btn-info">
   <%= link_to 'New Particular', new_perticular_path %>
+</button>
 <%end%><br/>
+<br/>
+<h2><u>Listing Particulars</u></h2>
+<br/>
 
-<h1>Listing Particulars</h1>
-
+<br/>
+<%if @perticulars.empty? %>
+  <p>No perticulars found </p>
+<%else %>
 <div class="container">
 <table class ="table table-striped" id="myTable">
   <thead>
     <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
+      <th class="text-success">Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -38,5 +40,10 @@ $(document).ready(function(){
   </tbody>
 </table>
 </div>
+<%end%>
 <br>
+
+<script type="text/javascript">
+   $('#myTable').DataTable();  
+</script>
 

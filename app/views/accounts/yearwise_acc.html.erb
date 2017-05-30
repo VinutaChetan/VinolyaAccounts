@@ -1,7 +1,18 @@
 <%= link_to "Back",account_path(@account)%><br/><br/>
 
 <% @account.transactions.list_view[params[:year].to_i].each do |months| %>
-	<%months.each do |key,value|%>
-		<%=link_to key,accounts_monthwise_acc_path(:year=>params[:year],:account_id =>@account.id,:month=> key),class:"btn btn-info"%>
+	<% if params[:year].to_i == Date.today.year %>
+		<%months.each do |key,value|%>
+			<%=link_to key,accounts_monthwise_acc_path(:year=>params[:year],:account_id =>@account.id,:month=> key),class:"btn btn-info"%>
+			<% if key== Date::MONTHNAMES[Date.today.end_of_month.month ]  %>
+            <%break%> 
+        <%end%> 
+		<%end%>	
+	<%else%>
+		<% @account.transactions.list_view[params[:year].to_i].each do |months| %>
+			<%months.each do |key,value|%>
+				<%=link_to key,accounts_monthwise_acc_path(:year=>params[:year],:account_id =>@account.id,:month=> key),class:"btn btn-info"%>
+			<%end%>
+		<%end%>	
 	<%end%>
-<%end%>	
+<%end%>		

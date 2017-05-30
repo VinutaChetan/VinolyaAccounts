@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170522060127) do
+ActiveRecord::Schema.define(version: 20170523045639) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "acc_no"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20170522060127) do
     t.integer  "company_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.text     "link"
   end
 
   create_table "branches", force: :cascade do |t|

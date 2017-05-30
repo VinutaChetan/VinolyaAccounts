@@ -20,17 +20,39 @@
   <%#end%>
 <%#end%>
 
+<!-- Searching-->
+<b>Note : Enter searching days in the format yyyy/mm/dd</b><br/><br/>
+<%=form_tag transactions_search_results_path,method: :get do %>
+ <label>Start Date:</label>
+ <%= text_field_tag :start%>
+  
+ <label>End Date:</label> 
+  <%= text_field_tag :end%>
+  
+  <%=submit_tag  "Search"%> 
+  
+<%end%> 
+
+
 <%# Total credit amount of perticular year%>
 
 <%= link_to "Back",transactions_path%><br><br/>
 
 <% Transaction.list_view[params[:year].to_i].each do |year| %>
-    <%year.each do |key,value|%>
-        <%#if key  Date::MONTHNAMES[Date.today.month]%>
-            <%=link_to key,transactions_monthwise_path(:year=> params[:year],:month => key),class:"btn btn-info"%> 
-        <%#end%>
-    <%end%>
-<%end%> <br/> <br/> 
+   <% if params[:year].to_i == Date.today.year %>
+      <%year.each do |key,value|%>  
+        <%=link_to key,transactions_monthwise_path(:year=> params[:year],:month => key),class:"btn btn-info"%>
+        <% if key== Date::MONTHNAMES[Date.today.end_of_month.month ]  %>
+            <%break%> 
+        <%end%> 
+      <%end%>  
+  <%else%>
+    <%year.each do |key,value|%>  
+        <%=link_to key,transactions_monthwise_path(:year=> params[:year],:month => key),class:"btn btn-info"%>
+    <%end%>        
+  <%end%>    
+<%end%>
+<br/> <br/> 
 
 <%Transaction.list_cr_amount[params[:year].to_i].each do |months,amounts|%>
 
@@ -75,30 +97,32 @@
         <% if key == Date.today.next_month.strftime("%B") %>
           <h2>No months Found</h2> 
         <%else%>  
-        <h3><b><%=link_to key,transactions_monthwise_path(:year=> params[:year],:month => key)%></b></h3>
+        <h3><b><%=link_to key,transactions_monthwise_path(:year=> params[:year],:month => key,class: "bg-danger")%></b></h3>
         <h2><b><%key%></b></h2>
         <% if value == []%>
             <h3>No Transactions Found</h3>
         <%else%>   
         <div class="container">
           <div class="row">
-            <div class="col-sm-6 col-md-7" >
+            <div class="col-md-9" >
                   <table class ="table table-striped" id="myTable">
                     <thead>
                       <tr>
-                        <th>Transaction Date</th>
-                        <th>Company Name</th>
-                        <th>Account Number</th>
-                        <th>Particular</th>
-                        <th>Transaction Type</th>
-                        <th>Amount</th>
-                        <th>Remark</th>
-                        <th>Transaction Kind</th> 
+                        <th class="text-success">SI.no</th>
+                        <th class="text-success">Transaction Date</th>
+                        <th class="text-success">Company Name</th>
+                        <th class="text-success">Account Number</th>
+                        <th class="text-success">Particular</th>
+                        <th class="text-success">Transaction Type</th>
+                        <th class="text-success">Amount</th>
+                        <th class="text-success">Remark</th>
+                        <th class="text-success">Transaction Kind</th> 
                       </tr>
                     </thead>
                     <tbody id="myTable">
-                      <%value.order('transaction_date DESC').each do |trans|%>
+                      <%value.order('transaction_date DESC').each_with_index do |trans,index|%>
                         <tr>
+                          <td>  <%=index+1%></td>
                           <td>  <%=trans.transaction_date%></td>
                           <td><%=trans.company.name%></td>
                           <td>  <%=trans.account.acc_no%></td>
@@ -119,7 +143,8 @@
         <%if value == []%>
                  <h2> No chart Found</h2>
               <%else %> 
-              <div class="col-sm-4 col-sm-offset-2 col-md-5 col-md-offset-0">  
+              <h2></h2>
+              <div class="col-md-3">  
               <% data ={}
 
               sum_debit=0
@@ -146,6 +171,9 @@
     <%end%> 
     <%end%>
 <%end%>
+
+
+
 
 
 

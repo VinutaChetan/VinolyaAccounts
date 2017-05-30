@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Account Number:</strong>
+  <%= @transaction.account.acc_no %>
+</p>
+
+<p>
   <strong>Transaction date:</strong>
   <%= @transaction.transaction_date.to_s(:long) %>
 </p>
