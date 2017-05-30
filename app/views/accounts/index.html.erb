@@ -37,7 +37,7 @@
     <% @accounts.order('created_at DESC').each_with_index do |account,index| %>
       <tr>
         <td><%=index.to_i+1%></td>
-        <td><%= account.acc_no %></td>
+        <td><%= account.try(:acc_no) %></td>
         <td><%= account.opening_balance %></td>
         <td><%= account.bank.name%></td>
         <td><%= account.branch.name %></td>
