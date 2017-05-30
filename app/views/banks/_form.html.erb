@@ -30,7 +30,7 @@
   </div>
   <div class="field">
     <%= f.label :branch_id %><br>
-    <%= f.collection_select :branch_id,Branch.all,:id,:name,{prompt:"Select acc_no"},{ class: 'chosen-select' }%><br/>
+    <%= f.collection_select :branch_id,Branch.all,:id,:name,{prompt:"Select branch"},{ class: 'chosen-select' }%><br/>
   </div>
   <div class="field">
     <%= f.label :company_id %><br>
