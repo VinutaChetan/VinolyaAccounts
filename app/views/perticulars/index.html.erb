@@ -27,7 +27,7 @@
   <tbody>
     <% @perticulars.order('created_at DESC').each do |perticular| %>
       <tr>
-        <td><%= perticular.name %></td>
+        <td><%= perticular.try(:name) %></td>
         <td><%= link_to 'Show', perticular %></td>
         <% if can? :update,perticular %> 
           <td><%= link_to 'Edit', edit_perticular_path(perticular) %></td>
