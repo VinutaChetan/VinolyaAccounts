@@ -86,6 +86,10 @@ task :setup_data => :environment do
 	# 	bank.save
 	# end	
 
+	Account.all.each do |acc|
+		acc.branch_id=Branch.all.pluck(:id).sample 
+		acc.save
+	end	
 end	
 
 
