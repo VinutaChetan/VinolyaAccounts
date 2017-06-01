@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>VinolyaAccounts</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
- <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all'%>
+ <%= javascript_include_tag 'application' %>
   <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
 
 <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
@@ -49,48 +49,28 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><%=link_to companies_path do %>
-          Company
-          <span class="badge" ></span>
-            <span class="badge"><%=Company.all.size%></span>
-          <%end %>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Master <span class="glyphicon glyphicon-th-list"></span></a>
+           <ul class="dropdown-menu">
+             <li><%=link_to "Company",companies_path%></li>
+             <li><%=link_to "Bank",banks_path%></li> 
+             <li><%=link_to "Branch",branches_path%></li> 
+             <li><%=link_to "Account",accounts_path%></li>
+             <li><%=link_to "Particular",perticulars_path%></li>
+          </ul> 
         </li>
 
-        <li><%=link_to banks_path do %>
-          Bank
-          <span class="badge" ></span>
-            <span class="badge"><%=Bank.all.size%></span>
-          <%end %>
-        </li>
-        
-        <li><%=link_to branches_path do %>
-          Branch
-          <span class="badge" ></span>
-            <span class="badge"><%=Branch.all.size%></span>
-          <%end %>
-        </li>
+        <li><%=link_to "Transaction",transactions_path %></li>
 
-        <li><%=link_to accounts_path do %>
-          Account
-          <span class="badge" ></span>
-            <span class="badge"><%=Account.all.size%></span>
-          <%end %>
-        </li>
-       
-        <li><%=link_to perticulars_path do %>
-          Particular
-          <span class="badge" ></span>
-            <span class="badge"><%=Perticular.all.size%></span>
-          <%end %>
-        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports <span class="glyphicon glyphicon-th-list"></span></a>
+           <ul class="dropdown-menu">
+             <li><%=link_to "Daily Statement",transactions_daily_statement_path%></li>
 
-        <li><%=link_to transactions_path do %>
-          Transaction
-          <span class="badge" ></span>
-            <span class="badge"><%=Transaction.all.size%></span>
-          <%end %>
-        </li>
-        
+             <li><%=link_to "Weekly Statement",transactions_weekly_statement_path%></li>
+           </ul>
+        </li>     
       </ul>
       <!-- <form class="navbar-form navbar-left">
         <div class="form-group">
@@ -177,25 +157,18 @@
  	<div class="alert alert danger"><%= alert %>
 <%= yield %>
 
-<!-- Include Date Range Picker -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
+
 <!-- Include Date Range Picker -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
-<script type="text/javascript">
-  $(document).ready(function(){
-    $(".chosen-select").chosen({max_selected_options: 5});
-  });
-</script>
+
 
 <!--script for Calender-->
 <script>
@@ -212,6 +185,11 @@
 </script>
 
 
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".chosen-select").chosen({max_selected_options: 5});
+  });
+</script>
 
 
 

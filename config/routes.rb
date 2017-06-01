@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   get 'companies/fake'
   get 'transactions/yearwise'
   get 'transactions/monthwise'
+  get 'transactions/daily_statement'
+  get 'transactions/weekly_statement'
   get 'transactions/search_results'
   get 'accounts/yearwise_acc'
   get 'accounts/monthwise_acc'
@@ -18,7 +20,9 @@ Rails.application.routes.draw do
     resources :accounts,only: [:show]
   end 
   resources :branches
-  resources :companies
+  resources :companies do 
+    resources :accounts,only: [:show]
+  end  
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -33,7 +33,7 @@
 <p>
   <strong>Accounts related to this bank:</strong>
   <%if  @bank.accounts == nil%>
-      No Accounts found 
+      <h3>No Accounts found </h3>
   <% else%>    
     <% @bank.accounts.each do |acc| %>  
     <li><%=link_to acc.acc_no,bank_account_path(@bank,acc.id)%></li><br/>

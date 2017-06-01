@@ -49,9 +49,9 @@
 <%end%>   <br/><br/> 
 <%end%>
 
-<%=link_to "Back to #{@account.bank.name}",bank_path(@account.bank.id)%>
-
-
+<%=link_to "Back to #{@account.bank.name}",bank_path(@account.bank.id),class:"btn btn-info"%>
+<br/><br/>
+<%=link_to "Back to #{@account.company.name}",company_path(@account.company.id),class:"btn btn-info"%>
 
 
 

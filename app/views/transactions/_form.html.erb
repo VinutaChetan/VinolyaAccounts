@@ -37,8 +37,8 @@
 
 
   <div class="field">
-    <%= f.label :perticular_id %><br>
-    <%=f.collection_select :perticular_id,Perticular.all,:id,:name,{prompt:"Select perticular"},{ class: 'chosen-select' }%>
+    <%= f.label :particular_id %><br>
+    <%=f.collection_select :perticular_id,Perticular.all,:id,:name,{prompt:"Select particular"},{ class: 'chosen-select' }%>
   </div>
   
   <div class="field">
@@ -53,7 +53,7 @@
 
   <div class="field">
     <%= f.label :amount %><br>
-    <%= f.text_field :amount %>
+    <%= f.text_field :amount %><br/>
   </div>
 
   <div class="field">
@@ -64,7 +64,7 @@
   <div class="field">
     <%= f.label :transaction_kind %><br>
     <%=f.select :transaction_kind,["Cash","Cheque","RTGS"],prompt:"select Kind"%><br/>
-  </div>
+  </div><br/>
   <div class="actions">
     <%= f.submit %>
   </div>

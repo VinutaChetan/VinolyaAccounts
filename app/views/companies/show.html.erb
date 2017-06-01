@@ -5,6 +5,17 @@
   <%= @company.name %>
 </p>
 
+<p>
+  <strong>Accounts related to this company:</strong>
+  <%if  @company.accounts == nil%>
+      No Accounts found 
+  <% else%>    
+    <% @company.accounts.each do |acc| %>  
+    <li><%=link_to acc.acc_no,company_account_path(@company,acc.id)%></li><br/>
+    <%end%>
+  <%end%>
+</p>
+
 <% if current_user.is_admin? %>
 	<%= link_to 'Edit', edit_company_path(@company) %> |
 <%end%>	

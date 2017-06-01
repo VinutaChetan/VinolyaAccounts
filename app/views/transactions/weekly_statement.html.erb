@@ -1,29 +1,3 @@
-<%#Code for Breadcrumbs%>
-<!-- <h1>Listing Transactions</h1><br/> -->
-<!-- <ol class="breadcrumb"> -->
- <!-- <li><a href="#">Transaction</a></li> -->
-  
-<!-- </ol> -->
-<%#end of Breadcrumbs%>
-
-<p id="notice"><%= notice %></p>
- 
-<%Transaction.list_view.each do |key,month| %>
-  
-      <%= link_to key ,transactions_yearwise_path(:year => key),class:"btn btn-success"%>
-      
-<%end%><br/>
-  
-<br/>
-
-<% if current_user.is_admin?%>
-<button type="button" class="btn btn-info">
-  <%= link_to 'New Transaction', new_transaction_path %>
-</button>  
-<%end%><br/><br/>
-
-<h2>Fetching Last 20 Records </h2>
-
 <%if @transactions.empty? %>
   <p>No transactions found </p>
 <%else %>
@@ -46,8 +20,8 @@
 
                     <tbody id="myTable">
 
-                      <%@transactions.order('created_at DESC').limit(20).each_with_index do |val,index|%>
-                       
+                      <%@transactions.order('created_at DESC').each_with_index do |val,index|%>
+                        <% if val.transaction_date >= Date.today.beginning_of_week() && val.transaction_date<= Date.today.end_of_week()%>
                       <tr>
                         <td><%=index+1%></td>
                         <td><%= val.transaction_date.to_s(:long) %></td>
@@ -60,17 +34,8 @@
                         <td><%= val.transaction_kind %></td>
                       </tr> 
                       <%end%>
+                      <%end%>
                     </tbody>
                   </table>             
    </div>
    <%end%>   
-
-   <script type="text/javascript">
-   $('#myTable').DataTable();  
-</script>
-            
-
-
-
-
-

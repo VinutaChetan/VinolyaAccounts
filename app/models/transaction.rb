@@ -2,8 +2,8 @@ class Transaction < ActiveRecord::Base
 	belongs_to :perticular
 	belongs_to :company
 	belongs_to :account
-	validates_presence_of :transaction_date,:perticular_id,:transaction_type,:transaction_kind
-
+	validates_presence_of :transaction_date,:company_id,:account_id,:perticular_id,:transaction_type,:amount,:transaction_kind
+	validates_numericality_of :amount
 	after_create :add_acc_balance
 
 	def self.list_view
