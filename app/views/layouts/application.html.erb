@@ -120,8 +120,6 @@
     <%end%>
 
 
-
-
     <%if controller.controller_name=="perticulars"%>
         <li><%=link_to "particulars",perticulars_path%><span class="divider">>></span></li> 
     <%end%> 
@@ -183,6 +181,33 @@
     })
   })
 </script>
+
+<script>
+  $(document).ready(function(){
+    var date_input=$('input[name="start"]');
+    var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+    date_input.datepicker({
+      format: 'yyyy-mm-dd',
+      container: container,
+      todayHighlight: true,
+      autoclose: true,
+    })
+  })
+</script>
+
+<script>
+  $(document).ready(function(){
+    var date_input=$('input[name="end"]');
+    var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+    date_input.datepicker({
+      format: 'yyyy-mm-dd',
+      container: container,
+      todayHighlight: true,
+      autoclose: true,
+    })
+  })
+</script>
+
 
 
 <script type="text/javascript">

@@ -33,9 +33,11 @@
   <div class="field">
     <%= f.label :account_id %><br>
     <%=f.collection_select :account_id,Account.all,:id,:acc_no,{prompt:"Select acc_no"},{ class: 'chosen-select' }%>
+    <br/>
+    <span id="balance"></span>
   </div>
 
-
+<br/>
   <div class="field">
     <%= f.label :particular_id %><br>
     <%=f.collection_select :perticular_id,Perticular.all,:id,:name,{prompt:"Select particular"},{ class: 'chosen-select' }%>
@@ -74,9 +76,16 @@
 <script>
 var companyHandle = document.getElementById('transaction_company_id');
 var accountHandle = document.getElementById('transaction_account_id');
+var spanHandle = document.getElementById('balance');
 
 companyHandle.onchange = function(){
   accountHandle.innerHTML = "";
+  spanHandle.innerHTML = "";
+  var newElement = document.createElement('option');
+  newElement.value = 0;
+  var newText = document.createTextNode('select');
+  newElement.appendChild(newText);
+  accountHandle.appendChild(newElement);
   var request = new XMLHttpRequest();
   request.open('GET','/companies/select_accounts.json?company_id=' + companyHandle.value)
   request.onreadystatechange = function(){
@@ -93,6 +102,18 @@ companyHandle.onchange = function(){
   }
   request.send();
 };
+
+  accountHandle.onchange = function(){
+    var request = new XMLHttpRequest();
+    request.open('GET','/accounts/select_balance.json?acc_id=' + accountHandle.value);
+    request.onreadystatechange = function(){
+      if(request.readyState === 4 && request.status === 200){
+        var response = JSON.parse(request.responseText);
+       spanHandle.innerHTML = "Current Balance : " + response.current_balance;
+      }
+    };
+    request.send();
+  };
 
 
 </script>

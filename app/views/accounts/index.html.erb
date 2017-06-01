@@ -2,18 +2,20 @@
 
 
 <% if current_user.is_admin? || current_user.is_finance? %>
-  <button type="button" class="btn btn-info">  
-    <%= link_to 'New Account', new_account_path %>
-   </button> 
+    <%= link_to 'New Account', new_account_path,class: "btn btn-info"%> 
 <%end%><br/>
 
 
 <h2 class="text-muted">Listing Accounts</h2>
-
+<br/>
 
 <%if @accounts.empty? %>
   <p>No accounts found </p>
 <%else %>
+
+<!--its to export to excel -->
+<%= link_to "Export to Excel",accounts_path(format: "xls") %><br/>
+<br/>
 
 <div class="container">
 <table id="myTable" class ="table table-striped">

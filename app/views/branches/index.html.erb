@@ -1,12 +1,10 @@
 <p id="notice"><%= notice %></p>
 
 <% if current_user.is_admin?%>
-<button type="button" class="btn btn-info">
-  <%= link_to 'New Branch', new_branch_path %>
-</button>
+  <%= link_to 'New Branch', new_branch_path,class: "btn btn-info" %>
 <%end%>
 <br/>
-<h2><u>Listing Branches</u></h2>
+<h2 class="text-muted">Listing Branches</h2>
 <br/>
 
 <br/>

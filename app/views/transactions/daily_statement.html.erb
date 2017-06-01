@@ -1,6 +1,7 @@
 <%if @transactions.empty? %>
   <p>No transactions found </p>
 <%else %>
+  <h2 class="text-muted">Today's Statement of the Date :  <%=Date.today.to_s(:long)%></h2>
 <div class="container">
                   <table class ="table table-striped" id="myTable">
                     <thead>

@@ -1,7 +1,7 @@
 class AccountsController < ApplicationController
- before_action :authenticate_user!
+ #before_action :authenticate_user! ,except: [:select_balance]
   before_action :set_account, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource 
+  #load_and_authorize_resource 
   # GET /accounts
   # GET /accounts.json
   def index
@@ -31,6 +31,9 @@ class AccountsController < ApplicationController
   def edit
   end
 
+  def select_balance
+    @account = Account.find(params[:acc_id])
+  end
   # POST /accounts
   # POST /accounts.json
   def create

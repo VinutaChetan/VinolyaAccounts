@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/accounts/select_balance'
   get 'companies/fake'
   get 'transactions/yearwise'
   get 'transactions/monthwise'

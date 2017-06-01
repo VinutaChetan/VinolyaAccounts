@@ -1,12 +1,10 @@
 <p id="notice"><%= notice %></p>
 
 <% if current_user.is_admin?%>
-<button type="button" class="btn btn-info">
-  <%= link_to 'New Particular', new_perticular_path %>
-</button>
+  <%= link_to 'New Particular', new_perticular_path,class: "btn btn-info" %>
 <%end%><br/>
 <br/>
-<h2><u>Listing Particulars</u></h2>
+<h2 class="text-muted">Listing Particulars</h2>
 <br/>
 
 <br/>

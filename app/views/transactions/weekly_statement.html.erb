@@ -1,6 +1,8 @@
 <%if @transactions.empty? %>
   <p>No transactions found </p>
 <%else %>
+<h2 class="text-muted">This week statement </h2> 
+<h3 class="text-muted">Transactions From : <%=Date.today.beginning_of_week().to_s(:long)%> To : <%=Date.today.end_of_week().to_s(:long)%> </h3>
 <div class="container">
                   <table class ="table table-striped" id="myTable">
                     <thead>

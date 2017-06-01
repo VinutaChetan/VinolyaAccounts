@@ -1,14 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <% if current_user.is_admin? %>
-<button type="button" class="btn btn-info">
-  <%= link_to 'New Bank', new_bank_path %>
- </button> 
+     <%= link_to 'New Bank', new_bank_path, class: "btn btn-info" %>   
 <%end%>
 <br/>
 
-<h2><u>Listing Banks</u></h2>
-
+<h2 class="text-muted">Listing Banks</h2>
+<br/>
 <%if @banks.empty? %>
   <p>No banks found </p>
 <%else %>

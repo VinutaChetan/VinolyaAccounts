@@ -7,15 +7,13 @@ $(document).ready(function(){
 <p id="notice"><%= notice %></p>
 
 <% if current_user.is_admin?%>
-<button type="button" class="btn btn-info">
-  <%= link_to 'New Company', new_company_path %>
-</button>
+  <%= link_to 'New Company', new_company_path,class: "btn btn-info" %>
 <%end%><br/>
 <br/>
 
 
-<h2><u>Listing Companies</u></h2>
-
+<h2 class="text-muted">Listing Companies</h2>
+<br/>
 <%if @companies.empty? %>
   <p>No companies found </p>
 <%else %>

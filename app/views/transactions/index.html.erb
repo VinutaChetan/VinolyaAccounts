@@ -17,13 +17,12 @@
 <br/>
 
 <% if current_user.is_admin?%>
-<button type="button" class="btn btn-info">
-  <%= link_to 'New Transaction', new_transaction_path %>
-</button>  
+
+  <%= link_to 'New Transaction', new_transaction_path ,class: "btn btn-info"%>
 <%end%><br/><br/>
 
-<h2>Fetching Last 20 Records </h2>
-
+<h2 class="text-muted">Fetching Last 20 Records </h2>
+<br/>
 <%if @transactions.empty? %>
   <p>No transactions found </p>
 <%else %>

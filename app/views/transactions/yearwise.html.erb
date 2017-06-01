@@ -21,7 +21,7 @@
 <%#end%>
 
 <!-- Searching-->
-<b>Note : Enter searching days in the format yyyy/mm/dd</b><br/><br/>
+
 <%=form_tag transactions_search_results_path,method: :get do %>
  <label>Start Date:</label>
  <%= text_field_tag :start%>
@@ -32,6 +32,33 @@
   <%=submit_tag  "Search"%> 
   
 <%end%> 
+
+
+<%#=form_tag transactions_search_results_path,method: :get do %>
+<!-- <label>Start Date:</label>
+ <div class="col-sm-10">
+    <div class="input-group">
+      <div class="input-group-addon">
+         <i class="fa fa-calendar"></i>
+      </div> -->
+
+      <%#= text_field :start,class: "form-control", id: "date" ,placeholder: "yyyy/mm/dd"%>
+    <!-- </div>
+  </div>
+ <label>End Date:</label> 
+ <div class="col-sm-10">
+    <div class="input-group">
+      <div class="input-group-addon">
+        <i class="fa fa-calendar"></i>
+      </div>
+      <%#= text_field :end,class: "form-control", id: "date" ,placeholder: "yyyy/mm/dd"%>
+    </div>
+  </div>
+  <br/>
+  <%#=submit_tag  "Search"%> 
+  
+<%#end%> 
+ -->
 
 
 <%# Total credit amount of perticular year%>
@@ -120,7 +147,7 @@
                       </tr>
                     </thead>
                     <tbody id="myTable">
-                      <%value.order('transaction_date DESC').each_with_index do |trans,index|%>
+                      <%value.order('transaction_date ASC').each_with_index do |trans,index|%>
                         <tr>
                           <td>  <%=index+1%></td>
                           <td>  <%=trans.transaction_date%></td>

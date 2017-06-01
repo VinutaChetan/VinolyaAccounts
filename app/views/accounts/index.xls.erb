@@ -1,0 +1,30 @@
+<table border ="1">
+  <thead> 
+    <tr>
+      <th> SI.no</th>
+      <th> Account Number</th>
+      <th>Opening Balance</th>
+      <th> Bank</th>
+      <th> Branch</th>
+      <th> Account Type</th>
+      <th> Current Balance</th>
+      <th> Company Name</th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @accounts.order('created_at DESC').each_with_index do |account,index| %>
+      <tr>
+        <td><%=index.to_i+1%></td>
+        <td><%= account.acc_no %></td>
+        <td><%= account.opening_balance %></td>
+        <td><%= account.bank.name%></td>
+        <td><%= account.branch.name  %></td>
+        <td><%= account.acc_type %></td>
+        <td><%= account.current_balance %></td>
+        <td><%= account.company.name%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

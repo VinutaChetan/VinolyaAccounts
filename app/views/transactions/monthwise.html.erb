@@ -12,7 +12,6 @@
 <%= link_to "Back",transactions_yearwise_path(:year=>params[:year])%><br/><br/>
 
 <!-- Searching-->
-<b>Note : Enter searching days in the format yyyy/mm/dd</b><br/><br/>
 <%=form_tag transactions_search_results_path,method: :get do %>
  <label>Start Date:</label>
  <%= text_field_tag :start%>
@@ -23,6 +22,7 @@
   <%=submit_tag  "Search"%> 
   
 <%end%> 
+<br/>
 
 
 <div class="container">
