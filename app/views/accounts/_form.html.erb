@@ -13,28 +13,28 @@
 
   <div class="field">
     <%= f.label :acc_no %><br>
-    <%= f.text_field :acc_no %>
+    <%= f.text_field :acc_no,class:"col-sm-6" %><br/><br/>
   </div>
 
   <div class="field">
     <%= f.label :opening_balance %><br>
-    <%= f.text_field :opening_balance %>
+    <%= f.text_field :opening_balance,class:"col-sm-6" %><br/><br/> 
   </div>
 
   <div class="field">
     <%= f.label :bank_id %><br>
     <%= f.collection_select :bank_id,Bank.all,:id,:name, prompt:"select Bank" %><br/>
-  </div>
+  </div><br/>
 
   <div class="field">
     <%= f.label :branch_id %><br>
     <%= f.collection_select :branch_id,Branch.all,:id,:name,{prompt:"Select branch"},{ class: 'chosen-select' }%><br/>
-  </div>
+  </div><br/>
 
   <div class="field">
     <%= f.label :company_id %><br>
     <%= f.collection_select :company_id,Company.all,:id,:name, {prompt:"Select company"},{ class: 'chosen-select' } %><br/>
-  </div>
+  </div><br/>
 
   <div class="field">
     <%= f.label :acc_type %><br>
@@ -47,12 +47,14 @@
 
     <%= f.radio_button :acc_type, 'Over Draft' %>
     <%= f.label :Savings %>
-  </div>
+  </div><br/>
+
   <div class="field">
     <%= f.label :current_balance %><br>
-    <%= f.text_field :current_balance %>
+    <%= f.text_field :current_balance,class:"col-sm-6" %><br/><br/> 
   </div>
+
   <div class="actions">
     <%= f.submit %>
-  </div>
+  </div><br/>
 <% end %>

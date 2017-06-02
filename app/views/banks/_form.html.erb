@@ -13,33 +13,33 @@
 
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name ,class:"col-sm-6" %><br/><br/>
   </div>
   <div class="field">
     <%= f.label :address %><br>
-    <%= f.text_area :address %><br/>
+    <%= f.text_area :address ,class:"col-sm-6" %><br/><br/><br/>
   </div>
   <div class="field">
     <%= f.label :manager %><br>
-    <%= f.text_field :manager %><br/>
+    <%= f.text_field :manager ,class:"col-sm-6" %><br/><br/>
   </div>
   <div class="field">
     <%= f.label :contact_details %><br>
-    <%= f.text_field :contact_details %><br/>
+    <%= f.text_field :contact_details ,class:"col-sm-6" %><br/><br/>
   </div>
   <div class="field">
     <%= f.label :branch_id %><br>
-    <%= f.collection_select :branch_id,Branch.all,:id,:name,{prompt:"Select branch"},{ class: 'chosen-select' }%><br/>
+    <%= f.collection_select :branch_id,Branch.all,:id,:name,{prompt:"Select branch"},{ class: 'chosen-select' }%><br/><br/>
   </div>
   <div class="field">
     <%= f.label :company_id %><br>
-    <%= f.collection_select :company_id,Company.all,:id,:name, {prompt:"Select company name"},{ class: 'chosen-select' }%><br/>
+    <%= f.collection_select :company_id,Company.all,:id,:name, {prompt:"Select company name"},{ class: 'chosen-select' }%><br/><br/>
   </div>
   <div class="field">
     <%= f.label :link %><br>
-    <%= f.text_field :link %><br/>
-  </div><br/><br/>
+    <%= f.text_field :link ,class:"col-sm-6" %><br/><br/>
+  </div>
   <div class="actions">
     <%= f.submit %>
-  </div>
+  </div><br/> 
 <% end %>

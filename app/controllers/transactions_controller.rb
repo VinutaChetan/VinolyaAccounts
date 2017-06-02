@@ -30,6 +30,7 @@ class TransactionsController < ApplicationController
 
     respond_to do |format|
       if @transaction.save
+        Notification.amount_transfer(@transaction,current_user).deliver!
         format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
         format.json { render :show, status: :created, location: @transaction }
       else

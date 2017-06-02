@@ -14,21 +14,22 @@
    
         <label>Transaction Date</label><br/>
      
-       <div class="col-sm-10">
+       <div class="col-sm-6">
        <div class="input-group">
         <div class="input-group-addon">
          <i class="fa fa-calendar"></i>
         </div>
-        
+
         <%= f.text_field :transaction_date, class: "form-control", id: "date" ,placeholder: "yyyy/mm/dd"%>
        </div>
      </div><br/>
      <br/>
      
+  
   <div class="field">
     <%=f.label :company_id %><br>
-    <%=f.collection_select :company_id,Company.all,:id,:name,{prompt:"Select Company"},{ class: 'chosen-select' }%>
-  </div>
+    <%=f.collection_select :company_id,Company.all,:id,:name,{prompt:"Select Company"},{ class: 'chosen-select'}%>  
+  </div><br/>
 
   <div class="field">
     <%= f.label :account_id %><br>
@@ -38,10 +39,10 @@
   </div>
 
 <br/>
-  <div class="field">
+  <div class="field" >
     <%= f.label :particular_id %><br>
     <%=f.collection_select :perticular_id,Perticular.all,:id,:name,{prompt:"Select particular"},{ class: 'chosen-select' }%>
-  </div>
+  </div><br/>
   
   <div class="field">
     <%= f.label :transaction_type %><br>
@@ -51,16 +52,16 @@
     
     <%= f.radio_button :transaction_type, 'credit' %> 
     <%= f.label :Credit %>
-  </div>
+  </div><br/>
 
   <div class="field">
     <%= f.label :amount %><br>
-    <%= f.text_field :amount %><br/>
+    <%= f.text_field :amount ,class:"col-sm-6" %><br/><br/> 
   </div>
 
   <div class="field">
     <%= f.label :remark %><br>
-    <%= f.text_area :remark %>
+    <%= f.text_area :remark ,class:"col-sm-6" %><br/><br/>
   </div>
 
   <div class="field">

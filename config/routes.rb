@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get '/accounts/select_balance'
+  
   get 'companies/fake'
   get 'transactions/yearwise'
   get 'transactions/monthwise'
@@ -11,8 +11,10 @@ Rails.application.routes.draw do
   get 'perticulars/yearwise_perticular'
   get 'perticulars/monthwise_perticular'
 
+  #this is for onclick event
   get 'companies/select_accounts'
-  
+  get '/accounts/select_balance'
+
   resources :transactions
   resources :perticulars 
   devise_for :users
