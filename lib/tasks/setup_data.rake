@@ -76,10 +76,10 @@ task :setup_data => :environment do
 	# 	account.save
 	# end	
 
-	# Transaction.all.each do |transaction|
-	# 	transaction.company_id=Company.all.pluck(:id).sample
-	# 	transaction.save
-	# end	
+	Transaction.all.each do |transaction|
+		transaction.company_id=Company.all.pluck(:id).sample
+		transaction.save
+	end	
 
 	# Bank.all.each do |bank|
 	# 	bank.link=Faker::Internet.url
