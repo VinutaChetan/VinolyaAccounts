@@ -62,11 +62,11 @@
   <div class="field">
     <%= f.label :remark %><br>
     <%= f.text_area :remark ,class:"col-sm-6" %><br/><br/>
-  </div>
+  </div><br/><br/>
 
   <div class="field">
     <%= f.label :transaction_kind %><br>
-    <%=f.select :transaction_kind,["Cash","Cheque","RTGS"],prompt:"select Kind"%><br/>
+    <%=f.select :transaction_kind,["Cash","Cheque","RTGS"],prompt:"select Kind"%>
   </div><br/>
   <div class="actions">
     <%= f.submit %>

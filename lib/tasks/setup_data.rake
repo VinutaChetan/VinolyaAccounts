@@ -71,10 +71,10 @@ task :setup_data => :environment do
 	# 	transaction.save
 	# end
 
-	Account.all.each do |account|
-		account.company_id=Company.all.pluck(:id).sample
-		account.save
-	end	
+	# Account.all.each do |account|
+	# 	account.company_id=Company.all.pluck(:id).sample
+	# 	account.save
+	# end	
 
 	# Transaction.all.each do |transaction|
 	# 	transaction.company_id=Company.all.pluck(:id).sample
