@@ -8,6 +8,6 @@ class Notification < ApplicationMailer
   def amount_transfer(transaction,user)
   	@transaction=transaction
     @user = user
-    mail to: "vinuta.udagatti@gmail.com",cc: "#{user.email}",subject: "Amount tranfered today"
+    mail to: "vinuta.testing@gmail.com",cc: "#{user.email}",subject: "Amount tranfered today"
   end
 end    
