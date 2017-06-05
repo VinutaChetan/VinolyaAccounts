@@ -2,7 +2,7 @@
 
 
 <% if current_user.is_admin? || current_user.is_finance? %>
-    <%= link_to 'New Account', new_account_path,class: "btn btn-info"%> 
+    <%= link_to 'New Account', new_account_path,class: "btn btn-success"%> 
 <%end%><br/>
 
 
@@ -46,12 +46,12 @@
         <td><%= account.acc_type %></td>
         <td><%= account.current_balance %></td>
         <td><%= account. company.name%>
-        <td><%= link_to 'Show', account %></td>
+        <td><%= link_to 'Show', account,class: "btn btn-info" %></td>
         <% if can? :update, account %>
-          <td><%= link_to 'Edit', edit_account_path(account) %></td>
+          <td><%= link_to 'Edit', edit_account_path(account),class: "btn btn-info" %></td>
         <% end %>
         <% if can? :destroy, account %> 
-          <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-info" %></td>
         <%end%>  
       </tr>
     <% end %>

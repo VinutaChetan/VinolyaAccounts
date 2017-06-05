@@ -1,5 +1,8 @@
 <p id="notice"><%= notice %></p>
 
+<div class="row">
+<div class="col-md-6">
+  <div class="box-1">
 <p>
   <strong>Name:</strong>
   <%= @bank.name %>
@@ -31,6 +34,21 @@
 </p>
 
 <p>
+  <strong>Link:</strong>
+  <%= @bank.link %>
+</p>
+
+<% if current_user.is_admin?%>
+  <%= link_to 'Edit', edit_bank_path(@bank),class: "btn btn-info" %> |
+<%end%> 
+<%= link_to 'Back', banks_path,class: "btn btn-info" %>
+</div>
+</div>
+
+
+<div class="col-md-6 ">
+  <div class="box-1">
+<p>
   <strong>Accounts related to this bank:</strong>
   <%if  @bank.accounts == nil%>
       <h3>No Accounts found </h3>
@@ -40,16 +58,8 @@
     <%end%>
   <%end%>
 </p>
+</div >
+</div>
 
-<p>
-  <strong>Link:</strong>
-  <%= @bank.link %>
-</p>
-
-
-<% if current_user.is_admin?%>
-  <%= link_to 'Edit', edit_bank_path(@bank) %> |
-<%end%> 
-<%= link_to 'Back', banks_path %>
 
 

@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <% if current_user.is_admin?%>
-  <%= link_to 'New Particular', new_perticular_path,class: "btn btn-info" %>
+  <%= link_to 'New Particular', new_perticular_path,class: "btn btn-success" %>
 <%end%><br/>
 <br/>
 <h2 class="text-muted">Listing Particulars</h2>
@@ -26,12 +26,12 @@
     <% @perticulars.order('created_at DESC').each do |perticular| %>
       <tr>
         <td><%= perticular.try(:name) %></td>
-        <td><%= link_to 'Show', perticular %></td>
+        <td><%= link_to 'Show', perticular,class: "btn btn-info" %></td>
         <% if can? :update,perticular %> 
-          <td><%= link_to 'Edit', edit_perticular_path(perticular) %></td>
+          <td><%= link_to 'Edit', edit_perticular_path(perticular),class: "btn btn-info" %></td>
         <%end%>
         <% if can? :destroy, perticular %> 
-          <td><%= link_to 'Destroy', perticular, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Destroy', perticular, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-info" %></td>
         <%end%>
       </tr>
     <% end %>

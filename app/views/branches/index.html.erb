@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <% if current_user.is_admin?%>
-  <%= link_to 'New Branch', new_branch_path,class: "btn btn-info" %>
+  <%= link_to 'New Branch', new_branch_path,class: "btn btn-success" %>
 <%end%>
 <br/>
 <h2 class="text-muted">Listing Branches</h2>
@@ -26,12 +26,12 @@
     <% @branches.order('created_at DESC').each do |branch| %>
       <tr>
         <td><%= branch.try(:name) %></td>
-        <td><%= link_to 'Show', branch %></td>
+        <td><%= link_to 'Show', branch,class: "btn btn-info" %></td>
         <% if can? :update, branch %> 
-          <td><%= link_to 'Edit', edit_branch_path(branch) %></td>
+          <td><%= link_to 'Edit', edit_branch_path(branch),class: "btn btn-info" %></td>
         <%end %> 
         <% if can? :destroy, branch %> 
-          <td><%= link_to 'Destroy', branch, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Destroy', branch, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-info" %></td>
         <%end%>    
       </tr>
     <% end %>

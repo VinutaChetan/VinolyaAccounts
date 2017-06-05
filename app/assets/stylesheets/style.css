@@ -2,3 +2,86 @@
     top: 380px !important;
     left: 0;
 }
+
+body{
+	box-sizing: border-box;
+}
+.page-header{
+	padding-bottom: 4px;
+    margin: 1px 0 20px !important;
+    border-bottom: 1px solid #eee;
+    color: currentColor;
+    background: cadetblue;;
+    padding-top: 1px;
+}
+
+.table{
+	background-color: thistle;
+}
+tbody#myTable {
+    background-color: white
+}
+
+select#account_branch_id {
+    width: 50%;
+}
+
+select#account_company_id{
+    width: 50%;   
+}
+
+select#bank_branch_id{
+    width: 50%;
+}
+
+select#bank_company_id{
+    width: 50%;
+}
+
+select#transaction_company_id{
+    width: 50%;
+}
+
+select#transaction_account_id{
+    width: 50%;
+}
+
+select#transaction_perticular_id{
+    width: 50%;
+}
+
+.box{
+    background-color: aliceblue !important;
+    padding :40px;
+}
+
+.box-1 {
+    border: 1px solid #000;
+    padding: 40px;
+    min-height: 400px;
+    background-color: #f9f9f9;;   
+}
+
+ul.breadcrumb{
+    background-color: transparent;
+    font-style: italic;
+    font-size: large;
+}
+
+/*.company{
+    background-color: aliceblue !important;
+    padding :40px;
+}
+
+.bank{
+     background-color: aliceblue !important;
+    padding :40px;
+
+}
+
+.account{
+     background-color: aliceblue !important;
+    padding :40px;
+
+}
+*/

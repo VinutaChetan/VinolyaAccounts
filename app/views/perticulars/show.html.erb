@@ -1,18 +1,29 @@
+<div class="row">
+<div class="col-md-6 ">
+	<div class="box-1">
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Particular Name:</strong>
+  <b><strong>Particular Name:</strong></b><br/><br/>
   <%= @perticular.name %>
 </p>
-
+<br/>
 <% if current_user.is_admin?%>
-	<%= link_to 'Edit', edit_perticular_path(@perticular) %> |
+	<%= link_to 'Edit', edit_perticular_path(@perticular),class: "btn btn-info" %> |
 <%end%>
-<%= link_to 'Back', perticulars_path %><br/><br/>
+<%= link_to 'Back', perticulars_path,class: "btn btn-info"	 %><br/><br/>
+</div>
+</div>
 
+<div class="col-md-6">
+	<div class="box-1">
+<b><strong>Reports</strong></b><br/><br/>		
 <% unless @perticular.transactions.blank? %>
 
 <%@perticular.transactions.list_view.each do |key,month| %>
-      <%=link_to key,perticulars_yearwise_perticular_path(:year => key,:perticular_id =>@perticular.id),class:"btn btn-info"%>
+      <%=link_to key,perticulars_yearwise_perticular_path(:year => key,:perticular_id =>@perticular.id),class:"btn btn-success"%><br/><br/>
 <%end%> 
-<%end%>  <br/><br/> 
+<%end%>
+	</div>  
+</div>
+</div>

@@ -1,22 +1,35 @@
 <p id="notice"><%= notice %></p>
 
+<div class="row">
+<div class="col-md-6 ">
+  <div class="box-1">
 <p>
-  <strong>Name:</strong>
+  <h4><strong>Name:</strong></h4><br/>
   <%= @company.name %>
 </p>
+</br/>
+<% if current_user.is_admin? %>
+  <%= link_to 'Edit', edit_company_path(@company),class: "btn btn-info" %> |
+<%end%> 
+<%= link_to 'Back', companies_path,class: "btn btn-info" %>
 
+</div>
+</div>
+
+
+<div class="col-md-6">
+  <div class="box-1">
 <p>
-  <strong>Accounts related to this company:</strong>
+  <b><h4><strong>Accounts :</strong></h4></b> <br/>
   <%if  @company.accounts == nil%>
-      No Accounts found 
+      <h3>No Accounts found</h3> 
   <% else%>    
-    <% @company.accounts.each do |acc| %>  
+    <% @company.accounts.each do |acc| %> 
     <li><%=link_to acc.acc_no,company_account_path(@company,acc.id)%></li><br/>
     <%end%>
   <%end%>
 </p>
+<br/>
+</div>
+</div>
 
-<% if current_user.is_admin? %>
-	<%= link_to 'Edit', edit_company_path(@company) %> |
-<%end%>	
-<%= link_to 'Back', companies_path %>

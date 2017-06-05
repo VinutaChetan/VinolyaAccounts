@@ -1,11 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <b><h4><strong>Name:</strong></h4></b>
   <%= @branch.name %>
 </p>
-
+<br/>
 <% if current_user.is_admin? %>
-	<%= link_to 'Edit', edit_branch_path(@branch) %> |
+	<%= link_to 'Edit', edit_branch_path(@branch),class: "btn btn-info" %> |
 <%end%>	
-<%= link_to 'Back', branches_path %>
+<%= link_to 'Back', branches_path,class: "btn btn-info" %>

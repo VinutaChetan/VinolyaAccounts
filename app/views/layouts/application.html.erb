@@ -30,7 +30,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
 
 <%if user_signed_in? %>
 <nav class="navbar navbar-default">
@@ -81,11 +81,10 @@
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bank Links <span class="glyphicon glyphicon-th-list"></span></a>
-           <ul class="dropdown-menu">
+           <ul class="dropdown-menu" >
             <%Bank.all.each do |bank|%>
              <li><%=link_to bank.name,bank.try(:link),target: :_blank%></li>
-            <%end%>
-            
+            <%end%> 
           </ul> 
         </li>
         <li class="dropdown">
@@ -101,7 +100,10 @@
 </nav>
 <%end%>
 
-<ul class="breadcrumb"> 
+<%if controller.controller_name!="companies"%>
+  <%if controller.controller_name!="banks"%>
+    <%if controller.controller_name!="branches"%>
+    <ul class="breadcrumb">
     <%if controller.controller_name=="transactions"%>
         <li><%=link_to "transaction",transactions_path%><span class="divider">>></span></li> 
     <%end%> 
@@ -150,7 +152,10 @@
 
         <li><%=link_to params[:month],accounts_monthwise_acc_path(:year => params[:year],:month => params[:month],:account_id =>@account.id)%><span class="divider">>></span></li> 
     <%end%>    
-</ul>
+    </ul>
+    <%end%>
+  <%end%>
+<%end%>  
  	
  	<div class="alert alert danger"><%= alert %>
 <%= yield %>

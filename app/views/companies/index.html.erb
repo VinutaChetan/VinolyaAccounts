@@ -7,10 +7,8 @@ $(document).ready(function(){
 <p id="notice"><%= notice %></p>
 
 <% if current_user.is_admin?%>
-  <%= link_to 'New Company', new_company_path,class: "btn btn-info" %>
+  <%= link_to 'New Company', new_company_path,class: "btn btn-success" %>
 <%end%><br/>
-<br/>
-
 
 <h2 class="text-muted">Listing Companies</h2>
 <br/>
@@ -32,12 +30,12 @@ $(document).ready(function(){
     <% @companies.order('created_at DESC').each do |company| %>
       <tr>
         <td><%= company.try(:name) %></td>
-        <td><%= link_to 'Show', company %></td>
+        <td><%= link_to 'Show', company,class: "btn btn-info" %></td>
         <% if can? :upadte, company %> 
-          <td><%= link_to 'Edit', edit_company_path(company) %></td>
+          <td><%= link_to 'Edit', edit_company_path(company),class: "btn btn-info" %></td>
         <%end%>
         <% if can? :destroy, company %>   
-          <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?'},class: "btn btn-info" %></td>
         <%end%>    
       </tr>
     <% end %>
