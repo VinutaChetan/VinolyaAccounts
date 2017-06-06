@@ -12,18 +12,18 @@
 <%= link_to "Back",transactions_yearwise_path(:year=>params[:year])%><br/><br/>
 
 <!-- Searching-->
-<%=form_tag transactions_search_results_path,method: :get do %>
- <label>Start Date:</label>
- <%= text_field_tag :start%>
+<%#=form_tag transactions_search_results_path,method: :get do %>
+ <!-- <label>Start Date:</label> -->
+ <%#= text_field_tag :start%>
   
- <label>End Date:</label> 
-  <%= text_field_tag :end%>
+ <!-- <label>End Date:</label> --> 
+  <%#= text_field_tag :end%>
   
-  <%=submit_tag  "Search"%> 
+  <%#=submit_tag  "Search"%> 
   
-<%end%> 
-<br/>
-
+<%#end%> 
+<!-- <br/>
+ -->
 
 <div class="container">
 <div class="row">

@@ -11,9 +11,9 @@
     </div>
   <% end %>
 
-   
+
         <label>Transaction Date</label><br/>
-     
+       
        <div class="col-sm-6">
        <div class="input-group">
         <div class="input-group-addon">
@@ -41,6 +41,7 @@
 <br/>
   <div class="field" >
     <%= f.label :particular_id %><br>
+    <%#= select_tag :perticular, options_from_collection_for_select(Perticular.all, :id, :name, params[:Perticular_id]), include_blank: true %>
     <%=f.collection_select :perticular_id,Perticular.all,:id,:name,{prompt:"Select particular"},{ class: 'chosen-select' }%>
   </div><br/>
   
@@ -60,14 +61,16 @@
   </div>
 
   <div class="field">
+    <%= f.label :transaction_kind %><br>
+    <%=f.select :transaction_kind,["Cash","Cheque","RTGS"],prompt:"select Kind"%>
+  </div><br/>
+  
+  <div class="field">
     <%= f.label :remark %><br>
     <%= f.text_area :remark ,class:"col-sm-6" %><br/><br/>
   </div><br/><br/>
 
-  <div class="field">
-    <%= f.label :transaction_kind %><br>
-    <%=f.select :transaction_kind,["Cash","Cheque","RTGS"],prompt:"select Kind"%>
-  </div><br/>
+  
   <div class="actions">
     <%= f.submit %>
   </div>

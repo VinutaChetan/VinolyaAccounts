@@ -1,7 +1,8 @@
+<div class="container">
 <table class ="table table-striped" id="myTable" >
            
             <thead>
-                <tr>
+                <tr >
                 	<th>SI.no</th>
                     <th>Transaction Date</th>
                     <th>Company Name</th>
@@ -16,7 +17,7 @@
             
             <tbody id="myTable" >
             	
-            	<% @transactions.each_with_index do |trans,index|%>
+            	<% @transactions.order('transaction_date ASC').each_with_index do |trans,index|%>
 				<tr>
 					<td>  <%=index+1%></td>
                     <td>  <%=trans.transaction_date%></td>
@@ -32,7 +33,11 @@
                    
             </tbody>
 </table> 
-
+</div>
 
 
 <%=link_to "back",transactions_path%>
+<script type="text/javascript">
+   $('#myTable').DataTable();  
+</script>
+

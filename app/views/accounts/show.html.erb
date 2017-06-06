@@ -55,12 +55,16 @@
 
 
 <div class="col-md-6">
+  <% if @account.transactions.blank? %>
+  <div class="box-2">
+  <%else%>  
   <div class="box-1">
 <% unless @account.transactions.blank? %>
   <h4><b>Reports</b></h4>
 <%@account.transactions.list_view.each do |key,month| %>
       <%=link_to key,accounts_yearwise_acc_path(:year => key,:account_id =>@account.id),class:"btn btn-success"%>   
 <%end%>   <br/><br/> 
+<%end%>
 <%end%>
 </div>
 </div>

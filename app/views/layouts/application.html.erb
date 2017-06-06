@@ -53,10 +53,10 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Master <span class="glyphicon glyphicon-th-list"></span></a>
            <ul class="dropdown-menu">
+             <li><%=link_to "Account",accounts_path%></li>
              <li><%=link_to "Company",companies_path%></li>
              <li><%=link_to "Bank",banks_path%></li> 
              <li><%=link_to "Branch",branches_path%></li> 
-             <li><%=link_to "Account",accounts_path%></li>
              <li><%=link_to "Particular",perticulars_path%></li>
           </ul> 
         </li>
@@ -105,18 +105,18 @@
     <%if controller.controller_name!="branches"%>
     <ul class="breadcrumb">
     <%if controller.controller_name=="transactions"%>
-        <li><%=link_to "transaction",transactions_path%><span class="divider">>></span></li> 
+        <li><%=link_to "Transactions",transactions_path%><span class="divider">>></span></li> 
     <%end%> 
 
 
     <%if controller.controller_name=="transactions" and controller.action_name=="yearwise" %>
       
-      <%= link_to params[:year],transactions_yearwise_path(:year => params[:year]),class:"btn btn-info"%><span class="divider">>></span><break> 
+      <%= link_to params[:year],transactions_yearwise_path(:year => params[:year])%><span class="divider">>></span><break> 
         
     <%end%>
 
     <%if controller.controller_name=="transactions" and controller.action_name=="monthwise"%>
-      <%= link_to params[:year],transactions_yearwise_path(:year => params[:year]),class:"btn btn-info"%><span class="divider">>></span><break> 
+      <%= link_to params[:year],transactions_yearwise_path(:year => params[:year])%><span class="divider">>></span><break> 
            
       <%=link_to params[:month],transactions_monthwise_path(:year=> params[:year],:month => params[:month])%></li> 
     <%end%>
@@ -173,6 +173,7 @@
 
 
 
+
 <!--script for Calender-->
 <script>
   $(document).ready(function(){
@@ -213,11 +214,9 @@
   })
 </script>
 
-
-
 <script type="text/javascript">
-  $(document).ready(function(){
-    $(".chosen-select").chosen({max_selected_options: 5});
+    $(document).ready(function(){
+     $(".chosen-select").chosen({max_selected_options: 5});
   });
 </script>
 

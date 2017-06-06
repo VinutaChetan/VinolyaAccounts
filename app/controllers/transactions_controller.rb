@@ -65,7 +65,7 @@ class TransactionsController < ApplicationController
   end
 
   def search_results
-    @transactions=Transaction.where("transaction_date BETWEEN ? AND ?",params[:start],params[:end])
+    @transactions=Transaction.where("transaction_date BETWEEN ? AND ? AND account_id=?",params[:start],params[:end],params[:acc_no])
   end 
 
   private

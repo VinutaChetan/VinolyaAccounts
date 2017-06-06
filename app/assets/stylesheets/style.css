@@ -1,8 +1,8 @@
-.datepicker-dropdown {
+/*.datepicker-dropdown {
     top: 380px !important;
     left: 0;
 }
-
+*/
 body{
 	box-sizing: border-box;
 }
@@ -11,7 +11,7 @@ body{
     margin: 1px 0 20px !important;
     border-bottom: 1px solid #eee;
     color: currentColor;
-    background: cadetblue;;
+    background: aliceblue;
     padding-top: 1px;
 }
 
@@ -62,12 +62,19 @@ select#transaction_perticular_id{
     background-color: #f9f9f9;;   
 }
 
+.box-2{
+    display: none;
+}
+
 ul.breadcrumb{
     background-color: transparent;
     font-style: italic;
     font-size: large;
 }
 
+.datepicker-dropdown {
+    top: 455px !important;
+}
 /*.company{
     background-color: aliceblue !important;
     padding :40px;

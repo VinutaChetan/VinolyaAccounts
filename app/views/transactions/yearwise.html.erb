@@ -22,16 +22,16 @@
 
 <!-- Searching-->
 
-<%=form_tag transactions_search_results_path,method: :get do %>
- <label>Start Date:</label>
- <%= text_field_tag :start%>
+<%#=form_tag transactions_search_results_path,method: :get do %>
+ <!-- <label>Start Date:</label> -->
+ <%#= text_field_tag :start%>
   
- <label>End Date:</label> 
-  <%= text_field_tag :end%>
+ <!-- <label>End Date:</label>  -->
+  <%#= text_field_tag :end%>
   
-  <%=submit_tag  "Search"%> 
+  <%#=submit_tag  "Search"%> 
   
-<%end%> 
+<%#end%> 
 
 
 <%#=form_tag transactions_search_results_path,method: :get do %>
@@ -121,9 +121,9 @@
 
 <% Transaction.list_view[params[:year].to_i].each do |year| %>
     <%year.each do |key,value|%>
-        <% if key == Date.today.next_month.strftime("%B") %>
-          <h2>No months Found</h2> 
-        <%else%>  
+        <%# if key == Date.today.next_month.strftime("%B") %>
+          <!--<h2>No months Found</h2> 
+        <%#else%> --> 
         <h3><b><%=link_to key,transactions_monthwise_path(:year=> params[:year],:month => key,class: "bg-danger")%></b></h3>
         <h2><b><%key%></b></h2>
         <% if value == []%>
@@ -196,7 +196,7 @@
         </div>                  
     <%end%>
     <%end%> 
-    <%end%>
+    <%#end%>
 <%end%>
 
 

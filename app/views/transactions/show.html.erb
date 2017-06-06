@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Particular Name:</strong>
+  <%= @transaction.perticular.name %>
+</p>
+
+<p>
   <strong>Account Number:</strong>
   <%= @transaction.account.acc_no %>
 </p>
@@ -10,10 +15,6 @@
   <%= @transaction.transaction_date.to_s(:long) %>
 </p>
 
-<p>
-  <strong>Perticular:</strong>
-  <%= @transaction.perticular.name %>
-</p>
 
 <p>
   <strong>Company Name:</strong>

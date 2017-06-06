@@ -21,6 +21,23 @@
   <%= link_to 'New Transaction', new_transaction_path ,class: "btn btn-info"%>
 <%end%><br/><br/>
 
+<!-- Searching-->
+
+<%=form_tag transactions_search_results_path,method: :get do %>
+ <label>Start Date:</label>
+ <%= text_field_tag :start%>
+  
+ <label>End Date:</label> 
+  <%= text_field_tag :end%>
+
+<label>Account Number:</label>
+  <%= select_tag "acc_no", options_from_collection_for_select(Account.all, "id", "acc_no"), { :include_blank => true , :class => "product_select"}%>
+  
+  <%=submit_tag  "Search"%> 
+<%end%> 
+<%#=collection_select :account_id,Account.all,:id,:acc_no,{prompt:"Select Account"}%>
+
+
 <h2 class="text-muted">Fetching Last 20 Records </h2>
 <br/>
 <%if @transactions.empty? %>
@@ -37,9 +54,9 @@
                         <th class="text-success">Particular</th>
                         <th class="text-success">Transaction type</th>
                         <th class="text-success">Amount</th>
-                        <th class="text-success">Remark</th>
-                        <th class="text-success">Transaction kind</th> 
-
+                        <th class="text-success">Transaction kind</th>
+                        <th class="text-success">Remark</th> 
+                        <th class="text-success">Show</th>
                       </tr>
                     </thead>
 
@@ -50,13 +67,14 @@
                       <tr>
                         <td><%=index+1%></td>
                         <td><%= val.transaction_date.to_s(:long) %></td>
-                        <td><%=val.company.try(:name)%></td>
-                        <td><%=val.account.acc_no%>
+                        <td><%=link_to val.company.try(:name),company_path(val.company.id)%></td>
+                        <td><%=link_to val.account.acc_no,account_path(val.account.id)%>
                         <td><%= val.perticular.name %></td>
                         <td><%= val.transaction_type %></td>
                         <td><%= val.amount%></td>
-                        <td><%= val.remark %></td>
                         <td><%= val.transaction_kind %></td>
+                        <td><%= val.remark %></td>
+                        <td><%= link_to 'Show',val,class: "btn btn-info" %></td>
                       </tr> 
                       <%end%>
                     </tbody>
