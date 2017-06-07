@@ -31,7 +31,7 @@
   <%= text_field_tag :end%>
 
 <label>Account Number:</label>
-  <%= select_tag "acc_no", options_from_collection_for_select(Account.all, "id", "acc_no"), { :include_blank => true , :class => "product_select"}%>
+  <%= select_tag "acc_no", options_from_collection_for_select(Account.all, "id", "acc_no"),{:include_blank => true , :class => "product_select"}%>
   
   <%=submit_tag  "Search"%> 
 <%end%> 
