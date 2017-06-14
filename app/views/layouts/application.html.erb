@@ -42,6 +42,9 @@
 <div class="container-fluid">
 
 <%if user_signed_in? %>
+<!--This condition for Dashboard-->
+<% unless controller.controller_name=="dashboards" %>
+
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -91,7 +94,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Accounts Links <span class="glyphicon glyphicon-th-list"></span></a>
            <ul class="dropdown-menu" >
-            <%Account.all.each do |acc|%>
+            <%Account.all.order('created_at DESC').each do |acc|%>
                <li><%=link_to acc.acc_no, accounts_select_account_path(account_id: acc.id)%></li>
             <%end%> 
           </ul> 
@@ -117,6 +120,7 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<%end%>
 <%end%>
 
 <%if controller.controller_name!="companies"%>
@@ -179,7 +183,7 @@
  	<div class="alert alert danger"><%= alert %>
 
 <div class= "session">
-<% if  user_signed_in? && controller.action_name!="welcome" %>
+<% if  user_signed_in? && controller.controller_name!="dashboards"  %>
   <h3> You are seleted the Account Id <%= current_account.id %>  of Account Number "<%= current_account.acc_no %>"</h3>
 <%end%>
 </div>        

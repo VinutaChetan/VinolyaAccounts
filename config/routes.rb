@@ -35,14 +35,16 @@ Rails.application.routes.draw do
   resources :branches
   resources :companies do 
     resources :accounts,only: [:show]
-  end  
-  
+  end 
+  #resources :dashboards 
+  get 'dashboards/index'
+  #root to: "dashboard/index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root to: "banks#welcome"
-
+  #root to: "banks#welcome"
+    root to: 'dashboards#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

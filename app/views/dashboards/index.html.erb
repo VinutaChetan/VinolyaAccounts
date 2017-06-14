@@ -1,0 +1,16 @@
+<div class="dashboard-style">
+<div class="dashboard">
+<h3>You Need To Select Account Before Proceeding</h3><br/><br/>
+</div>
+
+
+	<%@accounts.order('created_at DESC').each do |acc| %>
+	<div class="col-md-3">
+	<div class="well well-sm">
+		Account_no : <%=link_to acc.acc_no , accounts_select_account_path(account_id: acc.id)%><br/></a>Current_balance : <%=acc.current_balance%><br/><br/>
+	</div>
+	</div>	
+	<%end%>	
+	
+
+
