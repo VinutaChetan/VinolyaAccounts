@@ -16,7 +16,7 @@ gem 'devise','~>3.4.0'
 #for role managment(authorization)
 gem 'cancancan'
 #gem for chosen select
-gem 'chosen-rails'
+#gem 'chosen-rails'
 gem 'jquery-ui-rails'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'

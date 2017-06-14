@@ -6,11 +6,11 @@
 
   <div><%= f.label :password, "New password" %><br />
     <%= f.password_field :password, autofocus: true, autocomplete: "off" %></div>
-
+	<br/><br/>
   <div><%= f.label :password_confirmation, "Confirm new password" %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
-
+	<br/><br/>
   <div><%= f.submit "Change my password" %></div>
 <% end %>
-
+<br/><br/>
 <%= render "devise/shared/links" %>

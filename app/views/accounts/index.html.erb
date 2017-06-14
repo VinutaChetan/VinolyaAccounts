@@ -30,8 +30,8 @@
       <th class="text-success">Current Balance</th>
       <th class="text-success">Company Name</th>
       <th class="text-success">Show</th>
-      <th class="text-success">Edit</th>
-      <th class="text-success">Destroy</th>
+      <th ></th>
+      
     </tr>
   </thead>
 
@@ -50,9 +50,7 @@
         <% if can? :update, account %>
           <td><%= link_to 'Edit', edit_account_path(account),class: "btn btn-info" %></td>
         <% end %>
-        <% if can? :destroy, account %> 
-          <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-info" %></td>
-        <%end%>  
+        
       </tr>
     <% end %>
   </tbody>

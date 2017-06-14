@@ -75,6 +75,96 @@ ul.breadcrumb{
 .datepicker-dropdown {
     top: 455px !important;
 }
+
+/* for Login Page */
+.login {
+    width: 50%;
+    background-color: beige;
+    height: 450px;
+    padding-top: 30px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: black;
+}
+
+input#user_email {
+    column-count: col-sm-6;
+    width: 50%;
+    border-color: chartreuse;
+    border-radius: 5px;
+}
+
+input#user_password {
+    column-count: col-sm-6;
+    width: 50%;
+    border-color: chartreuse;
+    border-radius: 5px;
+}   
+
+.registration {
+    width: 50%;
+    background-color: beige;
+    height: 500px;
+    padding-top: 30px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: black;
+ }
+    
+.registration input#user_email {
+    column-count: col-sm-6;
+    width: 50%;
+    border-color: chartreuse;
+
+}
+
+.registration input#user_password {
+    column-count: col-sm-6;
+    width: 50%;
+    border-color: chartreuse;
+}   
+
+.registration input#user_password_confirmation {
+    column-count: col-sm-6;
+    width: 50%;
+    border-color: chartreuse;
+    border-radius: 5px;
+} 
+
+.forget {
+    width: 50%;
+    background-color: beige;
+    height: 400px;
+    padding-top: 30px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: black;
+ }
+
+.login a {
+    color: #b733a5;
+}
+
+.forget a{
+    color: #b733a5;   
+}
+
+.welcome {
+    color: red;
+    font-style: italic;
+}
+
+.session h3 {
+    text-align: pull-right;
+    text-align: right;
+    font-size: large;
+    color: chocolate;
+    font-style: oblique;
+}
+/*.alert.alert.danger .center {
+    background-color: currentColor;
+}  */ 
+
 /*.company{
     background-color: aliceblue !important;
     padding :40px;

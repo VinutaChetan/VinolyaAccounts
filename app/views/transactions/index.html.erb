@@ -8,12 +8,14 @@
 
 <p id="notice"><%= notice %></p>
  
-<%Transaction.list_view.each do |key,month| %>
-  
-      <%= link_to key ,transactions_yearwise_path(:year => key),class:"btn btn-success"%>
-      
-<%end%><br/>
-  
+  <% if Transaction.list_view(current_account)=="No Transaction found"%>
+      <h3>No Transaction found</h3> 
+    <%else%> 
+      <%Transaction.list_view(current_account).each do |key,month| %>
+      <%= link_to key ,transactions_yearwise_path(:year => key),class:"btn btn-success"%>    
+    <%end%><br/>
+  <%end%>
+ 
 <br/>
 
 <% if current_user.is_admin?%>

@@ -22,7 +22,6 @@ $(document).ready(function(){
       <th class="text-success">Name</th>
       <th></th>
       <th></th>
-      <th></th>
     </tr>
   </thead>
 
@@ -34,9 +33,7 @@ $(document).ready(function(){
         <% if can? :upadte, company %> 
           <td><%= link_to 'Edit', edit_company_path(company),class: "btn btn-info" %></td>
         <%end%>
-        <% if can? :destroy, company %>   
-          <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?'},class: "btn btn-info" %></td>
-        <%end%>    
+        
       </tr>
     <% end %>
   </tbody>

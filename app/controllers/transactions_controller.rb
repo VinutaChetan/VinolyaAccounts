@@ -2,11 +2,15 @@ class TransactionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource 
+  skip_before_action :current_account, only: [:create]
   # GET /transactions
   # GET /transactions.json
   def index
-    
+     if session[:account]
+        @transactions = current_account.transactions 
+     else   
       @transactions = Transaction.all.includes(:company,:account,:perticular)
+     end  
   end
 
   # GET /transactions/1
@@ -68,6 +72,7 @@ class TransactionsController < ApplicationController
     @transactions=Transaction.where("transaction_date BETWEEN ? AND ? AND account_id=?",params[:start],params[:end],params[:acc_no])
   end 
 
+ 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_transaction

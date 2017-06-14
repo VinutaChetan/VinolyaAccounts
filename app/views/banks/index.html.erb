@@ -23,7 +23,6 @@
       <th class="text-success">Link</th>
       <th></th>
       <th></th>
-      <th></th>
     </tr>
   </thead>
 
@@ -41,9 +40,7 @@
         <% if can? :update, bank %>
           <td><%= link_to 'Edit', edit_bank_path(bank),class: "btn btn-info"%></td>
          <%end%>
-         <% if can? :destroy, bank %>  
-          <td><%= link_to 'Destroy', bank, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-info" %></td>
-        <%end%>  
+         
       </tr>
     <% end %>
   </tbody>

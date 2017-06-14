@@ -6,9 +6,35 @@ class Transaction < ActiveRecord::Base
 	validates_numericality_of :amount
 	after_create :add_acc_balance
 
-	def self.list_view
+	def self.list_view(current_account) 
+		transaction = current_account.transactions.order('transaction_date ASC').first
+		
+		if transaction == nil
+			return "No Transaction found"
+		else
+		start_year=transaction.transaction_date.year
+		end_year=Date.today.year
+    	months = ['January','February','March','April','May','June','July','August','September','October','November','December']
+		data = {}
 
-		transaction=Transaction.order('transaction_date ASC').first
+		while(start_year<=end_year)
+			data_month = {}
+			months.each_with_index do |month, index|
+				
+				query_start_date = Date.parse("#{start_year}-#{index + 1}-1")
+				query_end_date = query_start_date.end_of_month
+				data_month[month] = current_account.transactions.where('transaction_date >= ? AND transaction_date <= ?',query_start_date, query_end_date)
+			
+			end
+			data[start_year] = [data_month]
+			start_year = start_year + 1
+		end
+		return data	
+	end
+	end
+
+	def self.list
+		transaction = Transaction.order('transaction_date ASC').first
 		
 		if transaction == nil
 			return "No Transaction found"
@@ -31,8 +57,11 @@ class Transaction < ActiveRecord::Base
 			start_year = start_year + 1
 		end
 		return data
-		end
-	end	
+		
+	end
+	end
+	
+
 
 	def add_acc_balance
 		if (self.transaction_type=="credit")
@@ -140,6 +169,5 @@ class Transaction < ActiveRecord::Base
 		
 
 	end	
-
 
 end

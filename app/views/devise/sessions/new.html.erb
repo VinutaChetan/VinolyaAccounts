@@ -1,11 +1,19 @@
-<center><h2>Log in</h2>
+<center>
+<div class="login">
+<h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+  
   <div><%= f.label :email %><br />
-  <%= f.email_field :email, autofocus: true %></div>
+  	<span class="fa fa-envelope fa" aria-hidden="true"></span>
+  <%= f.email_field :email, autofocus: true, placeholder:"Enter Your Mail Id" %></div>
+
+
 <br/>
   <div><%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %></div>
+  	<span class="fa fa-lock fa-lg" aria-hidden="true"></span>
+    <%= f.password_field :password,placeholder:"Enter Your Password", autocomplete: "off" %></div>
 <br/>
   <% if devise_mapping.rememberable? -%>
     <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
@@ -16,3 +24,4 @@
 
 <%= render "devise/shared/links" %>
 </center>
+</div>

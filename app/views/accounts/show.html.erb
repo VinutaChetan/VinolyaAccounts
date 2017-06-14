@@ -43,6 +43,10 @@
 <% if current_user.is_admin?%>
   <%= link_to 'Edit', edit_account_path(@account),class: "btn btn-info" %> |
 <%end%>
+
+<% if can? :destroy, @account %> 
+          <%= link_to 'Delete', @account, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-info" %> | 
+        <%end%>  
 <%= link_to 'Back', accounts_path,class: "btn btn-info" %><br/><br/>
 
 <%=link_to "Back to #{@account.bank.name}",bank_path(@account.bank.id),class:"btn btn-info"%>
@@ -61,7 +65,7 @@
   <div class="box-1">
 <% unless @account.transactions.blank? %>
   <h4><b>Reports</b></h4>
-<%@account.transactions.list_view.each do |key,month| %>
+<%@account.transactions.list.each do |key,month| %>
       <%=link_to key,accounts_yearwise_acc_path(:year => key,:account_id =>@account.id),class:"btn btn-success"%>   
 <%end%>   <br/><br/> 
 <%end%>

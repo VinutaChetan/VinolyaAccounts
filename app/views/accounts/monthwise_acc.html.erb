@@ -3,7 +3,7 @@
 <div class="container">
 <div class="row">
   <div class="col-sm-6 col-md-7">
-<%if @account.transactions.list_view[params[:year].to_i][0][params[:month]].empty?%>
+<%if @account.transactions.list[params[:year].to_i][0][params[:month]].empty?%>
 	<b><h3>No Transactions found </h3></b>
 <%else %>
         <table class ="table table-striped" id="myTable">
@@ -19,10 +19,10 @@
                 </tr>    
             </thead>
                 <tbody id="myTable">
-                <% @account.transactions.list_view[params[:year].to_i][0][params[:month]].order('transaction_date DESC').each do |trans| %>
+                <% @account.transactions.list[params[:year].to_i][0][params[:month]].order('transaction_date DESC').each do |trans| %>
                 <tr>
                     <td>  <%=trans.transaction_date%></td>
-                    <td>  <%=trans.account_id%></td>
+                    <td>  <%=trans.account.acc_no%></td>
                     <td>  <%=trans.perticular.name%></td>
                     <td>  <%=trans.transaction_type%></td>
                     <td>  <%=trans.amount%></td>
@@ -39,7 +39,7 @@
            	 	sum_debit=0
               	sum_credit=0
               
-            @account.transactions.list_view[params[:year].to_i][0][params[:month]].each do |trans|
+            @account.transactions.list[params[:year].to_i][0][params[:month]].each do |trans|
               if(trans.transaction_type=="debit")
                	sum_debit=sum_debit+trans.amount 
               else 

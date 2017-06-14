@@ -6,4 +6,12 @@ class ApplicationController < ActionController::Base
   	redirect_to accounts_path,alert:"You are not allowed to access this page"
   end
 
+
+  helper_method :current_account 
+
+
+  def current_account    
+    @current_account = Account.find(session[:account]) if session[:account]
+  end
+
 end

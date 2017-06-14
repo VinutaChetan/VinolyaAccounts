@@ -65,7 +65,7 @@
 
 <%= link_to "Back",transactions_path%><br><br/>
 
-<% Transaction.list_view[params[:year].to_i].each do |year| %>
+<% Transaction.list_view(current_account)[params[:year].to_i].each do |year| %>
    <% if params[:year].to_i == Date.today.year %>
       <%year.each do |key,value|%>  
         <%=link_to key,transactions_monthwise_path(:year=> params[:year],:month => key),class:"btn btn-info"%>
@@ -119,7 +119,7 @@
 <br/>
 
 
-<% Transaction.list_view[params[:year].to_i].each do |year| %>
+<% Transaction.list_view(current_account)[params[:year].to_i].each do |year| %>
     <%year.each do |key,value|%>
         <%# if key == Date.today.next_month.strftime("%B") %>
           <!--<h2>No months Found</h2> 

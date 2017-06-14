@@ -12,13 +12,12 @@
  *
  *= require_tree .
  *= require_self
- *= require chosen
 
  */
  
 
 .scroll {
-    overflow-x: hidden;
+    overflow-x: scroll;
     overflow-y: scroll;
     height: 500px;
     width: 700px;

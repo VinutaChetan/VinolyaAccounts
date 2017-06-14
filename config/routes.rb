@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+  get 'accounts/select_account'
+  #get 'accounts/destroy_account'
+  #get "log_out" => "sessions#destroy", :as => "log_out"
   
   get 'companies/fake'
   get 'transactions/yearwise'
@@ -11,9 +15,15 @@ Rails.application.routes.draw do
   get 'perticulars/yearwise_perticular'
   get 'perticulars/monthwise_perticular'
 
+  #get "transactions/log_in_session"
+  # get "log_out_session" => "sessions#destroy", :as => "log_out_session"
+  # get "log_in_session" => "sessions#index", :as => "log_in_session"
+  # resources :sessions
+
   #this is for onclick event
   get 'companies/select_accounts'
   get '/accounts/select_balance'
+  get 'banks/welcome'
 
   resources :transactions
   resources :perticulars 
@@ -31,7 +41,9 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root to: "transactions#index"
+  root to: "banks#welcome"
+
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

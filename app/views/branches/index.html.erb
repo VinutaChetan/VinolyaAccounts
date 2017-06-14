@@ -18,7 +18,6 @@
       <th class="text-success">Name</th>
       <th ></th>
       <th ></th>
-      <th ></th>
     </tr>
   </thead>
 
@@ -30,9 +29,7 @@
         <% if can? :update, branch %> 
           <td><%= link_to 'Edit', edit_branch_path(branch),class: "btn btn-info" %></td>
         <%end %> 
-        <% if can? :destroy, branch %> 
-          <td><%= link_to 'Destroy', branch, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-info" %></td>
-        <%end%>    
+          
       </tr>
     <% end %>
   </tbody>

@@ -41,6 +41,11 @@
 <% if current_user.is_admin?%>
   <%= link_to 'Edit', edit_bank_path(@bank),class: "btn btn-info" %> |
 <%end%> 
+
+<% if can? :destroy, @bank %>  
+          <%= link_to 'Destroy', @bank, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-info" %> | 
+        <%end%>  
+
 <%= link_to 'Back', banks_path,class: "btn btn-info" %>
 </div>
 </div>

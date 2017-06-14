@@ -28,7 +28,7 @@
 <div class="container">
 <div class="row">
   <div class="col-sm-6 col-md-7 table-scroll">
-  <% Transaction.list_view[params[:year].to_i][0][params[:month]] %>
+  <% Transaction.list_view(current_account)[params[:year].to_i][0][params[:month]] %>
        <div class="scroll">
         <table class ="table table-striped" id="myTable" >
            
@@ -48,7 +48,7 @@
               
             <tbody id="myTable" >
               
-                <% Transaction.list_view[params[:year].to_i][0][params[:month]].order('transaction_date DESC').each_with_index do |trans,index| %>
+                <% Transaction.list_view(current_account)[params[:year].to_i][0][params[:month]].order('transaction_date DESC').each_with_index do |trans,index| %>
                 <tr>
                     <td>   <%=index+1%></td>
                     <td>  <%=trans.transaction_date%></td>
@@ -73,7 +73,7 @@
            	 	sum_debit=0
               	sum_credit=0
               
-            Transaction.list_view[params[:year].to_i][0][params[:month]].each do |trans|
+            Transaction.list_view(current_account)[params[:year].to_i][0][params[:month]].each do |trans|
               if(trans.transaction_type=="debit")
                	sum_debit=sum_debit+trans.amount 
               else 
