@@ -71,7 +71,7 @@
                         <td><%= val.transaction_date.to_s(:long) %></td>
                         <td><%=link_to val.company.try(:name),company_path(val.company.id)%></td>
                         <td><%=link_to val.account.acc_no,account_path(val.account.id)%>
-                        <td><%= val.perticular.name %></td>
+                        <td><%=link_to val.perticular.name,perticular_path(val.perticular.id) %></td>
                         <td><%= val.transaction_type %></td>
                         <td><%= val.amount%></td>
                         <td><%= val.transaction_kind %></td>

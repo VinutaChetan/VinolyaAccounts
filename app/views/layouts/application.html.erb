@@ -9,6 +9,7 @@
 <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <link href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet">
 
+
   <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -23,10 +24,10 @@
 
 <link rel="stylesheet" href="https://harvesthq.github.io/chosen/chosen.css"/>
 <script type="text/javascript">
-    $(document).ready(function(){
+     $(document).ready(function(){
      $("#transaction_company_id").chosen();
   });
-</script>
+ </script>
 
 <center>
 	<% if user_signed_in? %>
@@ -123,9 +124,12 @@
 <%end%>
 <%end%>
 
+
 <%if controller.controller_name!="companies"%>
   <%if controller.controller_name!="banks"%>
     <%if controller.controller_name!="branches"%>
+    <div class="col-md-row">
+      <div class="col-md-6">
     <ul class="breadcrumb">
     <%if controller.controller_name=="transactions"%>
         <li><%=link_to "Transactions",transactions_path%><span class="divider">>></span></li> 
@@ -176,17 +180,30 @@
         <li><%=link_to params[:month],accounts_monthwise_acc_path(:year => params[:year],:month => params[:month],:account_id =>@account.id)%><span class="divider">>></span></li> 
     <%end%>    
     </ul>
+  </div>
+</div>
     <%end%>
   <%end%>
 <%end%>  
- 	
- 	<div class="alert alert danger"><%= alert %>
 
+ 
+ <div class="col-md-6">
 <div class= "session">
 <% if  user_signed_in? && controller.controller_name!="dashboards"  %>
   <h3> You are seleted the Account Id <%= current_account.id %>  of Account Number "<%= current_account.acc_no %>"</h3>
+  <% def number_to_indian_currency(current_balance, html=true)%>
+      <% txt = html ? ( 'Rs.') : 'Rs.' %>
+      <% "#{txt} #{current_balance.to_s.gsub(/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/, "\\1,")}"%>
+    <%end%> 
+
+  <h3>Current Balance : <%=number_to_indian_currency(current_account.current_balance)%></h3>
 <%end%>
-</div>        
+</div> 
+</div>
+
+</div>       
+
+<div class="alert alert danger"><%= alert %>
 
 <%= yield %>
 

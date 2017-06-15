@@ -1,4 +1,6 @@
 class Transaction < ActiveRecord::Base
+	 acts_as_paranoid
+	
 	belongs_to :perticular
 	belongs_to :company
 	belongs_to :account

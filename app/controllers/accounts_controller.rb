@@ -78,8 +78,6 @@ class AccountsController < ApplicationController
     session[:account] = Account.find(params[:account_id]).id
     redirect_to transactions_path, notice: "Account Selected "
   end
-
-  
   
 
   private

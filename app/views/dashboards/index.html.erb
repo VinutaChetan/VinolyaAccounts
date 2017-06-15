@@ -5,9 +5,16 @@
 
 
 	<%@accounts.order('created_at DESC').each do |acc| %>
-	<div class="col-md-3">
+	<div class="col-md-4">
 	<div class="well well-sm">
-		Account_no : <%=link_to acc.acc_no , accounts_select_account_path(account_id: acc.id)%><br/></a>Current_balance : <%=acc.current_balance%><br/><br/>
+		<% def number_to_indian_currency(current_balance, html=true)%>
+ 			<% txt = html ? ( 'Rs.') : 'Rs.' %>
+ 			<% "#{txt} #{current_balance.to_s.gsub(/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/, "\\1,")}"%>
+ 		<%end%> 
+
+		Account_no : <%=link_to acc.acc_no , accounts_select_account_path(account_id: acc.id)%><br/></a>Current Balance : <%=number_to_indian_currency(acc.current_balance)%><br/>
+
+		Company Name : <%= acc.company.name%>
 	</div>
 	</div>	
 	<%end%>	
