@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170614103410) do
+ActiveRecord::Schema.define(version: 20170616062316) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "acc_no"
@@ -23,7 +23,10 @@ ActiveRecord::Schema.define(version: 20170614103410) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.integer  "company_id"
+    t.datetime "deleted_at"
   end
+
+  add_index "accounts", ["deleted_at"], name: "index_accounts_on_deleted_at"
 
   create_table "banks", force: :cascade do |t|
     t.string   "name"
@@ -35,25 +38,37 @@ ActiveRecord::Schema.define(version: 20170614103410) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.text     "link"
+    t.datetime "deleted_at"
   end
+
+  add_index "banks", ["deleted_at"], name: "index_banks_on_deleted_at"
 
   create_table "branches", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
   end
+
+  add_index "branches", ["deleted_at"], name: "index_branches_on_deleted_at"
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
   end
+
+  add_index "companies", ["deleted_at"], name: "index_companies_on_deleted_at"
 
   create_table "perticulars", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
   end
+
+  add_index "perticulars", ["deleted_at"], name: "index_perticulars_on_deleted_at"
 
   create_table "transactions", force: :cascade do |t|
     t.date     "transaction_date"

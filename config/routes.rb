@@ -94,4 +94,10 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  
+  #this is for reset password
+    default_url_options :host => "http://localhost:3000"
+
+    
 end

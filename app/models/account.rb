@@ -1,4 +1,6 @@
 class Account < ActiveRecord::Base
+	acts_as_paranoid
+
 	belongs_to :branch
 	belongs_to :bank
 	belongs_to :company

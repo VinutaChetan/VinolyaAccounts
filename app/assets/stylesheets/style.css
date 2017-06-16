@@ -18,7 +18,7 @@ body{
 .table{
 	background-color: thistle;
 }
-tbody#myTable {
+tbody.myTable {
     background-color: white
 }
 

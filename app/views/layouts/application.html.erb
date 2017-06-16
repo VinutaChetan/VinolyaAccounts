@@ -29,6 +29,8 @@
   });
  </script>
 
+ 
+
 <center>
 	<% if user_signed_in? %>
     <div class="page-header">
@@ -190,7 +192,7 @@
  <div class="col-md-6">
 <div class= "session">
 <% if  user_signed_in? && controller.controller_name!="dashboards"  %>
-  <h3> You are seleted the Account Id <%= current_account.id %>  of Account Number "<%= current_account.acc_no %>"</h3>
+  <h3> You are seleted the Account Number : "<%= current_account.acc_no %>"</h3>
   <% def number_to_indian_currency(current_balance, html=true)%>
       <% txt = html ? ( 'Rs.') : 'Rs.' %>
       <% "#{txt} #{current_balance.to_s.gsub(/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/, "\\1,")}"%>
