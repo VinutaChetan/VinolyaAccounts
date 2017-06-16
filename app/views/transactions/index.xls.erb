@@ -1,0 +1,35 @@
+<table >
+                    <thead>
+                      <tr>
+                        <th class="text-success">SI.no</th>
+                        <th class="text-success">Transaction Date</th>
+                        <th class="text-success">Company Name</th>
+                        <th class="text-success">Account Number</th>
+                        <th class="text-success">Particular</th>
+                        <th class="text-success">Transaction type</th>
+                        <th class="text-success">Amount</th>
+                        <th class="text-success">Transaction kind</th>
+                        <th class="text-success">Remark</th> 
+                        <th class="text-success">Show</th>
+                      </tr>
+                    </thead>
+
+                    <tbody >
+
+                      <%@transactions.order('created_at DESC').limit(20).each_with_index do |val,index|%>
+                       
+                      <tr>
+                        <td><%=index+1%></td>
+                        <td><%= val.transaction_date.to_s(:long) %></td>
+                        <td><%=link_to val.company.try(:name),company_url(val.company.id)%></td>
+                        <td><%=link_to val.account.try(:acc_no),account_url(val.account.id)%>
+                        <td><%=link_to val.perticular.name,perticular_url(val.perticular.id) %></td>
+                        <td><%= val.transaction_type %></td>
+                        <td><%= val.amount%></td>
+                        <td><%= val.transaction_kind %></td>
+                        <td><%= val.remark %></td>
+                        <td><%= link_to 'Show',val,class: "btn btn-info" %></td>
+                      </tr> 
+                      <%end%>
+                    </tbody>
+                  </table>             

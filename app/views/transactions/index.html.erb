@@ -21,7 +21,12 @@
 <% if current_user.is_admin?%>
 
   <%= link_to 'New Transaction', new_transaction_path ,class: "btn btn-info"%>
-<%end%><br/><br/>
+<%end%><br/>
+
+
+<!--its to export to excel -->
+<%= link_to "Export to Excel",transactions_path(format: "xls") %><br/>
+<br/><br/>
 
 <!-- Searching-->
 
