@@ -97,7 +97,7 @@ Rails.application.routes.draw do
 
   
   #this is for reset password
-    default_url_options :host => "http://localhost:3000"
+    #default_url_options :host => "http://localhost:3000"
 
-    
+     default_url_options :host => "https://vinolya-staging.herokuapp.com"
 end

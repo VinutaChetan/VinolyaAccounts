@@ -19,7 +19,7 @@ body{
 	background-color: thistle;
 }
 tbody.myTable {
-    background-color: white
+    background-color: white;
 }
 
 select#account_branch_id {
@@ -179,6 +179,14 @@ input#user_password {
     font-size: large;
     color: chocolate;
     font-style: oblique;
+}
+
+.statements thead{
+    background-color: thistle;
+}
+
+.statements tbody{
+    background-color: white;
 }
 
 
