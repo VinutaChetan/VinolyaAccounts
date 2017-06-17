@@ -75,7 +75,7 @@
                         <td><%=index+1%></td>
                         <td><%= val.transaction_date.to_s(:long) %></td>
                         <%if val.company==nil%>
-                            Null
+                            <td>Null</td>
                         <%else%>    
                         <td><%=link_to val.company.try(:name),company_path(val.company.id)%></td>
                         <%end%>
