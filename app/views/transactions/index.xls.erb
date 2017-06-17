@@ -10,7 +10,7 @@
                         <th >Amount</th>
                         <th >Transaction kind</th>
                         <th >Remark</th> 
-                        <th >Show</th>
+                        
                       </tr>
                     </thead>
 
@@ -21,14 +21,14 @@
                       <tr>
                         <td><%=index+1%></td>
                         <td><%= val.transaction_date.to_s(:long) %></td>
-                        <td><%=link_to val.company.name,company_path(val.company.id)%></td>
-                        <td><%=link_to val.account.acc_no,account_path(val.account.id)%>
-                        <td><%=link_to val.perticular.name,perticular_path(val.perticular.id) %></td>
+                        <td><%=val.company.name%></td>
+                        <td><%= val.account.acc_no%>
+                        <td><%= val.perticular.name%></td>
                         <td><%= val.transaction_type %></td>
                         <td><%= val.amount%></td>
                         <td><%= val.transaction_kind %></td>
                         <td><%= val.remark %></td>
-                        <td><%= link_to 'Show',val,class: "btn btn-info" %></td>
+                        
                       </tr> 
                       <%end%>
                     </tbody>

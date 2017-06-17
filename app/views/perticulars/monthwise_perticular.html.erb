@@ -1,6 +1,8 @@
-<%=link_to 'Back',perticulars_yearwise_perticular_path(:year=>params[:year],:perticular_id=>[@perticular.id])%><br/>
+<%=link_to 'Back',perticulars_yearwise_perticular_path(:year=>params[:year],:perticular_id=>[@perticular.try(:id)])%>
 <br/>
-<b>Particular Name : <%=@perticular.name%></b>
+<br/>
+<b>Particular Name : <%=@perticular.try(:name)%></b>
+
 <div class="container">
 <div class="row">
   <div class="col-sm-6 col-md-7">
@@ -20,17 +22,21 @@
                 </tr>    
             </thead>
                 <tbody id="myTable">
+                  <%if @perticular==nil%>
+                    No perticular Found
+                  <%else%>  
                 <% @perticular.transactions.list[params[:year].to_i][0][params[:month]].order('transaction_date DESC').each do |trans| %>
                 <tr>
                     <td>  <%=trans.transaction_date%></td>
                     <td>  <%=trans.account.acc_no%></td>
-                    <td>  <%=trans.perticular.name%></td>
+                    <td>  <%=trans.perticular.try(:name)%></td>
                     <td>  <%=trans.transaction_type%></td>
                     <td>  <%=trans.amount%></td>
                     <td>  <%=trans.remark%></td>
                     <td>  <%=trans.transaction_kind%><td>
                 </tr>
-                <%end%> <br/><br/>   
+                <%end%> <br/><br/> 
+                <%end%>  
                 </tbody> 
     </table> 
 </div>
@@ -58,4 +64,4 @@
   </div>
  <%end%> 
  </div>
- </div>  
+ </div> 

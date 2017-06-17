@@ -40,7 +40,20 @@
 <p>
   <strong>Transaction kind:</strong>
   <%= @transaction.transaction_kind %>
-</p>
+</p><br/>
 
-  <%= link_to 'Edit', edit_transaction_path(@transaction) %> |
-<%= link_to 'Back', transactions_path %>
+<% if current_user.is_admin?%>
+  <%= link_to 'Edit', edit_transaction_path(@transaction),class: "btn btn-info" %> |
+<%end%>   
+  <% if can? :destroy, @transaction %> 
+          <%= link_to 'Destroy', @transaction, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-info" %> |
+  <%end%>
+
+<%= link_to 'Back', transactions_path,class: "btn btn-info" %>
+
+
+
+
+
+
+

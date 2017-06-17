@@ -25,7 +25,7 @@
 
 
 <!--its to export to excel -->
-<%= link_to "Export to Excel",transactions_path(format: "xls") %><br/>
+<%= link_to "Export to Excel",transactions_path(format: "xls"),class: "btn btn-info"%><br/>
 <br/><br/>
 
 <!-- Searching-->
@@ -74,9 +74,17 @@
                       <tr>
                         <td><%=index+1%></td>
                         <td><%= val.transaction_date.to_s(:long) %></td>
+                        <%if val.company==nil%>
+                            Null
+                        <%else%>    
                         <td><%=link_to val.company.try(:name),company_path(val.company.id)%></td>
+                        <%end%>
                         <td><%=link_to val.account.try(:acc_no),account_path(val.account.id)%>
+                          <%if val.perticular==nil%>
+                            <td>Null</td>
+                        <%else%> 
                         <td><%=link_to val.perticular.name,perticular_path(val.perticular.id) %></td>
+                        <%end%>
                         <td><%= val.transaction_type %></td>
                         <td><%= val.amount%></td>
                         <td><%= val.transaction_kind %></td>

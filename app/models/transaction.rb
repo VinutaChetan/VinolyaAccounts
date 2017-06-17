@@ -7,6 +7,7 @@ class Transaction < ActiveRecord::Base
 	validates_presence_of :transaction_date,:company_id,:account_id,:perticular_id,:transaction_type,:amount,:transaction_kind
 	validates_numericality_of :amount
 	after_create :add_acc_balance
+	after_destroy :update_current_balance
 
 	def self.list_view(current_account) 
 		transaction = current_account.transactions.order('transaction_date ASC').first
@@ -76,6 +77,18 @@ class Transaction < ActiveRecord::Base
 			account.save
 		end
 	end		
+
+	def update_current_balance
+		if (self.transaction_type=="credit")
+			account=Account.find_by(id: self.account.id)
+			account.current_balance =account.current_balance-self.amount
+			account.save
+		else 
+			account=Account.find_by(id: self.account.id)
+			account.current_balance =self.amount+account.current_balance
+			account.save
+		end		
+	end	
 
 	def self.list_cr_amount
 		#ordering of transaction date in ascending order and taking the first object

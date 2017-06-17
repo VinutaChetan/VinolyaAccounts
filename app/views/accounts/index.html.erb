@@ -14,7 +14,7 @@
 <%else %>
 
 <!--its to export to excel -->
-<%= link_to "Export to Excel",accounts_path(format: "xls") %><br/>
+<%= link_to "Export to Excel",accounts_path(format: "xls"),class: "btn btn-info" %><br/>
 <br/>
 
 <div class="container">
@@ -45,7 +45,11 @@
         <td><%= account.branch.name  %></td>
         <td><%= account.acc_type %></td>
         <td><%= account.current_balance %></td>
+        <%if account.company== nil%>
+          <td>Null</td>
+        <%else%>
         <td><%= account. company.name%></td>
+        <%end%>
         <td><%= link_to 'Show', account,class: "btn btn-info" %></td>
         <% if can? :update, account %>
           <td><%= link_to 'Edit', edit_account_path(account),class: "btn btn-info" %></td>
