@@ -10,4 +10,10 @@ class Notification < ApplicationMailer
     @user = user
     mail to: "vinuta.testing@gmail.com",cc: "#{user.email}",subject: "Amount tranfered today"
   end
+
+  def amount_destroy(transaction,user)
+    @transaction=transaction
+    @user = user
+    mail to: "vinuta.testing@gmail.com",cc: "#{user.email}",subject: "Transaction destroid today"
+  end
 end    
