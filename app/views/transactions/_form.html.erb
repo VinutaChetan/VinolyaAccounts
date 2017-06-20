@@ -24,17 +24,19 @@
        </div>
      </div><br/>
      <br/>
-     
-  
+
   <div class="field">
     <%=f.label :company_id %><br>
-    <%=f.collection_select :company_id,Company.all,:id,:name,{prompt: "Select Company"},{ class: 'chosen-select'}%>  
+    <%#acc_com = current_account.company.id%>
+    <%=f.collection_select  :company_id,Company.all,:id,:name%> 
+    <%= f.hidden_field :company_id, value: current_account.company.id %> 
   </div><br/>
 
   <div class="field">
     <%= f.label :account_id %><br>
-    <%=f.collection_select :account_id,Account.all,:id,:acc_no,{prompt:"Select acc_no"},{ class: 'chosen-select' }%>
-    
+     <%= f.collection_select :account_id, Account.all,:id,:acc_no %>
+        <%= f.hidden_field :account_id, value: current_account.id %> 
+
     <br/>
     <span id="balance"></span>
   </div>
@@ -42,7 +44,6 @@
 <br/>
   <div class="field" >
     <%= f.label :particular_id %><br>
-    <%#= select_tag :perticular, options_from_collection_for_select(Perticular.all, :id, :name, params[:Perticular_id]), include_blank: true %>
     <%=f.collection_select :perticular_id,Perticular.all,:id,:name,{prompt:"Select particular"},{ class: 'chosen-select' }%>
   </div><br/>
   
@@ -73,10 +74,10 @@
 
   
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit %><br/>
   </div>
 <% end %>
-
+<br/>
 
 <script>
 var companyHandle = document.getElementById('transaction_company_id');
@@ -123,6 +124,10 @@ companyHandle.onchange = function(){
     request.send();
   };
 
+<!--jquery for collection_select-->
+
+companyHandle.setAttribute('disabled', true);
+accountHandle.setAttribute('disabled', true);
 
 </script>
 
