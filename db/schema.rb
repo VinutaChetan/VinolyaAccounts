@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170628041620) do
+ActiveRecord::Schema.define(version: 20170628103538) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "acc_no"
@@ -63,10 +63,11 @@ ActiveRecord::Schema.define(version: 20170628041620) do
 
   create_table "perticulars", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.datetime "deleted_at"
-    t.string   "transaction_type"
+    t.string   "perticular_kind"
+    t.string   "perticular_type"
   end
 
   add_index "perticulars", ["deleted_at"], name: "index_perticulars_on_deleted_at"

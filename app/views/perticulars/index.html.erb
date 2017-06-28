@@ -16,6 +16,7 @@
   <thead>
     <tr>
       <th class="text-success">Name</th>
+      <th class="text-success">Perticular Type</th>
       <th></th>
       <th></th>
     </tr>
@@ -25,6 +26,7 @@
     <% @perticulars.order('created_at DESC').each do |perticular| %>
       <tr>
         <td><%= perticular.try(:name) %></td>
+        <td><%= perticular.try(:perticular_type) %></td>
         <td><%= link_to 'Show', perticular,class: "btn btn-info" %></td>
         <% if can? :update,perticular %> 
           <td><%= link_to 'Edit', edit_perticular_path(perticular),class: "btn btn-info" %></td>

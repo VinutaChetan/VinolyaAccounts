@@ -78,6 +78,6 @@ class PerticularsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def perticular_params
-      params.require(:perticular).permit(:name,:transaction_type)
+      params.require(:perticular).permit(:name,:perticular_type)
     end
 end
