@@ -11,13 +11,15 @@
  			<% txt = html ? ( 'Rs.') : 'Rs.' %>
  			<% "#{txt} #{current_balance.to_s.gsub(/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/, "\\1,")}"%>
  		<%end%>
- 		
-		Account_no : <%=link_to acc.acc_no , accounts_select_account_path(account_id: acc.id)%><br/></a>Current Balance : <%=number_to_indian_currency(acc.current_balance)%><br/>
-		<%if acc.company== nil%>
+
+ 		<%if acc.company== nil%>
  			Company Name : No Company Found
  		<%else%>
 		Company Name : <%= acc.company.name%>
-		<%end%>
+		<%end%><br/>
+ 		
+		Account_no : <%=link_to acc.acc_no , accounts_select_account_path(account_id: acc.id)%><br/></a>Current Balance : <%=number_to_indian_currency(acc.current_balance)%><br/>
+		
 	</div>
 	</div>	
 	<%end%>	

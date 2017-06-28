@@ -1,6 +1,5 @@
 <div class="container">
-<table class ="table table-striped" id="myTable" >
-           
+        <table class ="table table-striped" id="myTable">
             <thead>
                 <tr >
                 	<th>SI.no</th>
@@ -35,9 +34,11 @@
 </table> 
 </div>
 
-
-<%=link_to "back",transactions_path%>
 <script type="text/javascript">
    $('#myTable').DataTable();  
 </script>
+
+<%=link_to "back",transactions_path,class: "btn btn-info"%>
+
+
 

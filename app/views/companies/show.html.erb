@@ -12,9 +12,9 @@
   <%= link_to 'Edit', edit_company_path(@company),class: "btn btn-info" %> |
 <%end%> 
 
-<% if can? :destroy, @company %>   
-        <%= link_to 'Delete', @company, method: :delete, data: { confirm: 'Are you sure?'},class: "btn btn-info" %> | 
-        <%end%>   
+<%# if can? :destroy, @company %>   
+        <%#= link_to 'Delete', @company, method: :delete, data: { confirm: 'Are you sure?'},class: "btn btn-info" %>  
+        <%#end%>   
 
 <%= link_to 'Back', companies_path,class: "btn btn-info" %>
 

@@ -24,6 +24,11 @@ gem 'bootstrap-sass', '~> 3.3.6'
 #gems for datepicker
 #gem 'momentjs-rails', '>= 2.9.0'
 #gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
+#gem 'prawn'
+
+#pdf generator gem
+gem 'wicked_pdf', '~> 1.1'
+gem 'wkhtmltopdf-binary'
 
 gem 'nokogiri', '~> 1.6', '>= 1.6.7'
 # Use Uglifier as compressor for JavaScript assets

@@ -15,6 +15,15 @@
     <%= f.label :name %><br>
     <%= f.text_field :name ,class:"col-sm-6" %><br/><br/> 
   </div>
+
+  <div class="field">
+    <%= f.label :transaction_type %><br>
+    <%= f.radio_button :transaction_type ,'debit' %>
+    <%= f.label :Debit %><br/>
+    <%= f.radio_button :transaction_type ,'credit'%>
+    <%= f.label :Credit %><br/><br/>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div><br/>

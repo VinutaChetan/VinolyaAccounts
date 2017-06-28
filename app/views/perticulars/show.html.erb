@@ -4,17 +4,23 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b><strong>Particular Name:</strong></b><br/><br/>
+  <b><strong>Particular Name :  </strong></b>
   <%= @perticular.name %>
 </p>
+
+<p>
+  <b><strong>Transaction Type :  </strong></b>
+  <%= @perticular.transaction_type %>
+</p>
+
 <br/>
 <% if current_user.is_admin?%>
 	<%= link_to 'Edit', edit_perticular_path(@perticular),class: "btn btn-info" %> |
 <%end%>
 
-<% if can? :destroy, @perticular %> 
-          <%= link_to 'Destroy', @perticular, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-info" %> |
-        <%end%>
+<%# if can? :destroy, @perticular %> 
+          <%#= link_to 'Destroy', @perticular, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-info" %> 
+        <%#end%>
 
 <%= link_to 'Back', perticulars_path,class: "btn btn-info"	 %><br/><br/>
 </div>

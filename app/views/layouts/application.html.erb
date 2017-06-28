@@ -58,7 +58,10 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"><span class= "glyphicon glyphicon-home"></span></a>
+      
+      <%=link_to root_path ,:class=> "navbar-brand" do%>
+      <span class= "glyphicon glyphicon-home"></span>
+     <%end%>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -226,16 +229,18 @@
 <!--script for Calender-->
 <script>
   $(document).ready(function(){
-    var date_input=$('input[name="transaction[transaction_date]"]'); //our date input has the name "date"
-    var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-    date_input.datepicker({
-      format: 'yyyy/mm/dd',
-      container: container,
-      todayHighlight: true,
-      autoclose: true,
-    })
+   $('#transaction_transaction_date').datepicker({
+    format: 'yyyy/mm/dd'
+   });
+   $('#transaction_instrument_date').datepicker({
+    format: 'yyyy/mm/dd'
+   });
   })
 </script>
+
+
+
+
 
 <script>
   $(document).ready(function(){
@@ -262,6 +267,8 @@
     })
   })
 </script>
+
+
 
 
 

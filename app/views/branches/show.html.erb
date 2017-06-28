@@ -9,8 +9,8 @@
 	<%= link_to 'Edit', edit_branch_path(@branch),class: "btn btn-info" %> |
 <%end%>	
 
-<% if can? :destroy, @branch %> 
-          <%= link_to 'Delete', @branch, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-info" %> | 
-        <%end%> 
+<%# if can? :destroy, @branch %> 
+          <%#= link_to 'Delete', @branch, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-info" %>  
+        <%#end%> 
 
 <%= link_to 'Back', branches_path,class: "btn btn-info" %>

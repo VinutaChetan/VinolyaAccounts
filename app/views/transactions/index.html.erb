@@ -6,7 +6,23 @@
 <!-- </ol> -->
 <%#end of Breadcrumbs%>
 
-<p id="notice"><%= notice %></p>
+<b><p id="notice"><%= notice %></p></b><br/>
+
+<!-- Searching-->
+
+<%=form_tag transactions_search_results_path,method: :get do %>
+ <label>Start Date:</label>
+ <%= text_field_tag :start%>
+  
+ <label>End Date:</label> 
+  <%= text_field_tag :end%>
+
+<label>Account Number:</label>
+  <%= select_tag "acc_no", options_from_collection_for_select(Account.all, "id", "acc_no",:selected =>current_account.id),{:include_blank => false , :class => "product_select"}%>
+  
+  <%=submit_tag  "Search"%> 
+<%end%> 
+<%#=collection_select :account_id,Account.all,:id,:acc_no,{prompt:"Select Account"}%>
  
   <% if Transaction.list_view(current_account)=="No Transaction found"%>
       <h3>No Transaction found</h3> 
@@ -28,22 +44,6 @@
 <%= link_to "Export to Excel",transactions_path(format: "xls"),class: "btn btn-info"%><br/>
 <br/><br/>
 
-<!-- Searching-->
-
-<%=form_tag transactions_search_results_path,method: :get do %>
- <label>Start Date:</label>
- <%= text_field_tag :start%>
-  
- <label>End Date:</label> 
-  <%= text_field_tag :end%>
-
-<label>Account Number:</label>
-  <%= select_tag "acc_no", options_from_collection_for_select(Account.all, "id", "acc_no"),{:include_blank => true , :class => "product_select"}%>
-  
-  <%=submit_tag  "Search"%> 
-<%end%> 
-<%#=collection_select :account_id,Account.all,:id,:acc_no,{prompt:"Select Account"}%>
-
 
 <h2 class="text-muted">Fetching Last 20 Records </h2>
 <br/>
@@ -62,6 +62,8 @@
                         <th class="text-success">Transaction type</th>
                         <th class="text-success">Amount</th>
                         <th class="text-success">Transaction kind</th>
+                        <th class="text-success">Instrument Date</th>
+                        <th class="text-success">Instrument Number</th>
                         <th class="text-success">Remark</th> 
                         <th class="text-success">Show</th>
                       </tr>
@@ -88,6 +90,8 @@
                         <td><%= val.transaction_type %></td>
                         <td><%= val.amount%></td>
                         <td><%= val.transaction_kind %></td>
+                        <td><%= val.instrument_date%></td>
+                        <td><%= val.instrument_number%></td>
                         <td><%= val.remark %></td>
                         <td><%= link_to 'Show',val,class: "btn btn-info" %></td>
                       </tr> 

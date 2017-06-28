@@ -1,7 +1,3 @@
-<%if @transactions.empty? %>
-  <p>No transactions found </p>
-<%else %>
-  <h2 class="text-muted">Today's Statement of the Date :  <%=Date.today.to_s(:long)%></h2>
 <div class="container">
                   <table class ="table table-striped" id="myTable">
                     <thead>
@@ -13,35 +9,38 @@
                         <th class="text-success">Particular</th>
                         <th class="text-success">Transaction type</th>
                         <th class="text-success">Amount</th>
-                        <th class="text-success">Remark</th>
-                        <th class="text-success">Transaction kind</th> 
-
+                        <th class="text-success">Transaction kind</th>
+                        <th class="text-success">Remark</th> 
+                        <th class="text-success">Show</th>
                       </tr>
                     </thead>
 
                     <tbody id="myTable">
 
-                      <%@transactions.order('created_at DESC').each_with_index do |val,index|%>
-                        <% if val.transaction_date == Date.today%>
+                      <%@transactions.order('created_at DESC').limit(20).each_with_index do |val,index|%>
+                       
                       <tr>
                         <td><%=index+1%></td>
                         <td><%= val.transaction_date.to_s(:long) %></td>
-                        <td><%=val.company.name%></td>
-                        <td><%=val.account.acc_no%>
-                        <td><%= val.perticular.name %></td>
+                        <%if val.company==nil%>
+                            <td>Null</td>
+                        <%else%>    
+                        <td><%=link_to val.company.try(:name),company_path(val.company.id)%></td>
+                        <%end%>
+                        <td><%=link_to val.account.try(:acc_no),account_path(val.account.id)%>
+                          <%if val.perticular==nil%>
+                            <td>Null</td>
+                        <%else%> 
+                        <td><%=link_to val.perticular.name,perticular_path(val.perticular.id) %></td>
+                        <%end%>
                         <td><%= val.transaction_type %></td>
                         <td><%= val.amount%></td>
-                        <td><%= val.remark %></td>
                         <td><%= val.transaction_kind %></td>
+                        <td><%= val.remark %></td>
+                        <td><%= link_to 'Show',val,class: "btn btn-info" %></td>
                       </tr> 
-                      <%end%>
                       <%end%>
                     </tbody>
                   </table>             
    </div>
-   <%end%>   
-
-   <script type="text/javascript">
-   $('#myTable').DataTable();  
-</script>
-
+ 

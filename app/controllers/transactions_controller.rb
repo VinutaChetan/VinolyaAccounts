@@ -16,6 +16,12 @@ class TransactionsController < ApplicationController
   # GET /transactions/1
   # GET /transactions/1.json
   def show
+    respond_to do |format|
+        format.html
+        format.pdf do
+          render pdf: transaction_path(@transaction)
+        end
+      end
   end
 
   # GET /transactions/new
@@ -81,6 +87,6 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:transaction_date,:company_id, :perticular_id, :transaction_type,:amount,:remark, :transaction_kind,:account_id)
+      params.require(:transaction).permit(:transaction_date,:company_id, :perticular_id, :transaction_type,:amount,:remark, :transaction_kind,:account_id,:instrument_date,:instrument_number)
     end
 end

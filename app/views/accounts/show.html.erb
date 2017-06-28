@@ -44,9 +44,9 @@
   <%= link_to 'Edit', edit_account_path(@account),class: "btn btn-info" %> |
 <%end%>
 
-<% if can? :destroy, @account %> 
-          <%= link_to 'Delete', @account, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-info" %> | 
-        <%end%>  
+<%# if can? :destroy, @account %> 
+          <%#= link_to 'Delete', @account, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-info" %>  
+        <%#end%>  
 <%= link_to 'Back', accounts_path,class: "btn btn-info" %><br/><br/>
 
 <%=link_to "Back to #{@account.bank.name}",bank_path(@account.bank.id),class:"btn btn-info"%>
