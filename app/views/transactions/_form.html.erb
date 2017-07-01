@@ -11,12 +11,20 @@
     </div>
   <% end %>
 
+  <div class="row">
+    <div class="col-md-6">
+         <!-- <label>Transaction Date</label></h5>
+
+        <div class="form-group">
+            <div class="input-group date" id="datetimepicker1">
+                 <span class="input-group-addon"><span class="glyphicon-calendar glyphicon"></span></span><%#= f.text_field :transaction_date, class: "form-control",placeholder: "yyyy/mm/dd"%>
+            </div> -->
 
 
         <label>Transaction Date</label><br/>
        
        <div class="col-sm-6">
-       <div class="input-group">
+       <div class="input-group" id="datetimepicker1">
         <div class="input-group-addon">
          <i class="fa fa-calendar"></i>
         </div>
@@ -67,10 +75,20 @@
     <%=f.select :transaction_kind,["Cash","Cheque","RTGS"],prompt:"select Kind"%>
   </div><br/>
 
-  <label>Instrument Date</label><br/>
+  
+
+  <!-- <label>Instrument Date</label></h5>
+
+        <div class="form-group">
+            <div class="input-group date" id="datetimepicker2">
+                 <span class="input-group-addon"><span class="glyphicon-calendar glyphicon"></span></span><%#= f.text_field :transaction_date, class: "form-control",placeholder: "yyyy/mm/dd"%>
+            </div> -->
+
+     
+      <label>Instrument Date</label><br/>
        
        <div class="col-sm-6">
-       <div class="input-group">
+       <div class="input-group" id="datetimepicker2">
         <div class="input-group-addon">
          <i class="fa fa-calendar"></i>
         </div>
@@ -142,9 +160,10 @@ companyHandle.onchange = function(){
     request.send();
   };
 
-<!--jquery for collection_select-->
+<!--jscript for date picker-->
 
-
+$('#datetimepicker1').datetimepicker();
+$('#datetimepicker2').datetimepicker();
 
 </script>
 

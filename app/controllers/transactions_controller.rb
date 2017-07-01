@@ -78,6 +78,10 @@ class TransactionsController < ApplicationController
     @transactions=Transaction.where("transaction_date BETWEEN ? AND ? AND account_id=?",params[:start],params[:end],params[:acc_no])
   end 
 
+  def soft_delete
+    @transactions=Transaction.only_deleted
+  end  
+
  
   private
     # Use callbacks to share common setup or constraints between actions.

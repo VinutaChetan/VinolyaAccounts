@@ -87,6 +87,8 @@
              <li><%=link_to "Daily Statement",transactions_daily_statement_path%></li>
 
              <li><%=link_to "Weekly Statement",transactions_weekly_statement_path%></li>
+
+             <li><%=link_to "Soft Deleted Transactions",transactions_soft_delete_path%></li>
            </ul>
         </li>     
       </ul>
@@ -227,12 +229,12 @@
 
 
 <!--script for Calender-->
-<script>
+  <script>
   $(document).ready(function(){
    $('#transaction_transaction_date').datepicker({
-    format: 'yyyy/mm/dd'
+     format: 'yyyy/mm/dd'
    });
-   $('#transaction_instrument_date').datepicker({
+    $('#transaction_instrument_date').datepicker({
     format: 'yyyy/mm/dd'
    });
   })

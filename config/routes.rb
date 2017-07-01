@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'transactions/monthwise'
   get 'transactions/daily_statement'
   get 'transactions/weekly_statement'
+  get 'transactions/soft_delete'
   get 'transactions/search_results'
   get 'accounts/yearwise_acc'
   get 'accounts/monthwise_acc'
