@@ -74,19 +74,12 @@
     <%= f.radio_button :transaction_type, 'credit' %> 
     <%= f.label :Credit %>
 
-    <%= f.radio_button :transaction_type, 'RTGS/NEFT' %> 
-    <%= f.label :"RTGS/NEFT" %>
-
-    <%= f.radio_button :transaction_type, 'DD' %> 
-    <%= f.label :DD %>
-
-    <%= f.radio_button :transaction_type, 'others' %> 
-    <%= f.label :others %>
+    
   </div><br/>
 
   <div class="field">
     <%= f.label :transaction_kind %><br>
-    <%=f.select :transaction_kind,["Cash","Cheque","RTGS"],prompt:"select Kind"%>
+    <%=f.select :transaction_kind,["Cash","Cheque","RTGS/NEFT","DD","others"],prompt:"select Kind"%>
   </div><br/>
 
   
@@ -122,6 +115,7 @@
   
   <div class="actions">
     <%= f.submit %><br/>
+
   </div>
 <% end %>
 <br/>
