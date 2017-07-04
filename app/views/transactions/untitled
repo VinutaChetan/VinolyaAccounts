@@ -208,5 +208,46 @@ accountHandle.setAttribute('disabled', true);
 
 
 
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Company Links <span class="glyphicon glyphicon-th-list"></span></a>
+
+
+           <ul class="dropdown-menu" >
+             
+            <%Company.all.order('created_at DESC').each do |com|%>
+            <li class="dropdown-submenu">
+              <% @company=com%>
+                <li><%=link_to com.name,company_path(com.id)%> 
+
+                     <!--  <ul class="dropdown-menu"> 
+                      <%# @company.accounts.each do |acc| %> 
+                      <li> <%#=link_to acc.acc_no,accounts_select_account_path(account_id: acc.id)%></li>
+                      <%#end%>
+                    <ul>   --> 
+
+                     <ul class="account-side">
+                        <% @company.accounts.each do |acc| %>
+                        <li><%=link_to acc.acc_no,accounts_select_account_path(account_id: acc.id)%></li>
+                        <%end%>
+                    </ul> 
+              </li> 
+            <%end%>
+            </li>
+          </ul> 
+
+        </li>
+
+
+.dropdown-menu>li>a {
+    display: block;
+    padding: 3px 15px;
+    /* clear: both; */
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+
+
 
 
