@@ -29,6 +29,7 @@
       <th class="text-success">Account Type</th>
       <th class="text-success">Current Balance</th>
       <th class="text-success">Company Name</th>
+      <th class="text-success">IFSC</th>
       <th class="text-success">Show</th>
       <th ></th>
       
@@ -50,6 +51,7 @@
         <%else%>
         <td><%= account. company.name%></td>
         <%end%>
+        <td><%= account.IFSC %></td>
         <td><%= link_to 'Show', account,class: "btn btn-info" %></td>
         <% if can? :update, account %>
           <td><%= link_to 'Edit', edit_account_path(account),class: "btn btn-info" %></td>

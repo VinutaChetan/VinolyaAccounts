@@ -39,6 +39,11 @@
   <%= @account.company.name%>
 </p>
 
+<p>
+  <strong>IFSC:</strong>
+  <%= @account.IFSC%>
+</p>
+
 <br/>
 <% if current_user.is_admin?%>
   <%= link_to 'Edit', edit_account_path(@account),class: "btn btn-info" %> |

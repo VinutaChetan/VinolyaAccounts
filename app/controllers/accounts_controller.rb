@@ -88,6 +88,6 @@ class AccountsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_params
-      params.require(:account).permit(:acc_no, :opening_balance, :bank_id, :branch_id, :acc_type, :current_balance,:company_id)
+      params.require(:account).permit(:acc_no, :opening_balance, :bank_id, :branch_id, :acc_type, :current_balance,:company_id,:IFSC)
     end
 end

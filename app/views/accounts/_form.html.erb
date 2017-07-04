@@ -45,13 +45,21 @@
     <%= f.radio_button :acc_type, 'Over Draft' %>
     <%= f.label :OverDraft %>
 
-    <%= f.radio_button :acc_type, 'Over Draft' %>
+    <%= f.radio_button :acc_type, 'Savings' %>
     <%= f.label :Savings %>
+
+    <%= f.radio_button :acc_type, 'Others' %>
+    <%= f.label :Others %>
   </div><br/>
 
   <div class="field">
     <%= f.label :current_balance %><br>
     <%= f.text_field :current_balance,class:"col-sm-6" %><br/><br/> 
+  </div>
+
+  <div class="field">
+    <%= f.label :IFSC %><br>
+    <%= f.text_field :IFSC,class:"col-sm-6" %><br/><br/>
   </div>
 
   <div class="actions">

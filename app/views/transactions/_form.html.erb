@@ -31,7 +31,12 @@
 
         <%= f.text_field :transaction_date, class: "form-control",placeholder: "yyyy/mm/dd"%>
        </div>
-     </div><br/>
+     </div><br/><br/><br/>
+
+     <div class="field">
+    <%= f.label :instrument_number %><br>
+    <%= f.text_field :instrument_number ,class:"col-sm-6" %><br/> 
+  </div>
 
   <!-- <div class="field"> -->
     <%#=f.label :company_id %><!-- <br> -->
@@ -54,6 +59,11 @@
     <%= f.label :particular_id %><br>
     <%=f.collection_select :perticular_id,Perticular.all,:id,:name,{prompt:"Select particular"},{ class: 'chosen-select' }%>
   </div><br/>
+
+  <div class="field">
+    <%= f.label :amount %><br>
+    <%= f.text_field :amount ,class:"col-sm-6" %><br/><br/> 
+  </div>
   
   <div class="field">
     <%= f.label :transaction_type %><br>
@@ -63,12 +73,16 @@
     
     <%= f.radio_button :transaction_type, 'credit' %> 
     <%= f.label :Credit %>
-  </div><br/>
 
-  <div class="field">
-    <%= f.label :amount %><br>
-    <%= f.text_field :amount ,class:"col-sm-6" %><br/><br/> 
-  </div>
+    <%= f.radio_button :transaction_type, 'RTGS/NEFT' %> 
+    <%= f.label :"RTGS/NEFT" %>
+
+    <%= f.radio_button :transaction_type, 'DD' %> 
+    <%= f.label :DD %>
+
+    <%= f.radio_button :transaction_type, 'others' %> 
+    <%= f.label :others %>
+  </div><br/>
 
   <div class="field">
     <%= f.label :transaction_kind %><br>
@@ -85,23 +99,20 @@
             </div> -->
 
      
-      <label>Instrument Date</label><br/>
+  <label>Instrument Date</label><br/>
        
-       <div class="col-sm-6">
-       <div class="input-group" id="datetimepicker2">
-        <div class="input-group-addon">
-         <i class="fa fa-calendar"></i>
-        </div>
+    <div class="col-sm-6">
+      <div class="input-group" id="datetimepicker2">
+      <div class="input-group-addon">
+        <i class="fa fa-calendar"></i>
+      </div>
 
-        <%= f.text_field :instrument_date, class: "form-control",placeholder: "yyyy/mm/dd"%>
-       </div>
-     </div><br/>
+      <%= f.text_field :instrument_date, class: "form-control",placeholder: "yyyy/mm/dd"%>
+      </div>
+    </div><br/>
      <br/>
   
-  <div class="field">
-    <%= f.label :instrument_number %><br>
-    <%= f.text_field :instrument_number ,class:"col-sm-6" %><br/><br/> 
-  </div>
+  
 
   <div class="field">
     <%= f.label :remark %><br>

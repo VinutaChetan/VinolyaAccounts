@@ -13,7 +13,8 @@
                         <th class="text-success">Transaction kind</th>
                         <th class="text-success">Instrument Date</th>
                         <th class="text-success">Instrument Number</th>
-                        <th class="text-success">Remark</th> 
+                        <th class="text-success">Remark</th>
+                        <th class="text-success">Restore</th> 
                         
                         
                       </tr>
@@ -47,7 +48,7 @@
                         <td><%= val.instrument_date%></td>
                         <td><%= val.instrument_number%></td>
                         <td><%= val.remark %></td>
-                        
+                        <td><%= link_to "Restore",transactions_restore_path(transaction_id: val.id) %></td>
                         
                       </tr> 
                       <%end%>

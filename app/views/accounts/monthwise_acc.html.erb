@@ -15,7 +15,8 @@
                     <th>Transaction type</th>
                     <th>Amount</th>
                     <th>Remark</th>
-                    <th>Transaction kind</th>                               
+                    <th>Transaction kind</th> 
+                    <!-- <th>IFSC</th>     -->                          
                 </tr>    
             </thead>
                 <tbody id="myTable">
@@ -28,6 +29,7 @@
                     <td>  <%=trans.amount%></td>
                     <td>  <%=trans.remark%></td>
                     <td>  <%=trans.transaction_kind%><td>
+                    <td>  <%#=trans.account.IFSC%></td>  
                 </tr>
                 <%end%> <br/><br/>   
                 </tbody> 

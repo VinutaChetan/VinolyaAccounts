@@ -82,6 +82,11 @@ class TransactionsController < ApplicationController
     @transactions=Transaction.only_deleted
   end  
 
+  def restore
+    Transaction.restore(params[:transaction_id])
+    redirect_to :back
+  end  
+
  
   private
     # Use callbacks to share common setup or constraints between actions.

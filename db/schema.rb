@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170628105148) do
+ActiveRecord::Schema.define(version: 20170704043629) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "acc_no"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20170628105148) do
     t.datetime "updated_at",      null: false
     t.integer  "company_id"
     t.datetime "deleted_at"
+    t.string   "IFSC"
   end
 
   add_index "accounts", ["deleted_at"], name: "index_accounts_on_deleted_at"
@@ -54,9 +55,12 @@ ActiveRecord::Schema.define(version: 20170628105148) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.datetime "deleted_at"
+    t.string   "contact_number"
+    t.text     "address"
+    t.string   "mail_id"
   end
 
   add_index "companies", ["deleted_at"], name: "index_companies_on_deleted_at"

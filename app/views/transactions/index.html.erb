@@ -19,10 +19,12 @@
 
 <label>Account Number:</label>
   <%= select_tag "acc_no", options_from_collection_for_select(Account.all, "id", "acc_no",:selected =>current_account.id),{:include_blank => false , :class => "product_select"}%>
+
+  <%#=collection_select :account_id,Account.all,:id,:acc_no,{prompt:"Select Account"}%>
   
   <%=submit_tag  "Search"%> 
 <%end%> 
-<%#=collection_select :account_id,Account.all,:id,:acc_no,{prompt:"Select Account"}%>
+
  
   <% if Transaction.list_view(current_account)=="No Transaction found"%>
       <h3>No Transaction found</h3> 

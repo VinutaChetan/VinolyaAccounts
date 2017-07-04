@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Particular Name:</strong>
-  <%= @transaction.perticular.name %>
+  <strong>Company Name:</strong>
+  <%= @transaction.company.name %>
 </p>
 
 <p>
@@ -15,21 +15,24 @@
   <%= @transaction.transaction_date.to_s(:long) %>
 </p>
 
-
 <p>
-  <strong>Company Name:</strong>
-  <%= @transaction.company.name %>
+  <strong>Instrument number:</strong>
+  <%= @transaction.instrument_number %>
 </p>
 
+<p>
+  <strong>Particular Name:</strong>
+  <%= @transaction.perticular.name %>
+</p>
+
+<p>
+  <strong>Transaction amount:</strong>
+  <%= @transaction.amount %>
+</p>
 
 <p>
   <strong>Transaction type:</strong>
   <%= @transaction.transaction_type %>
-</p>
-
-<p>
-  <strong>Transaction type:</strong>
-  <%= @transaction.amount %>
 </p>
 
 <p>
@@ -38,19 +41,15 @@
 </p>
 
 <p>
-  <strong>Instrument number:</strong>
-  <%= @transaction.instrument_number %>
+  <strong>Transaction kind:</strong>
+  <%= @transaction.transaction_kind %>
 </p>
 
 <p>
   <strong>Remark:</strong>
   <%= @transaction.remark %>
-</p>
+</p><br/> 
 
-<p>
-  <strong>Transaction kind:</strong>
-  <%= @transaction.transaction_kind %>
-</p><br/>
 
 <% if current_user.is_admin?%>
   <%= link_to 'Edit', edit_transaction_path(@transaction),class: "btn btn-info" %> |

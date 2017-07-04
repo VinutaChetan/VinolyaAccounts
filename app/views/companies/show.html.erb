@@ -4,9 +4,25 @@
 <div class="col-md-6 ">
   <div class="box-1">
 <p>
-  <h4><strong>Name:</strong></h4><br/>
+  <h4><strong>Name:</strong></h4>
   <%= @company.name %>
 </p>
+
+<p>
+  <h4><strong>Contact Number:</strong></h4>
+  <%= @company.contact_number %>
+</p>
+
+<p>
+  <h4><strong>Address:</strong></h4>
+  <%= @company.address %>
+</p>
+
+<p>
+  <h4><strong>Mail Id:</strong></h4>
+  <%= @company.mail_id %>
+</p>
+<br/>
 </br/>
 <% if current_user.is_admin? %>
   <%= link_to 'Edit', edit_company_path(@company),class: "btn btn-info" %> |

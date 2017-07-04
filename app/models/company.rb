@@ -5,5 +5,5 @@ class Company < ActiveRecord::Base
 	has_many :accounts, dependent: :destroy
 	has_many :transactions
 	
-	validates_presence_of :name
+	validates_presence_of :name,:contact_number,:address,:mail_id
 end

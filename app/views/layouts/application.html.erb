@@ -6,8 +6,10 @@
  <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
   <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
 
+
 <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <link href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet">
+
 
 
   <!-- Latest compiled and minified CSS -->
@@ -28,6 +30,8 @@
      $("#transaction_company_id").chosen();
   });
  </script>
+
+
 
  
 
@@ -58,17 +62,17 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      
       <%=link_to root_path ,:class=> "navbar-brand" do%>
       <span class= "glyphicon glyphicon-home"></span>
      <%end%>
+   
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-
-        <li class="dropdown">
+  
+                      <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Master <span class="glyphicon glyphicon-th-list"></span></a>
            <ul class="dropdown-menu">
              <li><%=link_to "Account",accounts_path%></li>
@@ -78,6 +82,7 @@
              <li><%=link_to "Particular",perticulars_path%></li>
           </ul> 
         </li>
+ 
 
         <li><%=link_to "Transaction",transactions_path %></li>
 
@@ -89,6 +94,8 @@
              <li><%=link_to "Weekly Statement",transactions_weekly_statement_path%></li>
 
              <li><%=link_to "Soft Deleted Transactions",transactions_soft_delete_path%></li>
+
+             
            </ul>
         </li>     
       </ul>
@@ -98,7 +105,34 @@
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form> -->
-      <ul class="nav navbar-nav navbar-right">
+    <ul class="nav navbar-nav navbar-right">
+
+  <li> 
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Company Link <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        
+                        <li class="dropdown-submenu ">
+                    <% Company.all.each do |company| %> 
+                <li class="dropdown-submenu ">
+                <% unless company.accounts.empty? %> 
+                  <a tabindex="-1" href="#"><%= company.name %> </a>
+                  <ul class="dropdown-menu ">
+                    <% company.accounts.each do |account| %> 
+                      
+                       <li class="postion"><%=link_to account.acc_no,accounts_select_account_path(account_id: account.id)%></li>
+                      <% end %> 
+                      </ul>
+                   
+                   </li>
+                <% else %> 
+                  <li><%= link_to  company.name %>  </li>
+                <% end %> 
+
+
+            <% end %>
+                        </li>
+                    </ul></li>
+
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Accounts Links <span class="glyphicon glyphicon-th-list"></span></a>
            <ul class="dropdown-menu" >
@@ -128,6 +162,7 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
 <%end%>
 <%end%>
 
@@ -217,7 +252,6 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 
@@ -269,10 +303,6 @@
     })
   })
 </script>
-
-
-
-
 
 
 
