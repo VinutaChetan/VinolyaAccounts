@@ -26,6 +26,7 @@
     <%= f.collection_select :bank_id,Bank.all,:id,:name, {prompt:"select Bank"},{class:"col-sm-6" } %><br/>
   </div><br/>
 
+
   <div class="field">
     <%= f.label :branch_id %><br>
     <%= f.collection_select :branch_id,Branch.all,:id,:name,{prompt:"Select branch"},{ class: 'chosen-select' }%><br/>

@@ -5,12 +5,11 @@
   
 <!-- </ol> -->
 <%#end of Breadcrumbs%>
-
 <b><p id="notice"><%= notice %></p></b><br/>
 
 <!-- Searching-->
-
-<%=form_tag transactions_search_results_path,method: :get do %>
+<div class="top-calander">
+ <%=form_tag transactions_search_results_path,method: :get do %>
  <label>Start Date:</label>
  <%= text_field_tag :start%>
   
@@ -23,7 +22,11 @@
   <%#=collection_select :account_id,Account.all,:id,:acc_no,{prompt:"Select Account"}%>
   
   <%=submit_tag  "Search"%> 
-<%end%> 
+<%end%>  
+
+
+</div>
+
 
  
   <% if Transaction.list_view(current_account)=="No Transaction found"%>
@@ -101,12 +104,13 @@
                     </tbody>
                   </table>             
    </div>
-   <%end%>   
+   <%end%>
+
 
    <script type="text/javascript">
    $('#myTable').DataTable();  
 </script>
-            
+          
 
 
 

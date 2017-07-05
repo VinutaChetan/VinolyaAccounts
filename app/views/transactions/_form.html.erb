@@ -11,6 +11,7 @@
     </div>
   <% end %>
 
+  
   <div class="row">
     <div class="col-md-6">
          <!-- <label>Transaction Date</label></h5>
@@ -24,13 +25,16 @@
         <label>Transaction Date</label><br/>
        
        <div class="col-sm-6">
-       <div class="input-group" id="datetimepicker1">
+        <div class="top-cal">
+           <div class="input-group" id="datetimepicker1">
         <div class="input-group-addon">
          <i class="fa fa-calendar"></i>
         </div>
 
         <%= f.text_field :transaction_date, class: "form-control",placeholder: "yyyy/mm/dd"%>
        </div>
+      </div>
+      
      </div><br/><br/><br/>
 
      <div class="field">
@@ -65,10 +69,10 @@
     <%= f.text_field :amount ,class:"col-sm-6" %><br/><br/> 
   </div>
   
-  <div class="field">
+  <div class="field" id= "transaction_type_id">
     <%= f.label :transaction_type %><br>
 
-    <%= f.radio_button :transaction_type, 'debit', :checked => true %> 
+    <%= f.radio_button :transaction_type, 'debit' %> 
     <%= f.label :Debit %>
     
     <%= f.radio_button :transaction_type, 'credit' %> 
@@ -100,6 +104,7 @@
         <i class="fa fa-calendar"></i>
       </div>
 
+
       <%= f.text_field :instrument_date, class: "form-control",placeholder: "yyyy/mm/dd"%>
       </div>
     </div><br/>
@@ -119,6 +124,8 @@
   </div>
 <% end %>
 <br/>
+
+
 
 <script>
 var companyHandle = document.getElementById('transaction_company_id');
@@ -169,6 +176,28 @@ companyHandle.onchange = function(){
 
 $('#datetimepicker1').datetimepicker();
 $('#datetimepicker2').datetimepicker();
+
+var transactionHandle = document.getElementById('transaction_perticular_id');
+var typeHandle = document.getElementById('transaction_type_id');
+
+transactionHandle.onchange = function(){
+  typeHandle.innerHTML = "";
+  var request = new XMLHttpRequest();
+  request.open('get','/transactions/select_perticular.json?perticular_id=' + transactionHandle.value);
+  request.onreadystatechange = function(){
+    if(request.readyState === 4 && request.status === 200){
+      var response = JSON.parse(request.responseText);
+      //response.forEach(function(type){
+        var newElement = document.createElement('radio');
+        newElement.value = response.id;
+        var newText = document.createTextNode(response.perticular_type);
+        newElement.appendChild(newText);
+        typeHandle.appendChild(newElement);
+      //})
+    }
+  }
+  request.send();
+}
 
 </script>
 

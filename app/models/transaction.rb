@@ -4,10 +4,12 @@ class Transaction < ActiveRecord::Base
 	belongs_to :perticular
 	belongs_to :company
 	belongs_to :account
+	
 	validates_presence_of :transaction_date,:company_id,:account_id,:perticular_id,
 							:transaction_type,:amount,:transaction_kind,:instrument_date,:instrument_number
 	validates_numericality_of :amount
 	validates_uniqueness_of :instrument_number
+
 	after_create :add_acc_balance
 	after_destroy :update_current_balance
 

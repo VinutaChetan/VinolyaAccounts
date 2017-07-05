@@ -151,9 +151,9 @@
                         <tr>
                           <td>  <%=index+1%></td>
                           <td>  <%=trans.transaction_date%></td>
-                          <td><%=trans.company.name%></td>
-                          <td>  <%=trans.account.acc_no%></td>
-                          <td>  <%=trans.perticular.name%></td>
+                          <td><%=trans.company.try(:name)%></td>
+                          <td>  <%=trans.account.try(:acc_no)%></td>
+                          <td>  <%=trans.perticular.try(:name)%></td>
                           <td>  <%=trans.transaction_type%></td>
                           <td>  <%=trans.amount%></td>
                           <td>  <%=trans.remark%></td>

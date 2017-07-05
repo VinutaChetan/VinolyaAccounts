@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get 'accounts/monthwise_acc'
   get 'perticulars/yearwise_perticular'
   get 'perticulars/monthwise_perticular'
+  get 'transactions/select_perticular'
 
   #get "transactions/log_in_session"
   # get "log_out_session" => "sessions#destroy", :as => "log_out_session"

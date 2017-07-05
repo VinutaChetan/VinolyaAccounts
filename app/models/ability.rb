@@ -9,7 +9,7 @@ class Ability
     else 
         can [:read],[Company,Bank,Branch,Account,Perticular,Transaction]
         #can [:yearwise,:monthwise,:weekly_statement,:monthly_statement], :transaction 
-        can [:yearwise,:monthwise,:daily_statement,:weekly_statement,:monthly_statement], Transaction         
+        can [:yearwise,:monthwise,:daily_statement,:weekly_statement,:monthly_statement,:soft_delete], Transaction         
     end    
     
     # Define abilities for the passed in user here. For example:

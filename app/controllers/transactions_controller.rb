@@ -87,6 +87,11 @@ class TransactionsController < ApplicationController
     redirect_to :back
   end  
 
+  def select_perticular
+    @perticular=Perticular.find(params[:perticular_id])
+    @perticular_transtype= @perticular.transaction_type
+  end  
+
  
   private
     # Use callbacks to share common setup or constraints between actions.

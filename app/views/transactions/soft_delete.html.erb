@@ -14,8 +14,9 @@
                         <th class="text-success">Instrument Date</th>
                         <th class="text-success">Instrument Number</th>
                         <th class="text-success">Remark</th>
+                        <% if current_user.role=="admin"%>
                         <th class="text-success">Restore</th> 
-                        
+                        <%end%>
                         
                       </tr>
                     </thead>
@@ -26,30 +27,36 @@
                        
                       <tr>
                         <td><%=index+1%></td>
+
                         <td><%= val.transaction_date.to_s(:long) %></td>
+
                         <%if val.company==nil%>
                              <td>Null</td>
                         <%else%>    
                         <td><%=val.company.name%></td>
                         <%end%>
-                      <%if val.account_id==nil%>
+    
+                        <% if val.account==nil%>
                           <td>Null</td>
                         <%else%> 
-                        <td><%=val.account_id%>
+                        <td><%=val.account.acc_no%>
                          <%end%> 
-                          <%if val.perticular==nil%>
-                            <td>Null</td>
+
+                        <%if val.perticular==nil%>
+                          <td>Null</td>
                         <%else%> 
                         <td><%=val.perticular.name %></td>
-                        <%end%> 
+                        <%end%>
+
                         <td><%= val.transaction_type %></td>
                         <td><%= val.amount%></td>
                         <td><%= val.transaction_kind %></td>
                         <td><%= val.instrument_date%></td>
                         <td><%= val.instrument_number%></td>
                         <td><%= val.remark %></td>
+                        <% if current_user.role=="admin"%>
                         <td><%= link_to "Restore",transactions_restore_path(transaction_id: val.id) %></td>
-                        
+                        <%end%>
                       </tr> 
                       <%end%>
                     </tbody>

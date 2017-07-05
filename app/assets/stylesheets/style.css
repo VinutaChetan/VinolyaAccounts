@@ -72,8 +72,10 @@ ul.breadcrumb{
     font-size: large;
 }
 
-.datepicker-dropdown {
-    top: 455px !important;
+ 
+
+.alert.alert.danger datepicker.datepicker-dropdown.dropdown-menu.datepicker-orient-left.datepicker-orient-top {
+    top: 372px !important;
 }
 
 /* for Login Page */
