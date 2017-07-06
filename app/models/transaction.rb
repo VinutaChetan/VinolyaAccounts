@@ -186,8 +186,18 @@ class Transaction < ActiveRecord::Base
 		#return data
 		return data_debit
 		#return cr_dr
-		
-
 	end	
+
+	def restore_transaction
+		if self.transaction_type == "credit"
+			account=Account.find_by(id: self.account.id)
+			account.current_balance =self.amount+account.current_balance
+			account.save
+		else
+			account=Account.find_by(id: self.account.id)
+			account.current_balance =account.current_balance-self.amount
+			account.save
+		end
+	end
 
 end

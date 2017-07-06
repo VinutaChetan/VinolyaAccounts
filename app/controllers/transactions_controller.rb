@@ -84,6 +84,8 @@ class TransactionsController < ApplicationController
 
   def restore
     Transaction.restore(params[:transaction_id])
+    @transaction = Transaction.find(params[:transaction_id])
+    @transaction.restore_transaction
     redirect_to :back
   end  
 
