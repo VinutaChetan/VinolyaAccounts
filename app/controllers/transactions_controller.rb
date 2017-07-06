@@ -7,7 +7,7 @@ class TransactionsController < ApplicationController
   # GET /transactions.json
   def index
      if session[:account]
-        @transactions = current_account.transactions 
+        @transactions = current_account.transactions.includes(:company,:account,:perticular)
      else   
       @transactions = Transaction.all.includes(:company,:account,:perticular)
      end  
