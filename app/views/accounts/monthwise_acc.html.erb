@@ -3,37 +3,47 @@
 <div class="container">
 <div class="row">
   <div class="col-sm-6 col-md-7">
+    <div class="acc_month">
 <%if @account.transactions.list[params[:year].to_i][0][params[:month]].empty?%>
 	<b><h3>No Transactions found </h3></b>
 <%else %>
         <table class ="table table-striped" id="myTable">
             <thead>
                 <tr>
-                    <th>Transaction date</th>
+                    <th>SI.no</th>
+                    <th>Transaction Date</th>
+                    <th>Company Name</th>
                     <th>Account Number</th>
                     <th>Particular</th>
                     <th>Transaction type</th>
                     <th>Amount</th>
-                    <th>Remark</th>
-                    <th>Transaction kind</th> 
+                    <th>Transaction kind</th>
+                    <th>Instrument Date</th>
+                    <th>Instrument Number</th>
+                    <th>Remark</th> 
                     <!-- <th>IFSC</th>     -->                          
                 </tr>    
             </thead>
                 <tbody id="myTable">
-                <% @account.transactions.list[params[:year].to_i][0][params[:month]].order('transaction_date DESC').each do |trans| %>
+                <% @account.transactions.list[params[:year].to_i][0][params[:month]].order('transaction_date DESC').each_with_index do |trans,index| %>
                 <tr>
-                    <td>  <%=trans.transaction_date%></td>
+                    <td>   <%=index+1%></td>
+                    <td>  <%=trans.transaction_date.strftime("%d-%m-%Y")%></td>
+                    <td>  <%=trans.company.name%></td>
                     <td>  <%=trans.account.acc_no%></td>
                     <td>  <%=trans.perticular.name%></td>
                     <td>  <%=trans.transaction_type%></td>
                     <td>  <%=trans.amount%></td>
+                    <td><%= trans.transaction_kind %></td>
+                    <td><%= trans.instrument_date.strftime("%d-%m-%Y") if trans.instrument_date != nil%></td>
+                    <td><%= trans.instrument_number%></td>
                     <td>  <%=trans.remark%></td>
-                    <td>  <%=trans.transaction_kind%><td>
                     <td>  <%#=trans.account.IFSC%></td>  
                 </tr>
                 <%end%> <br/><br/>   
                 </tbody> 
         </table>
+      </div>
  </div>       
 
         <div class="col-sm-4 col-sm-offset-2 col-md-5 col-md-offset-0"> 

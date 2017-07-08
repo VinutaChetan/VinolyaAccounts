@@ -91,7 +91,12 @@ class TransactionsController < ApplicationController
 
   def select_perticular
     @perticular=Perticular.find(params[:perticular_id])
-    @perticular_transtype= @perticular.transaction_type
+    
+  end  
+
+  def print_preview
+    @transaction=Transaction.find(params[:transaction_id])
+   
   end  
 
  

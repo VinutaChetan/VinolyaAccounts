@@ -12,7 +12,7 @@
 
 <p>
   <strong>Transaction date:</strong>
-  <%= @transaction.transaction_date.to_s(:long) %>
+  <%= @transaction.transaction_date.strftime("%m-%d-%Y") %>
 </p>
 
 <p>
@@ -37,7 +37,7 @@
 
 <p>
   <strong>Instrument date:</strong>
-  <%= @transaction.instrument_date %>
+  <%= @transaction.instrument_date.strftime("%d-%m-%Y") %>
 </p>
 
 <p>
@@ -61,6 +61,19 @@
 <%= link_to 'Back', transactions_path,class: "btn btn-info" %><br/><br/>
 
 <%= link_to 'Generate pdf',transaction_path(@transaction, format: "pdf"), target: "_blank",class: "btn btn-primary" %>
+
+<%= link_to 'print_preview', transactions_print_preview_path(transaction_id: @transaction.id),class: "btn btn-primary" %><br/><br/>
+
+
+
+<!-- <input type="button" value="Print this page" onclick="printpage()" class="btn btn-success">
+ -->
+  <script>
+    function printpage()
+      {
+      window.print()
+      }
+    </script>
 
 
 

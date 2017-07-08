@@ -1,0 +1,66 @@
+<p>
+  <strong>Particular Name:</strong>
+  <%= @transaction.perticular.name %>
+</p>
+
+<p>
+  <strong>Account Number:</strong>
+  <%= @transaction.account.acc_no %>
+</p>
+
+<p>
+  <strong>Transaction date:</strong>
+  <%= @transaction.transaction_date.to_s(:long) %>
+</p>
+
+
+<p>
+  <strong>Company Name:</strong>
+  <%= @transaction.company.name %>
+</p>
+
+
+<p>
+  <strong>Transaction type:</strong>
+  <%= @transaction.transaction_type %>
+</p>
+
+<p>
+  <strong>Transaction type:</strong>
+  <%= @transaction.amount %>
+</p>
+
+<p>
+  <strong>Instrument date:</strong>
+  <%= @transaction.instrument_date %>
+</p>
+
+<p>
+  <strong>Instrument number:</strong>
+  <%= @transaction.instrument_number %>
+</p>
+
+<p>
+  <strong>Remark:</strong>
+  <%= @transaction.remark %>
+</p>
+
+<p>
+  <strong>Transaction kind:</strong>
+  <%= @transaction.transaction_kind %>
+</p><br/>
+
+
+<input type="button" value="Print this page" onclick="printpage()" class="btn btn-success">
+
+
+<%=link_to "Back",transaction_path(@transaction)%>
+
+
+
+  <script>
+    function printpage()
+      {
+      window.print()
+      }
+    </script>

@@ -34,15 +34,17 @@
            
             <thead>
                 <tr>
-                    <th class="text-success">SI.no</th>
-                    <th class="text-success">Transaction Date</th>
-                    <th class="text-success">Company Name</th>
-                    <th class="text-success">Account Number</th>
-                    <th class="text-success">Particular</th>
-                    <th class="text-success">Transaction Type</th>
-                    <th class="text-success">Amount</th>
-                    <th class="text-success">Remark</th>
-                    <th class="text-success">Transaction Kind</th>                               
+                    <th>SI.no</th>
+                    <th>Transaction Date</th>
+                    <th>Company Name</th>
+                    <th>Account Number</th>
+                    <th>Particular</th>
+                    <th>Transaction type</th>
+                    <th>Amount</th>
+                    <th>Transaction kind</th>
+                    <th>Instrument Date</th>
+                    <th>Instrument Number</th>
+                    <th>Remark</th> 
                 </tr>    
             </thead>
               
@@ -57,8 +59,11 @@
                     <td>  <%=trans.perticular.name%></td>
                     <td>  <%=trans.transaction_type%></td>
                     <td>  <%=trans.amount%></td>
+                    <td><%= trans.transaction_kind %></td>
+                    <td><%= trans.instrument_date.strftime("%d-%m-%Y") if trans.instrument_date != nil%></td>
+                    <td><%= trans.instrument_number%></td>
                     <td>  <%=trans.remark%></td>
-                    <td>  <%=trans.transaction_kind%><td>
+                    
                 </tr>
                 <%end%> <br/><br/> 
                    

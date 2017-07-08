@@ -31,7 +31,7 @@
          <i class="fa fa-calendar"></i>
         </div>
 
-        <%= f.text_field :transaction_date, class: "form-control",placeholder: "yyyy/mm/dd"%>
+        <%= f.text_field :transaction_date, class: "form-control transaction_date",placeholder: "yyyy/mm/dd" %>
        </div>
       </div>
       
@@ -62,7 +62,7 @@
 <br/>
   <div class="field" >
     <%= f.label :particular_id %><br>
-    <%=f.collection_select :perticular_id,Perticular.all,:id,:name,{prompt:"Select particular"},{ class: 'chosen-select' }%>
+    <%=f.collection_select :perticular_id,Perticular.all,:id,:name,{prompt:"Select particular"},{ class: "chosen-select" }%>
   </div><br/>
 
   <div class="field">
@@ -70,7 +70,7 @@
     <%= f.text_field :amount ,class:"col-sm-6" %><br/><br/> 
   </div>
   
-  <div class="field" id= "transaction_type_id">
+  <div class="field">
     <%= f.label :transaction_type %><br>
 
     <%= f.radio_button :transaction_type, 'debit' %> 
@@ -106,7 +106,7 @@
       </div>
 
 
-      <%= f.text_field :instrument_date, class: "form-control",placeholder: "yyyy/mm/dd"%>
+      <%= f.text_field :instrument_date, class: "form-control transaction_date",placeholder: "yyyy/mm/dd"%>
       </div>
     </div><br/>
      <br/>
@@ -129,76 +129,81 @@
 
 
 <script>
-var companyHandle = document.getElementById('transaction_company_id');
-var accountHandle = document.getElementById('transaction_account_id');
-var spanHandle = document.getElementById('balance');
-
-companyHandle.onchange = function(){
-  accountHandle.innerHTML = "";
-  spanHandle.innerHTML = "";
-  var newElement = document.createElement('option');
-  newElement.value = 0;
-  var newText = document.createTextNode('select');
-  newElement.appendChild(newText);
-  accountHandle.appendChild(newElement);
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET','/companies/select_accounts.json?company_id=' + companyHandle.value)
-  xhr.onreadystatechange = function(){
-    if(xhr.readyState === 4 && xhr.status === 200){
-      var response = JSON.parse(xhr.responseText);
-      console.log(xhr.responseText);
-      if(response.length > 0){
-        response.forEach(function(account){
-          var newElement = document.createElement('option');
-          newElement.value = account.id;
-          var newText = document.createTextNode(account.acc_no)
-          newElement.appendChild(newText);
-          accountHandle.appendChild(newElement);
-        });
-      }
-    }
-  }
-  xhr.send();
-};
-
-  accountHandle.onchange = function(){
-    var request = new XMLHttpRequest();
-    request.open('GET','/accounts/select_balance.json?acc_id=' + accountHandle.value);
-    request.onreadystatechange = function(){
-      if(request.readyState === 4 && request.status === 200){
-        var response = JSON.parse(request.responseText);
-       spanHandle.innerHTML = "Current Balance : " + response.current_balance;
-      }
-    };
-    request.send();
-  };
-
-<!--jscript for date picker-->
-
-$('#datetimepicker1').datetimepicker();
-$('#datetimepicker2').datetimepicker();
 
 var transactionHandle = document.getElementById('transaction_perticular_id');
-var typeHandle = document.getElementById('transaction_type_id');
+var creditHandle = document.getElementById('transaction_transaction_type_credit');
+var debitHandle = document.getElementById('transaction_transaction_type_debit');
 
 transactionHandle.onchange = function(){
-  typeHandle.innerHTML = "";
   var request = new XMLHttpRequest();
   request.open('get','/transactions/select_perticular.json?perticular_id=' + transactionHandle.value);
   request.onreadystatechange = function(){
     if(request.readyState === 4 && request.status === 200){
       var response = JSON.parse(request.responseText);
       //response.forEach(function(type){
-        var newElement = document.createElement('radio');
-        newElement.value = response.id;
-        var newText = document.createTextNode(response.perticular_type);
-        newElement.appendChild(newText);
-        typeHandle.appendChild(newElement);
-      //})
+        if (response.perticular_type == "credit"){
+          creditHandle.checked = true;
+        }
+          else if(response.perticular_type == "debit"){
+            debitHandle.checked = true;
+          }
+
+        }
     }
-  }
+  
   request.send();
 }
+
+// var companyHandle = document.getElementById('transaction_company_id');
+// var accountHandle = document.getElementById('transaction_account_id');
+// var spanHandle = document.getElementById('balance');
+
+// companyHandle.onchange = function(){
+//   accountHandle.innerHTML = "";
+//   spanHandle.innerHTML = "";
+//   var newElement = document.createElement('option');
+//   newElement.value = 0;
+//   var newText = document.createTextNode('select');
+//   newElement.appendChild(newText);
+//   accountHandle.appendChild(newElement);
+//   var xhr = new XMLHttpRequest();
+//   xhr.open('GET','/companies/select_accounts.json?company_id=' + companyHandle.value)
+//   xhr.onreadystatechange = function(){
+//     if(xhr.readyState === 4 && xhr.status === 200){
+//       var response = JSON.parse(xhr.responseText);
+//       console.log(xhr.responseText);
+//       if(response.length > 0){
+//         response.forEach(function(account){
+//           var newElement = document.createElement('option');
+//           newElement.value = account.id;
+//           var newText = document.createTextNode(account.acc_no)
+//           newElement.appendChild(newText);
+//           accountHandle.appendChild(newElement);
+//         });
+//       }
+//     }
+//   }
+//   xhr.send();
+// };
+
+//   accountountHandle.onchange = function(){
+//     var request = new XMLHttpRequest();
+//     request.open('GET','/accounts/select_balance.json?acc_id=' + accountHandle.value);
+//     request.onreadystatechange = function(){
+//       if(request.readyState === 4 && request.status === 200){
+//         var response = JSON.parse(request.responseText);
+//        spanHandle.innerHTML = "Current Balance : " + response.current_balance;
+//       }
+//     };
+//     request.send();
+//   };
+
+// <!--jscript for date picker-->
+
+$('#datetimepicker1').datetimepicker();
+$('#datetimepicker2').datetimepicker();
+
+//dynamic select
 
 </script>
 

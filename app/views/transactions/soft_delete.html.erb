@@ -51,7 +51,7 @@
                         <td><%= val.transaction_type %></td>
                         <td><%= val.amount%></td>
                         <td><%= val.transaction_kind %></td>
-                        <td><%= val.instrument_date%></td>
+                        <td><%= val.instrument_date.strftime("%d-%m-%Y") if val.instrument_date != nil %></td>
                         <td><%= val.instrument_number%></td>
                         <td><%= val.remark %></td>
                         <% if current_user.role=="admin"%>

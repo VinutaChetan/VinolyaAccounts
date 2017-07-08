@@ -131,7 +131,8 @@
         <%else%>   
         <div class="container">
           <div class="row">
-            <div class="col-md-9" >
+            <div class="col-md-9 " >
+              <div class="scrolling">
                   <table class ="table table-striped" id="myTable">
                     <thead>
                       <tr>
@@ -140,29 +141,35 @@
                         <th class="text-success">Company Name</th>
                         <th class="text-success">Account Number</th>
                         <th class="text-success">Particular</th>
-                        <th class="text-success">Transaction Type</th>
+                        <th class="text-success">Transaction type</th>
                         <th class="text-success">Amount</th>
-                        <th class="text-success">Remark</th>
-                        <th class="text-success">Transaction Kind</th> 
+                        <th class="text-success">Transaction kind</th>
+                        <th class="text-success">Instrument Date</th>
+                        <th class="text-success">Instrument Number</th>
+                        <th class="text-success">Remark</th>  
                       </tr>
                     </thead>
                     <tbody id="myTable">
                       <%value.order('transaction_date ASC').each_with_index do |trans,index|%>
                         <tr>
                           <td>  <%=index+1%></td>
-                          <td>  <%=trans.transaction_date%></td>
+                          <td>  <%=trans.transaction_date.strftime("%m-%d-%Y") %></td>
                           <td><%=trans.company.try(:name)%></td>
                           <td>  <%=trans.account.try(:acc_no)%></td>
                           <td>  <%=trans.perticular.try(:name)%></td>
                           <td>  <%=trans.transaction_type%></td>
                           <td>  <%=trans.amount%></td>
-                          <td>  <%=trans.remark%></td>
                           <td>  <%=trans.transaction_kind%><td>
+                          <td>  <%=trans.instrument_date.strftime("%d-%m-%Y") if trans.instrument_date!= nil%></td>
+                          <td>  <%=trans.instrument_number%></td>
+                          <td>  <%=trans.remark%></td>
+                          
                          </tr> 
                       <%end%> <br/><br/>
                         
                     </tbody> 
                   </table> 
+                 </div> 
           </div> 
         
 

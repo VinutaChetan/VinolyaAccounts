@@ -191,6 +191,25 @@ input#user_password {
     background-color: white;
 }
 
+.search_date {
+    background-color: aliceblue;
+    padding: 16px;
+    border: 1px solid #eee;
+    border-color: darkgray;
+    height: 160px;
+}
+
+.new_transe {
+    background-color: aliceblue;
+    padding: -12px;
+    border: 1px solid #eee;
+    border-color: darkgray;
+    padding-left: 60px;
+    padding-top: 7px;
+    height: o;
+    height: 160px;
+    margin-bottom: 25px;
+}
 
 /*.alert.alert.danger .center {
     background-color: currentColor;
@@ -234,7 +253,7 @@ ul.account-side {
     top: 0;
     left: 100%;
     margin-top: -6px;
-    margin-left: -55px; /* 6px;*/
+    margin-left:  6px;/* -55px;*/
     -webkit-border-radius: 0 6px 6px 6px;
     -moz-border-radius: 0 6px 6px;
     border-radius: 0 6px 6px 6px;
@@ -283,3 +302,15 @@ ul.account-side {
     color: #333;
     white-space: nowrap;
 }
+
+.scrolling{
+    overflow-x: scroll;
+    overflow-y: scroll;
+}
+
+.acc_month {
+    overflow-x: scroll;
+    overflow-y: scroll;
+}
+
+

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'transactions/weekly_statement'
   get 'transactions/soft_delete'
   get 'transactions/restore'
+  get 'transactions/print_preview'
   get 'transactions/search_results'
   get 'accounts/yearwise_acc'
   get 'accounts/monthwise_acc'

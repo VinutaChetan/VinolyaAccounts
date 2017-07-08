@@ -7,28 +7,38 @@
 <%#end of Breadcrumbs%>
 <b><p id="notice"><%= notice %></p></b><br/>
 
+
+<div class="col-md-row">
+  <div class="col-md-6">
+    <div class="search_date">
 <!-- Searching-->
-<div class="top-calander">
- <%=form_tag transactions_search_results_path,method: :get do %>
- <label>Start Date:</label>
- <%= text_field_tag :start%>
+        <div class="top-calander">
+          <%=form_tag transactions_search_results_path,method: :get do %>
+          <label>Start Date:</label>
+          <%= text_field_tag :start%>  
   
- <label>End Date:</label> 
-  <%= text_field_tag :end%>
 
-<label>Account Number:</label>
-  <%= select_tag "acc_no", options_from_collection_for_select(Account.all, "id", "acc_no",:selected =>current_account.id),{:include_blank => false , :class => "product_select"}%>
+          <label>End Date:</label> 
+          <%= text_field_tag :end%><br/><br/>
 
-  <%#=collection_select :account_id,Account.all,:id,:acc_no,{prompt:"Select Account"}%>
+          <label>Account Number:</label>
+          <%= select_tag "acc_no", options_from_collection_for_select(Account.all, "id", "acc_no",:selected =>current_account.id),{:include_blank => false , :class => "product_select"}%><br/><br/>
+
+          <%#=collection_select :account_id,Account.all,:id,:acc_no,{prompt:"Select Account"}%>
   
-  <%=submit_tag  "Search"%> 
-<%end%>  
+          <%=submit_tag  "Search"%> 
+          <%end%>  
+        </div>
+    </div>
+  </div>
+</div> 
 
+<div class="col-md-1">
 
 </div>
 
-
- 
+<div class="col-md-5">
+  <div class="new_transe">
   <% if Transaction.list_view(current_account)=="No Transaction found"%>
       <h3>No Transaction found</h3> 
     <%else%> 
@@ -37,18 +47,18 @@
     <%end%><br/>
   <%end%>
  
-<br/>
+    <br/>
 
-<% if current_user.is_admin?%>
+  <% if current_user.is_admin?%>
+      <%= link_to 'New Transaction', new_transaction_path ,class: "btn btn-info"%>
+  <%end%><br/><br/>
 
-  <%= link_to 'New Transaction', new_transaction_path ,class: "btn btn-info"%>
-<%end%><br/><br/>
 
-
-<!--its to export to excel -->
-<%= link_to "Export to Excel",transactions_path(format: "xls"),class: "btn btn-info"%><br/>
-<br/><br/>
-
+    <!--its to export to excel -->
+  <%= link_to "Export to Excel",transactions_path(format: "xls"),class: "btn btn-info"%><br/>
+  </div>
+</div>  
+<br/>  <br/><br/>
 
 <h2 class="text-muted">Displaying Last 20 Records </h2>
 <br/>
@@ -80,7 +90,7 @@
                        
                       <tr>
                         <td><%=index+1%></td>
-                        <td><%= val.transaction_date.to_s(:long) %></td>
+                        <td><%= val.transaction_date.strftime(" %d-%m-%Y") %></td>
                         <%if val.company==nil%>
                             <td>Null</td>
                         <%else%>    
@@ -95,7 +105,7 @@
                         <td><%= val.transaction_type %></td>
                         <td><%= val.amount%></td>
                         <td><%= val.transaction_kind %></td>
-                        <td><%= val.instrument_date%></td>
+                        <td><%= val.instrument_date.strftime(" %d-%m-%Y") if val.instrument_date != nil %></td>
                         <td><%= val.instrument_number%></td>
                         <td><%= val.remark %></td>
                         <td><%= link_to 'Show',val,class: "btn btn-info" %></td>

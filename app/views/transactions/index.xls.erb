@@ -1,15 +1,17 @@
 <table >
                     <thead>
                       <tr>
-                        <th >SI.no</th>
-                        <th >Transaction Date</th>
-                        <th >Company Name</th>
-                        <th >Account Number</th>
-                        <th >Particular</th>
-                        <th >Transaction type</th>
-                        <th >Amount</th>
-                        <th >Transaction kind</th>
-                        <th >Remark</th> 
+                        <th>SI.no</th>
+                        <th>Transaction Date</th>
+                        <th>Company Name</th>
+                        <th>Account Number</th>
+                        <th>Particular</th>
+                        <th>Transaction type</th>
+                        <th>Amount</th>
+                        <th>Transaction kind</th>
+                        <th>Instrument Date</th>
+                        <th>Instrument Number</th>
+                        <th>Remark</th> 
                         
                       </tr>
                     </thead>
@@ -27,6 +29,8 @@
                         <td><%= val.transaction_type %></td>
                         <td><%= val.amount%></td>
                         <td><%= val.transaction_kind %></td>
+                        <td><%= val.instrument_date %></td>
+                        <td><%= val.instrument_number %></td>
                         <td><%= val.remark %></td>
                         
                       </tr> 
