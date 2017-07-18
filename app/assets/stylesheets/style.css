@@ -50,6 +50,12 @@ select#transaction_perticular_id{
     width: 50%;
 }
 
+.chosen_select{
+    width: 50%;
+}
+
+
+
 .box{
     background-color: aliceblue !important;
     padding :40px;
@@ -253,7 +259,7 @@ ul.account-side {
     top: 0;
     left: 100%;
     margin-top: -6px;
-    margin-left:  -55px;/*6px;*/
+    margin-left:  6px; /*-55px;*/
     -webkit-border-radius: 0 6px 6px 6px;
     -moz-border-radius: 0 6px 6px;
     border-radius: 0 6px 6px 6px;
@@ -313,4 +319,15 @@ ul.account-side {
     overflow-y: scroll;
 }
 
+.print_preview{
+    border: 1px solid white;
+    padding: 40px;
+    min-height: 500px;
+    background-color: #f9f9f9;
+    font-size: 16px; 
+    margin-bottom: 25px;  
+}
 
+table.table.table-bordered {
+    background-color: transparent;
+}

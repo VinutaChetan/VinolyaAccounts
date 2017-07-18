@@ -15,8 +15,7 @@
         <div class="top-calander">
           <%=form_tag transactions_search_results_path,method: :get do %>
           <label>Start Date:</label>
-          <%= text_field_tag :start%>  
-  
+          <%= text_field_tag :start %>  
 
           <label>End Date:</label> 
           <%= text_field_tag :end%><br/><br/>
@@ -26,7 +25,7 @@
 
           <%#=collection_select :account_id,Account.all,:id,:acc_no,{prompt:"Select Account"}%>
   
-          <%=submit_tag  "Search"%> 
+          <%=submit_tag "Search"%> 
           <%end%>  
         </div>
     </div>
@@ -53,7 +52,8 @@
       <%= link_to 'New Transaction', new_transaction_path ,class: "btn btn-info"%>
   <%end%><br/><br/>
 
-
+  <%= link_to 'Generate pdf',transactions_path( @transactions,format: "pdf"), target: "_blank",class: "btn btn-info" %>
+  
     <!--its to export to excel -->
   <%= link_to "Export to Excel",transactions_path(format: "xls"),class: "btn btn-info"%><br/>
   </div>

@@ -1,5 +1,5 @@
 <div class="container">
-    <table class ="table table-striped" id="myTable">
+    <table class ="table table-bordered" >
         <thead>
             <tr >
             	<th>SI.no</th>
@@ -22,9 +22,9 @@
     		<tr>
                 <td><%=index+1%></td>
                 <td><%=trans.transaction_date.strftime(" %d-%m-%Y") if trans.transaction_date!= nil %></td>
-                <td><%=trans.company.name%></td>
+                <td><%=trans.company.try(:name)%></td>
                 <td><%=trans.account.acc_no%></td>
-                <td><%=trans.perticular.name%></td>
+                <td><%=trans.perticular.try(:name)%></td>
                 <td><%= trans.transaction_type %></td>
                 <td><%= trans.amount%></td>
                 <td><%= trans.transaction_kind %></td>
@@ -39,15 +39,16 @@
     </table> 
 </div>
 
-<%=link_to "back",transactions_path,class: "btn btn-info"%>
+<input type="button" value="Print this page" onclick="printpage()" class="btn btn-success">
 
-<%=link_to "Print Preview" ,transactions_search_printpreview_path(:start_date => params[:start], :end_date => params[:end], :account_no => params[:acc_no]),class: "btn btn-primary" %><br/><br/>
-
-<%#=link_to "Export to Excel",transactions_search_printpreview_path(:st_date=> params(:start),:en_date=> params(:end),:accnt_no=>params(:acc_no)),(format: "xls",class: "btn btn-primary")%>
-
-<%=link_to "Export to Excel",transactions_search_results_path(format: "xls")%>
-
-<script type="text/javascript">
+<!--<script type="text/javascript">
    $('#myTable').DataTable();  
-</script>
+</script>-->
+
+<script>
+    function printpage()
+      {
+      window.print()
+      }
+    </script>
 

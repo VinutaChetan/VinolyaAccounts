@@ -1,6 +1,9 @@
+<input type="button" value="Print this page" onclick="printpage()" class="btn btn-success">
+
 <h3>Total soft deleted transactions: <%=@transactions.count%></h3>
+
 <div class="container">
-                  <table class ="table table-striped" id="myTable">
+                  <table class ="table table-striped" >
                     <thead>
                       <tr>
                         <th class="text-success">SI.no</th>
@@ -55,7 +58,7 @@
                         <td><%= val.instrument_number%></td>
                         <td><%= val.remark %></td>
                         <% if current_user.role=="admin"%>
-                        <td><%= link_to "Restore",transactions_restore_path(transaction_id: val.id) %></td>
+                        <td><%=  "Restore"%></td>
                         <%end%>
                       </tr> 
                       <%end%>
@@ -63,12 +66,13 @@
                   </table> 
 </div>
 
-<%= link_to 'print_preview', transactions_softdelete_pp_path,class: "btn btn-primary" %><br/><br/>
+<input type="button" value="Print this page" onclick="printpage()" class="btn btn-success">
+ <script>
+    function printpage()
+      {
+      window.print()
+      }
+    </script>
 
 
 
-<script type="text/javascript">
-   $('#myTable').DataTable();  
-</script>
-
-   

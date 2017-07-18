@@ -1,27 +1,9 @@
-<p id="notice"><%= notice %></p>
+<input type="button" value="Print this page" onclick="printpage()" class="btn btn-success">
 
-
-<% if current_user.is_admin? || current_user.is_finance? %>
-    <%= link_to 'New Account', new_account_path,class: "btn btn-success"%> 
-<%end%><br/>
-
-
-<h2 class="text-muted">Listing Accounts</h2>
-<br/>
 
 <%if @accounts.empty? %>
   <p>No accounts found </p>
 <%else %>
-
-<!--its to export to excel -->
-<div class= "export">
-  <div class="col-md-2">
-<%= link_to "Export to Excel",accounts_path(format: "xls"),class: "btn btn-info" %><br/>
-<br/>
-</div>
-<div class="col-md-2">
-<%=link_to "Print Preview",accounts_print_preview_path,class: "btn btn-info"%>
-</div>
 <div class="container">
 <table id="myTable" class ="table table-striped">
   <thead>
@@ -35,8 +17,8 @@
       <th class="text-success">Current Balance</th>
       <th class="text-success">Company Name</th>
       <th class="text-success">IFSC</th>
-      <th class="text-success">Show</th>
-      <th ></th>
+    
+    
       
     </tr>
   </thead>
@@ -57,10 +39,8 @@
         <td><%= account. company.name%></td>
         <%end%>
         <td><%= account.IFSC %></td>
-        <td><%= link_to 'Show', account,class: "btn btn-info" %></td>
-        <% if can? :update, account %>
-          <td><%= link_to 'Edit', edit_account_path(account),class: "btn btn-info" %></td>
-        <% end %>
+        
+        
         
       </tr>
     <% end %>
@@ -68,16 +48,11 @@
 </table>
 </div>
 <%end%>
-<br/>
 
+<script>
+    function printpage()
+      {
+      window.print()
+      }
+    </script>
 
-
-<!--<script>
-$(document).ready(function(){
-    $('#myTable').DataTable();
-});
-</script>-->
-
-<script type="text/javascript">
-   $('#myTable').DataTable();  
-</script>

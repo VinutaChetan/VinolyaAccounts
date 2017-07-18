@@ -11,6 +11,14 @@ class TransactionsController < ApplicationController
      else   
       @transactions = Transaction.all.includes(:company,:account,:perticular)
      end  
+     respond_to do |format|
+     format.html
+        format.pdf do
+          render pdf: transactions_path(@transactions)
+        end
+      format.xls
+      end 
+
   end
 
   # GET /transactions/1
@@ -27,6 +35,7 @@ class TransactionsController < ApplicationController
   # GET /transactions/new
   def new
     @transaction = Transaction.new
+    #@perticular = Perticular.new
   end
 
   # GET /transactions/1/edit
@@ -75,7 +84,21 @@ class TransactionsController < ApplicationController
   end
 
   def search_results
-    @transactions=Transaction.where("transaction_date BETWEEN ? AND ? AND account_id=?",params[:start],params[:end],params[:acc_no])
+    params_start_date = params[:start].split("-").reverse
+    start_year = "20" + params_start_date.first
+    full_start_date = start_year + "-" + params_start_date[1] + "-" + params_start_date[2]
+
+    params_end_date = params[:end].split("-").reverse
+    end_year = "20" + params_end_date.first
+    full_end_date = end_year + "-" + params_end_date[1] + "-" + params_end_date[2]
+
+    @transactions=Transaction.where("transaction_date BETWEEN ? AND ? AND account_id=?",full_start_date,full_end_date,params[:acc_no])
+    # binding.pry
+    respond_to do |format|
+      format.html
+      format.xls
+    end
+
   end 
 
   def soft_delete
@@ -96,8 +119,17 @@ class TransactionsController < ApplicationController
 
   def print_preview
     @transaction=Transaction.find(params[:transaction_id])
-   
   end  
+
+  def search_printpreview
+    @transactions=Transaction.where("transaction_date BETWEEN ? AND ? AND account_id=?",params[:start_date],params[:end_date],params[:account_no])
+  end 
+
+  def softdelete_pp
+    @transactions=Transaction.only_deleted
+  end 
+
+   
 
  
   private

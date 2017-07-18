@@ -25,6 +25,8 @@
 <!-- <br/>
  -->
 
+
+
 <div class="container">
 <div class="row">
   <div class="col-sm-6 col-md-7 table-scroll">
@@ -53,7 +55,7 @@
                 <% Transaction.list_view(current_account)[params[:year].to_i][0][params[:month]].order('transaction_date DESC').each_with_index do |trans,index| %>
                 <tr>
                     <td>   <%=index+1%></td>
-                    <td>  <%=trans.transaction_date%></td>
+                    <td>  <%=trans.transaction_date.strftime("%d-%m-%Y")%></td>
                     <td>  <%=trans.company.name%></td>
                     <td>  <%=trans.account.acc_no%></td>
                     <td>  <%=trans.perticular.name%></td>

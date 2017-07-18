@@ -78,7 +78,10 @@ class AccountsController < ApplicationController
     session[:account] = Account.find(params[:account_id]).id
     redirect_to transactions_path, notice: "Account Selected "
   end
-  
+
+  def print_preview
+    @accounts =Account.all
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

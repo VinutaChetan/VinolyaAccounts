@@ -9,9 +9,19 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_account 
 
+  helper_method :all_accounts
+
 
   def current_account    
     @current_account = Account.find(session[:account]) if session[:account]
   end
+
+  def all_accounts
+    @all_accounts ||= Account.all
+  end
+
+  # def all_companies
+  #   @all_companies ||= Company.all
+  # end
 
 end

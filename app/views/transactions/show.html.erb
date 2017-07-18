@@ -12,7 +12,7 @@
 
 <p>
   <strong>Transaction date:</strong>
-  <%= @transaction.transaction_date.strftime("%m-%d-%Y") %>
+  <%= @transaction.transaction_date.strftime("%d-%m-%Y") if@transaction.transaction_date!=nil  %>
 </p>
 
 <p>
@@ -37,7 +37,7 @@
 
 <p>
   <strong>Instrument date:</strong>
-  <%= @transaction.instrument_date.strftime("%d-%m-%Y") %>
+  <%= @transaction.instrument_date.strftime("%d-%m-%Y") if@transaction.instrument_date!=nil %>
 </p>
 
 <p>
@@ -67,13 +67,13 @@
 
 
 <!-- <input type="button" value="Print this page" onclick="printpage()" class="btn btn-success">
- -->
+ 
   <script>
     function printpage()
       {
       window.print()
       }
-    </script>
+    </script>-->
 
 
 

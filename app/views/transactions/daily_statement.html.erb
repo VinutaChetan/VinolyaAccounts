@@ -45,6 +45,10 @@
    </div>
    <%end%>   
 
+  <%= link_to 'print_preview', transactions_daily_pp_path,class: "btn btn-primary" %><br/><br/>
+
+  <%= link_to 'Export to Excel', transactions_daily_statement_path(format:"xls"),class: "btn btn-primary" %><br/><br/>
+
    <script type="text/javascript">
    $('#myTable').DataTable();  
 </script>

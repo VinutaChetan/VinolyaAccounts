@@ -5,6 +5,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.3'
 gem 'will_paginate', '~> 3.1.0'
 gem 'rabl'
+gem 'prawn-table'
+gem 'prawn'
 
 # Use sqlite3 as the database for Active Record
 
@@ -16,7 +18,7 @@ gem 'devise','~>3.4.0'
 #for role managment(authorization)
 gem 'cancancan'
 #gem for chosen select
-gem 'chosen-rails'
+#gem 'chosen-rails'
 gem 'jquery-ui-rails'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'

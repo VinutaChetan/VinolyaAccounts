@@ -1,3 +1,10 @@
+<center><h2><%= @transaction.company.name %></h2></center>
+
+
+<div class= "print_preview">
+  <div class="col-md-2"></div>
+
+  <div class="col-md-8"> 
 <p>
   <strong>Particular Name:</strong>
   <%= @transaction.perticular.name %>
@@ -49,7 +56,10 @@
   <strong>Transaction kind:</strong>
   <%= @transaction.transaction_kind %>
 </p><br/>
+</div>
+</div>
 
+<div class="col-md-2"></div>
 
 <input type="button" value="Print this page" onclick="printpage()" class="btn btn-success">
 

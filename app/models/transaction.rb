@@ -10,8 +10,10 @@ class Transaction < ActiveRecord::Base
 	validates_numericality_of :amount
 	validates_uniqueness_of :instrument_number
 
-	after_create :add_acc_balance
+	before_create :change_date_format
+	after_save :add_acc_balance
 	after_destroy :update_current_balance
+
 
 	def self.list_view(current_account) 
 		transaction = current_account.transactions.order('transaction_date ASC').first
@@ -71,16 +73,15 @@ class Transaction < ActiveRecord::Base
 
 
 	def add_acc_balance
-
+		account=Account.find_by(id: self.account.id)
+		binding.pry
 		if (self.transaction_type=="credit")
-			account=Account.find_by(id: self.account.id)
 			account.current_balance =self.amount+account.current_balance
-			account.save
 		else 
-			account=Account.find_by(id: self.account.id)
 			account.current_balance =account.current_balance-self.amount
-			account.save
 		end
+		binding.pry
+		account.save
 	end		
 
 	def update_current_balance
@@ -199,5 +200,39 @@ class Transaction < ActiveRecord::Base
 			account.save
 		end
 	end
+
+	def change_date_format
+		trans_date = self.transaction_date.strftime("%d-%m-%Y").split("-") 
+		year = "20" +  trans_date.first
+		day = trans_date.last.split("")
+		input_day = day[2]+day[3]
+		self.transaction_date = year + "-" + trans_date[1] + "-" +input_day
+		self.transaction_date.strftime("%d-%m-%Y")
+		
+
+		 instru_date = self.instrument_date.strftime("%d-%m-%Y").split("-") 
+		 
+		instru_year = "20" +  instru_date.first
+		instru_day = instru_date.last.split("")
+		 instru_input_day = instru_day[2]+instru_day[3]
+		 self.instrument_date = instru_year + "-" + instru_date[1] + "-" + instru_input_day
+		 
+		 self.instrument_date.strftime("%d-%m-%Y")
+
+
+
+		# trans_date = self.transaction_date.strftime("%d-%m-%Y").split("-").reverse.join("-")
+		# #binding.pry
+		# year = "20" + trans_date.first
+		# self.transaction_date = year + "-" + trans_date[1] + "-" + trans_date[2]
+		# #binding.pry
+		# self.save
+
+		# instru_date = self.instrument_date.strftime("%d-%m-%Y").split("-").reverse.join("-")
+		# year = "20" + instru_date.first
+		# self.instrument_date = year + "-" + instru_date[1] + "-" + instru_date[2]
+		# self.save
+	end	
+
 
 end

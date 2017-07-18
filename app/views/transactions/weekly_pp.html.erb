@@ -1,10 +1,4 @@
-<div class="statements">
-<%if @transactions.empty? %>
-  <p>No transactions found </p>
-<%else %>
-
-<h2 class="text-muted">This week statement </h2> 
-<h3 class="text-muted">Transactions From : <%=Date.today.beginning_of_week().to_s(:long)%> To : <%=Date.today.to_s(:long)%> </h3>
+ <h3 class="text-muted">Transactions From : <%=Date.today.beginning_of_week().to_s(:long)%> To : <%=Date.today.to_s(:long)%> </h3>
 <div class="container">
                   <table class ="table table-striped" id="myTable">
                     <thead>
@@ -25,7 +19,7 @@
                     </thead>
 
                     <tbody id="myTable">
-                    
+
                       <%@transactions.order('created_at DESC').each_with_index do |val,index|%>
                         <% if val.transaction_date >= Date.today.beginning_of_week() && val.transaction_date<= Date.today.end_of_week() %>
                       <tr>
@@ -46,12 +40,14 @@
                     </tbody>
                   </table>             
    </div>
-   <%end%>   
+    
 </div>
 
-<%= link_to 'print_preview', transactions_weekly_pp_path,class: "btn btn-primary" %><br/><br/>
+<input type="button" value="Print this page" onclick="printpage()" class="btn btn-success">
+<script>
+    function printpage()
+      {
+      window.print()
+      }
+    </script>
 
-
-<script type="text/javascript">
-   $('#myTable').DataTable();  
-</script>

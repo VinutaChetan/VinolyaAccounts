@@ -2,14 +2,14 @@
 <html>
 <head>
   <title>VinolyaAccounts</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false%>
- <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
-  <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+ <%= javascript_include_tag 'application' %>
+  <%#= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
 
 <link href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet">
 <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js">
   $(document).ready(function(){
-    $('.data-table').DataTable();  
+   // $('.data-table').DataTable();  
   });
 </script>
 
@@ -24,13 +24,16 @@
 <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
 
 <!-- FOR CHOSEN SELECT -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.7.0/chosen.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.7.0/chosen.jquery.js">
-  $(document).ready(function(){
+<link rel="stylesheet" type="text/css" href="../chosen.css" />
+<script type="text/javascript" src="../chosen.jquery.min.js"></script>
+<script>
+   $(document).ready(function(){
      $(".chosen-select").chosen();
   });
 </script>
 
+ <% unless controller.action_name == "print_preview" || request.path == "/transactions/weekly_pp" || request.path == "/transactions/daily_pp" || controller.action_name =="softdelete_pp"%> 
+ 
 <center>
 	<% if user_signed_in? %>
     <div class="page-header">
@@ -128,7 +131,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Accounts Links <span class="glyphicon glyphicon-th-list"></span></a>
            <ul class="dropdown-menu" >
-            <%Account.all.order('created_at DESC').each do |acc|%>
+            <% all_accounts.each do |acc|%>
                <li><%=link_to acc.acc_no, accounts_select_account_path(account_id: acc.id)%></li>
             <%end%> 
           </ul> 
@@ -138,7 +141,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bank Links <span class="glyphicon glyphicon-th-list"></span></a>
            <ul class="dropdown-menu" >
-            <%Bank.all.each do |bank|%>
+            <% Bank.all.each do |bank|%>
              <li><%=link_to bank.name,bank.try(:link),target: :_blank%></li>
             <%end%> 
           </ul> 
@@ -161,7 +164,7 @@
 
 <%end%>
 <%end%>
-
+<%end%>
 
 <%if controller.controller_name!="companies"%>
   <%if controller.controller_name!="banks"%>
@@ -169,7 +172,9 @@
     <div class="col-md-row">
       <div class="col-md-6">
     <ul class="breadcrumb">
-    <%if controller.controller_name=="transactions"%>
+
+    <%#unless (controller.controller_name!="transactions"and controller.action_name=="print_preview") || request.path == "/transactions/weekly_pp" || request.path == "/transactions/daily_pp" || controller.action_name =="softdelete_pp"%>
+     <%if controller.controller_name=="transactions" %>
         <li><%=link_to "Transactions",transactions_path%><span class="divider">>></span></li> 
     <%end%> 
 
@@ -227,12 +232,14 @@
  
  <div class="col-md-6">
 <div class= "session">
+  <% if controller.controller_name =="transactions" and controller.action_name!="print_preview" %>
 <% if  user_signed_in? && controller.controller_name!="dashboards"  %>
   <h3> You are seleted the Account Number : "<%= current_account.acc_no %>"</h3>
   <% def number_to_indian_currency(current_balance, html=true)%>
       <% txt = html ? ( 'Rs.') : 'Rs.' %>
       <% "#{txt} #{current_balance.to_s.gsub(/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/, "\\1,")}"%>
     <%end%> 
+    <%end%>
 
   <h3>Current Balance : <%=number_to_indian_currency(current_account.current_balance)%></h3>
 <%end%>
@@ -248,8 +255,6 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-
 
 <!-- Include Date Range Picker -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
@@ -262,7 +267,7 @@
   <script>
   $(document).ready(function(){
     $('.transaction_date').datepicker({
-      format: 'yyyy/mm/dd',
+      format: 'dd-mm-yy',
       todayHighlight: true,
       autoclose: true,
     });
@@ -275,7 +280,7 @@
     var date_input=$('input[name="start"]');
     //var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
     date_input.datepicker({
-      format: 'yyyy-mm-dd',
+      format: 'dd-mm-yy',
       //container: container,
       todayHighlight: true,
       autoclose: true,
@@ -288,7 +293,7 @@
     var date_input=$('input[name="end"]');
     var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
     date_input.datepicker({
-      format: 'yyyy-mm-dd',
+      format: 'dd-mm-yy',
       container: container,
       todayHighlight: true,
       autoclose: true,

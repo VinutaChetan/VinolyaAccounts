@@ -1,5 +1,5 @@
 <div class="container">
-                  <table class ="table table-striped" id="myTable">
+                  <table class ="table table-boardered" >
                     <thead>
                       <tr>
                         <th class="text-success">SI.no</th>
@@ -11,7 +11,7 @@
                         <th class="text-success">Amount</th>
                         <th class="text-success">Transaction kind</th>
                         <th class="text-success">Remark</th> 
-                        <th class="text-success">Show</th>
+                      
                       </tr>
                     </thead>
 
@@ -25,19 +25,20 @@
                         <%if val.company==nil%>
                             <td>Null</td>
                         <%else%>    
-                        <td><%=link_to val.company.try(:name),company_path(val.company.id)%></td>
+                        <td><%= val.company.try(:name)%></td>
                         <%end%>
-                        <td><%=link_to val.account.try(:acc_no),account_path(val.account.id)%>
+                        <td><%=val.account.try(:acc_no)%>
                           <%if val.perticular==nil%>
                             <td>Null</td>
                         <%else%> 
-                        <td><%=link_to val.perticular.name,perticular_path(val.perticular.id) %></td>
+                        <td><%=val.perticular.name %></td>
                         <%end%>
                         <td><%= val.transaction_type %></td>
                         <td><%= val.amount%></td>
                         <td><%= val.transaction_kind %></td>
                         <td><%= val.remark %></td>
-                        <td><%= link_to 'Show',val,class: "btn btn-info" %></td>
+                        
+
                       </tr> 
                       <%end%>
                     </tbody>

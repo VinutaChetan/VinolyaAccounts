@@ -13,8 +13,13 @@ Rails.application.routes.draw do
   get 'transactions/restore'
   get 'transactions/print_preview'
   get 'transactions/search_results'
+  get 'transactions/search_printpreview'
+  get 'transactions/softdelete_pp'
+  get 'transactions/weekly_pp'
+  get 'transactions/daily_pp'
   get 'accounts/yearwise_acc'
   get 'accounts/monthwise_acc'
+  get 'accounts/print_preview'
   get 'perticulars/yearwise_perticular'
   get 'perticulars/monthwise_perticular'
   get 'transactions/select_perticular'
@@ -28,6 +33,8 @@ Rails.application.routes.draw do
   get 'companies/select_accounts'
   get '/accounts/select_balance'
   get 'banks/welcome'
+  get 'dashboards/index'
+  get 'dashboards/print_preview'
 
   resources :transactions
   resources :perticulars 
@@ -41,7 +48,7 @@ Rails.application.routes.draw do
     resources :accounts,only: [:show]
   end 
   #resources :dashboards 
-  get 'dashboards/index'
+
   #root to: "dashboard/index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

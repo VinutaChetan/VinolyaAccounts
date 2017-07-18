@@ -1,4 +1,5 @@
 class PerticularsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :authenticate_user!
   before_action :set_perticular, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource 
@@ -39,6 +40,7 @@ class PerticularsController < ApplicationController
       if @perticular.save
         format.html { redirect_to perticulars_path, notice: 'Perticular was successfully created.' }
         format.json { render :show, status: :created, location: @perticular }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @perticular.errors, status: :unprocessable_entity }
