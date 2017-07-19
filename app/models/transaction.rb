@@ -74,13 +74,11 @@ class Transaction < ActiveRecord::Base
 
 	def add_acc_balance
 		account=Account.find_by(id: self.account.id)
-		binding.pry
 		if (self.transaction_type=="credit")
 			account.current_balance =self.amount+account.current_balance
 		else 
 			account.current_balance =account.current_balance-self.amount
 		end
-		binding.pry
 		account.save
 	end		
 
