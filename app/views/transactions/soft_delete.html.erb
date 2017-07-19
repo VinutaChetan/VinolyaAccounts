@@ -28,7 +28,7 @@
                       <tr>
                         <td><%=index+1%></td>
 
-                        <td><%= val.transaction_date.strftime("%d-%m-%Y") %></td>
+                        <td><%= val.transaction_date.strftime("%d-%m-%Y") if val.transaction_date != nil  %></td>
 
                         <%if val.company==nil%>
                              <td>Null</td>
