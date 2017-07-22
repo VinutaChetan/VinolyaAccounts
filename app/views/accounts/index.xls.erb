@@ -23,7 +23,7 @@
         <td><%= account.branch.name  %></td>
         <td><%= account.acc_type %></td>
         <td><%= account.current_balance %></td>
-        <td><%= account.company.name%></td>
+        <td><%= account.company.try(:name)%></td>
       </tr>
     <% end %>
   </tbody>

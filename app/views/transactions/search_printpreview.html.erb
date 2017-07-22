@@ -19,6 +19,7 @@
         <tbody>
         	
         	<% @transactions.order('transaction_date ASC').each_with_index do |trans,index|%>
+
     		<tr>
                 <td><%=index+1%></td>
                 <td><%=trans.transaction_date.strftime(" %d-%m-%Y") if trans.transaction_date!= nil %></td>

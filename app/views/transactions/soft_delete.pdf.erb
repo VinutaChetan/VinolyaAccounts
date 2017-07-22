@@ -1,5 +1,4 @@
-<div class="container">
-                  <table class ="table table-boardered" >
+<table class ="table table-boarded">
                     <thead>
                       <tr>
                         <th class="text-success">SI.no</th>
@@ -12,40 +11,51 @@
                         <th class="text-success">Transaction kind</th>
                         <th class="text-success">Instrument Date</th>
                         <th class="text-success">Instrument Number</th>
-                        <th class="text-success">Remark</th> 
-                      
+                        <th class="text-success">Remark</th>
+                        <% if current_user.role=="admin"%>
+                        <th class="text-success">Restore</th> 
+                        <%end%>
+                        
                       </tr>
                     </thead>
 
                     <tbody id="myTable">
 
-                      <%@transactions.order('created_at DESC').limit(20).each_with_index do |val,index|%>
+                      <%@transactions.order('deleted_at DESC').each_with_index do |val,index|%>
                        
                       <tr>
                         <td><%=index+1%></td>
-                        <td><%= val.transaction_date.strftime(" %d-%m-%Y") %></td>
+
+                        <td><%= val.transaction_date.strftime("%d-%m-%Y") if val.transaction_date != nil  %></td>
+
                         <%if val.company==nil%>
-                            <td>Null</td>
+                             <td>Null</td>
                         <%else%>    
-                        <td><%= val.company.try(:name)%></td>
+                        <td><%=val.company.name%></td>
                         <%end%>
-                        <td><%=val.account.try(:acc_no)%>
-                          <%if val.perticular==nil%>
-                            <td>Null</td>
+    
+                        <% if val.account==nil%>
+                          <td>Null</td>
+                        <%else%> 
+                        <td><%=val.account.acc_no%>
+                         <%end%> 
+
+                        <%if val.perticular==nil%>
+                          <td>Null</td>
                         <%else%> 
                         <td><%=val.perticular.name %></td>
                         <%end%>
+
                         <td><%= val.transaction_type %></td>
                         <td><%= val.amount%></td>
                         <td><%= val.transaction_kind %></td>
-                        <td><%= val.instrument_date.strftime(" %d-%m-%Y") if val.instrument_date != nil %></td>
+                        <td><%= val.instrument_date.strftime("%d-%m-%Y") if val.instrument_date != nil %></td>
                         <td><%= val.instrument_number%></td>
                         <td><%= val.remark %></td>
-                        
-
+                        <% if current_user.role=="admin"%>
+                        <td><%= link_to "Restore",transactions_restore_path(transaction_id: val.id) %></td>
+                        <%end%>
                       </tr> 
                       <%end%>
                     </tbody>
-                  </table>             
-   </div>
- 
+                  </table> 

@@ -84,25 +84,38 @@ class TransactionsController < ApplicationController
   end
 
   def search_results
+   
     params_start_date = params[:start].split("-").reverse
     start_year = "20" + params_start_date.first
     full_start_date = start_year + "-" + params_start_date[1] + "-" + params_start_date[2]
-
+    
     params_end_date = params[:end].split("-").reverse
     end_year = "20" + params_end_date.first
     full_end_date = end_year + "-" + params_end_date[1] + "-" + params_end_date[2]
-
-    @transactions=Transaction.where("transaction_date BETWEEN ? AND ? AND account_id=?",full_start_date,full_end_date,params[:acc_no])
-    # binding.pry
+    
+      @transactions = Transaction.where("transaction_date BETWEEN ? AND ? AND account_id=?",full_start_date,full_end_date,params[:acc_no])
+    
     respond_to do |format|
       format.html
       format.xls
+      format.pdf do
+          render pdf: transactions_search_results_path(:start => params[:start], :end => params[:end], :acc_no => params[:acc_no])
+      end
+
+      
     end
 
   end 
 
   def soft_delete
     @transactions=Transaction.only_deleted
+
+    respond_to do |format|
+    format.html  
+    format.pdf do
+          render pdf: transactions_soft_delete_path
+    end
+  end
   end  
 
   def restore
@@ -122,12 +135,24 @@ class TransactionsController < ApplicationController
   end  
 
   def search_printpreview
-    @transactions=Transaction.where("transaction_date BETWEEN ? AND ? AND account_id=?",params[:start_date],params[:end_date],params[:account_no])
+    params_start_date = params[:start_date].split("-").reverse
+    start_year = "20" + params_start_date.first
+    full_start_date = start_year + "-" + params_start_date[1] + "-" + params_start_date[2]
+
+    params_end_date = params[:end_date].split("-").reverse
+    end_year = "20" + params_end_date.first
+    full_end_date = end_year + "-" + params_end_date[1] + "-" + params_end_date[2]
+
+    @transactions=Transaction.where("transaction_date BETWEEN ? AND ? AND account_id=?",full_start_date,full_end_date ,params[:account_no])
   end 
 
   def softdelete_pp
     @transactions=Transaction.only_deleted
   end 
+
+  def daily_statement
+
+  end  
 
    
 

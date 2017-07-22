@@ -62,9 +62,15 @@
                     </tbody>
                   </table> 
 </div>
+<br/><br/>
 
 <%= link_to 'print_preview', transactions_softdelete_pp_path,class: "btn btn-primary" %><br/><br/>
 
+
+
+<%= link_to 'Export to Excel', transactions_soft_delete_path(format:"xls"),class: "btn btn-primary" %><br/><br/>
+
+<%= link_to 'Generate PDF', transactions_soft_delete_path(format:"pdf"),class: "btn btn-primary" %><br/><br/>
 
 
 <script type="text/javascript">

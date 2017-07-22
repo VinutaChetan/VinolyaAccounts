@@ -1,6 +1,6 @@
  <h3 class="text-muted">Transactions From : <%=Date.today.beginning_of_week().to_s(:long)%> To : <%=Date.today.to_s(:long)%> </h3>
 <div class="container">
-                  <table class ="table table-striped" id="myTable">
+                  <table class ="table  table-bordered" >
                     <thead>
                       <tr>
                         <th class="text-success">SI.no</th>
@@ -24,14 +24,14 @@
                         <% if val.transaction_date >= Date.today.beginning_of_week() && val.transaction_date<= Date.today.end_of_week() %>
                       <tr>
                         <td>   <%=index+1%></td>
-                    <td>  <%=val.transaction_date.to_s(:long)%></td>
+                    <td>  <%=val.transaction_date.strftime(" %d-%m-%Y")%></td>
                     <td>  <%=val.company.name%></td>
                     <td>  <%=val.account.acc_no%></td>
                     <td>  <%=val.perticular.name%></td>
                     <td>  <%=val.transaction_type%></td>
                     <td>  <%=val.amount%></td>
                     <td><%= val.transaction_kind %></td>
-                    <td><%= val.instrument_date%></td>
+                    <td><%= val.instrument_date.strftime(" %d-%m-%Y")%></td>
                     <td><%= val.instrument_number%></td>
                     <td>  <%=val.remark%></td>
                       </tr> 
@@ -50,4 +50,6 @@
       window.print()
       }
     </script>
+
+
 
