@@ -1,9 +1,4 @@
-<%if @transactions.empty? %>
-  <p>No transactions found </p>
-<%else %>
-  <h2 class="text-muted">Today's Statement of the Date :  <%=Date.today.to_s(:long)%></h2>
-<div class="container">
-                  <table class ="table table-striped" id="myTable">
+<table class ="table table-striped" id="myTable">
                     <thead>
                       <tr>
                         <th class="text-success">SI.no</th>
@@ -22,19 +17,19 @@
                     </thead>
 
                     <tbody id="myTable">
-
+                    
                       <%@transactions.order('created_at DESC').each_with_index do |val,index|%>
-                        <% if val.transaction_date == Date.today%>
+                        <% if val.transaction_date >= Date.today.beginning_of_week() && val.transaction_date<= Date.today.end_of_week() %>
                       <tr>
                         <td>   <%=index+1%></td>
-                    <td>  <%=val.transaction_date.strftime("%d-%m-%Y") if val.transaction_date!=nil %></td>
+                    <td>  <%=val.transaction_date.strftime("%d-%m-%Y") if val.transaction_date!=nil%></td>
                     <td>  <%=val.company.name%></td>
                     <td>  <%=val.account.acc_no%></td>
                     <td>  <%=val.perticular.name%></td>
                     <td>  <%=val.transaction_type%></td>
                     <td>  <%=val.amount%></td>
                     <td><%= val.transaction_kind %></td>
-                    <td><%= val.instrument_date.strftime("%d-%m-%Y") if val.instrument_date!=nil%></td>
+                    <td><%= val.instrument_date.strftime("%d-%m-%Y") if val.instrument_date!=nil %></td>
                     <td><%= val.instrument_number%></td>
                     <td>  <%=val.remark%></td>
                       </tr> 
@@ -42,24 +37,3 @@
                       <%end%>
                     </tbody>
                   </table>             
-   </div>
-   <%end%>   
-<div class="container">
-<div class="daily_statement_button">
-  <div class="col-md-3">
-  <%= link_to 'print_preview', transactions_daily_pp_path,class: "btn btn-primary" %><br/><br/>
-  </div>
-
-  <div class="col-md-3">
-    <%= link_to 'Export to Excel', transactions_daily_statement_path(format:"xls"),class: "btn btn-primary" %><br/><br/>
-  </div>
-
-  <div class="col-md-3"> 
-    <%= link_to 'Generate PDF', transactions_daily_statement_path(format:"pdf"),class: "btn btn-primary" %><br/><br/>
-  </div>
-</div>
-</div>
-<script type="text/javascript">
-   $('#myTable').DataTable();  
-</script>
-

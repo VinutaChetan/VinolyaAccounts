@@ -1,5 +1,7 @@
-<%= form_for(@perticular,remote: true) do |f| %>
+<%= form_for @perticular, remote: true do |f| %>
+
   <% if @perticular.errors.any? %>
+  
     <div id="error_explanation">
       <h2><%= pluralize(@perticular.errors.count, "error") %> prohibited this perticular from being saved:</h2>
 
@@ -8,16 +10,17 @@
         <li><%= message %></li>
       <% end %>
       </ul>
+      <% end %>
     </div>
-  <% end %>
-
-  <div class="field">
+  
+ 
+  <div class= "field">
     <%= f.label :name %><br>
-    <%= f.text_field :name ,class:"col-sm-6" %><br/><br/> 
+    <%= f.text_field :name , class: 'col-sm-6' %><br/><br/> 
   </div>
 
-  <div class="field">
-    <%= f.label :perticular_type %><br>
+  <div class= "field">
+    <%= f.label :particular_type %><br>
     <%= f.radio_button :perticular_type ,'debit' %>
     <%= f.label :Debit %><br/>
     <%= f.radio_button :perticular_type ,'credit'%>
@@ -25,6 +28,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Particular"%>
+
   </div><br/>
 <% end %>

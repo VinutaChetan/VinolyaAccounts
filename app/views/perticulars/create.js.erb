@@ -1,0 +1,11 @@
+<% if @perticular.valid? %>
+	$('#errorMsg').hide();
+	$('#notice').text("successfully created");
+ 	
+	$('#myModal').modal('toggle');
+	$('#new_perticular')[0].reset();
+	$('#transaction_perticular_id').append("<%= escape_javascript(render 'option')%>");
+	$('#transaction_perticular_id').trigger("chosen:updated");
+<%elsif %>
+ $('#errorMsg').html("<%= escape_javascript(render 'errors')%>");
+ <%end%> 	 

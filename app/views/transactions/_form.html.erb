@@ -1,136 +1,131 @@
-
-<%= form_for(@transaction) do |f| %>
-  <% if @transaction.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
-
-      <ul>
-      <% @transaction.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+<div class="row">
+  <div class= "col-md-8">
+    <div class="trans_table">
+      <%= form_for(@transaction) do |f| %>
+          <div id="error_explanation">
+            <% if @transaction.errors.any? %>
+              <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+              <ul>
+              <% @transaction.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+          </ul>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-   
-
-  
-  <div class="row">
-    <div class="col-md-6">
-         <!-- <label>Transaction Date</label></h5>
-
-        <div class="form-group">
-            <div class="input-group date" id="datetimepicker1">
-                 <span class="input-group-addon"><span class="glyphicon-calendar glyphicon"></span></span><%#= f.text_field :transaction_date, class: "form-control",placeholder: "yyyy/mm/dd"%>
-            </div> -->
-
-
-        <label>Transaction Date</label><br/>
-       
-       <div class="col-sm-6">
-        <div class="top-cal">
+      </div>
+      <label>Transaction Date</label><br/>
+        <div class="valuedate">
+        <!-- <div class= "col-sm-6"> -->
+          <div class="top-cal">
            <div class="input-group " id="datetimepicker1">
-        <div class="input-group-addon">
-         <i class="fa fa-calendar"></i>
+              <div class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+              </div>
+              <%= f.text_field :transaction_date, class: "form-control transaction_date ",placeholder: "dd/mm/yy" %>
+            </div>
+          </div>
+        </div><br/>
+        <div class="field-group">
+            <%= f.label :instrument_number %><br>
+            <%= f.text_field :instrument_number ,class: "namevalue" %><br/> 
         </div>
+            <%= f.hidden_field :company_id, value: current_account.company.id %> 
+            <%= f.hidden_field :account_id, value: current_account.id %> 
+            <!-- <span id="balance"></span> -->
+         
+          <div class="field" >
+            <%= f.label :particular_id %><br>
+            <%=f.collection_select :perticular_id,Perticular.all,:id,:name,{prompt:"Select particular"} %>
+          </div><br/>
 
-        <%= f.text_field :transaction_date, class: "form-control transaction_date",placeholder: "dd/mm/yy" %>
-       </div>
-      </div>
-      
-     </div><br/><br/><br/>
+          
 
 
-     <div class="field">
-    <%= f.label :instrument_number %><br>
-    <%= f.text_field :instrument_number ,class:"col-sm-6" %><br/> 
-  </div>
 
-  <!-- <div class="field"> -->
-    <%#=f.label :company_id %><!-- <br> -->
-    <%#acc_com = current_account.company.id%>
-    <%#=f.collection_select  :company_id,Company.all,:id,:name%> 
-    <%= f.hidden_field :company_id, value: current_account.company.id %> 
-  <!-- </div><br/> -->
-
- <!--  <div class="field"> -->
-    <%#= f.label :account_id %><br>
-     <%#= f.collection_select :account_id, Account.all,:id,:acc_no %>
-        <%= f.hidden_field :account_id, value: current_account.id %> 
         
-    <!-- <br/> -->
-    <span id="balance"></span>
-  <!-- </div> -->
+          <div class="field">
+            <%= f.label :amount %><br>
+            <%= f.text_field :amount ,class: "namevalue" %><br/><br/> 
+          </div><br/>
+                  
+          <div class="field">
+            <%= f.label :transaction_type %><br>
+            <%= f.radio_button :transaction_type, 'debit' %> 
+            <%= f.label :Debit %>
+            <%= f.radio_button :transaction_type, 'credit' %> 
+            <%= f.label :Credit %>  
+          </div><br/>
 
-<br/>
+          <div class="field">
+            <%= f.label :transaction_kind %><br>
+            <%=f.select :transaction_kind,["Cash","Cheque","RTGS/NEFT","DD","others"],prompt:"select Kind",class: "namevalue"%>
+          </div><br/>
 
-<div class="field" >
-    <%= f.label :particular_id %><br>
-    <%=f.collection_select :perticular_id,Perticular.all,:id,:name,{prompt:"Select particular"},{ class: "chosen-select" }%>
-  </div><br/>
-
-  <div class="field">
-    <%= f.label :amount %><br>
-    <%= f.text_field :amount ,class:"col-sm-6" %><br/><br/> 
-  </div>
+          <!-- <label>Instrument Date</label></h5>
+                <div class="form-group">
+                  <div class="input-group date" id="datetimepicker2">
+                      <span class="input-group-addon"><span class="glyphicon-calendar glyphicon"></span></span><%#= f.text_field :transaction_date, class: "form-control",placeholder: "yyyy/mm/dd"%>
+                  </div> -->
+                  
+          <label>Instrument Date</label><br/>
+            <div class="value1"> 
+              <!-- <div class="col-sm-6"> -->
+              <div class="input-group" id="datetimepicker2">
+                <div class="input-group-addon">
+                   <i class="fa fa-calendar"></i>
+                </div>
+                  <%= f.text_field :instrument_date, class: "form-control transaction_date",placeholder: 'dd-mm-yy'%>
+              </div>
+            </div><br/>
+            <br/>
+            <div class="field">
+              <%= f.label :remark %><br>
+              <%= f.text_area :remark ,class: "namevalue" %>
+            </div><br/><br/>
+            <div class="actions">
+              <%= f.submit %><br/>
+            </div>
+      </div>       
+      <% end %>    
+  </div> 
   
-  <div class="field">
-    <%= f.label :transaction_type %><br>
 
-    <%= f.radio_button :transaction_type, 'debit' %> 
-    <%= f.label :Debit %>
-    
-    <%= f.radio_button :transaction_type, 'credit' %> 
-    <%= f.label :Credit %>
-
-    
-  </div><br/>
-
-  <div class="field">
-    <%= f.label :transaction_kind %><br>
-    <%=f.select :transaction_kind,["Cash","Cheque","RTGS/NEFT","DD","others"],prompt:"select Kind"%>
-  </div><br/>
-
-  
-
-  <!-- <label>Instrument Date</label></h5>
-
-        <div class="form-group">
-            <div class="input-group date" id="datetimepicker2">
-                 <span class="input-group-addon"><span class="glyphicon-calendar glyphicon"></span></span><%#= f.text_field :transaction_date, class: "form-control",placeholder: "yyyy/mm/dd"%>
-            </div> -->
-
+  <div class= "col-md-4">
+    <div class="box1">
      
-  <label>Instrument Date</label><br/>
-       
-    <div class="col-sm-6">
-      <div class="input-group" id="datetimepicker2">
-      <div class="input-group-addon">
-        <i class="fa fa-calendar"></i>
+       <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary " data-toggle="modal" data-target="  #myModal">
+            Add Particulars
+        </button>
+
+            <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Particulars</h4>
+          </div>
+        <div class="modal-body">
+          <div id="errorMsg">
+            <%= render './transactions/perticularform'%>
+          </div>
+        </div>
+        </div>
       </div>
-
-
-      <%= f.text_field :instrument_date, class: "form-control transaction_date",placeholder: 'dd-mm-yy'%>
-      </div>
-    </div><br/>
-     <br/>
-  
-  
-
-  <div class="field">
-    <%= f.label :remark %><br>
-    <%= f.text_area :remark ,class:"col-sm-6" %><br/><br/>
-  </div><br/><br/>
-
-  
-  <div class="actions">
-    <%= f.submit %><br/>
-
-  </div>
-<% end %>
-<br/>
-
-
+    </div>
+               
+      <!-- <h4>Add Particulars</h4>
+         <div id="errorMsg">
+          <%#= render './transactions/perticularform'%>
+        </div>  -->
+  </div>   
+</div> 
+</div>    
+<script>
+  $(document).ready(function(){
+    $('#transaction_perticular_id').chosen();
+  });
+</script>
 
 <script>
 
@@ -210,6 +205,14 @@ transactionHandle.onchange = function(){
 //dynamic select
 
 </script>
+
+
+
+
+
+
+
+
  
 
 

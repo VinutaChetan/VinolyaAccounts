@@ -35,25 +35,30 @@ class TransactionsController < ApplicationController
   # GET /transactions/new
   def new
     @transaction = Transaction.new
-    #@perticular = Perticular.new
+
+    @perticular =Perticular.new
   end
 
   # GET /transactions/1/edit
   def edit
+    @perticular = Perticular.new
   end
 
   # POST /transactions
   # POST /transactions.json
   def create
     @transaction = Transaction.new(transaction_params)
+    @perticular = Perticular.new
     respond_to do |format|
       if @transaction.save
         Notification.amount_transfer(@transaction,current_user).deliver!
         format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
         format.json { render :show, status: :created, location: @transaction }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -65,9 +70,11 @@ class TransactionsController < ApplicationController
       if @transaction.update(transaction_params)
         format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
         format.json { render :show, status: :ok, location: @transaction }
+        format.js
       else
         format.html { render :edit }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -151,11 +158,24 @@ class TransactionsController < ApplicationController
   end 
 
   def daily_statement
-
+    respond_to do |format|
+     format.html
+     format.xls
+        format.pdf do
+          render pdf: transactions_path(@transactions)
+        end
+      end  
   end  
 
-   
-
+  def weekly_statement
+    respond_to do |format|
+     format.html
+     format.xls
+        format.pdf do
+          render pdf: transactions_path(@transactions)
+        end
+      end  
+  end
  
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -38,12 +38,15 @@ class PerticularsController < ApplicationController
 
     respond_to do |format|
       if @perticular.save
+          format.js 
         format.html { redirect_to perticulars_path, notice: 'Perticular was successfully created.' }
         format.json { render :show, status: :created, location: @perticular }
-        format.js
+      
       else
+        format.js 
         format.html { render :new }
         format.json { render json: @perticular.errors, status: :unprocessable_entity }
+        
       end
     end
   end

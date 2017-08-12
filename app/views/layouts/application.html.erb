@@ -24,12 +24,14 @@
 <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
 
 <!-- FOR CHOSEN SELECT -->
-<link rel="stylesheet" type="text/css" href="../chosen.css" />
-<script type="text/javascript" src="../chosen.jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../chosen.css" />
+<script type="text/javascript" src="../../chosen.jquery.min.js"></script>
+
 <script>
    $(document).ready(function(){
      $(".chosen-select").chosen();
   });
+
 </script>
 
  <% unless controller.action_name == "print_preview" || request.path == "/transactions/weekly_pp" || request.path == "/transactions/daily_pp" || controller.action_name =="softdelete_pp"%> 
@@ -42,6 +44,7 @@
  		<%=current_user.email %><br/><br/>
  	<%end%>	
 </center>
+
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -157,6 +160,11 @@
 
           
         </li>
+        <li><%=link_to :back do %>
+                  <span class= "glyphicon glyphicon-menu-left">Back</span>
+            <%end%>      
+        </li>
+
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -259,6 +267,7 @@
 <!-- Include Date Range Picker -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
 
 
 

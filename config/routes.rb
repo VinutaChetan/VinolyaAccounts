@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get 'transactions/search_printpreview'
   get 'transactions/softdelete_pp'
   get 'transactions/weekly_pp'
+  #get 'transactions/weekly_pp_pdf'
   get 'transactions/daily_pp'
   get 'accounts/yearwise_acc'
   get 'accounts/monthwise_acc'

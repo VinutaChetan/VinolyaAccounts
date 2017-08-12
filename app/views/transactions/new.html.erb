@@ -1,9 +1,11 @@
 <div class="box">
 	<h3>New transaction for the company :<%=current_account.company.name %> of  account number :<%=current_account.acc_no %> </h3>
-<div class="col-md-8">
+
+	
 	<%= render 'form' %>
 
 	<%= link_to 'Back', transactions_path %>
+	
 </div> 
 <!-- <div class="col-md-4">
 	<%#= render 'particular' %>

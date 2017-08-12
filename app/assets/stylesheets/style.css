@@ -58,8 +58,10 @@ select#transaction_perticular_id{
 
 .box{
     background-color: aliceblue !important;
-    padding :40px;
+    padding :30px;
 }
+
+
 
 .box-1 {
     border: 1px solid #000;
@@ -331,3 +333,66 @@ ul.account-side {
 table.table.table-bordered {
     background-color: transparent;
 }
+
+
+.daily_statement_button {
+    margin-left: 170px;
+}
+
+div#myTable_wrapper {
+    margin-bottom: 41px;
+}
+
+.transaction_perticular_id_chosen{
+    width: 450;
+}
+
+ .box h3 {
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 15px;
+    margin-bottom: 30px;
+}
+
+.trans_table, .box1 {
+    padding: 25px 40px;
+}
+.trans_table {
+    border: 1px solid #000;
+    margin: 0 50px;
+}
+
+input#transaction_instrument_number ,  input#transaction_amount
+ {
+ padding: 5px 7em;
+    border-radius: 5px;
+}
+
+input#perticular_name {
+    border-radius: 5px;
+    
+}
+
+.input-group .form-control {
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 48% ! important;
+    margin-bottom: 0;
+}
+
+.trans_table {
+    border: 1px solid #000;
+    margin: 0 50px;
+}
+
+.box1 {
+    border: 1px solid #000;
+    /* border-bottom-left-radius: 31px; */
+}
+
+textarea#transaction_remark {
+    padding: 5px 6em;
+    border-radius: 5px;
+}
+

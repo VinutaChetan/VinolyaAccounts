@@ -49,8 +49,22 @@
    <%end%>   
 </div>
 
+<div class="container">
+<div class="daily_statement_button">
+  <div class="col-md-3">
 <%= link_to 'print_preview', transactions_weekly_pp_path,class: "btn btn-primary" %><br/><br/>
+</div>
+
+  <div class="col-md-3">
 <%= link_to 'Export to Excel', transactions_weekly_statement_path(format:"xls"),class: "btn btn-primary" %><br/><br/>
+</div>
+
+ <div class="col-md-3">
+<%= link_to 'Generate PDF', transactions_weekly_statement_path(format:"pdf"),class: "btn btn-primary" %><br/><br/>
+</div>
+</div>
+</div>
+
 
 <script type="text/javascript">
    $('#myTable').DataTable();  
