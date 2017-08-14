@@ -16,12 +16,12 @@
  
   <div class= "field">
     <%= f.label :name %><br>
-    <%= f.text_field :name , class: 'col-sm-6' %><br/><br/> 
+    <%= f.text_field :name ,selected: :true, class: 'col-sm-6' %><br/><br/> 
   </div>
 
   <div class= "field">
     <%= f.label :particular_type %><br>
-    <%= f.radio_button :perticular_type ,'debit' %>
+    <%= f.radio_button :perticular_type ,'debit'  %>
     <%= f.label :Debit %><br/>
     <%= f.radio_button :perticular_type ,'credit'%>
     <%= f.label :Credit %><br/><br/>

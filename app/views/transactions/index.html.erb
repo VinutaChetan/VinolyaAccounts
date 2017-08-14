@@ -106,7 +106,7 @@
                         <td><%= val.amount%></td>
                         <td><%= val.transaction_kind %></td>
                         <td><%= val.instrument_date.strftime(" %d-%m-%Y") if val.instrument_date != nil %></td>
-                        <td><%= val.instrument_number%></td>
+                        <td><%= val.instrument_number if val.instrument_number !=nil%></td>
                         <td><%= val.remark %></td>
                         <td><%= link_to 'Show',val,class: "btn btn-info" %></td>
                       </tr> 
