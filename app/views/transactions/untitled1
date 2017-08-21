@@ -1,6 +1,6 @@
 <div class="row">
- <div class= "transbox">
-    <!-- <div class="trans_table"> -->
+  <div class= "col-md-8"> 
+   <div class="trans_table"> 
       <%= form_for(@transaction) do |f| %>
           <div id="error_explanation">
             <% if @transaction.errors.any? %>
@@ -27,35 +27,17 @@
         <div class="field-group">
             <%= f.label :instrument_number %><br>
             <%= f.text_field :instrument_number ,class: "namevalue" %><br/> 
-        </div><br/>
+        </div>
             <%= f.hidden_field :company_id, value: current_account.company.id %> 
             <%= f.hidden_field :account_id, value: current_account.id %> 
             <!-- <span id="balance"></span> -->
-        
-        <div class = "content">  
-          <div class= "col-md-8">
-            <div class= "col-md-6">
-              <div class="pertiblock">
-              <div class="field" >
-                <%= f.label :particular_id %><br>
-                <%=f.collection_select :perticular_id,Perticular.all,:id,:name,{prompt:"Select particular"} %>
-              </div>
-            </div>
-            </div><br/>
-         <div class= "col-md-2">
-          <button type="button" class="btn btn-primary " data-toggle="modal" data-target="  #myModal">
-            Add Particulars
-          </button>
-          </div>
-        </div><br/>
-
-          <div class= "col-md-4">
-
+         
+          <div class="field" >
+            <%= f.label :particular_id %><br>
+            <%=f.collection_select :perticular_id,Perticular.all,:id,:name,{prompt:"Select particular"} %>
           </div><br/>
-        
-      </div><br/>
 
-
+          
           <div class="field">
             <%= f.label :amount %><br>
             <%= f.text_field :amount ,class: "namevalue" %><br/><br/> 
@@ -97,19 +79,19 @@
             </div><br/><br/>
             <div class="actions">
               <%= f.submit %><br/>
-            </div><br/>
-      <!-- </div>  -->      
+            </div>
+        </div>        
       <% end %>    
-<!--   </div>  -->
+  </div> 
   
 
-  <!-- <div class= "col-md-4"> -->
-    <!-- <div class="box1"> -->
+ <div class= "col-md-4"> 
+    <div class="box1"> 
      
        <!-- Button trigger modal -->
-        <!-- <button type="button" class="btn btn-primary " data-toggle="modal" data-target="  #myModal">
+        <button type="button" class="btn btn-primary " data-toggle="modal" data-target="  #myModal">
             Add Particulars
-        </button> -->
+        </button>
 
             <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -126,16 +108,15 @@
         </div>
         </div>
       </div>
-    <!-- </div> -->
+   </div> 
                
       <!-- <h4>Add Particulars</h4>
          <div id="errorMsg">
           <%#= render './transactions/perticularform'%>
         </div>  -->
- <!--  </div>    -->
-    </div> 
-  </div>  
-</div>  
+  </div>   
+</div> 
+</div>    
 <script>
   $(document).ready(function(){
     $('#transaction_perticular_id').chosen();

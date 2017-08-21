@@ -364,7 +364,7 @@ div#myTable_wrapper {
 
 input#transaction_instrument_number ,  input#transaction_amount
  {
- padding: 5px 7em;
+ padding: 5px 15em;
     border-radius: 5px;
 }
 
@@ -392,7 +392,17 @@ input#perticular_name {
 }
 
 textarea#transaction_remark {
-    padding: 5px 6em;
+    padding: 25px 15em;
     border-radius: 5px;
 }
+
+.transbox {
+    margin-left: 80px;
+}
+
+.pertiblock{
+    margin-left: -30px !important;
+}
+
+
 
