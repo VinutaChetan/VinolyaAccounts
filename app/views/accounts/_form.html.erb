@@ -14,11 +14,13 @@
   <div class="field">
     <%= f.label :acc_no %><br>
     <%= f.text_field :acc_no,class:"col-sm-6" %><br/><br/>
+    <p id ="accountError"></p>
   </div>
 
   <div class="field">
     <%= f.label :opening_balance %><br>
     <%= f.text_field :opening_balance,class:"col-sm-6" %><br/><br/> 
+    <p id ="opening_balanceError"></p>
   </div>
 
   <div class="field">
@@ -56,14 +58,62 @@
   <div class="field">
     <%= f.label :current_balance %><br>
     <%= f.text_field :current_balance,class:"col-sm-6" %><br/><br/> 
+    <p id ="current_balanceError"></p>
   </div>
 
   <div class="field">
     <%= f.label :IFSC %><br>
     <%= f.text_field :IFSC,class:"col-sm-6" %><br/><br/>
+    <p id ="IFSCError"></p>
   </div>
 
   <div class="actions">
     <%= f.submit %>
   </div><br/>
 <% end %>
+
+
+<script>
+  var accountHandle = document.getElementById('account_acc_no');
+  var accountErrorHandle = document.getElementById('accountError');
+  var opening_balanceHandle = document.getElementById('account_opening_balance');
+  var opening_balanceErrorHandle = document.getElementById('opening_balanceError');
+  var current_balanceHandle= document.getElementById('account_current_balance');
+  var current_balanceErrorHandle =document.getElementById('current_balanceError');
+  var account_IFSCHandle = document.getElementById('account_IFSC');
+  var IFSCErrorHandle =document.getElementById('IFSCError');
+
+  accountHandle.onblur = function(){
+    if(accountHandle.value == ""){
+      accountErrorHandle.innerHTML = "Cant't be blank";
+    }else{
+      accountErrorHandle.innerHTML = "";
+    }  
+  }
+
+  opening_balanceHandle.onblur =function(){
+    if(opening_balanceHandle.value == ""){
+      opening_balanceErrorHandle.innerHTML = "Cant't be blank";
+    }else{
+      opening_balanceErrorHandle.innerHTML = "";
+    }
+  }
+
+  current_balanceHandle.onblur = function(){
+    if(current_balanceHandle.value == ""){
+      current_balanceErrorHandle.innerHTML = "Can't be blank";
+    }else{
+      current_balanceErrorHandle.innerHTML = "";
+    }
+  }
+
+  account_IFSCHandle.onblur = function(){
+    if(account_IFSCHandle.value == ""){
+      IFSCErrorHandle.innerHTML = "Cant't be blank";
+    }else{
+      IFSCErrorHandle.innerHTML = "";
+    }
+  }
+
+
+</script>

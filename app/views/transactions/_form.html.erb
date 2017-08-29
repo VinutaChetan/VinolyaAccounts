@@ -12,67 +12,107 @@
           </ul>
       <% end %>
       </div>
-      <label>Transaction Date</label><br/>
-        <div class="valuedate">
-        <!-- <div class= "col-sm-6"> -->
-          <div class="top-cal">
-           <div class="input-group " id="datetimepicker1">
-              <div class="input-group-addon">
-                  <i class="fa fa-calendar"></i>
+
+      <div class = "trans_date">
+        <div class= "row">
+          <div class = "col-md-6">
+            <label>Transaction Date</label><br/>
+              <div class="valuedate">
+              <!-- <div class= "col-sm-6"> -->
+                <div class="top-cal">
+                 <div class="input-group " id="datetimepicker1">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <%= f.text_field :formatted_date, class: "form-control transaction_date ", placeholder: "dd/mm/yy"%>
+                  </div>
+                </div>
               </div>
-              <%= f.text_field :transaction_date, class: "form-control transaction_date ",placeholder: "dd/mm/yy" %>
+              <p id ="trans_dateError"></p>
+          </div> 
+
+          <div class = "col-md-6">
+            <div class="field-group">
+              <%= f.label :instrument_number %>
+              <%= f.text_field :instrument_number ,class: "form-control" %>
+              <p id="trans_instruError"></p>
             </div>
-          </div>
-        </div><br/>
-        <div class="field-group">
-            <%= f.label :instrument_number %><br>
-            <%= f.text_field :instrument_number ,class: "namevalue" %><br/> 
-        </div><br/>
+          </div> 
+        </div>
+      </div>  
+      
+      <div class = "empty">
+      <div class = "row">
+        <div class = "col-md-12">
+        </div>  
+      </div>
+      </div>
+        
+       
+        
             <%= f.hidden_field :company_id, value: current_account.company.id %> 
+            
             <%= f.hidden_field :account_id, value: current_account.id %> 
             <!-- <span id="balance"></span> -->
         
-        <div class = "content">  
-          <div class= "col-md-8">
-            <div class= "col-md-6">
+        <div class = "content"> 
+        <div class ="row"> 
+          <div class= "col-md-3">
+           
               <div class="pertiblock">
               <div class="field" >
                 <%= f.label :particular_id %><br>
-                <%=f.collection_select :perticular_id,Perticular.all,:id,:name,{prompt:"Select particular"} %>
+                <%=f.collection_select :perticular_id,Perticular.all,:id,:name,{prompt:"Select particular"}, class: "form-control" %>
+                <p id ="trans_pertiError"></p>
               </div>
             </div>
-            </div><br/>
-         <div class= "col-md-2">
+          </div>
+
+         <div class= "col-md-3">
           <button type="button" class="btn btn-primary " data-toggle="modal" data-target="  #myModal">
             Add Particulars
           </button>
           </div>
-        </div><br/>
 
-          <div class= "col-md-4">
-
-          </div><br/>
-        
+        <div class = "col-md-6">
+          <div class="field">
+            <%= f.label :transaction_type, class: "debitradio"  %><br>
+            <%= f.radio_button :transaction_type, 'debit' %> 
+            <%= f.label :Debit, class: "debitradio"  %>
+            <%= f.radio_button :transaction_type, 'credit' %> 
+            <%= f.label :Credit %>  
+            <p id ="transradioError"></p>
+          </div>
+        </div>
+          
+       </div> 
       </div><br/>
 
+      <div class = "content"> 
+        <div class ="row"> 
+          <div class= "col-md-6">
 
           <div class="field">
             <%= f.label :amount %><br>
-            <%= f.text_field :amount ,class: "namevalue" %><br/><br/> 
-          </div><br/>
-                  
-          <div class="field">
-            <%= f.label :transaction_type %><br>
-            <%= f.radio_button :transaction_type, 'debit' %> 
-            <%= f.label :Debit %>
-            <%= f.radio_button :transaction_type, 'credit' %> 
-            <%= f.label :Credit %>  
+            <%= f.text_field :amount ,class: "form-control" %>
+            <p id="trans_amountError"></p>
           </div><br/>
 
-          <div class="field">
-            <%= f.label :transaction_kind %><br>
-            <%=f.select :transaction_kind,["Cash","Cheque","RTGS/NEFT","DD","others"],prompt:"select Kind",class: "namevalue"%>
-          </div><br/>
+          </div>
+
+
+          <div class= "col-md-6">       
+            <div class="field">
+              <%= f.label :transaction_kind %><br>
+              <%=f.select :transaction_kind,["Cash","Cheque","RTGS/NEFT","DD","others"],prompt:"select Kind",class: "namevalue"%><br/>
+              <p id ="trans_kindError"></p>
+            </div>
+          </div>
+
+        </div>
+      </div>    
+
+          
 
           <!-- <label>Instrument Date</label></h5>
                 <div class="form-group">
@@ -87,16 +127,19 @@
                 <div class="input-group-addon">
                    <i class="fa fa-calendar"></i>
                 </div>
-                  <%= f.text_field :instrument_date, class: "form-control transaction_date",placeholder: 'dd-mm-yy'%>
+                  <%= f.text_field :formattedinstru_date, class: "form-control transaction_date",placeholder: 'dd-mm-yy' %>
               </div>
+              <p id ="instru_dateError"></p>
             </div><br/>
             <br/>
+
             <div class="field">
               <%= f.label :remark %><br>
               <%= f.text_area :remark ,class: "namevalue" %>
             </div><br/><br/>
             <div class="actions">
-              <%= f.submit %><br/>
+              <%#= f.submit %>
+              <%= f.submit "Create ",id: "submit" %><br/>
             </div><br/>
       <!-- </div>  -->      
       <% end %>    
@@ -126,13 +169,6 @@
         </div>
         </div>
       </div>
-    <!-- </div> -->
-               
-      <!-- <h4>Add Particulars</h4>
-         <div id="errorMsg">
-          <%#= render './transactions/perticularform'%>
-        </div>  -->
- <!--  </div>    -->
     </div> 
   </div>  
 </div>  
@@ -143,88 +179,257 @@
 </script>
 
 <script>
+    var transactionHandle = document.getElementById('transaction_perticular_id');
+    var creditHandle = document.getElementById('transaction_transaction_type_credit');
+    var debitHandle = document.getElementById('transaction_transaction_type_debit');
 
-var transactionHandle = document.getElementById('transaction_perticular_id');
-var creditHandle = document.getElementById('transaction_transaction_type_credit');
-var debitHandle = document.getElementById('transaction_transaction_type_debit');
+    var transformatteddateHandle = document.getElementById('transaction_formatted_date');
+    var trans_dateErrorHandle = document.getElementById('trans_dateError');
 
-transactionHandle.onchange = function(){
-  var request = new XMLHttpRequest();
-  request.open('get','/transactions/select_perticular.json?perticular_id=' + transactionHandle.value);
-  request.onreadystatechange = function(){
-    if(request.readyState === 4 && request.status === 200){
-      var response = JSON.parse(request.responseText);
-      //response.forEach(function(type){
-        if (response.perticular_type == "credit"){
-          creditHandle.checked = true;
-        }
-          else if(response.perticular_type == "debit"){
-            debitHandle.checked = true;
-          }
+    var transinstrumentnumberHandle = document.getElementById('transaction_instrument_number');
+    var trans_instruErrorHandle = document.getElementById('trans_instruError');
 
-        }
+    var transamountHandle = document.getElementById('transaction_amount');
+    var trans_amountErrorHandle = document.getElementById('trans_amountError');
+
+    var formattedinstrudateHandle =document.getElementById('transaction_formattedinstru_date');
+    var instru_dateErrorHandle = document.getElementById('instru_dateError');
+
+    var trans_kindHandle = document.getElementById('transaction_transaction_kind');
+    var trans_kindErrorHandle =document.getElementById('trans_kindError');
+
+    var debitHandle =document.getElementById('transaction_transaction_type_debit');
+    var creditHandle = document.getElementById('transaction_transaction_type_credit');
+
+    // var transperticularHandle = document.getElementById('transaction_perticular_id');
+     var trans_pertiErrorHandle = document.getElementById('trans_pertiError');
+
+    var submitHandle = document.getElementById('submit');
+
+    submitHandle.disabled = true;
+
+    var validator = {
+      transaction_date: transformatteddateHandle.value != "" ? true : false,
+      instrument_number: transinstrumentnumberHandle.value != "" ? true :false,
+      perticular: transactionHandle.value != "" ? true : false,
+      transaction_type: debitHandle.checked == true ? true : false || creditHandle.checked == true ? true :false,
+      amount: transamountHandle.value != "" ? true : false,
+      transaction_kind: trans_kindHandle.value != "" ? true : false,
+      instrument_date: formattedinstrudateHandle.value != "" ?true : false
     }
+
+    transactionHandle.onchange = function(){
+      var request = new XMLHttpRequest();
+      request.open('get','/transactions/select_perticular.json?perticular_id=' + transactionHandle.value);
+      request.onreadystatechange = function(){
+        if(request.readyState === 4 && request.status === 200){
+          var response = JSON.parse(request.responseText);
+          //response.forEach(function(type){
+            if (response.perticular_type == "credit"){
+              creditHandle.checked = true;
+              validator.transaction_type = true;
+              enableSubmit();
+            }
+              else if(response.perticular_type == "debit"){
+                debitHandle.checked = true;
+                validator.transaction_type = true;
+                enableSubmit();
+              }
+
+            }
+        }
+      
+      request.send();
+
+     validator.perticular =false;
+      if(transactionHandle.value == ""){
+        trans_pertiErrorHandle.innerHTML = "can't be blank";
+      }else{
+        trans_pertiErrorHandle.innerHTML = "";
+        validator.perticular =true;
+      }
+      submitHandle.disable= false;
+      enableSubmit();
+    }
+
+     transformatteddateHandle.onblur = function(){
+      validator.transaction_date = false;
+      if(transformatteddateHandle.value == ""){
+        trans_dateErrorHandle.innerHTML = "can't be blank";
+      }else{
+        trans_dateErrorHandle.innerHTML = "";
+        validator.transaction_date = true;
+      }
+      enableSubmit();
+    }
+
+    transformatteddateHandle.onchange = function(){
+      trans_dateErrorHandle.innerHTML = "";
+      validator.transaction_date =true;
+      enableSubmit();
+     }
+
+
+
+    transinstrumentnumberHandle.onblur = function(){
+      if(transinstrumentnumberHandle.value == ""){
+        validator.instrument_number = false;
+        trans_instruErrorHandle.innerHTML = "can't be blank";
+      }else{  
+          if(validateinstrunum(transinstrumentnumberHandle.value)){
+            trans_instruErrorHandle.innerHTML = ""; 
+            validator.instrument_number = true; 
+          }else{
+            trans_instruErrorHandle.innerHTML = "should contain numbers";
+          } 
+      }
+      enableSubmit();
+    }
+
+
+    debitHandle.onclick = function(){
+      if (debitHandle.checked == true){
+        validator.transaction_type = true;
+        //creditHandle.disabled = true;
+        enableSubmit();
+      }
+    }
+
+    creditHandle.onclick = function(){
+     if (creditHandle.checked == true){
+        validator.transaction_type = true;
+        //creditHandle.disabled = true;
+        enableSubmit();
+      }
+    }
+
+
+    function validateinstrunum(number) {
+          var numberOnly = /^\d+$/;
+          return numberOnly.test(number);
+        }
+
+    
+
+    // var companyHandle = document.getElementById('transaction_company_id');
+    // var accountHandle = document.getElementById('transaction_account_id');
+    // var spanHandle = document.getElementById('balance');
+
+    // companyHandle.onchange = function(){
+    //   accountHandle.innerHTML = "";
+
+    //   spanHandle.innerHTML = "";
+    //   var newElement = document.createElement('option');
+    //   newElement.value = 0;
+    //   var newText = document.createTextNode('select');
+    //   newElement.appendChild(newText);
+    //   accountHandle.appendChild(newElement);
+    //   var xhr = new XMLHttpRequest();
+    //   xhr.open('GET','/companies/select_accounts.json?company_id=' + companyHandle.value)
+    //   xhr.onreadystatechange = function(){
+    //     if(xhr.readyState === 4 && xhr.status === 200){
+    //       var response = JSON.parse(xhr.responseText);
+    //       console.log(xhr.responseText);
+    //       if(response.length > 0){
+    //         response.forEach(function(account){
+    //           var newElement = document.createElement('option');
+    //           newElement.value = account.id;
+    //           var newText = document.createTextNode(account.acc_no)
+    //           newElement.appendChild(newText);
+    //           accountHandle.appendChild(newElement);
+    //         });
+    //       }
+    //     }
+    //   }
+    //   xhr.send();
+    // };
+
+    //   accountountHandle.onchange = function(){
+    //     var request = new XMLHttpRequest();
+    //     request.open('GET','/accounts/select_balance.json?acc_id=' + accountHandle.value);
+    //     request.onreadystatechange = function(){
+    //       if(request.readyState === 4 && request.status === 200){
+    //         var response = JSON.parse(request.responseText);
+    //        spanHandle.innerHTML = "Current Balance : " + response.current_balance;
+    //       }
+    //     };
+    //     request.send();
+    //   };
+
+    // <!--jscript for date picker-->
+
+    //$('#datetimepicker1').datetimepicker();
+    //$('#datetimepicker2').datetimepicker();
+
+    //dynamic select
+    transamountHandle.onblur =function(){
+      validator.amount =false;
+      if(transamountHandle.value == ""){
+        trans_amountErrorHandle.innerHTML = "can't be blank";
+      }else{
+        trans_amountErrorHandle.innerHTML = "";
+        validator.amount =true;
+      }
+      enableSubmit();
+    }
+ 
+    formattedinstrudateHandle.onblur = function(){
+      validator.instrument_date =false;
+      if(formattedinstrudateHandle.value == ""){
+        instru_dateErrorHandle.innerHTML = "can't be blank";
+      }else{
+        instru_dateErrorHandle.innerHTML = "";
+        validator.instrument_date =true;
+      }
+      enableSubmit();
+    }
+    formattedinstrudateHandle.onchange = function(){
+      instru_dateErrorHandle.innerHTML = "";
+      validator.instrument_date =true;
+      enableSubmit();
+    }
+
+    // transperticularHandle.onchange = function(){
+    //   validator.perticular =false;
+    //   if(transperticularHandle.value == ""){
+    //     trans_pertiErrorHandle.innerHTML = "can't be blank";
+    //   }else{
+    //     trans_pertiErrorHandle.innerHTML = "";
+    //     validator.perticular =true;
+    //   }
+    //   submitHandle.disable= false;
+    // }
+
+
+    trans_kindHandle.onchange = function(){
+      validator.transaction_kind =false;
+      if (trans_kindHandle.value =="" ){
+        trans_kindErrorHandle.innerHTML = "can't be blank";
+      }else{
+         trans_kindErrorHandle.innerHTML ="";
+         validator.transaction_kind =true;
+      }
+       enableSubmit();
+    };
   
-  request.send();
-}
+    window.onload = function(){
+      if(Object.values(validator).includes(false)){
+        submitHandle.disabled = true;
+      }else{
+        submitHandle.disabled = false;
+      }
+    }
+    
+    function enableSubmit(){
+      if(Object.values(validator).includes(false)){
+        submitHandle.disabled = true;
+      }else{
+        submitHandle.disabled = false;
+      }
+    }
 
-// var companyHandle = document.getElementById('transaction_company_id');
-// var accountHandle = document.getElementById('transaction_account_id');
-// var spanHandle = document.getElementById('balance');
-
-// companyHandle.onchange = function(){
-//   accountHandle.innerHTML = "";
-//   spanHandle.innerHTML = "";
-//   var newElement = document.createElement('option');
-//   newElement.value = 0;
-//   var newText = document.createTextNode('select');
-//   newElement.appendChild(newText);
-//   accountHandle.appendChild(newElement);
-//   var xhr = new XMLHttpRequest();
-//   xhr.open('GET','/companies/select_accounts.json?company_id=' + companyHandle.value)
-//   xhr.onreadystatechange = function(){
-//     if(xhr.readyState === 4 && xhr.status === 200){
-//       var response = JSON.parse(xhr.responseText);
-//       console.log(xhr.responseText);
-//       if(response.length > 0){
-//         response.forEach(function(account){
-//           var newElement = document.createElement('option');
-//           newElement.value = account.id;
-//           var newText = document.createTextNode(account.acc_no)
-//           newElement.appendChild(newText);
-//           accountHandle.appendChild(newElement);
-//         });
-//       }
-//     }
-//   }
-//   xhr.send();
-// };
-
-//   accountountHandle.onchange = function(){
-//     var request = new XMLHttpRequest();
-//     request.open('GET','/accounts/select_balance.json?acc_id=' + accountHandle.value);
-//     request.onreadystatechange = function(){
-//       if(request.readyState === 4 && request.status === 200){
-//         var response = JSON.parse(request.responseText);
-//        spanHandle.innerHTML = "Current Balance : " + response.current_balance;
-//       }
-//     };
-//     request.send();
-//   };
-
-// <!--jscript for date picker-->
-
-//$('#datetimepicker1').datetimepicker();
-//$('#datetimepicker2').datetimepicker();
-
-//dynamic select
 
 </script>
-
-
-
-
-
 
 
 

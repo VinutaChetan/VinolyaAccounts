@@ -204,7 +204,11 @@ input#user_password {
     padding: 16px;
     border: 1px solid #eee;
     border-color: darkgray;
-    height: 160px;
+    height: 180px;
+}
+
+#search_dateError {
+    color: red;
 }
 
 .new_transe {
@@ -215,7 +219,7 @@ input#user_password {
     padding-left: 60px;
     padding-top: 7px;
     height: o;
-    height: 160px;
+    height: 180px;
     margin-bottom: 25px;
 }
 
@@ -364,8 +368,12 @@ div#myTable_wrapper {
 
 input#transaction_instrument_number ,  input#transaction_amount
  {
- padding: 5px 15em;
-    border-radius: 5px;
+ /*padding: 5px 10em;
+    border-radius: 5px;*/
+}
+
+.form-control{
+    width :75% !important;
 }
 
 input#perticular_name {
@@ -377,7 +385,7 @@ input#perticular_name {
     position: relative;
     z-index: 2;
     float: left;
-    width: 48% ! important;
+    width: 36% ! important;
     margin-bottom: 0;
 }
 
@@ -392,7 +400,7 @@ input#perticular_name {
 }
 
 textarea#transaction_remark {
-    padding: 25px 15em;
+    padding: 25px 30em;
     border-radius: 5px;
 }
 
@@ -401,8 +409,47 @@ textarea#transaction_remark {
 }
 
 .pertiblock{
-    margin-left: -30px !important;
+    margin-left: 0px !important;
 }
 
+.empty {
+    padding-top: 30px;
+}
 
+.content button.btn.btn-primary {
+    margin-top: 20px;
+}
+
+#datetimepicker1{
+    width: 200% !important;
+}
+
+label.debitradio {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+#error_explanation{
+    color: red;
+}
+
+#account_acc_no,#accountError,#account_opening_balance,#opening_balanceError,#account_current_balance,#current_balanceError,#account_IFSC,#IFSCError {
+    color: red;
+}
+
+#nameError,#contact_numberError,#addressError,#mail_idError{
+    color: red;
+}
+
+#bank_nameError,#bank_addressError,#bank_managerError,#bank_contactError{
+    color: red;
+}
+
+#perticular_nameError{
+    color: red;
+}
+
+#trans_dateError,#trans_instruError,#trans_amountError,#instru_dateError,#trans_kindError{
+    color: red;
+}
 

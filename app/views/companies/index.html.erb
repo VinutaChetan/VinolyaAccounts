@@ -24,7 +24,7 @@ $(document).ready(function(){
       <th class="text-success">Address</th>
       <th class="text-success">Mail Id</th>
       <th></th>
-      <th></th>
+      
     </tr>
   </thead>
 
@@ -36,9 +36,7 @@ $(document).ready(function(){
         <td><%= company.address %></td>
         <td><%= company.mail_id %></td>
         <td><%= link_to 'Show', company,class: "btn btn-info" %></td>
-        <% if can? :upadte, company %> 
-          <td><%= link_to 'Edit', edit_company_path(company),class: "btn btn-info" %></td>
-        <%end%>
+       
         
       </tr>
     <% end %>

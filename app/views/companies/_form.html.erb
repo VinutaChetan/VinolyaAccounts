@@ -13,25 +13,82 @@
 
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name ,class:"col-sm-6" %><br/><br/>
+    <%= f.text_field :name ,class:"col-sm-6",autofocus: true %><br/><br/>
+    <p id = "nameError"></p>
   </div>
 
   <div class="field">
     <%= f.label :contact_number %><br>
     <%= f.text_field :contact_number ,class:"col-sm-6" %><br/><br/>
+    <p id ="contact_numberError"></p>
   </div>
 
   <div class="field">
     <%= f.label :address %><br>
     <%= f.text_area :address ,class:"col-sm-6" %><br/><br/><br/>
+    <p id ="addressError"></p>
   </div>
 
   <div class="field">
     <%= f.label :mail_id %><br>
     <%= f.text_field :mail_id ,class:"col-sm-6" %><br/><br/>
+    <p id ="mail_idError"></p>
   </div>
 
   <div class="actions">
     <%= f.submit %><br/>
   </div><br/>
 <% end %>
+
+<script>
+  var nameHandle =document.getElementById('company_name');
+  var nameErrorHandle =document.getElementById('nameError');
+  var contact_numberHandle = document.getElementById('company_contact_number');
+  var contact_numberErrorHamdle = document.getElementById('contact_numberError');
+  var addressHandle = document.getElementById('company_address');
+  var addressErrorHandle = document.getElementById('addressError');
+  var mail_idHandle =document.getElementById('company_mail_id');
+  var mail_idErrorHandle = document.getElementById('mail_idError');
+
+  nameHandle.onblur = function(){
+    if(nameHandle.value == ""){
+      nameErrorHandle.innerHTML = "Cant't be blank";
+    }else{
+      nameErrorHandle.innerHTML = "";
+    }  
+  }
+
+  contact_numberHandle.onblur = function(){
+    if(contact_numberHandle.value == ""){
+      contact_numberErrorHamdle.innerHTML = "Cant't be blank";
+    }else{
+      contact_numberErrorHamdle.innerHTML = "";
+    }  
+  }
+
+  addressHandle.onblur = function(){
+    if(addressHandle.value == ""){
+      addressErrorHandle.innerHTML = "Cant't be blank";
+    }else{
+      addressErrorHandle.innerHTML = "";
+    }  
+  }
+
+  mail_idHandle.onblur = function(){
+    if(mail_idHandle.value == ""){
+      mail_idErrorHandle.innerHTML = "Cant't be blank";
+    }else{
+      mail_idErrorHandle.innerHTML = "";
+    }  
+  }
+
+</script>
+
+
+
+
+
+
+
+
+

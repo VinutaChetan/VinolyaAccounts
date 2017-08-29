@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :all_accounts
 
+  helper_method :all_companies
+
 
   def current_account    
     @current_account = Account.find(session[:account]) if session[:account]
@@ -20,8 +22,8 @@ class ApplicationController < ActionController::Base
     @all_accounts ||= Account.all
   end
 
-  # def all_companies
-  #   @all_companies ||= Company.all
-  # end
+  def all_companies
+    @all_companies ||= Company.includes(:accounts)
+  end
 
 end

@@ -14,6 +14,9 @@
 <!-- Searching-->
         <div class="top-calander">
           <%=form_tag transactions_search_results_path,method: :get do %>
+
+          <p id = "search_dateError"></p>
+
           <label>Start Date:</label>
           <%= text_field_tag :start %>  
 
@@ -24,8 +27,8 @@
           <%= select_tag "acc_no", options_from_collection_for_select(Account.all, "id", "acc_no",:selected =>current_account.id),{:include_blank => false , :class => "product_select"}%><br/><br/>
 
           <%#=collection_select :account_id,Account.all,:id,:acc_no,{prompt:"Select Account"}%>
-  
-          <%=submit_tag "Search"%> 
+          
+          <%=submit_tag "Search",id: "search"%> 
           <%end%>  
         </div>
     </div>
@@ -119,6 +122,31 @@
 
    <script type="text/javascript">
    $('#myTable').DataTable();  
+</script>
+
+<script>
+ var searchHandle = document.getElementById('search');
+ searchHandle.disabled = true;
+  var startHandle = document.getElementById('start');
+  var endHandle = document.getElementById('end');
+  var search_dateErrorHandle = document.getElementById('search_dateError');
+  endHandle.onchange = function(){
+    var startDateFormatted = formatDate(startHandle.value);
+    var endDateFormatted = formatDate(endHandle.value);
+    if( (new Date(startDateFormatted).getTime() > new Date(endDateFormatted).getTime())){
+      search_dateErrorHandle.innerHTML = "Start date should be less than end date";
+    }else{
+      search_dateErrorHandle.innerHTML = "";
+      searchHandle.disabled = false;
+    }
+  }
+  function formatDate(date){
+    var splitDate = date.split("-");
+    var formatedDate = "20" + splitDate[2] +"-" + splitDate[1] +"-" +
+     splitDate[0];
+    return formatedDate;
+  }
+
 </script>
           
 

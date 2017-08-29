@@ -47,8 +47,12 @@ class TransactionsController < ApplicationController
   # POST /transactions
   # POST /transactions.json
   def create
-    @transaction = Transaction.new(transaction_params)
-    @perticular = Perticular.new
+  @transaction = Transaction.new(transaction_params)
+  @perticular = Perticular.new
+  # set the value for the transaction date 
+  @transaction.formulate_date(params[:transaction][:formatted_date])
+  # set the value for the instrument date 
+  @transaction.formulateinstru_date(params[:transaction][:formattedinstru_date])
     respond_to do |format|
       if @transaction.save
         #Notification.amount_transfer(@transaction,current_user).deliver!
@@ -67,6 +71,10 @@ class TransactionsController < ApplicationController
   # PATCH/PUT /transactions/1.json
   def update
     respond_to do |format|
+      @perticular = Perticular.new
+      @transaction.formulate_date(params[:transaction][:formatted_date])
+      @transaction.formulateinstru_date(params[:transaction][:formattedinstru_date])
+     
       if @transaction.update(transaction_params)
         format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
         format.json { render :show, status: :ok, location: @transaction }
@@ -93,13 +101,16 @@ class TransactionsController < ApplicationController
   def search_results
    
     params_start_date = params[:start].split("-").reverse
-    start_year = "20" + params_start_date.first
-    full_start_date = start_year + "-" + params_start_date[1] + "-" + params_start_date[2]
-    
+    if(!(params_start_date.empty?) )
+      start_year = "20" + params_start_date.first
+      full_start_date = start_year + "-" + params_start_date[1] + "-" + params_start_date[2]
+    end
+
     params_end_date = params[:end].split("-").reverse
-    end_year = "20" + params_end_date.first
-    full_end_date = end_year + "-" + params_end_date[1] + "-" + params_end_date[2]
-    
+    if(!(params_end_date.empty?) )
+      end_year = "20" + params_end_date.first
+      full_end_date = end_year + "-" + params_end_date[1] + "-" + params_end_date[2]
+    end
       @transactions = Transaction.where("transaction_date BETWEEN ? AND ? AND account_id=?",full_start_date,full_end_date,params[:acc_no])
     
     respond_to do |format|
@@ -185,6 +196,6 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:transaction_date,:company_id, :perticular_id, :transaction_type,:amount,:remark, :transaction_kind,:account_id,:instrument_date,:instrument_number)
+      params.require(:transaction).permit(:company_id, :perticular_id, :transaction_type,:amount,:remark, :transaction_kind,:account_id,:formattedinstru_date,:instrument_number, :formatted_date)
     end
 end

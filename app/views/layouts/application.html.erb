@@ -113,7 +113,7 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Company Link <b class="caret"></b></a>
         <ul class="dropdown-menu">
             <li class="dropdown-submenu ">
-              <% Company.all.each do |company| %> 
+              <% all_companies.each do |company| %> 
 
               <li class="dropdown-submenu ">
                 <% unless company.accounts.empty? %> 
@@ -242,7 +242,8 @@
 <div class= "session">
   <% if controller.controller_name =="transactions" and controller.action_name!="print_preview" %>
 <% if  user_signed_in? && controller.controller_name!="dashboards"  %>
-  <h3> You are seleted the Account Number : "<%= current_account.acc_no %>"</h3>
+  <h3> Selected the Account Number : <%= current_account.acc_no %></h3>
+  <h3> Selected the Company : <%= current_account.company.name %></h3>
   <% def number_to_indian_currency(current_balance, html=true)%>
       <% txt = html ? ( 'Rs.') : 'Rs.' %>
       <% "#{txt} #{current_balance.to_s.gsub(/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/, "\\1,")}"%>
@@ -276,9 +277,9 @@
   <script>
   $(document).ready(function(){
     $('.transaction_date').datepicker({
-      format: 'dd-mm-yy',
+      format: 'dd-mm-yyyy',
       todayHighlight: true,
-      autoclose: true,
+      autoclose: true
     });
   })
 </script>

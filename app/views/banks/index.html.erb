@@ -22,7 +22,7 @@
       <th class="text-success">Company</th>
       <th class="text-success">Link</th>
       <th></th>
-      <th></th>
+      <!-- <th></th> -->
     </tr>
   </thead>
 
@@ -37,9 +37,9 @@
         <td><%= bank.company.name %></td>
         <td><%= bank.link %></td>
         <td><%= link_to 'Show', bank,class: "btn btn-info" %></td>
-        <% if can? :update, bank %>
-          <td><%= link_to 'Edit', edit_bank_path(bank),class: "btn btn-info"%></td>
-         <%end%>
+        <%# if can? :update, bank %>
+          <!-- <td><%#= link_to 'Edit', edit_bank_path(bank),class: "btn btn-info"%></td> -->
+         <%#end%>
          
       </tr>
     <% end %>

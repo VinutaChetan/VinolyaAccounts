@@ -1,5 +1,8 @@
 class Transaction < ActiveRecord::Base
-	 acts_as_paranoid
+
+	attr_accessor :formatted_date
+	attr_accessor :formattedinstru_date
+	acts_as_paranoid
 	
 	belongs_to :perticular
 	belongs_to :company
@@ -10,9 +13,43 @@ class Transaction < ActiveRecord::Base
 	validates_numericality_of :amount
 	validates_uniqueness_of :instrument_number
 
-	before_create :change_date_format
+
 	after_save :add_acc_balance
+	after_save :update_acc_balance
+	
+
+
 	after_destroy :update_current_balance
+
+
+
+	# this method is for changing the incoming date format from dd-mm-yy to yy-mm-dd 
+	def formulate_date(form_date)
+		date_array = form_date.split("-").map! {|v| v.to_i}
+		self.transaction_date = Date.new(date_array[2], date_array[1],date_array[0]) if !date_array.empty?
+	end
+
+	# this method is for changing the outgoing date format from yy-mm-dd to dd-mm-yy
+	def formatted_date
+		format_str = ""
+		date_array = self.transaction_date.to_s.split('-')
+		format_str += "#{date_array[2]}-#{date_array[1]}-#{date_array[0]}"
+		#binding.pry
+		return format_str == "--" ? nil : format_str
+	end
+
+	def formulateinstru_date(form_date)
+		date_array = form_date.split("-").map! {|v| v.to_i}
+		self.instrument_date = Date.new(date_array[2], date_array[1],date_array[0]) if !date_array.empty?
+	end	
+
+	# this method is for changing the outgoing date format from yy-mm-dd to dd-mm-yy
+	def formattedinstru_date
+		format_str = ""
+		date_array = self.instrument_date.to_s.split('-')
+		format_str += "#{date_array[2]}-#{date_array[1]}-#{date_array[0]}"
+		return format_str == "--" ? nil : format_str
+	end
 
 
 	def self.list_view(current_account) 
@@ -70,25 +107,41 @@ class Transaction < ActiveRecord::Base
 	end
 	end
 	
+	def update_acc_balance
+		if !self.created_at_changed?
+			account=Account.find_by(id: self.account.id)
+			if (self.transaction_type=="credit")
+				current_balance = account.current_balance - self.amount_was
+				account.current_balance = self.amount + current_balance
+				
+			else 
+				current_balance = account.current_balance + self.amount_was 
+				account.current_balance = current_balance - self.amount
+			end
+			account.save
+		end
+	end		
 
 
 	def add_acc_balance
-		account=Account.find_by(id: self.account.id)
-		if (self.transaction_type=="credit")
-			account.current_balance =self.amount+account.current_balance
-		else 
-			account.current_balance =account.current_balance-self.amount
+		if self.created_at_changed?
+			if (self.transaction_type=="credit")
+				account=Account.find_by(id: self.account.id)
+				account.current_balance =self.amount+account.current_balance
+			else 
+				account=Account.find_by(id: self.account.id)
+				account.current_balance =account.current_balance-self.amount
+			end
+			account.save
 		end
-		account.save
 	end		
 
 	def update_current_balance
+		account=Account.find_by(id: self.account.id)
 		if (self.transaction_type=="credit")
-			account=Account.find_by(id: self.account.id)
 			account.current_balance =account.current_balance-self.amount
 			account.save
 		else 
-			account=Account.find_by(id: self.account.id)
 			account.current_balance =self.amount+account.current_balance
 			account.save
 		end		
@@ -199,38 +252,6 @@ class Transaction < ActiveRecord::Base
 		end
 	end
 
-	def change_date_format
-		trans_date = self.transaction_date.strftime("%d-%m-%Y").split("-") 
-		year = "20" +  trans_date.first
-		day = trans_date.last.split("")
-		input_day = day[2]+day[3]
-		self.transaction_date = year + "-" + trans_date[1] + "-" +input_day
-		self.transaction_date.strftime("%d-%m-%Y")
-		
-
-		 instru_date = self.instrument_date.strftime("%d-%m-%Y").split("-") 
-		 
-		instru_year = "20" +  instru_date.first
-		instru_day = instru_date.last.split("")
-		 instru_input_day = instru_day[2]+instru_day[3]
-		 self.instrument_date = instru_year + "-" + instru_date[1] + "-" + instru_input_day
-		 
-		 self.instrument_date.strftime("%d-%m-%Y")
-
-
-
-		# trans_date = self.transaction_date.strftime("%d-%m-%Y").split("-").reverse.join("-")
-		# #binding.pry
-		# year = "20" + trans_date.first
-		# self.transaction_date = year + "-" + trans_date[1] + "-" + trans_date[2]
-		# #binding.pry
-		# self.save
-
-		# instru_date = self.instrument_date.strftime("%d-%m-%Y").split("-").reverse.join("-")
-		# year = "20" + instru_date.first
-		# self.instrument_date = year + "-" + instru_date[1] + "-" + instru_date[2]
-		# self.save
-	end	
-
+	
 
 end

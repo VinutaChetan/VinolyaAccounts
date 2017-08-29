@@ -10,9 +10,8 @@
 
 <p>
   <strong>Transaction date:</strong>
-  <%= @transaction.transaction_date.to_s(:long) %>
+  <%= @transaction.transaction_date.strftime(" %d-%m-%Y") if @transaction.transaction_date != nil  %>
 </p>
-
 
 <p>
   <strong>Company Name:</strong>
@@ -32,7 +31,7 @@
 
 <p>
   <strong>Instrument date:</strong>
-  <%= @transaction.instrument_date %>
+  <%= @transaction.instrument_date.strftime(" %d-%m-%Y") if @transaction.instrument_date != nil   %>
 </p>
 
 <p>

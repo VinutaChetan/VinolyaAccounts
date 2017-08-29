@@ -17,7 +17,7 @@
 
 <p>
   <strong>Transaction date:</strong>
-  <%= @transaction.transaction_date.to_s(:long) %>
+  <%= @transaction.transaction_date.strftime(" %d-%m-%Y") %>
 </p>
 
 
@@ -39,7 +39,7 @@
 
 <p>
   <strong>Instrument date:</strong>
-  <%= @transaction.instrument_date %>
+  <%= @transaction.instrument_date.strftime(" %d-%m-%Y") %>
 </p>
 
 <p>
