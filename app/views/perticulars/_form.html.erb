@@ -27,23 +27,23 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Create",id: "submit"%>
   </div><br/>
 <% end %>
 
 <script>
   var perticular_nameHandle = document.getElementById('perticular_name');
   var perticular_nameErrorHandle = document.getElementById('perticular_nameError');
-
+ 
+ 
   perticular_nameHandle.onblur = function(){
-    if(perticular_nameHandle.value == ""){
+    if(perticular_nameHandle.value == ""){ 
       perticular_nameErrorHandle.innerHTML = "Cant't be blank";
     }else{
-      perticular_nameErrorHandle.innerHTML = "";
-    }  
+      perticular_nameErrorHandle.innerHTML = "";  
+    } 
   }
 
-
-
+ 
 
 </script>

@@ -6,6 +6,7 @@
 	$('#new_perticular')[0].reset();
 	$('#transaction_perticular_id').append("<%= escape_javascript(render 'option')%>");
 	$('#transaction_perticular_id').trigger("chosen:updated");
+	
 	<% if @perticular.perticular_type == "debit" %>
 		$('#transaction_transaction_type_debit').prop("checked", true);	
 	<% elsif @perticular.perticular_type == "credit"%>

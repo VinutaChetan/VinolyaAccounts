@@ -1,3 +1,5 @@
+The transaction details from  <%=@transactions.first.transaction_date.strftime(" %d-%m-%Y") if @transactions.first.transaction_date!= nil%> to  <%=@transactions.last.transaction_date.strftime(" %d-%m-%Y") if @transactions.last.transaction_date!= nil%>
+
 <table >
                     <thead>
                       <tr>
@@ -17,11 +19,11 @@
                     </thead>
 
                     <tbody id="myTable">
-                    
-                      <%@transactions.order('created_at DESC').each_with_index do |val,index|%>
+                    <% i = 1%>
+                      <%@transactions.order('created_at DESC').each do |val|%>
                         <% if val.transaction_date >= Date.today.beginning_of_week() && val.transaction_date<= Date.today.end_of_week() %>
                       <tr>
-                        <td>   <%=index+1%></td>
+                        <td>   <%=i %></td>
                     <td>  <%=val.transaction_date.strftime("%d-%m-%Y") if val.transaction_date!=nil%></td>
                     <td>  <%=val.company.name%></td>
                     <td>  <%=val.account.acc_no%></td>
@@ -33,6 +35,7 @@
                     <td><%= val.instrument_number%></td>
                     <td>  <%=val.remark%></td>
                       </tr> 
+                      <% i =i +1 %>
                       <%end%>
                       <%end%>
                     </tbody>

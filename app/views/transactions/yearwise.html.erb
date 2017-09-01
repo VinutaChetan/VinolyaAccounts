@@ -69,6 +69,14 @@
    <% if params[:year].to_i == Date.today.year %>
       <%year.each do |key,value|%>  
         <%=link_to key,transactions_monthwise_path(:year=> params[:year],:month => key),class:"btn btn-info"%>
+        
+        <% Transaction.list_view(current_account)[params[:year].to_i].each do |year| %>
+            <%year.each do |key,value|%>
+              <%#=value.count%>
+            <%end%>
+            <b>=> <%=value.count%></b>
+        <%end%>
+
         <% if key== Date::MONTHNAMES[Date.today.end_of_month.month ]  %>
             <%break%> 
         <%end%> 

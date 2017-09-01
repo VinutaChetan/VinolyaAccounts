@@ -1,38 +1,42 @@
-<table class ="table table-striped" id="myTable">
+<h3>The transaction details from  <%=@transactions.first.transaction_date.strftime(" %d-%m-%Y") if @transactions.first.transaction_date!= nil%> to  <%=@transactions.last.transaction_date.strftime(" %d-%m-%Y") if @transactions.last.transaction_date!= nil%></h3>
+
+
+<table border="1">
                     <thead>
                       <tr>
-                        <th class="text-success">SI.no</th>
-                        <th class="text-success">Transaction Date</th>
-                        <th class="text-success">Company Name</th>
-                        <th class="text-success">Account Number</th>
-                        <th class="text-success">Particular</th>
-                        <th class="text-success">Transaction type</th>
-                        <th class="text-success">Amount</th>
-                        <th class="text-success">Transaction kind</th>
-                        <th class="text-success">Instrument Date</th>
-                        <th class="text-success">Instrument Number</th>
-                        <th class="text-success">Remark</th> 
+                        <th style="padding: 10px;">SI.no</th>
+                        <th style="padding: 10px;">Transaction Date</th>
+                        <th style="padding: 10px;">Company Name</th>
+                        <th style="padding: 10px;">Account Number</th>
+                        <th style="padding: 10px;">Particular</th>
+                        <th style="padding: 10px;">Transaction type</th>
+                        <th style="padding: 10px;">Amount</th>
+                        <th style="padding: 10px;">Transaction kind</th>
+                        <th style="padding: 10px;">Instrument Date</th>
+                        <th style="padding: 10px;">Instrument Number</th>
+                        <th style="padding: 10px;">Remark</th> 
 
                       </tr>
                     </thead>
 
                     <tbody id="myTable">
-                    
-                      <%@transactions.order('created_at DESC').each_with_index do |val,index|%>
+                    <% i = 1 %>
+                      <%@transactions.order('created_at DESC').each do |val|%>
                         <% if val.transaction_date >= Date.today.beginning_of_week() && val.transaction_date<= Date.today.end_of_week() %>
-                      <tr>
-                        <td>   <%=index+1%></td>
-                    <td>  <%=val.transaction_date.strftime("%d-%m-%Y") if val.transaction_date!=nil%></td>
-                    <td>  <%=val.company.name%></td>
-                    <td>  <%=val.account.acc_no%></td>
-                    <td>  <%=val.perticular.name%></td>
-                    <td>  <%=val.transaction_type%></td>
-                    <td>  <%=val.amount%></td>
-                    <td><%= val.transaction_kind %></td>
-                    <td><%= val.instrument_date.strftime("%d-%m-%Y") if val.instrument_date!=nil %></td>
-                    <td><%= val.instrument_number%></td>
-                    <td>  <%=val.remark%></td>
-                      </tr> 
+                          <tr>
+                            <td style="padding: 10px;">   <%= i %></td>
+                            <td style="padding: 10px;">  <%=val.transaction_date.strftime("%d-%m-%Y") if val.transaction_date!=nil%></td>
+                            <td style="padding: 10px;">  <%=val.company.name%></td>
+                            <td style="padding: 10px;">  <%=val.account.acc_no%></td>
+                            <td style="padding: 10px;">  <%=val.perticular.name%></td>
+                            <td style="padding: 10px;">  <%=val.transaction_type%></td>
+                            <td style="padding: 10px;">  <%=val.amount%></td>
+                            <td style="padding: 10px;"><%= val.transaction_kind %></td>
+                            <td style="padding: 10px;"><%= val.instrument_date.strftime("%d-%m-%Y") if val.instrument_date!=nil %></td>
+                            <td style="padding: 10px;"><%= val.instrument_number%></td>
+                            <td style="padding: 10px;">  <%=val.remark%></td>
+                          </tr> 
+                      <% i = i+1%>   
                       <%end%>
                       <%end%>
                     </tbody>

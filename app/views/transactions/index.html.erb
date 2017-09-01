@@ -24,8 +24,9 @@
           <%= text_field_tag :end%><br/><br/>
 
           <label>Account Number:</label>
+          <% if current_account != nil%>
           <%= select_tag "acc_no", options_from_collection_for_select(Account.all, "id", "acc_no",:selected =>current_account.id),{:include_blank => false , :class => "product_select"}%><br/><br/>
-
+          <%end%>
           <%#=collection_select :account_id,Account.all,:id,:acc_no,{prompt:"Select Account"}%>
           
           <%=submit_tag "Search",id: "search"%> 
@@ -41,13 +42,15 @@
 
 <div class="col-md-5">
   <div class="new_transe">
-  <% if Transaction.list_view(current_account)=="No Transaction found"%>
-      <h3>No Transaction found</h3> 
+  <% if current_account !=nil %>  
+    <% if Transaction.list_view(current_account)=="No Transaction found"%>
+        <h3>No Transaction found</h3> 
     <%else%> 
-      <%Transaction.list_view(current_account).each do |key,month| %>
-      <%= link_to key ,transactions_yearwise_path(:year => key),class:"btn btn-success"%>    
-    <%end%><br/>
-  <%end%>
+        <%Transaction.list_view(current_account).each do |key,month| %>
+          <%= link_to key ,transactions_yearwise_path(:year => key),class:"btn btn-success"%>    
+        <%end%><br/>
+    <%end%>
+  <%end%>  
  
     <br/>
 
@@ -55,10 +58,13 @@
       <%= link_to 'New Transaction', new_transaction_path ,class: "btn btn-info"%>
   <%end%><br/><br/>
 
-  <%= link_to 'Generate pdf',transactions_path( @transactions,format: "pdf"), target: "_blank",class: "btn btn-info" %>
+  <% if !(current_account.transactions.empty?)%>
+      <%= link_to 'Generate pdf',transactions_path( @transactions,format: "pdf"), target: "_blank",class: "btn btn-info" %>
   
-    <!--its to export to excel -->
-  <%= link_to "Export to Excel",transactions_path(format: "xls"),class: "btn btn-info"%><br/>
+      <!--its to export to excel -->
+      <%= link_to "Export to Excel",transactions_path(format: "xls"),class: "btn btn-info"%>
+  <% end%>
+  <br/>
   </div>
 </div>  
 <br/>  <br/><br/>

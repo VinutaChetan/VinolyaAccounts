@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :acc_no %><br>
-    <%= f.text_field :acc_no,class:"col-sm-6" %><br/><br/>
+    <%= f.text_field :acc_no,class:"col-sm-6" ,autofocus: true%><br/><br/>
     <p id ="accountError"></p>
   </div>
 
@@ -74,6 +74,16 @@
 
 
 <script>
+  // document.getElementById('account_acc_no').tabIndex="1";
+  // document.getElementById('account_opening_balance').tabIndex="2";
+  // document.getElementById('account_bank_id').tabIndex="3";
+  // document.getElementById('account_branch_id').tabIndex="4";
+  // document.getElementById('account_company_id').tabIndex="5";
+  // //document.getElementById('account_account_acc_type_current').tabIndex="6";
+  // document.getElementById('account_current_balance').tabIndex="6";
+  // document.getElementById('account_IFSC').tabIndex="7";
+  // document.getElementById('submit').tabIndex="8";
+
   var accountHandle = document.getElementById('account_acc_no');
   var accountErrorHandle = document.getElementById('accountError');
   var opening_balanceHandle = document.getElementById('account_opening_balance');

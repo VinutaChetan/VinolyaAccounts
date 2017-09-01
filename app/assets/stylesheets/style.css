@@ -433,7 +433,7 @@ label.debitradio {
     color: red;
 }
 
-#account_acc_no,#accountError,#account_opening_balance,#opening_balanceError,#account_current_balance,#current_balanceError,#account_IFSC,#IFSCError {
+/*#account_acc_no,#accountError,#account_opening_balance,#opening_balanceError,#account_current_balance,#current_balanceError,#account_IFSC,#IFSCError {
     color: red;
 }
 
@@ -451,5 +451,5 @@ label.debitradio {
 
 #trans_dateError,#trans_instruError,#trans_amountError,#instru_dateError,#trans_kindError{
     color: red;
-}
+}*/
 

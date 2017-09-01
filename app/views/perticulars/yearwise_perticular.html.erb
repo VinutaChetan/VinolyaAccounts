@@ -1,6 +1,6 @@
 <%= link_to "Back",perticular_path(@perticular)%><br/><br/>
 
-<b>Perticular Name</b> : <%= @perticular.name%> <br/>
+<b>Particular Name</b> : <%= @perticular.name%> <br/>
 <b></b><br/>
 <br/>
 <% @perticular.transactions.list[params[:year].to_i].each do |months| %>

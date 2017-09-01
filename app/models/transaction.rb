@@ -53,6 +53,8 @@ class Transaction < ActiveRecord::Base
 
 
 	def self.list_view(current_account) 
+		if current_account !=nil
+
 		transaction = current_account.transactions.order('transaction_date ASC').first
 		
 		if transaction == nil
@@ -76,7 +78,11 @@ class Transaction < ActiveRecord::Base
 			start_year = start_year + 1
 		end
 		return data	
-	end
+		end
+
+		else
+			Account.all
+		end	
 	end
 
 	def self.list

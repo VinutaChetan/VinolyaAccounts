@@ -64,14 +64,22 @@
 </div>
 <br/><br/>
 
-<%= link_to 'print_preview', transactions_softdelete_pp_path,class: "btn btn-primary" %><br/><br/>
+<div class="row">
+  <div class="col-md-3">
+  </div>
+    
+  <div class="col-md-2">
+    <%= link_to 'print_preview', transactions_softdelete_pp_path,class: "btn btn-primary" %><br/><br/>
+  </div>
 
+  <div class="col-md-2">
+    <%= link_to 'Export to Excel', transactions_soft_delete_path(format:"xls"),class: "btn btn-primary" %><br/><br/>
+  </div>
 
-
-<%= link_to 'Export to Excel', transactions_soft_delete_path(format:"xls"),class: "btn btn-primary" %><br/><br/>
-
-<%= link_to 'Generate PDF', transactions_soft_delete_path(format:"pdf"),class: "btn btn-primary" %><br/><br/>
-
+  <div class="col-md-2">
+    <%= link_to 'Generate PDF', transactions_soft_delete_path(format:"pdf"),class: "btn btn-primary" %><br/><br/>
+  </div>  
+</div>
 
 <script type="text/javascript">
    $('#myTable').DataTable();  

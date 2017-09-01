@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <title>VinolyaAccounts</title>
@@ -84,10 +84,10 @@
              <li><%=link_to "Particular",perticulars_path%></li>
           </ul> 
         </li>
- 
 
-        <li><%=link_to "Transaction",transactions_path %></li>
-
+        <% if Account.first != nil %>
+            <li><%=link_to "Transaction",transactions_path %></li>
+        <% end %>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports <span class="glyphicon glyphicon-th-list"></span></a>
            <ul class="dropdown-menu">
@@ -201,7 +201,7 @@
 
 
     <%if controller.controller_name=="perticulars"%>
-        <li><%=link_to "particulars",perticulars_path%><span class="divider">>></span></li> 
+        <li><%=link_to "Particulars",perticulars_path%><span class="divider">>></span></li> 
     <%end%> 
 
     <%if controller.controller_name=="perticulars" and controller.action_name=="yearwise_perticular" %>
@@ -238,20 +238,24 @@
 <%end%>  
 
  
- <div class="col-md-6">
+<div class="col-md-6">
 <div class= "session">
   <% if controller.controller_name =="transactions" and controller.action_name!="print_preview" %>
-<% if  user_signed_in? && controller.controller_name!="dashboards"  %>
-  <h3> Selected the Account Number : <%= current_account.acc_no %></h3>
-  <h3> Selected the Company : <%= current_account.company.name %></h3>
-  <% def number_to_indian_currency(current_balance, html=true)%>
-      <% txt = html ? ( 'Rs.') : 'Rs.' %>
-      <% "#{txt} #{current_balance.to_s.gsub(/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/, "\\1,")}"%>
-    <%end%> 
-    <%end%>
-
-  <h3>Current Balance : <%=number_to_indian_currency(current_account.current_balance)%></h3>
-<%end%>
+    <% if  user_signed_in? && controller.controller_name!="dashboards"  %>
+      <% if current_account != nil %>
+        <h3> Selected the Account Number : <%= current_account.acc_no %></h3>
+        <h3> Selected the Company : <%= current_account.company.name %></h3>
+        <% def number_to_indian_currency(current_balance, html=true)%>
+            <% txt = html ? ( 'Rs.') : 'Rs.' %>
+            <% "#{txt} #{current_balance.to_s.gsub(/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/, "\\1,")}"%>  
+        <%end%> 
+     
+        <h3>Current Balance : <%=number_to_indian_currency(current_account.current_balance)%></h3>
+      <% else%>
+        <h3><b>Select account number</b></h3>
+      <% end %>
+    <%end%>  
+  <%end%>
 </div> 
 </div>
 

@@ -163,7 +163,12 @@
               <h4 class="modal-title" id="myModalLabel">Particulars</h4>
           </div>
         <div class="modal-body">
+
           <div id="errorMsg">
+
+          </div>
+
+          <div id="form">
             <%= render './transactions/perticularform'%>
           </div>
         </div>
@@ -179,9 +184,21 @@
 </script>
 
 <script>
+     document.getElementById('transaction_formatted_date').tabIndex = "1";
+     document.getElementById('transaction_instrument_number').tabIndex = "2";
+     document.getElementById('transaction_perticular_id').tabIndex = "3";
+     document.getElementById('transaction_transaction_type_debit').tabIndex = "4";
+     document.getElementById('transaction_amount').tabIndex = "5";
+     document.getElementById('transaction_transaction_kind').tabIndex = "6";
+     document.getElementById('transaction_remark').tabIndex = "7";
+     document.getElementById('submit').tabIndex = "8";
+
+
+
     var transactionHandle = document.getElementById('transaction_perticular_id');
-    var creditHandle = document.getElementById('transaction_transaction_type_credit');
     var debitHandle = document.getElementById('transaction_transaction_type_debit');
+    var creditHandle = document.getElementById('transaction_transaction_type_credit');
+    
 
     var transformatteddateHandle = document.getElementById('transaction_formatted_date');
     var trans_dateErrorHandle = document.getElementById('trans_dateError');
@@ -192,7 +209,7 @@
     var transamountHandle = document.getElementById('transaction_amount');
     var trans_amountErrorHandle = document.getElementById('trans_amountError');
 
-    var formattedinstrudateHandle =document.getElementById('transaction_formattedinstru_date');
+    var formattedinstrudateHandle =document.getElementById('transaction_formattedinstru_date').tabIndex = "7";
     var instru_dateErrorHandle = document.getElementById('instru_dateError');
 
     var trans_kindHandle = document.getElementById('transaction_transaction_kind');
@@ -206,6 +223,7 @@
 
     var submitHandle = document.getElementById('submit');
 
+  
     submitHandle.disabled = true;
 
     var validator = {
@@ -247,9 +265,9 @@
       }else{
         trans_pertiErrorHandle.innerHTML = "";
         validator.perticular =true;
+        enableSubmit();
       }
-      submitHandle.disable= false;
-      enableSubmit();
+      
     }
 
      transformatteddateHandle.onblur = function(){
@@ -311,6 +329,74 @@
 
     
 
+    
+    //dynamic select
+    transamountHandle.onblur =function(){
+      validator.amount =false;
+      if(transamountHandle.value == ""){
+        trans_amountErrorHandle.innerHTML = "can't be blank";
+      }else{
+        trans_amountErrorHandle.innerHTML = "";
+        validator.amount =true;
+      }
+      enableSubmit();
+    }
+ 
+    formattedinstrudateHandle.onblur = function(){
+      validator.instrument_date =false;
+      if(formattedinstrudateHandle.value == ""){
+        instru_dateErrorHandle.innerHTML = "can't be blank";
+      }else{
+        instru_dateErrorHandle.innerHTML = "";
+        validator.instrument_date =true;
+      }
+      enableSubmit();
+    }
+    formattedinstrudateHandle.onchange = function(){
+      instru_dateErrorHandle.innerHTML = "";
+      validator.instrument_date =true;
+      enableSubmit();
+    }
+
+    // transactionHandle.onchange = function(){
+    //   validator.perticular =false;
+    //   if(transactionHandle.value == ""){
+    //     trans_pertiErrorHandle.innerHTML = "can't be blank";
+    //   }else{
+    //     trans_pertiErrorHandle.innerHTML = "";
+    //     validator.perticular =true;
+    //   }
+    //   enableSubmit();
+    // }
+
+
+    trans_kindHandle.onchange = function(){
+      validator.transaction_kind =false;
+      if (trans_kindHandle.value =="" ){
+        trans_kindErrorHandle.innerHTML = "can't be blank";
+      }else{
+         trans_kindErrorHandle.innerHTML ="";
+         validator.transaction_kind =true;
+      }
+       enableSubmit();
+    };
+  
+    window.onload = function(){
+      if(Object.values(validator).includes(false)){
+        submitHandle.disabled = true;
+      }else{
+        submitHandle.disabled = false;
+      }
+    }
+
+    function enableSubmit(){
+      if(Object.values(validator).includes(false)){
+        submitHandle.disabled = true;
+      }else{
+        submitHandle.disabled = false;
+      }
+    }
+
     // var companyHandle = document.getElementById('transaction_company_id');
     // var accountHandle = document.getElementById('transaction_account_id');
     // var spanHandle = document.getElementById('balance');
@@ -361,72 +447,31 @@
     //$('#datetimepicker1').datetimepicker();
     //$('#datetimepicker2').datetimepicker();
 
-    //dynamic select
-    transamountHandle.onblur =function(){
-      validator.amount =false;
-      if(transamountHandle.value == ""){
-        trans_amountErrorHandle.innerHTML = "can't be blank";
-      }else{
-        trans_amountErrorHandle.innerHTML = "";
-        validator.amount =true;
-      }
-      enableSubmit();
-    }
- 
-    formattedinstrudateHandle.onblur = function(){
-      validator.instrument_date =false;
-      if(formattedinstrudateHandle.value == ""){
-        instru_dateErrorHandle.innerHTML = "can't be blank";
-      }else{
-        instru_dateErrorHandle.innerHTML = "";
-        validator.instrument_date =true;
-      }
-      enableSubmit();
-    }
-    formattedinstrudateHandle.onchange = function(){
-      instru_dateErrorHandle.innerHTML = "";
-      validator.instrument_date =true;
-      enableSubmit();
-    }
 
-    // transperticularHandle.onchange = function(){
-    //   validator.perticular =false;
-    //   if(transperticularHandle.value == ""){
-    //     trans_pertiErrorHandle.innerHTML = "can't be blank";
-    //   }else{
-    //     trans_pertiErrorHandle.innerHTML = "";
-    //     validator.perticular =true;
-    //   }
-    //   submitHandle.disable= false;
-    // }
+  // select the target node
+var target = document.querySelector('#transaction_perticular_id');
 
+target.addEventListener("DOMNodeInserted", function (event) {
+  validator.perticular = true;
+  validator.transaction_type =true;
+}, false);
 
-    trans_kindHandle.onchange = function(){
-      validator.transaction_kind =false;
-      if (trans_kindHandle.value =="" ){
-        trans_kindErrorHandle.innerHTML = "can't be blank";
-      }else{
-         trans_kindErrorHandle.innerHTML ="";
-         validator.transaction_kind =true;
-      }
-       enableSubmit();
-    };
-  
-    window.onload = function(){
-      if(Object.values(validator).includes(false)){
-        submitHandle.disabled = true;
-      }else{
-        submitHandle.disabled = false;
-      }
-    }
-    
-    function enableSubmit(){
-      if(Object.values(validator).includes(false)){
-        submitHandle.disabled = true;
-      }else{
-        submitHandle.disabled = false;
-      }
-    }
+// // create an observer instance
+// var observer = new MutationObserver(function(mutations) {
+//   console.log(mutations);
+//   mutations.forEach(function(mutation) {
+//     console.log(mutation.type);
+//   });    
+// });
+
+// // configuration of the observer:
+// var config = { attributes: true, childList: true, characterData: true };
+
+// // pass in the target node, as well as the observer options
+// observer.observe(target, config);
+
+// // later, you can stop observing
+// observer.disconnect();
 
 
 </script>

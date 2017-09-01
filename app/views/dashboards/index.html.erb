@@ -47,7 +47,7 @@
 <h3>You Need To Select Account Before Proceeding</h3><br/><br/>
 </div>
 
-
+  
 	<%@accounts.order('created_at DESC').each do |acc| %>
 	<div class="col-md-6">
 	<div class="well well-sm">
@@ -68,6 +68,10 @@
 	</div>	
 	<%end%>	
   <br/>
+
+  <% unless Account.first != nil %>  
+    <%=link_to "Add first account",new_account_path ,class: "btn btn-primary"%>
+  <%end%> 
 
 
   <%=link_to "Print Preview" ,dashboards_print_preview_path(),class: "btn btn-primary" %><br/><br/>

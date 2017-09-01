@@ -1,3 +1,5 @@
+The transaction details from  <%=@transactions.first.transaction_date.strftime(" %d-%m-%Y") if @transactions.first.transaction_date!= nil%> to  <%=@transactions.last.transaction_date.strftime(" %d-%m-%Y") if @transactions.last.transaction_date!= nil%>
+
 <table>
         <thead>
             <tr>
