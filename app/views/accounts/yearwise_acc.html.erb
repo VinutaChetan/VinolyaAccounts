@@ -3,10 +3,12 @@
 <% @account.transactions.list[params[:year].to_i].each do |months| %>
 	<% if params[:year].to_i == Date.today.year %>
 		<%months.each do |key,value|%>
-			<%=link_to key,accounts_monthwise_acc_path(:year=>params[:year],:account_id =>@account.id,:month=> key),class:"btn btn-info"%>
+			<%=link_to "#{key}(#{value.count})",accounts_monthwise_acc_path(:year=>params[:year],:account_id =>@account.id,:month=> key),class:"btn btn-info"%>
 			<% if key== Date::MONTHNAMES[Date.today.end_of_month.month ]  %>
             <%break%> 
+
         <%end%> 
+
 		<%end%>	
 	<%else%>
 		<% @account.transactions.list[params[:year].to_i].each do |months| %>

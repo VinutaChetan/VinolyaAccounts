@@ -1,5 +1,8 @@
 <p id="notice"><%= notice %></p>
 
+<div class= "col-md-10">
+<div class = "transactionbox">
+  
 <p>
   <strong>Company Name:</strong>
   <%= @transaction.company.name %>
@@ -63,8 +66,9 @@
 <%= link_to 'Generate pdf',transaction_path(@transaction, format: "pdf"), target: "_blank",class: "btn btn-primary" %>
 
 <%= link_to 'print_preview', transactions_print_preview_path(transaction_id: @transaction.id),class: "btn btn-primary" %><br/><br/>
-
-
+  
+  </div>
+</div>
 
 <!-- <input type="button" value="Print this page" onclick="printpage()" class="btn btn-success">
  

@@ -68,13 +68,11 @@
 <% Transaction.list_view(current_account)[params[:year].to_i].each do |year| %>
    <% if params[:year].to_i == Date.today.year %>
       <%year.each do |key,value|%>  
-        <%=link_to key,transactions_monthwise_path(:year=> params[:year],:month => key),class:"btn btn-info"%>
-        
+        <%=link_to "#{key}  (#{value.count})",transactions_monthwise_path(:year=> params[:year],:month => key),class:"btn btn-info"%>
         <% Transaction.list_view(current_account)[params[:year].to_i].each do |year| %>
             <%year.each do |key,value|%>
               <%#=value.count%>
             <%end%>
-            <b>=> <%=value.count%></b>
         <%end%>
 
         <% if key== Date::MONTHNAMES[Date.today.end_of_month.month ]  %>
@@ -161,13 +159,13 @@
                       <%value.order('transaction_date ASC').each_with_index do |trans,index|%>
                         <tr>
                           <td>  <%=index+1%></td>
-                          <td>  <%=trans.transaction_date.strftime("%m-%d-%Y") %></td>
+                          <td>  <%=trans.transaction_date.strftime("%d-%m-%Y") %></td>
                           <td><%=trans.company.try(:name)%></td>
                           <td>  <%=trans.account.try(:acc_no)%></td>
                           <td>  <%=trans.perticular.try(:name)%></td>
                           <td>  <%=trans.transaction_type%></td>
                           <td>  <%=trans.amount%></td>
-                          <td>  <%=trans.transaction_kind%><td>
+                          <td>  <%=trans.transaction_kind%></td>
                           <td>  <%=trans.instrument_date.strftime("%d-%m-%Y") if trans.instrument_date!= nil%></td>
                           <td>  <%=trans.instrument_number%></td>
                           <td>  <%=trans.remark%></td>

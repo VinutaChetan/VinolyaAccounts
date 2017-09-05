@@ -41,7 +41,7 @@
     <div class="page-header">
         <h1>VINOLYA ACCOUNTS <small>From DCT Academy</small></h1>
     </div>
- 		<%=current_user.email %><br/><br/>
+ 		
  	<%end%>	
 </center>
 
@@ -99,7 +99,10 @@
 
              
            </ul>
-        </li>     
+        </li>   
+
+        
+
       </ul>
       <!-- <form class="navbar-form navbar-left">
         <div class="form-group">
@@ -149,9 +152,11 @@
             <%end%> 
           </ul> 
         </li>
+          
 
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class= "glyphicon glyphicon-user"></span></a>
+
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%="#{current_user.email}" %><span class= "glyphicon glyphicon-user"></span></a>
           <ul class="dropdown-menu">
             <li><%= link_to "Edit Account", edit_user_registration_path %></li>
             <li><%=link_to "Logout", destroy_user_session_path,method: :delete %></li>
@@ -178,7 +183,7 @@
   <%if controller.controller_name!="banks"%>
     <%if controller.controller_name!="branches"%>
     <div class="col-md-row">
-      <div class="col-md-6">
+      <div class="col-md-4">
     <ul class="breadcrumb">
 
     <%#unless (controller.controller_name!="transactions"and controller.action_name=="print_preview") || request.path == "/transactions/weekly_pp" || request.path == "/transactions/daily_pp" || controller.action_name =="softdelete_pp"%>
@@ -238,19 +243,18 @@
 <%end%>  
 
  
-<div class="col-md-6">
+<div class="col-md-8">
 <div class= "session">
   <% if controller.controller_name =="transactions" and controller.action_name!="print_preview" %>
     <% if  user_signed_in? && controller.controller_name!="dashboards"  %>
       <% if current_account != nil %>
-        <h3> Selected the Account Number : <%= current_account.acc_no %></h3>
-        <h3> Selected the Company : <%= current_account.company.name %></h3>
+        <h3> Account Number : <%= current_account.acc_no %>  Company : <%= current_account.company.name %>
         <% def number_to_indian_currency(current_balance, html=true)%>
             <% txt = html ? ( 'Rs.') : 'Rs.' %>
             <% "#{txt} #{current_balance.to_s.gsub(/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/, "\\1,")}"%>  
         <%end%> 
      
-        <h3>Current Balance : <%=number_to_indian_currency(current_account.current_balance)%></h3>
+         Current Balance : <%=number_to_indian_currency(current_account.current_balance)%></h3>
       <% else%>
         <h3><b>Select account number</b></h3>
       <% end %>

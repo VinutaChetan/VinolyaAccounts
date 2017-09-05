@@ -6,7 +6,8 @@
 <% @perticular.transactions.list[params[:year].to_i].each do |months| %>
 	<% if params[:year].to_i == Date.today.year %>
       <%months.each do |key,value|%>
-		<%=link_to key,perticulars_monthwise_perticular_path(:year=>params[:year],:perticular_id =>@perticular.id,:month=> key),class:"btn btn-info"%>
+		<%=link_to "#{key} (#{value.count})",perticulars_monthwise_perticular_path(:year=>params[:year],:perticular_id =>@perticular.id,:month=> key),class:"btn btn-info"%>
+		
 		<% if key== Date::MONTHNAMES[Date.today.end_of_month.month ]  %>
             <%break%> 
         <%end%> 
@@ -27,3 +28,62 @@
 		<%#=link_to key,perticulars_monthwise_perticular_path(:year=>params[:year],:perticular_id =>@perticular.id,:month=> key),class:"btn btn-info"%>
 	<%#end%>
 <%#end%>	
+<br/><br/>
+
+<% @perticular.transactions.list[params[:year].to_i].each do |months| %>
+	<% if params[:year].to_i == Date.today.year %>
+      <%months.each do |key,value|%>
+		<b><%=key%></b><br/>
+
+		<% if value == []%>
+            <!-- <h3>No Transactions Found</h3> -->
+        <%else%>   
+
+        <div class="container">
+          <div class="row">
+            
+             
+                  <table class ="table table-striped" id="myTable">
+                    <thead>
+                      <tr>
+                        <th class="text-success">SI.no</th>
+                        <th class="text-success">Transaction Date</th>
+                        <th class="text-success">Company Name</th>
+                        <th class="text-success">Account Number</th>
+                        <th class="text-success">Particular</th>
+                        <th class="text-success">Transaction type</th>
+                        <th class="text-success">Amount</th>
+                        <th class="text-success">Transaction kind</th>
+                        <th class="text-success">Instrument Date</th>
+                        <th class="text-success">Instrument Number</th>
+                        <th class="text-success">Remark</th>  
+                      </tr>
+                    </thead>
+                    <tbody id="myTable">
+                      <%value.order('transaction_date ASC').each_with_index do |trans,index|%>
+                        <tr>
+                          <td>  <%=index+1%></td>
+                          <td>  <%=trans.transaction_date.strftime("%d-%m-%Y") %></td>
+                          <td><%=trans.company.try(:name)%></td>
+                          <td>  <%=trans.account.try(:acc_no)%></td>
+                          <td>  <%=trans.perticular.try(:name)%></td>
+                          <td>  <%=trans.transaction_type%></td>
+                          <td>  <%=trans.amount%></td>
+                          <td>  <%=trans.transaction_kind%></td>
+                          <td>  <%=trans.instrument_date.strftime("%d-%m-%Y") if trans.instrument_date!= nil%></td>
+                          <td>  <%=trans.instrument_number%></td>
+                          <td>  <%=trans.remark%></td>
+                          
+                         </tr> 
+                      <%end%> <br/><br/>
+                        
+                    </tbody> 
+                  </table> 
+           </div> 
+        </div>
+  <% end %>
+
+<% end %>		
+<% end %>		
+<% end %>
+

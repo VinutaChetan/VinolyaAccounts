@@ -8,6 +8,10 @@ gem 'rabl'
 gem 'prawn-table'
 gem 'prawn'
 
+#gem 'sunspot_rails'
+ 
+
+
 # Use sqlite3 as the database for Active Record
 
 gem 'chartkick', '~> 1.2.4'
@@ -81,5 +85,7 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  #gem 'sunspot_solr'
 end
 
