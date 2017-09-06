@@ -109,7 +109,19 @@ input#user_password {
     width: 50%;
     border-color: chartreuse;
     border-radius: 5px;
-}   
+} 
+
+input#user_password_confirmation{
+    width: 50%;
+    border-color: chartreuse;
+    border-radius: 5px;
+}
+
+input#user_current_password{
+    width: 50%;
+    border-color: chartreuse;
+    border-radius: 5px;
+}  
 
 .registration {
     width: 50%;
