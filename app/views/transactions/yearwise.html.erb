@@ -81,7 +81,7 @@
       <%end%>  
   <%else%>
     <%year.each do |key,value|%>  
-        <%=link_to key,transactions_monthwise_path(:year=> params[:year],:month => key),class:"btn btn-info"%>
+        <%=link_to "#{key}  (#{value.count})",transactions_monthwise_path(:year=> params[:year],:month => key),class:"btn btn-info"%>
     <%end%>        
   <%end%>    
 <%end%>
