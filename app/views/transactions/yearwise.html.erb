@@ -133,7 +133,7 @@
         <h3><b><%=link_to key,transactions_monthwise_path(:year=> params[:year],:month => key,class: "bg-danger")%></b></h3>
         <h2><b><%key%></b></h2>
         <% if value == []%>
-            <!-- <h3>No Transactions Found</h3> -->
+            <h4>No Transactions Found</h4>
         <%else%>   
         <div class="container">
           <div class="row">

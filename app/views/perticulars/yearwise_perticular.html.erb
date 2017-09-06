@@ -33,10 +33,10 @@
 <% @perticular.transactions.list[params[:year].to_i].each do |months| %>
 	<% if params[:year].to_i == Date.today.year %>
       <%months.each do |key,value|%>
-		<b><%=key%></b><br/>
+		<b><%=key%> : </b>
 
 		<% if value == []%>
-            <!-- <h3>No Transactions Found</h3> -->
+           No Transactions Found<br/>
         <%else%>   
 
         <div class="container">
