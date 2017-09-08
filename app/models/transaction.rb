@@ -116,13 +116,21 @@ class Transaction < ActiveRecord::Base
 	def update_acc_balance
 		if !self.created_at_changed?
 			account=Account.find_by(id: self.account.id)
-			if (self.transaction_type=="credit")
+			if (self.transaction_type_was == "credit")
 				current_balance = account.current_balance - self.amount_was
+				
+			else
+				current_balance = account.current_balance + self.amount_was
+				
+			end
+			if (self.transaction_type=="credit")
+				#current_balance = account.current_balance - self.amount_was
 				account.current_balance = self.amount + current_balance
 				
-			else 
-				current_balance = account.current_balance + self.amount_was 
+			else (self.transaction_type=="debit")
+				#current_balance = account.current_balance + self.amount_was 
 				account.current_balance = current_balance - self.amount
+				
 			end
 			account.save
 		end
