@@ -15,7 +15,7 @@
 	<%else%>
 		<% @perticular.transactions.list[params[:year].to_i].each do |months| %>
 		<%months.each do |key,value|%>
-		<%=link_to key,perticulars_monthwise_perticular_path(:year=>params[:year],:perticular_id =>@perticular.id,:month=> key),class:"btn btn-info"%>
+		<%=link_to "#{key} (#{value.count})",perticulars_monthwise_perticular_path(:year=>params[:year],:perticular_id =>@perticular.id,:month=> key),class:"btn btn-info"%>
 	<%end%>
 <%end%>	
 

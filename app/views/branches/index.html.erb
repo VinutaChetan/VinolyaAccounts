@@ -16,8 +16,9 @@
   <thead>
     <tr>
       <th class="text-success">Name</th>
-      <th ></th>
-      <th ></th>
+      <% if current_user.role == "admin" %> 
+        <th ></th>
+      <% end %>
     </tr>
   </thead>
 
@@ -25,10 +26,12 @@
     <% @branches.order('created_at DESC').each do |branch| %>
       <tr>
         <td><%= branch.try(:name) %></td>
-        <td><%= link_to 'Show', branch,class: "btn btn-info" %></td>
         <% if can? :update, branch %> 
-          <td><%= link_to 'Edit', edit_branch_path(branch),class: "btn btn-info" %></td>
-        <%end %> 
+          <td><%= link_to 'Show', branch,class: "btn btn-info" %></td>
+        <% end %>
+        <%# if can? :update, branch %> 
+          <!-- <td><%#= link_to 'Edit', edit_branch_path(branch),class: "btn btn-info" %></td> -->
+        <%#end %> 
           
       </tr>
     <% end %>
