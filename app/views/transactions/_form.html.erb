@@ -190,8 +190,9 @@
      document.getElementById('transaction_transaction_type_debit').tabIndex = "4";
      document.getElementById('transaction_amount').tabIndex = "5";
      document.getElementById('transaction_transaction_kind').tabIndex = "6";
-     document.getElementById('transaction_remark').tabIndex = "7";
-     document.getElementById('submit').tabIndex = "8";
+     document.getElementById('transaction_formattedinstru_date').tabIndex = "7";
+     document.getElementById('transaction_remark').tabIndex = "8";
+     document.getElementById('submit').tabIndex = "9";
 
 
 
@@ -209,7 +210,7 @@
     var transamountHandle = document.getElementById('transaction_amount');
     var trans_amountErrorHandle = document.getElementById('trans_amountError');
 
-    var formattedinstrudateHandle =document.getElementById('transaction_formattedinstru_date').tabIndex = "7";
+    var formattedinstrudateHandle =document.getElementById('transaction_formattedinstru_date');
     var instru_dateErrorHandle = document.getElementById('instru_dateError');
 
     var trans_kindHandle = document.getElementById('transaction_transaction_kind');
@@ -233,8 +234,8 @@
       transaction_type: debitHandle.checked == true ? true : false || creditHandle.checked == true ? true :false,
       amount: transamountHandle.value != "" ? true : false,
       transaction_kind: trans_kindHandle.value != "" ? true : false,
-      instrument_date: formattedinstrudateHandle.value != "" ?true : false
-    }
+      instrument_date: formattedinstrudateHandle.value != "" ? true : false
+    };
 
     transactionHandle.onchange = function(){
       var request = new XMLHttpRequest();
@@ -343,7 +344,7 @@
     }
  
     formattedinstrudateHandle.onblur = function(){
-      validator.instrument_date =false;
+      validator.instrument_date = false;
       if(formattedinstrudateHandle.value == ""){
         instru_dateErrorHandle.innerHTML = "can't be blank";
       }else{
