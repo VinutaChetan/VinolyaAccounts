@@ -28,9 +28,6 @@
         <td><%= perticular.try(:name) %></td>
         <td><%= perticular.try(:perticular_type) %></td>
         <td><%= link_to 'Show', perticular,class: "btn btn-info" %></td>
-        <% if can? :update,perticular %> 
-          <td><%= link_to 'Edit', edit_perticular_path(perticular),class: "btn btn-info" %></td>
-        <%end%>
       </tr>
     <% end %>
   </tbody>

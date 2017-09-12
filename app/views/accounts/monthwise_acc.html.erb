@@ -4,10 +4,10 @@
 <div class="row">
   <div class="col-sm-6 col-md-7">
     <div class="acc_month">
-<%if @account.transactions.list[params[:year].to_i][0][params[:month]].empty?%>
-	<b><h3>No Transactions found </h3></b>
-<%else %>
-        <table class ="table table-striped" id="myTable">
+    <%if @account.transactions.list[params[:year].to_i][0][params[:month]].empty?%>
+    	<b><h3>No Transactions found </h3></b>
+    <%else %>
+        <table class ="table table-striped tabl">
             <thead>
                 <tr>
                     <th>SI.no</th>
@@ -24,7 +24,7 @@
                     <!-- <th>IFSC</th>     -->                          
                 </tr>    
             </thead>
-                <tbody id="myTable">
+                <tbody >
                 <% @account.transactions.list[params[:year].to_i][0][params[:month]].order('transaction_date DESC').each_with_index do |trans,index| %>
                 <tr>
                     <td>   <%=index+1%></td>
@@ -69,5 +69,6 @@
 </div>
 </div>  
 
-  
-
+  <script type="text/javascript">
+   $('.tabl').DataTable();  
+</script>

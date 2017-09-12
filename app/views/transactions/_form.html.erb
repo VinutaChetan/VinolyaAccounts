@@ -328,8 +328,16 @@
           return numberOnly.test(number);
         }
 
-    
-
+    // transamountHandle.onblur =function(){
+    //   validator.amount =false;
+    //   if(transamountHandle.value == ""){
+    //     trans_amountErrorHandle.innerHTML = "can't be blank";
+    //   }else{
+    //     trans_amountErrorHandle.innerHTML = "";
+    //         validator.amount =true;
+    //     }
+    //   enableSubmit();
+    // }
     
     //dynamic select
     transamountHandle.onblur =function(){
@@ -337,9 +345,18 @@
       if(transamountHandle.value == ""){
         trans_amountErrorHandle.innerHTML = "can't be blank";
       }else{
-        trans_amountErrorHandle.innerHTML = "";
-        validator.amount =true;
-      }
+        if(debitHandle.checked == true ){
+          if( "<%=  current_account.acc_type %>" != 'Over Draft'){
+          amount = <%= current_account.current_balance %> - transamountHandle.value;
+          if(amount < 0){
+            trans_amountErrorHandle.innerHTML = "amount should be less than current_balance";
+          } else{
+          trans_amountErrorHandle.innerHTML = "";
+            validator.amount =true;
+          }
+          }
+        } 
+      } 
       enableSubmit();
     }
  

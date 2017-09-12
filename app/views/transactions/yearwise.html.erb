@@ -87,40 +87,49 @@
 <%end%>
 <br/> <br/> 
 
-<%Transaction.list_cr_amount[params[:year].to_i].each do |months,amounts|%>
+<div class="container">
+  <div class= "row">
+    <div class= "col-md-6">
+        <%Transaction.list_cr_amount[params[:year].to_i].each do |months,amounts|%>
 
-<% a = 0 %>
-<%months.each do |month,amount|%>
-      <%amount%>
-      <%a = a + amount %>
-  <%end%>
-<% a %>
-<% data ={}
-  data["credit"]=a
-  %>
-  <%=column_chart(data) %>
+        <% a = 0 %>
+        <%months.each do |month,amount|%>
+              <%amount%>
+              <%a = a + amount %>
+          <%end%>
+        <% a %>
+        <% data ={}
+          data["credit"]=a
+          %>
+          <%=column_chart(data) %>
 
-<br/><br/>
+        <br/><br/>
 
-<%end%>
+        <%end%>
+    </div>
 
-<%# Total debit amount of perticular year%>
-<%Transaction.list_dr_amount[params[:year].to_i].each do |months,amounts|%>
+    <div class= "col-md-6">
+        <%# Total debit amount of perticular year%>
+        <%Transaction.list_dr_amount[params[:year].to_i].each do |months,amounts|%>
 
-<% a = 0 %>
-<%months.each do |month,amount|%>
-      <%amount%>
-      <%a = a + amount %>
-  <%end%>
-<% a %>
-<% data ={}
-  data["debit"]=a
-  %>
-  <%=column_chart(data) %>
+        <% a = 0 %>
+        <%months.each do |month,amount|%>
+              <%amount%>
+              <%a = a + amount %>
+          <%end%>
+        <% a %>
+        <% data ={}
+          data["debit"]=a
+          %>
+          <%=column_chart(data) %>
 
-<br/><br/>
+        <br/><br/>
 
-<%end%>     
+        <%end%>
+    </div>  
+      
+  </div> 
+</div>          
 
 <br/>
 
@@ -130,16 +139,18 @@
         <%# if key == Date.today.next_month.strftime("%B") %>
           <!--<h2>No months Found</h2> 
         <%#else%> --> 
-        <h3><b><%=link_to key,transactions_monthwise_path(:year=> params[:year],:month => key,class: "bg-danger")%></b></h3>
-        <h2><b><%key%></b></h2>
+        <!-- <h3><b><%#=link_to key,transactions_monthwise_path(:year=> params[:year],:month => key,class: "bg-danger")%></b></h3> -->
+        <% if value.present? %>
+        <h2><b><%=key%></b></h2>
+        <% end %>
         <% if value == []%>
-            <h4>No Transactions Found</h4>
+            <!-- <h4>No Transactions Found</h4> -->
         <%else%>   
         <div class="container">
           <div class="row">
             <div class="col-md-9 " >
               <div class="scrolling">
-                  <table class ="table table-striped" id="myTable">
+                  <table class ="table table-striped tabl">
                     <thead>
                       <tr>
                         <th class="text-success">SI.no</th>
@@ -213,7 +224,9 @@
 <%end%>
 
 
-
+ <script type="text/javascript">
+   $('.tabl').DataTable();  
+</script>
 
 
 

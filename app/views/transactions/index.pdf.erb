@@ -8,8 +8,8 @@
                       <tr>
                         <th style="padding: 10px;">SI.no</th>
                         <th style="padding: 10px;">Transaction Date</th>
-                        <th style="padding: 10px;">Company Name</th>
-                        <th style="padding: 10px;">Account Number</th>
+                        <!-- <th style="padding: 10px;">Company Name</th>
+                        <th style="padding: 10px;">Account Number</th> -->
                         <th style="padding: 10px;">Particular</th>
                         <th style="padding: 10px;">Transaction type</th>
                         <th style="padding: 10px;">Amount</th>
@@ -28,12 +28,12 @@
                       <tr>
                         <td style="padding: 10px;"><%=index+1%></td>
                         <td style="padding: 10px;"><%= val.transaction_date.strftime(" %d-%m-%Y") %></td>
-                        <%if val.company==nil%>
+                        <!-- <%#if val.company==nil%>
                             <td style="padding: 10px;">Null</td>
-                        <%else%>    
+                        <%#else%>    
                         <td style="padding: 10px;"><%= val.company.try(:name)%></td>
-                        <%end%>
-                        <td style="padding: 10px;"><%=val.account.try(:acc_no)%>
+                        <%#end%>
+                        <td style="padding: 10px;"><%=val.account.try(:acc_no)%> -->
                           <%if val.perticular==nil%>
                             <td style="padding: 10px;">Null</td>
                         <%else%> 

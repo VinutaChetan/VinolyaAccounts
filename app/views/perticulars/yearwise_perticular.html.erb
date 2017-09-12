@@ -6,22 +6,23 @@
 <% @perticular.transactions.list[params[:year].to_i].each do |months| %>
 	<% if params[:year].to_i == Date.today.year %>
       <%months.each do |key,value|%>
-		<%=link_to "#{key} (#{value.count})",perticulars_monthwise_perticular_path(:year=>params[:year],:perticular_id =>@perticular.id,:month=> key),class:"btn btn-info"%>
+		      <%=link_to "#{key} (#{value.count})",perticulars_monthwise_perticular_path(:year=>params[:year],:perticular_id =>@perticular.id,:month=> key),class:"btn btn-info"%>
 		
-		<% if key== Date::MONTHNAMES[Date.today.end_of_month.month ]  %>
+		      <% if key== Date::MONTHNAMES[Date.today.end_of_month.month ]  %>
             <%break%> 
-        <%end%> 
-	<%end%>
+          <%end%> 
+	    <%end%>
 	<%else%>
 		<% @perticular.transactions.list[params[:year].to_i].each do |months| %>
-		<%months.each do |key,value|%>
-		<%=link_to "#{key} (#{value.count})",perticulars_monthwise_perticular_path(:year=>params[:year],:perticular_id =>@perticular.id,:month=> key),class:"btn btn-info"%>
-	<%end%>
+		  <%months.each do |key,value|%>
+		      <%=link_to "#{key} (#{value.count})",perticulars_monthwise_perticular_path(:year=>params[:year],:perticular_id =>@perticular.id,:month=> key),class:"btn btn-info"%>
+	     <%end%><br/>
+    <%end%><br/>	
+  <%end%>
+
 <%end%>	
 
-<%end%>
-
-<%end%>	
+ <%=link_to "All transactions",perticulars_all_transaction_path(:year=>params[:year],:perticular_id =>@perticular.id),class:"btn btn-info"%>
 
 <%# @perticular.transactions.list_view[params[:year].to_i].each do |months| %>
 	<%#months.each do |key,value|%>
@@ -31,19 +32,18 @@
 <br/><br/>
 
 <% @perticular.transactions.list[params[:year].to_i].each do |months| %>
-	<% if params[:year].to_i == Date.today.year %>
+	<%# if params[:year].to_i == Date.today.year %>
       <%months.each do |key,value|%>
-		<b><%=key%> : </b>
-
-		<% if value == []%>
-           No Transactions Found<br/>
+        <% if value.present? %>  
+    		  <b><br/><br/> <%=key%> : </b>
+        <% end %>   
+    		<% if value == []%>
+              <!--  No Transactions Found<br/> -->
         <%else%>   
 
         <div class="container">
           <div class="row">
-            
-             
-                  <table class ="table table-striped" id="myTable">
+                  <table class ="table table-striped pertitable" >
                     <thead>
                       <tr>
                         <th class="text-success">SI.no</th>
@@ -59,7 +59,7 @@
                         <th class="text-success">Remark</th>  
                       </tr>
                     </thead>
-                    <tbody id="myTable">
+                    <tbody >
                       <%value.order('transaction_date ASC').each_with_index do |trans,index|%>
                         <tr>
                           <td>  <%=index+1%></td>
@@ -75,15 +75,19 @@
                           <td>  <%=trans.remark%></td>
                           
                          </tr> 
-                      <%end%> <br/><br/>
-                        
+                      <%end%>   
                     </tbody> 
                   </table> 
            </div> 
         </div>
-  <% end %>
+        <% end %>
 
-<% end %>		
-<% end %>		
+
+      <% end %>		
 <% end %>
+
+<script type="text/javascript">
+   $('.pertitable').DataTable();  
+</script>
+
 

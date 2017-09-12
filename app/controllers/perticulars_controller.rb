@@ -22,6 +22,10 @@ class PerticularsController < ApplicationController
      @perticular = Perticular.find_by(id: params[:perticular_id]) 
   end  
 
+  def all_transaction
+     @perticular = Perticular.find_by(id: params[:perticular_id]) 
+  end 
+
   # GET /perticulars/new
   def new
     @perticular = Perticular.new

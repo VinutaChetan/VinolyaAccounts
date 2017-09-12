@@ -50,6 +50,11 @@ select#transaction_perticular_id{
     width: 50%;
 }
 
+select#transaction_transaction_kind {
+    width: 75%;
+    height: 25px;
+}
+
 .chosen_select{
     width: 50%;
 }

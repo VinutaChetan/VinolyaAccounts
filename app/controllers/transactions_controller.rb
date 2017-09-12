@@ -140,7 +140,7 @@ class TransactionsController < ApplicationController
     Transaction.restore(params[:transaction_id])
     @transaction = Transaction.find(params[:transaction_id])
     @transaction.restore_transaction
-    redirect_to :back
+    redirect_to @transaction
   end  
 
   def select_perticular

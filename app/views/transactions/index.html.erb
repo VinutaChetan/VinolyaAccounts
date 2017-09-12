@@ -80,8 +80,8 @@
                       <tr>
                         <th class="text-success">SI.no</th>
                         <th class="text-success">Transaction Date</th>
-                        <th class="text-success">Company Name</th>
-                        <th class="text-success">Account Number</th>
+                        <!-- <th class="text-success">Company Name</th>
+                        <th class="text-success">Account Number</th> -->
                         <th class="text-success">Particular</th>
                         <th class="text-success">Transaction type</th>
                         <th class="text-success">Amount</th>
@@ -99,13 +99,13 @@
                        
                       <tr>
                         <td><%=index+1%></td>
-                        <td><%= val.transaction_date.strftime(" %d-%m-%Y") %></td>
-                        <%if val.company==nil%>
+                         <td><%= val.transaction_date.strftime(" %d-%m-%Y") %></td>
+                        <!-- <%#if val.company==nil%>
                             <td>Null</td>
-                        <%else%>    
-                        <td><%=link_to val.company.try(:name),company_path(val.company.id)%></td>
-                        <%end%>
-                        <td><%=link_to val.account.try(:acc_no),account_path(val.account.id)%>
+                        <%#else%>    
+                        <td><%#=link_to val.company.try(:name),company_path(val.company.id)%></td>
+                        <%#end%>
+                        <td><%#=link_to val.account.try(:acc_no),account_path(val.account.id)%> -->
                           <%if val.perticular==nil%>
                             <td>Null</td>
                         <%else%> 

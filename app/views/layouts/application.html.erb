@@ -87,7 +87,14 @@
 
         <% if Account.first != nil %>
             <li><%=link_to "Transaction",transactions_path %></li>
+        
+
+            <% if current_user.is_admin? %>
+                <li><%= link_to 'New Transaction', new_transaction_path %></li>
+            <%end%>
+
         <% end %>
+
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports <span class="glyphicon glyphicon-th-list"></span></a>
            <ul class="dropdown-menu">
@@ -134,14 +141,14 @@
             </li>
         </ul></li>
 
-        <li class="dropdown">
+        <!-- <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Accounts Links <span class="glyphicon glyphicon-th-list"></span></a>
            <ul class="dropdown-menu" >
-            <% all_accounts.each do |acc|%>
-               <li><%=link_to acc.acc_no, accounts_select_account_path(account_id: acc.id)%></li>
-            <%end%> 
+            <%# all_accounts.each do |acc|%>
+               <li><%#=link_to acc.acc_no, accounts_select_account_path(account_id: acc.id)%></li>
+            <%#end%> 
           </ul> 
-        </li>
+        </li> -->
 
 
         <li class="dropdown">
@@ -188,50 +195,50 @@
 
     <%#unless (controller.controller_name!="transactions"and controller.action_name=="print_preview") || request.path == "/transactions/weekly_pp" || request.path == "/transactions/daily_pp" || controller.action_name =="softdelete_pp"%>
      <%if controller.controller_name=="transactions" %>
-        <li><%=link_to "Transactions",transactions_path%><span class="divider">>></span></li> 
+        <li><%=link_to "Transactions",transactions_path%><span class="divider"></span></li> 
     <%end%> 
 
 
     <%if controller.controller_name=="transactions" and controller.action_name=="yearwise" %>
       
-      <%= link_to params[:year],transactions_yearwise_path(:year => params[:year])%><span class="divider">>></span><break> 
+      <li><%= link_to params[:year],transactions_yearwise_path(:year => params[:year])%><span class="divider"></span></li> 
         
     <%end%>
 
     <%if controller.controller_name=="transactions" and controller.action_name=="monthwise"%>
-      <%= link_to params[:year],transactions_yearwise_path(:year => params[:year])%><span class="divider">>></span><break> 
+      <li><%= link_to params[:year],transactions_yearwise_path(:year => params[:year])%><span class="divider"></span></li>
            
-      <%=link_to params[:month],transactions_monthwise_path(:year=> params[:year],:month => params[:month])%></li> 
+      <li><%=link_to params[:month],transactions_monthwise_path(:year=> params[:year],:month => params[:month])%></li> 
     <%end%>
 
 
     <%if controller.controller_name=="perticulars"%>
-        <li><%=link_to "Particulars",perticulars_path%><span class="divider">>></span></li> 
+        <li><%=link_to "Particulars",perticulars_path%><span class="divider"></span></li> 
     <%end%> 
 
     <%if controller.controller_name=="perticulars" and controller.action_name=="yearwise_perticular" %>
-        <li><%=link_to params[:year],perticulars_yearwise_perticular_path(:year => params[:year],:perticular_id =>@perticular.id)%><span class="divider">>></span></li>
+        <li><%=link_to params[:year],perticulars_yearwise_perticular_path(:year => params[:year],:perticular_id =>@perticular.id)%><span class="divider"></span></li>
     <%end%>    
 
     <%if controller.controller_name=="perticulars" and controller.action_name=="monthwise_perticular" %>
-        <li><%=link_to params[:year],perticulars_yearwise_perticular_path(:year => params[:year],:perticular_id =>@perticular.id)%><span class="divider">>></span></li>
+        <li><%=link_to params[:year],perticulars_yearwise_perticular_path(:year => params[:year],:perticular_id =>@perticular.id)%><span class="divider"></span></li>
 
-        <li><%=link_to params[:month],perticulars_monthwise_perticular_path(:year => params[:year],:month => params[:month],:perticular_id =>@perticular.id)%><span class="divider">>></span></li>   
+        <li><%=link_to params[:month],perticulars_monthwise_perticular_path(:year => params[:year],:month => params[:month],:perticular_id =>@perticular.id)%><span class="divider"></span></li>   
     <%end%>
 
 
 
 
     <%if controller.controller_name=="accounts"%>
-        <li><%=link_to "account",accounts_path%><span class="divider">>></span></li> 
+        <li><%=link_to "account",accounts_path%><span class="divider"></span></li> 
     <%end%> 
 
     <%if controller.controller_name=="accounts" and controller.action_name=="yearwise_acc" %>
-        <li><%=link_to params[:year],accounts_yearwise_acc_path(:year => params[:year],:account_id =>@account.id)%><span class="divider">>></span></li>
+        <li><%=link_to params[:year],accounts_yearwise_acc_path(:year => params[:year],:account_id =>@account.id)%><span class="divider"></span></li>
     <%end%>   
 
     <%if controller.controller_name=="accounts" and controller.action_name=="monthwise_acc" %>
-        <li><%=link_to params[:year],accounts_yearwise_acc_path(:year => params[:year],:account_id =>@account.id)%><span class="divider">>></span></li>
+        <li><%=link_to params[:year],accounts_yearwise_acc_path(:year => params[:year],:account_id =>@account.id)%><span class="divider"></span></li>
 
         <li><%=link_to params[:month],accounts_monthwise_acc_path(:year => params[:year],:month => params[:month],:account_id =>@account.id)%><span class="divider">>></span></li> 
     <%end%>    

@@ -21,8 +21,10 @@ Rails.application.routes.draw do
   get 'accounts/yearwise_acc'
   get 'accounts/monthwise_acc'
   get 'accounts/print_preview'
+  get 'accounts/all_transaction'
   get 'perticulars/yearwise_perticular'
   get 'perticulars/monthwise_perticular'
+  get 'perticulars/all_transaction'
   get 'transactions/select_perticular'
 
   #get "transactions/log_in_session"

@@ -20,6 +20,10 @@ class AccountsController < ApplicationController
 
   def monthwise_acc
     @account= Account.find_by(id: params[:account_id])
+  end 
+
+  def all_transaction
+    @account= Account.find_by(id: params[:account_id])
   end  
 
   # GET /accounts/new

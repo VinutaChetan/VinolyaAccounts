@@ -59,7 +59,7 @@
       <h3>No Accounts found </h3>
   <% else%>    
     <% @bank.accounts.each do |acc| %>  
-    <li><%=link_to acc.acc_no,bank_account_path(@bank,acc.id)%></li><br/>
+    <li><%=link_to acc.acc_no,bank_account_path(@bank,acc.id)%> : Rs. <%=acc.current_balance%></li><br/>
     <%end%>
   <%end%>
 </p>

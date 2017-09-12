@@ -6,7 +6,5 @@ class Perticular < ActiveRecord::Base
 	validates_presence_of :name,:perticular_type
 	validates_uniqueness_of :name
 
-	# searchable do
- #    	text :name
-	# end
+	
 end
