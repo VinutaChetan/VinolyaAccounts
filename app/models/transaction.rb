@@ -26,11 +26,9 @@ class Transaction < ActiveRecord::Base
 	def check_balance
 		if(self.transaction_type == "debit" && self.account.acc_type != "Over Draft")
 			balance = self.account.current_balance - self.amount
-			binding.pry
 			if(balance<0)
 				errors.add(:base,"amount should be less than current_balance")
 			end	
-			binding.pry
 		end	
 	end	
 

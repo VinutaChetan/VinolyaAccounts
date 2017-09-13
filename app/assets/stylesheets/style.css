@@ -189,6 +189,7 @@ input#user_current_password{
 .dashboard-style {
     background-color: aliceblue;
     padding: 30px;
+    height: auto;
 }
 
 .box-account{
@@ -477,5 +478,17 @@ label.debitradio {
 
 #trans_dateError,#trans_instruError,#trans_amountError,#instru_dateError,#trans_kindError{
     color: red;
+}
+
+/*.srcoll-1{
+    overflow-y: scroll;
+    height: 150px;
+    width: auto;
+}*/
+
+.srcoll-2{
+    overflow-y: scroll;
+    height: 150px;
+    width: auto;
 }
 

@@ -350,12 +350,14 @@
           amount = <%= current_account.current_balance %> - transamountHandle.value;
           if(amount < 0){
             trans_amountErrorHandle.innerHTML = "amount should be less than current_balance";
+              
           } else{
           trans_amountErrorHandle.innerHTML = "";
             validator.amount =true;
           }
           }
         } 
+        validator.amount =true;
       } 
       enableSubmit();
     }

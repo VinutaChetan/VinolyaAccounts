@@ -248,6 +248,26 @@ accountHandle.setAttribute('disabled', true);
     white-space: nowrap;
 }
 
-
+<!--<%#@accounts.order('created_at DESC').each do |acc| %>
+  <div class="col-md-6">
+    <div class="well well-sm">
+      <%# def number_to_indian_currency(current_balance, html=true)%>
+        <%# txt = html ? ( 'Rs.') : 'Rs.' %>
+        <%# "#{txt} #{current_balance.to_s.gsub(/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/, "\\1,")}"%>
+      <%#end%>
+      
+      
+      <%#if acc.company== nil%>
+        Company Name : No Company Found
+      <%#else%>
+      Company Name : <%= acc.company.name%>
+      <%#end%><br/>
+      
+      Account_no : <%#=link_to acc.acc_no , accounts_select_account_path(account_id: acc.id)%><br/></a>Current Balance : <%=number_to_indian_currency(acc.current_balance)%><br/>
+      
+    </div>
+  </div>  
+  <%#end%>  
+  <br/>-->
 
 

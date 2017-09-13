@@ -3,8 +3,8 @@ class DashboardsController < ApplicationController
 	# load_and_authorize_resource 
 
 	def index
-		@accounts=Account.all
-		
+		#@accounts=Account.all
+		@companies = Company.all
 	end	
 
 end

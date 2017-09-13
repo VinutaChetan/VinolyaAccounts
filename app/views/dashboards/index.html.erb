@@ -44,36 +44,58 @@
 
 <div class="dashboard-style">
 <div class="dashboard">
-<h3>Select Account Number</h3><br/><br/>
+<h3>Select Account Number</h3>
+<div class="form-group">  
+  <%=link_to "Print Preview" ,dashboards_print_preview_path(),class: "btn btn-primary pull-right" %>
+</div>  
+<br/><br/>
 </div>
 
-  
-	<%@accounts.order('created_at DESC').each do |acc| %>
-	<div class="col-md-6">
-  	<div class="well well-sm">
-  		<% def number_to_indian_currency(current_balance, html=true)%>
-   			<% txt = html ? ( 'Rs.') : 'Rs.' %>
-   			<% "#{txt} #{current_balance.to_s.gsub(/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/, "\\1,")}"%>
-   		<%end%>
-
-   		<%if acc.company== nil%>
-   			Company Name : No Company Found
-   		<%else%>
-  		Company Name : <%= acc.company.name%>
-  		<%end%><br/>
-   		
-  		Account_no : <%=link_to acc.acc_no , accounts_select_account_path(account_id: acc.id)%><br/></a>Current Balance : <%=number_to_indian_currency(acc.current_balance)%><br/>
-  		
-  	</div>
-	</div>	
-	<%end%>	
-  <br/>
-
-  <% unless Account.first != nil %>  
+<% unless Account.first != nil %>  
     <%=link_to "Add first account",new_account_path ,class: "btn btn-primary"%>
-  <%end%> 
+<%end%> 
+ <!--paste here--> 
+	
 
-  <%=link_to "Print Preview" ,dashboards_print_preview_path(),class: "btn btn-primary" %><br/><br/>
+  
+
+
+<div class="container">
+<div class="row">
+  
+  <% def number_to_indian_currency(current_balance, html=true)%>
+    <% txt = html ? ( 'Rs.') : 'Rs.' %>
+    <% "#{txt} #{current_balance.to_s.gsub(/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/, "\\1,")}"%>
+  <%end%>
+
+  <% @companies.each do |company|%>
+  <div class="col-md-6"> 
+        <% if company.accounts.present?%>
+      <div class="well well-sm">
+      
+          <% if company.name != nil %>
+            <b>Company Name : <%=company.name %></b><br/><br/>
+          <% end %>  
+        <% end %>
+
+        <% i= 1%>
+        <% if company.accounts.present?%>
+        <div class="srcoll-2 ">
+            <% company.accounts.each do |acc|%>
+                  <%=i %>)  Account_no : <%=link_to acc.acc_no, accounts_select_account_path(account_id: acc.id) %>  -  Current Balance : <%=number_to_indian_currency(acc.current_balance)%><br/>
+                  <% i+=1 %><br/>
+            <% end %>
+        </div>    
+        <% end %><br/>
+      
+    </div>
+    </div>
+  <% end %> <br/> 
+  
+</div>
+</div> 
+<br/>  
+<%=link_to "Print Preview" ,dashboards_print_preview_path(),class: "btn btn-primary" %>
 
 
   <script>
