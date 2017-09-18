@@ -204,6 +204,12 @@ transactionHandle.onchange = function(){
 
 
 
+             // if("<%=current_account.transaction_type_was%>" == "credit"){
+             //  var current_bal = "<%= current_account.current_balance_was %>" - "<%= current_account.amount_was %>"
+             //  binding.pry
+             //  var amount = current_bal - transamountHandle.value;
+             //  binding.pry
+             // }
 
 
 

@@ -21,13 +21,60 @@ class Transaction < ActiveRecord::Base
 
 	after_destroy :update_current_balance
 
-	validate :check_balance
+	validate :check_balance, :on => :create
+	validate :update_check_balance,:on =>:update
 
+	#for show error if the transaction type is not overdraft and it is debit , amount should not goies to negative while creating.
 	def check_balance
-		if(self.transaction_type == "debit" && self.account.acc_type != "Over Draft")
-			balance = self.account.current_balance - self.amount
-			if(balance<0)
-				errors.add(:base,"amount should be less than current_balance")
+			# binding.pry
+			if(self.transaction_type == "debit" && self.account.acc_type != "Over Draft")
+				balance = self.account.current_balance - self.amount
+				# binding.pry
+				if(balance<0)
+					errors.add(:base,"amount should be less than #{self.account.current_balance}");
+				end	
+			end	
+			# binding.pry	
+	end	
+
+	def update_check_balance
+		if !self.created_at_changed?
+			# binding.pry
+			if(self.transaction_type == "debit" && self.account.acc_type != "Over Draft")
+				# binding.pry
+				if(self.transaction_type_was == "credit")
+					current_balance = self.account.current_balance - self.amount_was
+				
+					if(self.account.current_balance!=0)
+						balance = current_balance - self.amount	
+						# binding.pry
+						if(balance < 0)
+							errors.add(:base,"amount should be less than #{current_balance}");
+						end	
+					else
+						if(self.account.current_balance == 0)
+							# binding.pry
+							errors.add(:base,"amount should not be less than Rs.0 ")
+							# binding.pry
+						end	
+					end
+				else
+					current_balance = self.account.current_balance + self.amount_was
+					if(current_balance!=0)
+						balance = current_balance - self.amount	
+						# binding.pry
+						if(balance < 0)
+							errors.add(:base,"amount should not be greater than #{current_balance}")
+						end	
+					else
+						if(current_balance == 0)
+							# binding.pry
+							errors.add(:base,"amount should not be less than Rs.0 ")
+							# binding.pry
+						end	
+					end
+
+				end	
 			end	
 		end	
 	end	
@@ -43,7 +90,7 @@ class Transaction < ActiveRecord::Base
 		format_str = ""
 		date_array = self.transaction_date.to_s.split('-')
 		format_str += "#{date_array[2]}-#{date_array[1]}-#{date_array[0]}"
-		#binding.pry
+		# binding.pry
 		return format_str == "--" ? nil : format_str
 	end
 

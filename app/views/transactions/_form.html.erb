@@ -51,7 +51,7 @@
        
         
             <%= f.hidden_field :company_id, value: current_account.company.id %> 
-            
+            <%#= binding.pry %>
             <%= f.hidden_field :account_id, value: current_account.id %> 
             <!-- <span id="balance"></span> -->
         
@@ -341,22 +341,104 @@
     
     //dynamic select
     transamountHandle.onblur =function(){
+     //console.log("<%= Account.find(current_account.id).current_balance_was %>");
+
+     
       validator.amount =false;
       if(transamountHandle.value == ""){
         trans_amountErrorHandle.innerHTML = "can't be blank";
       }else{
         if(debitHandle.checked == true ){
           if( "<%=  current_account.acc_type %>" != 'Over Draft'){
-          amount = <%= current_account.current_balance %> - transamountHandle.value;
-          if(amount < 0){
-            trans_amountErrorHandle.innerHTML = "amount should be less than current_balance";
+
+            if(checked_debit){
+              var balance1 = <%= current_account.current_balance %> + Number(before_balance);
+              var netbal1 = balance1 - transamountHandle.value;
+              if(netbal1 < 0){
+                trans_amountErrorHandle.innerHTML = "amount can't be greater than " + balance1 ;
+              }else{
+                trans_amountErrorHandle.innerHTML = "";
+                validator.amount =true;
+              }
+            }
+
+            if(checked_credit){
+              var balance1 = <%= current_account.current_balance %> - Number(before_balance);
+              console.log(balance1);
+              var netbal1 = balance1 - transamountHandle.value ;
+              console.log(netbal1)
+              if(netbal1 < 0){
+                trans_amountErrorHandle.innerHTML = "amount can't be greater than " + balance1 ;
+                validator.amount = false;
+              }else{
+                trans_amountErrorHandle.innerHTML = "";
+                validator.amount =true;
+              }
+            }
+
+
+
+
+          // amount = <%= current_account.current_balance %> - transamountHandle.value;
+          // if(amount < 0){
+          //   trans_amountErrorHandle.innerHTML = "amount should be less than current_balance";
               
-          } else{
+          // } else{
+          // trans_amountErrorHandle.innerHTML = "";
+          //   validator.amount =true;
+          // }
+          }
+          if(debitHandle.checked == true ){
+            if( "<%=  current_account.acc_type %>" != 'Over Draft'){
+              console.log("hi");
+            var first_time_debit = <%= current_account.current_balance %> - transamountHandle.value;
+            console.log("hello");
+                if(first_time_debit < 0 ){
+                  console.log("gm");
+                  trans_amountErrorHandle.innerHTML = "amount can't be greater than " + <%= current_account.current_balance %>;
+                  console.log("gn");
+                }
+            }
+          }else{
           trans_amountErrorHandle.innerHTML = "";
-            validator.amount =true;
+                validator.amount =true;
           }
-          }
+
         } 
+        // validator.amount =true;
+
+        // if(creditHandle.checked == true ){
+
+        //   if(checked_credit){
+        //     console.log(typeof(before_balance));
+        //       var cr_balance1 = <%= current_account.current_balance %> + Number(before_balance);
+        //       var cr_netbal1 = cr_balance1 + transamountHandle.value ;
+        //       if(cr_netbal1 < 0){
+        //         trans_amountErrorHandle.innerHTML = "amount can't be greater than " + cr_balance1 ;
+        //       }else{
+        //         trans_amountErrorHandle.innerHTML = "";
+        //         validator.amount =true;
+        //       }
+        //     }
+        //   }
+
+        //   if(checked_debit){
+
+        //       var cr_balance1 = <%= current_account.current_balance %> + Number(before_balance);
+
+        //       console.log(typeof(transamountHandle.value));
+        //       var cr_netbal1 = cr_balance1 + Number(transamountHandle.value);
+        //       console.log(cr_netbal1);
+        //       if(cr_netbal1 < 0){
+        //         trans_amountErrorHandle.innerHTML = "amount can't be greater than " + cr_balance1 ;
+        //       }else{
+        //         trans_amountErrorHandle.innerHTML = "";
+        //         validator.amount =true;
+        //       }
+        //     }
+
+        // }
+
         validator.amount =true;
       } 
       enableSubmit();
@@ -401,7 +483,16 @@
        enableSubmit();
     };
   
+    
+    var before_balance;
+    var checked_credit;
+    var checked_debit;
+
     window.onload = function(){
+      before_balance= document.getElementById('transaction_amount').value;
+      checked_credit = document.getElementById('transaction_transaction_type_credit').checked;
+      checked_debit = document.getElementById('transaction_transaction_type_debit').checked;
+
       if(Object.values(validator).includes(false)){
         submitHandle.disabled = true;
       }else{
