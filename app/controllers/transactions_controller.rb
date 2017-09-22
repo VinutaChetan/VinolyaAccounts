@@ -49,6 +49,8 @@ class TransactionsController < ApplicationController
   def create
   @transaction = Transaction.new(transaction_params)
   @perticular = Perticular.new
+  #@transaction.balance = current_account.current_balance
+
   # set the value for the transaction date 
   @transaction.formulate_date(params[:transaction][:formatted_date])
   # set the value for the instrument date 
@@ -74,8 +76,10 @@ class TransactionsController < ApplicationController
       @perticular = Perticular.new
       @transaction.formulate_date(params[:transaction][:formatted_date])
       @transaction.formulateinstru_date(params[:transaction][:formattedinstru_date])
-     
+      amount_was = @transaction.amount_was
+      binding.pry
       if @transaction.update(transaction_params)
+        @transaction.cascade(amount_was)
         format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
         format.json { render :show, status: :ok, location: @transaction }
         format.js
@@ -85,6 +89,7 @@ class TransactionsController < ApplicationController
         format.js
       end
     end
+
   end
 
   # DELETE /transactions/1
@@ -144,8 +149,7 @@ class TransactionsController < ApplicationController
   end  
 
   def select_perticular
-    @perticular=Perticular.find(params[:perticular_id])
-    
+    @perticular=Perticular.find(params[:perticular_id])   
   end  
 
   def print_preview
@@ -169,6 +173,7 @@ class TransactionsController < ApplicationController
   end 
 
   def daily_statement
+    @accounts = Account.where(id: Transaction.where('transaction_date =?',Date.today).pluck(:account_id).uniq)
     respond_to do |format|
      format.html
      format.xls
@@ -179,6 +184,8 @@ class TransactionsController < ApplicationController
   end  
 
   def weekly_statement
+    @accounts = Account.where(id: Transaction.where( 'transaction_date>= ? AND transaction_date <= ?',Date.today.beginning_of_week() ,Date.today.end_of_week()).pluck(:account_id).uniq)
+
     respond_to do |format|
      format.html
      format.xls
@@ -187,6 +194,7 @@ class TransactionsController < ApplicationController
         end
       end  
   end
+
  
   private
     # Use callbacks to share common setup or constraints between actions.

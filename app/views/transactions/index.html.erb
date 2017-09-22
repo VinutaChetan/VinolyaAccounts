@@ -22,10 +22,16 @@
 
           <label>End Date:</label> 
           <%= text_field_tag :end%><br/><br/>
-
-          <label>Account Number:</label>
+          
           <% if current_account != nil%>
-          <%= select_tag "acc_no", options_from_collection_for_select(Account.all, "id", "acc_no",:selected =>current_account.id),{:include_blank => false , :class => "product_select"}%><br/><br/>
+              <label>Company Name:</label>
+              <%= select_tag "company_name", options_from_collection_for_select(Company.all, "id", "name"),prompt: "select Company Name"%>
+
+              <%#= select_tag "company_name", options_from_collection_for_select(Company.all, "id", "name",selected =>current_account.company_id),{:include_blank => false , :class => "product_select"}%>
+    
+                <label>Account Number:</label>
+                <%= select_tag "acc_no", options_from_collection_for_select(Account.all, "id", "acc_no",:selected =>current_account.id),{:include_blank => false , :class => "product_select"}%><br/><br/>
+
           <%end%>
           <%#=collection_select :account_id,Account.all,:id,:acc_no,{prompt:"Select Account"}%>
           
@@ -71,59 +77,61 @@
 
 <h2 class="text-muted">Displaying Last 20 Records </h2>
 <br/>
+
 <%if @transactions.empty? %>
   <p>No transactions found </p>
 <%else %>
-<div class="container">
-                  <table class ="table table-striped" id="myTable">
-                    <thead>
-                      <tr>
-                        <th class="text-success">SI.no</th>
-                        <th class="text-success">Transaction Date</th>
-                        <!-- <th class="text-success">Company Name</th>
-                        <th class="text-success">Account Number</th> -->
-                        <th class="text-success">Particular</th>
-                        <th class="text-success">Transaction type</th>
-                        <th class="text-success">Amount</th>
-                        <th class="text-success">Transaction kind</th>
-                        <th class="text-success">Instrument Date</th>
-                        <th class="text-success">Instrument Number</th>
-                        <th class="text-success">Remark</th> 
-                        <th class="text-success">Show</th>
-                      </tr>
-                    </thead>
+  <div class="container">
+    <table class ="table table-striped" id="myTable">
+      <thead>
+        <tr>
+          <th class="text-success">SI.no</th>
+          <th class="text-success">Transaction Date</th>
+          <!-- <th class="text-success">Company Name</th>
+          <th class="text-success">Account Number</th> -->
+          <th class="text-success">Instrument Date</th>
+          <th class="text-success">Transaction kind</th>
+          <th class="text-success">Instrument Number</th>
+          <th class="text-success">Particular</th>
+           <th class="text-success">Amount</th>
+          <th class="text-success">Transaction type</th>
+          <th class="text-success">Balance</th>
+          <th class="text-success">Remark</th> 
+          <th class="text-success">Show</th>
+        </tr>
+      </thead>
 
-                    <tbody id="myTable">
+      <tbody id="myTable">
 
-                      <%@transactions.order('created_at DESC').limit(20).each_with_index do |val,index|%>
-                       
-                      <tr>
-                        <td><%=index+1%></td>
-                         <td><%= val.transaction_date.strftime(" %d-%m-%Y") %></td>
-                        <!-- <%#if val.company==nil%>
-                            <td>Null</td>
-                        <%#else%>    
-                        <td><%#=link_to val.company.try(:name),company_path(val.company.id)%></td>
-                        <%#end%>
-                        <td><%#=link_to val.account.try(:acc_no),account_path(val.account.id)%> -->
-                          <%if val.perticular==nil%>
-                            <td>Null</td>
-                        <%else%> 
-                        <td><%=link_to val.perticular.name,perticular_path(val.perticular.id) %></td>
-                        <%end%>
-                        <td><%= val.transaction_type %></td>
-                        <td><%= val.amount%></td>
-                        <td><%= val.transaction_kind %></td>
-                        <td><%= val.instrument_date.strftime(" %d-%m-%Y") if val.instrument_date != nil %></td>
-                        <td><%= val.instrument_number if val.instrument_number !=nil%></td>
-                        <td><%= val.remark %></td>
-                        <td><%= link_to 'Show',val,class: "btn btn-info" %></td>
-                      </tr> 
-                      <%end%>
-                    </tbody>
-                  </table>             
-   </div>
-   <%end%>
+        <%@transactions.order('created_at DESC').limit(20).each_with_index do |transaction, index|%> 
+          <tr>
+            <td><%=index+1%></td>
+            <td><%= transaction.transaction_date.strftime(" %d-%m-%Y") %></td>
+            <!-- <%#if transaction.company==nil%>
+                <td>Null</td>
+            <%#else%>    
+            <td><%#=link_to transaction.company.try(:name),company_path(transaction.company.id)%></td>
+            <%#end%>
+            <td><%#=link_to transaction.account.try(:acc_no),account_path(transaction.account.id)%> -->
+            <td><%= transaction.instrument_date.strftime(" %d-%m-%Y") if transaction.instrument_date != nil %></td>  
+            <td><%= transaction.transaction_kind %></td>
+            <td><%= transaction.instrument_number if transaction.instrument_number !=nil%></td>
+            <%if transaction.perticular==nil%>
+              <td>Null</td>
+            <%else%> 
+              <td><%=link_to transaction.perticular.name,perticular_path(transaction.perticular.id) %></td>
+            <%end%>
+            <td><%= transaction.amount%></td>
+            <td><%= transaction.transaction_type %></td>
+            <td><%=transaction.balance%></td>
+            <td><%= transaction.remark %></td>
+            <td><%= link_to 'Show',transaction,class: "btn btn-info" %></td>
+          </tr> 
+        <%end%>
+      </tbody>
+    </table>             
+  </div>
+<%end%>
 
 
    <script type="text/javascript">
@@ -131,11 +139,21 @@
 </script>
 
 <script>
+
+
+    var validator = {
+      start_date: false,
+      end_date:  false,
+      acc_no: false   
+    };
+
+
  var searchHandle = document.getElementById('search');
  searchHandle.disabled = true;
   var startHandle = document.getElementById('start');
   var endHandle = document.getElementById('end');
   var search_dateErrorHandle = document.getElementById('search_dateError');
+  
   endHandle.onchange = function(){
     var startDateFormatted = formatDate(startHandle.value);
     var endDateFormatted = formatDate(endHandle.value);
@@ -143,15 +161,64 @@
       search_dateErrorHandle.innerHTML = "Start date should be less than end date";
     }else{
       search_dateErrorHandle.innerHTML = "";
-      searchHandle.disabled = false;
+      //searchHandle.disabled = false;
+      validator.start_date = true;
+      validator.end_date = true;
+      enableSubmit();
+     
     }
   }
+
   function formatDate(date){
     var splitDate = date.split("-");
     var formatedDate = "20" + splitDate[2] +"-" + splitDate[1] +"-" +
      splitDate[0];
     return formatedDate;
   }
+
+
+  var companyHandle = document.getElementById('company_name');
+  var accountHandle = document.getElementById('acc_no');
+  accountHandle.innerHTML = "";
+  companyHandle.onchange = function(){
+    accountHandle.innerHTML = "";
+    var output = "";
+    var xhr =  new XMLHttpRequest();
+    xhr.open('GET','/companies/find_accounts?company_id='+ companyHandle.value );
+    xhr.onreadystatechange = function(){
+      if(xhr.readyState == 4 && xhr.status == 200){
+        var accounts=JSON.parse(xhr.responseText);
+        accounts.forEach(function(account){
+          output +="<option value =" + account.id + ">" + account.acc_no + "</option>";
+        });
+        accountHandle.innerHTML=output;
+      }
+    }
+    xhr.send();
+  };
+
+
+
+accountHandle.onchange = function(){
+  if(accountHandle.value == ""){
+   
+  }else{
+    validator.acc_no = true;  
+    enableSubmit();
+  }
+
+}
+
+
+function enableSubmit(){
+      if(Object.values(validator).includes(false)){
+        searchHandle.disabled = true;
+      }else{
+        searchHandle.disabled = false;
+      }
+    }
+
+    
 
 </script>
           

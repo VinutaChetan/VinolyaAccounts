@@ -4,16 +4,15 @@
                       <tr>
                         <th class="text-success">SI.no</th>
                         <th class="text-success">Transaction Date</th>
+                        <th class="text-success">Instrument Date</th>
                         <th class="text-success">Company Name</th>
                         <th class="text-success">Account Number</th>
-                        <th class="text-success">Particular</th>
-                        <th class="text-success">Transaction type</th>
-                        <th class="text-success">Amount</th>
                         <th class="text-success">Transaction kind</th>
-                        <th class="text-success">Instrument Date</th>
-                        <th class="text-success">Instrument Number</th>
-                        <th class="text-success">Remark</th> 
-
+                         <th class="text-success">Instrument Number</th>
+                        <th class="text-success">Particular</th>
+                        <th class="text-success">Amount</th>
+                        <th class="text-success">Transaction type</th>
+                        <th class="text-success">Remark</th>  
                       </tr>
                     </thead>
 
@@ -22,18 +21,18 @@
                       <%@transactions.order('created_at DESC').each do |val|%>
                         <% if val.transaction_date == Date.today%>
                       <tr>
-                        <td>   <%=i%></td>
-                    <td>  <%=val.transaction_date.strftime(" %d-%m-%Y") if val.transaction_date!=nil%></td>
-                    <td>  <%=val.company.name%></td>
-                    <td>  <%=val.account.acc_no%></td>
-                    <td>  <%=val.perticular.name%></td>
-                    <td>  <%=val.transaction_type%></td>
-                    <td>  <%=val.amount%></td>
-                    <td><%= val.transaction_kind %></td>
-                    <td><%= val.instrument_date.strftime(" %d-%m-%Y") if val.instrument_date!=nil%></td>
-                    <td><%= val.instrument_number%></td>
-                    <td>  <%=val.remark%></td>
-                      </tr> 
+                            <td>   <%=i%></td>
+                            <td>  <%=val.transaction_date.strftime("%d-%m-%Y") if val.transaction_date!=nil %></td>
+                            <td><%= val.instrument_date.strftime("%d-%m-%Y") if val.instrument_date!=nil%></td>
+                            <td>  <%=val.company.name%></td>
+                            <td>  <%=val.account.acc_no%></td>
+                            <td><%= val.transaction_kind %></td>
+                            <td><%= val.instrument_number%></td>
+                            <td>  <%=val.perticular.name%></td>
+                            <td>  <%=val.amount%></td>
+                            <td>  <%=val.transaction_type%></td>
+                            <td>  <%=val.remark%></td>
+                          </tr> 
                       <% i = i+1%>
                       <%end%>
                       <%end%>

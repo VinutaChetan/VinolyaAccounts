@@ -1,32 +1,4 @@
-<div class="statements">
-<%if @transactions.empty? %>
-  <p>No transactions found </p>
-<%else %>
-<div class="conatainer">
-  <div class="col-md-row">
-  
-    
-<!-- Searching-->
-          <%=form_tag transactions_weekly_results_path(),method: :get do %>
-
-          
-          <% if current_account != nil%>
-              
-                <label>Account Number:</label>
-                <%= select_tag "id", options_from_collection_for_select(@accounts, "id", "acc_no"),{:prompt=>"select account number"}%><br/><br/>
-
-          <%end%>
-          <%#=collection_select :account_id,Account.all,:id,:acc_no,{prompt:"Select Account"}%>
-          
-          <%=submit_tag "Search",id: "search"%> 
-          <%end%>  
-    </div>
-</div><br/>
- 
-
 <div class="container">
-<h3 class="text-muted">Transactions From : <%=Date.today.beginning_of_week().to_s(:long)%> To : <%=Date.today.to_s(:long)%> </h3>
-
                   <table class ="table table-striped" id="myTable">
                     <thead>
                        <tr>
@@ -46,8 +18,10 @@
 
                     <tbody id="myTable">
                        <% i = 1 %>
-                      <%@transactions.order('created_at DESC').each do |val|%>
-                        <%if val.transaction_date >= Date.today.beginning_of_week() && val.transaction_date<= Date.today.end_of_week() %>
+                      <%Transaction.order('created_at DESC').where('transaction_date>= ? AND transaction_date <= ? AND account_id = ?',Date.today.beginning_of_week() ,Date.today.end_of_week(), params[:id]).each do |val|%>
+
+                      <%# if val.account.acc_no == params[:acc_no]%>
+                        
                           <tr>
                             <td>   <%=i%></td>
                             <td>  <%=val.transaction_date.strftime("%d-%m-%Y") if val.transaction_date!=nil %></td>
@@ -62,54 +36,12 @@
                             <td>  <%=val.remark%></td>
                           </tr> 
                           <% i =i+1%>
-                        <%end%>
+                      <%#end %>
                       <%end%>
                     </tbody>
                   </table>             
    </div>
-   <%end%>   
-</div>
-
-<div class="container">
-<div class="daily_statement_button">
-  <div class="col-md-3">
-<%= link_to 'print_preview', transactions_weekly_pp_path,class: "btn btn-primary" %><br/><br/>
-</div>
-
-  <div class="col-md-3">
-<%= link_to 'Export to Excel', transactions_weekly_statement_path(format:"xls"),class: "btn btn-primary" %><br/><br/>
-</div>
-
- <div class="col-md-3">
-<%= link_to 'Generate PDF', transactions_weekly_statement_path(format:"pdf"),class: "btn btn-primary" %><br/><br/>
-</div>
-</div>
-</div>
-
 
 <script type="text/javascript">
    $('#myTable').DataTable();  
 </script>
-
-<script>
-  var acc_searchHandle = document.getElementById('id');
-  var searchHandle = document.getElementById('search');
-
-  searchHandle.disabled = true;
-
-  acc_searchHandle.onchange = function(){
-    if (acc_searchHandle.value == ""){
-      searchHandle.disabled = true;
-    }else{
-      searchHandle.disabled = false;
-    }
-  };
-
-</script>
-
-
-
-
-
-
-

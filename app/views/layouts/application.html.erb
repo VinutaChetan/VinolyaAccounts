@@ -194,8 +194,12 @@
     <ul class="breadcrumb">
 
     <%#unless (controller.controller_name!="transactions"and controller.action_name=="print_preview") || request.path == "/transactions/weekly_pp" || request.path == "/transactions/daily_pp" || controller.action_name =="softdelete_pp"%>
-     <%if controller.controller_name=="transactions" %>
-        <li><%=link_to "Transactions",transactions_path%><span class="divider"></span></li> 
+     <%#if controller.controller_name=="transactions" %>
+        <!-- <li><%#=link_to "Transactions",transactions_path%><span class="divider"></span></li>  -->
+    <%#end%> 
+
+    <%if controller.controller_name=="transactions" and controller.action_name !="print_preview" and controller.action_name !="weekly_pp"%>
+        <li><%=link_to "Transactions",transactions_path%><span class="divider"></span></li>  
     <%end%> 
 
 
@@ -212,7 +216,7 @@
     <%end%>
 
 
-    <%if controller.controller_name=="perticulars"%>
+    <%if controller.controller_name=="perticulars" %>
         <li><%=link_to "Particulars",perticulars_path%><span class="divider"></span></li> 
     <%end%> 
 

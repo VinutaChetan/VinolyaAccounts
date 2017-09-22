@@ -5,14 +5,14 @@
                       <tr>
                         <th style="padding: 10px;">SI.no</th>
                         <th style="padding: 10px;">Transaction Date</th>
+                        <th style="padding: 10px;">Instrument Date</th>
                         <th style="padding: 10px;">Company Name</th>
                         <th style="padding: 10px;">Account Number</th>
-                        <th style="padding: 10px;">Particular</th>
-                        <th style="padding: 10px;">Transaction type</th>
-                        <th style="padding: 10px;">Amount</th>
                         <th style="padding: 10px;">Transaction kind</th>
-                        <th style="padding: 10px;">Instrument Date</th>
                         <th style="padding: 10px;">Instrument Number</th>
+                        <th style="padding: 10px;">Particular</th>
+                        <th style="padding: 10px;">Amount</th>
+                        <th style="padding: 10px;">Transaction type</th>
                         <th style="padding: 10px;">Remark</th> 
 
                       </tr>
@@ -25,14 +25,14 @@
                     <tr>
                       <td style="padding: 10px"><%=i%></td>
                       <td style="padding: 10px">  <%=val.transaction_date.strftime(" %d-%m-%Y") if val.transaction_date!=nil%></td>
+                      <td style="padding: 10px"><%= val.instrument_date.strftime(" %d-%m-%Y") if val.instrument_date!=nil%></td>
                       <td style="padding: 10px">  <%=val.company.name%></td>
                       <td style="padding: 10px">  <%=val.account.acc_no%></td>
-                      <td style="padding: 10px">  <%=val.perticular.name%></td>
-                      <td style="padding: 10px">  <%=val.transaction_type%></td>
-                      <td style="padding: 10px">  <%=val.amount%></td>
                       <td style="padding: 10px"><%= val.transaction_kind %></td>
-                      <td style="padding: 10px"><%= val.instrument_date.strftime(" %d-%m-%Y") if val.instrument_date!=nil%></td>
                       <td style="padding: 10px"><%= val.instrument_number%></td>
+                      <td style="padding: 10px">  <%=val.perticular.name%></td>
+                       <td style="padding: 10px">  <%=val.amount%></td>
+                      <td style="padding: 10px">  <%=val.transaction_type%></td>
                       <td style="padding: 10px">  <%=val.remark%></td>
                     </tr> 
                     <% i= i+1%>

@@ -13,16 +13,54 @@ class Transaction < ActiveRecord::Base
 	validates_numericality_of :amount
 	validates_uniqueness_of :instrument_number
 
+	
 
 	after_save :add_acc_balance
 	after_save :update_acc_balance
-	
 
-
+	before_save :set_balance, on: :create 
+	#before_update :update_set_balance
 	after_destroy :update_current_balance
 
 	validate :check_balance, :on => :create
 	validate :update_check_balance,:on =>:update
+
+	def amount_was
+		return self.amount
+	end
+	
+	def set_balance
+		if(self.transaction_type == "credit")
+			self.balance = self.account.current_balance + self.amount
+		else
+			self.balance = self.account.current_balance - self.amount	
+		end	
+	end	
+
+	def cascade(amount_was)
+		if(self.transaction_type == "credit")
+
+			t = Transaction.where( 'account_id = ? AND created_at > ?',self.account_id, self.created_at)
+			t.each do |trans|
+				if(trans.transaction_type == "credit" and trans.transaction_type_was == "credit" )
+					binding.pry
+					difference = self.amount  - amount_was
+					trans_balance = trans.balance+difference
+					trans.balance = trans_balance
+					binding.pry
+					trans.save
+					binding.pry
+				end
+
+				# break
+			end
+		end
+	end	
+
+	# def update_set_balance
+		
+		
+	# end
 
 	#for show error if the transaction type is not overdraft and it is debit , amount should not goies to negative while creating.
 	def check_balance
@@ -321,7 +359,5 @@ class Transaction < ActiveRecord::Base
 			account.save
 		end
 	end
-
-	
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170704043629) do
+ActiveRecord::Schema.define(version: 20170921064217) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "acc_no"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20170704043629) do
     t.datetime "deleted_at"
     t.date     "instrument_date"
     t.string   "instrument_number"
+    t.float    "balance"
   end
 
   add_index "transactions", ["deleted_at"], name: "index_transactions_on_deleted_at"
@@ -112,6 +113,7 @@ ActiveRecord::Schema.define(version: 20170704043629) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "role"
+    t.string   "userid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

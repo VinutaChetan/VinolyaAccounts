@@ -5,15 +5,16 @@
         <thead>
             <tr>
             	<th style="padding: 10px;">SI.no</th>
-                <th style="padding: 10px;">Transaction Date</th>
+               
                 <th style="padding: 10px;">Company Name</th>
                 <th style="padding: 10px;">Account Number</th>
-                <th style="padding: 10px;">Particular</th>
-                <th style="padding: 10px;">Transaction type</th>
-                <th style="padding: 10px;">Amount</th>
-                <th style="padding: 10px;">Transaction kind</th>
-                <th style="padding: 10px;">Instrument Date</th>
+                 <th style="padding: 10px;">Transaction Date</th>
+                 <th style="padding: 10px;">Instrument Date</th>
+                 <th style="padding: 10px;">Transaction kind</th>
                 <th style="padding: 10px;">Instrument Number</th>
+                <th style="padding: 10px;">Particular</th>
+                <th style="padding: 10px;">Amount</th>
+                <th style="padding: 10px;">Transaction type</th>
                 <th style="padding: 10px;">Remark</th>                        
             </tr>    
         </thead>
@@ -23,15 +24,15 @@
         	<% @transactions.order('transaction_date ASC').each_with_index do |trans,index|%>
     		<tr>
                 <td style="padding: 10px;"><%=index+1%></td>
-                <td style="padding: 10px;"><%=trans.transaction_date.strftime(" %d-%m-%Y") if trans.transaction_date!= nil %></td>
                 <td style="padding: 10px;"><%=trans.company.try(:name)%></td>
                 <td style="padding: 10px;"><%=trans.account.acc_no%></td>
-                <td style="padding: 10px;"><%=trans.perticular.try(:name)%></td>
-                <td style="padding: 10px;"><%= trans.transaction_type %></td>
-                <td style="padding: 10px;"><%= trans.amount%></td>
-                <td style="padding: 10px;"><%= trans.transaction_kind %></td>
+                <td style="padding: 10px;"><%=trans.transaction_date.strftime(" %d-%m-%Y") if trans.transaction_date!= nil %></td>
                 <td style="padding: 10px;"><%= trans.instrument_date.strftime(" %d-%m-%Y") if trans.instrument_date!= nil  %></td>
+                <td style="padding: 10px;"><%= trans.transaction_kind %></td>
                 <td style="padding: 10px;"><%= trans.instrument_number%></td>
+                <td style="padding: 10px;"><%=trans.perticular.try(:name)%></td>
+                <td style="padding: 10px;"><%= trans.amount%></td>
+                <td style="padding: 10px;"><%= trans.transaction_type %></td>
                 <td style="padding: 10px;"><%= trans.remark %></td>    
 
             </tr>

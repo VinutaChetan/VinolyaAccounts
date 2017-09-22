@@ -109,7 +109,7 @@ input#user_email {
     border-radius: 5px;
 }
 
-input#user_password {
+input#user_password,#user_userid {
     column-count: col-sm-6;
     width: 50%;
     border-color: chartreuse;

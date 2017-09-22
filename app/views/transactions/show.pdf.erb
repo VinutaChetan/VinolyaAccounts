@@ -9,25 +9,16 @@
 </p>
 
 <p>
-  <strong>Transaction date:</strong>
-  <%= @transaction.transaction_date.strftime(" %d-%m-%Y") if @transaction.transaction_date != nil  %>
-</p>
-
-<p>
   <strong>Company Name:</strong>
   <%= @transaction.company.name %>
 </p>
 
 
 <p>
-  <strong>Transaction type:</strong>
-  <%= @transaction.transaction_type %>
+  <strong>Transaction date:</strong>
+  <%= @transaction.transaction_date.strftime(" %d-%m-%Y") if @transaction.transaction_date != nil  %>
 </p>
 
-<p>
-  <strong>Transaction type:</strong>
-  <%= @transaction.amount %>
-</p>
 
 <p>
   <strong>Instrument date:</strong>
@@ -35,8 +26,24 @@
 </p>
 
 <p>
+  <strong>Transaction kind:</strong>
+  <%= @transaction.transaction_kind %>
+</p>
+
+<p>
   <strong>Instrument number:</strong>
   <%= @transaction.instrument_number %>
+</p>
+
+
+<p>
+  <strong>Transaction amount:</strong>
+  <%= @transaction.amount %>
+</p>
+
+<p>
+  <strong>Transaction type:</strong>
+  <%= @transaction.transaction_type %>
 </p>
 
 <p>
@@ -44,8 +51,5 @@
   <%= @transaction.remark %>
 </p>
 
-<p>
-  <strong>Transaction kind:</strong>
-  <%= @transaction.transaction_kind %>
-</p><br/>
+<br/>
 

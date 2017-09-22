@@ -1,7 +1,7 @@
 class CompaniesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:find_accounts]
   before_action :set_company, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource 
+  #load_and_authorize_resource 
   # GET /companies
   # GET /companies.json
   def index
@@ -67,6 +67,10 @@ class CompaniesController < ApplicationController
     @company = Company.find(params[:company_id])
     @accounts = @company.accounts
   end
+
+  def find_accounts
+    @accounts = Account.where('company_id=?',params[:company_id])
+  end  
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'transactions/weekly_pp'
   #get 'transactions/weekly_pp_pdf'
   get 'transactions/daily_pp'
+  get 'companies/find_accounts'
   get 'accounts/yearwise_acc'
   get 'accounts/monthwise_acc'
   get 'accounts/print_preview'
@@ -26,6 +27,9 @@ Rails.application.routes.draw do
   get 'perticulars/monthwise_perticular'
   get 'perticulars/all_transaction'
   get 'transactions/select_perticular'
+  get 'transactions/weekly_results'
+  get 'transactions/daily_results'
+  get 'transactions/weekly_results_pp'
 
   #get "transactions/log_in_session"
   # get "log_out_session" => "sessions#destroy", :as => "log_out_session"
@@ -38,6 +42,7 @@ Rails.application.routes.draw do
   get 'banks/welcome'
   get 'dashboards/index'
   get 'dashboards/print_preview'
+  
 
   resources :transactions
   resources :perticulars 

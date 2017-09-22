@@ -40,12 +40,12 @@
                     <th>Transaction Date</th>
                     <!-- <th>Company Name</th>
                     <th>Account Number</th> -->
-                    <th>Particular</th>
-                    <th>Transaction type</th>
-                    <th>Amount</th>
-                    <th>Transaction kind</th>
                     <th>Instrument Date</th>
+                    <th>Transaction kind</th>
                     <th>Instrument Number</th>
+                    <th>Particular</th>
+                    <th>Amount</th>
+                    <th>Transaction type</th>
                     <th>Remark</th> 
                 </tr>    
             </thead>
@@ -58,12 +58,12 @@
                     <td>  <%=trans.transaction_date.strftime("%d-%m-%Y")%></td>
                     <!-- <td>  <%=trans.company.name%></td>
                     <td>  <%=trans.account.acc_no%></td> -->
-                    <td>  <%=trans.perticular.name%></td>
-                    <td>  <%=trans.transaction_type%></td>
-                    <td>  <%=trans.amount%></td>
-                    <td><%= trans.transaction_kind %></td>
                     <td><%= trans.instrument_date.strftime("%d-%m-%Y") if trans.instrument_date != nil%></td>
+                    <td><%= trans.transaction_kind %></td>
                     <td><%= trans.instrument_number%></td>
+                    <td>  <%=trans.perticular.name%></td>
+                    <td>  <%=trans.amount%></td>
+                    <td>  <%=trans.transaction_type%></td>
                     <td>  <%=trans.remark%></td>
                     
                 </tr>

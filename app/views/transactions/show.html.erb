@@ -19,6 +19,17 @@
 </p>
 
 <p>
+  <strong>Instrument date:</strong>
+  <%= @transaction.instrument_date.strftime("%d-%m-%Y") if@transaction.instrument_date!=nil %>
+</p>
+
+
+<p>
+  <strong>Transaction kind:</strong>
+  <%= @transaction.transaction_kind %>
+</p>
+
+<p>
   <strong>Instrument number:</strong>
   <%= @transaction.instrument_number %>
 </p>
@@ -36,16 +47,6 @@
 <p>
   <strong>Transaction type:</strong>
   <%= @transaction.transaction_type %>
-</p>
-
-<p>
-  <strong>Instrument date:</strong>
-  <%= @transaction.instrument_date.strftime("%d-%m-%Y") if@transaction.instrument_date!=nil %>
-</p>
-
-<p>
-  <strong>Transaction kind:</strong>
-  <%= @transaction.transaction_kind %>
 </p>
 
 <p>

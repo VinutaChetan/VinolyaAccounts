@@ -13,18 +13,20 @@
 	<table class ="table table-striped" id="myTable">
             <thead>
                 <tr>
-                    <th>SI.no</th>
-                    <th>Transaction Date</th>
-                    <th>Company Name</th>
-                    <th>Account Number</th>
-                    <th>Particular</th>
-                    <th>Transaction type</th>
-                    <th>Amount</th>
-                    <th>Transaction kind</th>
-                    <th>Instrument Date</th>
-                    <th>Instrument Number</th>
-                    <th>Remark</th>                              
-                </tr>    
+                  <th>SI.no</th>
+                  <th>Transaction Date</th>
+                  <th>Instrument Date</th>
+                  <th>Company Name</th>
+                  <th>Account Number</th>
+                  <th>Transaction kind</th>
+                  <th>Instrument Number</th>
+                  <th>Particular</th>
+                  <th>Amount</th>
+                  <th>Transaction type</th>
+                  
+                  <th>Remark</th> 
+                  <!-- <th>IFSC</th>     -->                          
+              </tr>    
             </thead>
                 <tbody id="myTable">
                   <%if @perticular==nil%>
@@ -34,14 +36,14 @@
                 <tr>
                     <td>   <%=index+1%></td>
                     <td>  <%=trans.transaction_date.strftime("%d-%m-%Y")%></td>
+                    <td><%= trans.instrument_date.strftime("%d-%m-%Y") if trans.instrument_date != nil%></td>
                     <td>  <%=trans.company.name%></td>
                     <td>  <%=trans.account.acc_no%></td>
-                    <td>  <%=trans.perticular.name%></td>
-                    <td>  <%=trans.transaction_type%></td>
-                    <td>  <%=trans.amount%></td>
                     <td><%= trans.transaction_kind %></td>
-                    <td><%= trans.instrument_date.strftime("%d-%m-%Y") if trans.instrument_date != nil%></td>
                     <td><%= trans.instrument_number%></td>
+                    <td>  <%=trans.perticular.name%></td>
+                    <td>  <%=trans.amount%></td>
+                    <td>  <%=trans.transaction_type%></td>
                     <td>  <%=trans.remark%></td>
                 </tr>
                 <%end%> <br/><br/> 
