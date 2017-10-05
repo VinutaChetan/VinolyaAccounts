@@ -13,21 +13,19 @@ class Transaction < ActiveRecord::Base
 	validates_numericality_of :amount
 	validates_uniqueness_of :instrument_number
 
-	
-
 	after_save :add_acc_balance
-	after_save :update_acc_balance
+	after_save :update_current_account_balance
 
-	before_save :set_balance, on: :create 
-	#before_update :update_set_balance
+	validate :set_balance, :on => :create 
+	
 	after_destroy :update_current_balance
 
-	validate :check_balance, :on => :create
+	validate :check_balance, :on =>:create
 	validate :update_check_balance,:on =>:update
 
-	def amount_was
-		return self.amount
-	end
+	# def amount_was
+	# 	return self.amount
+	# end
 	
 	def set_balance
 		if(self.transaction_type == "credit")
@@ -37,78 +35,113 @@ class Transaction < ActiveRecord::Base
 		end	
 	end	
 
-	def cascade(amount_was)
-		if(self.transaction_type == "credit")
+	# def cascade(amount_was)
+	# 	# if(self.transaction_type == "credit")
+	# 		# binding.pry
+	# 		diff_plus = self.amount  + amount_was
+	# 		diff_minus = amount_was - self.amount
+	# 		t = Transaction.where( 'account_id = ? AND created_at >= ?',self.account_id, self.created_at)
+	# 		# binding.pry
+	# 		t.each do |trans|
+	# 			if(trans.transaction_type == "credit" and trans.transaction_type_was == "credit" )
+	# 				trans.balance = trans.balance + diff_minus
+	# 				# binding.pry
+	# 			elsif(trans.transaction_type == "credit" and trans.transaction_type_was == "debit" )
+	# 				binding.pry
+	# 				trans.balance = trans.balance - diff_plus	
+	# 				binding.pry
+	# 			elsif(trans.transaction_type == "debit" and trans.transaction_type_was == "debit" )
+	# 				trans.balance = trans.balance - diff_minus	
+	# 				# binding.pry
+	# 			elsif(trans.transaction_type == "debit" and trans.transaction_type_was == "credit" )
+	# 				trans.balance = trans.balance + diff_plus	
+	# 				# binding.pry
+	# 			end
+	# 			trans.save
+	# 			# break
 
-			t = Transaction.where( 'account_id = ? AND created_at > ?',self.account_id, self.created_at)
-			t.each do |trans|
-				if(trans.transaction_type == "credit" and trans.transaction_type_was == "credit" )
-					binding.pry
-					difference = self.amount  - amount_was
-					trans_balance = trans.balance+difference
-					trans.balance = trans_balance
-					binding.pry
-					trans.save
-					binding.pry
-				end
+	# 		end
+	# 	# end
+	#  end	
 
-				# break
-			end
-		end
+	def cascade
+		t = Transaction.where( 'account_id = ? AND created_at < ?',self.account_id , self.created_at).last
+		if t.present?
+			t.balance
+			temp = t.balance
+			tran = Transaction.where( 'account_id = ? AND created_at >= ?',self.account_id, self.created_at)
+			tran.each do |trans|
+				if(trans.transaction_type == "credit" )
+					trans.balance= temp + trans.amount
+				else 
+					trans.balance= temp - trans.amount	
+				end	
+				trans.save
+				temp=trans.balance
+			end	
+		else
+			if(self.transaction_type == "credit" )
+				self.balance = self.account.opening_balance + self.amount
+			else
+				self.balance = self.account.opening_balance - self.amount
+			end	
+			self.save
+			temp = self.balance
+			tran = Transaction.where( 'account_id = ? AND created_at > ?',self.account_id, self.created_at)
+			binding.pry
+			tran.each do |trans|
+				if(trans.transaction_type == "credit" )
+					trans.balance= temp + trans.amount
+					binding.pry
+				else 
+					trans.balance= temp - trans.amount	
+					binding.pry
+				end	
+				trans.save
+				temp=trans.balance
+			end	
+		end	
 	end	
 
-	# def update_set_balance
-		
-		
-	# end
 
 	#for show error if the transaction type is not overdraft and it is debit , amount should not goies to negative while creating.
 	def check_balance
-			# binding.pry
 			if(self.transaction_type == "debit" && self.account.acc_type != "Over Draft")
 				balance = self.account.current_balance - self.amount
-				# binding.pry
 				if(balance<0)
 					errors.add(:base,"amount should be less than #{self.account.current_balance}");
 				end	
 			end	
-			# binding.pry	
 	end	
 
 	def update_check_balance
 		if !self.created_at_changed?
-			# binding.pry
 			if(self.transaction_type == "debit" && self.account.acc_type != "Over Draft")
-				# binding.pry
 				if(self.transaction_type_was == "credit")
 					current_balance = self.account.current_balance - self.amount_was
-				
 					if(self.account.current_balance!=0)
 						balance = current_balance - self.amount	
-						# binding.pry
 						if(balance < 0)
 							errors.add(:base,"amount should be less than #{current_balance}");
 						end	
 					else
 						if(self.account.current_balance == 0)
-							# binding.pry
-							errors.add(:base,"amount should not be less than Rs.0 ")
-							# binding.pry
+							errors.add(:base,"You can't debit because amount is Rs.0 ")
 						end	
 					end
 				else
 					current_balance = self.account.current_balance + self.amount_was
 					if(current_balance!=0)
 						balance = current_balance - self.amount	
-						# binding.pry
 						if(balance < 0)
 							errors.add(:base,"amount should not be greater than #{current_balance}")
 						end	
-					else
+						if(balance == 0)
+							errors.add(:base,"amount should  be less than #{current_balance}")
+						end	
+					else 
 						if(current_balance == 0)
-							# binding.pry
-							errors.add(:base,"amount should not be less than Rs.0 ")
-							# binding.pry
+							errors.add(:base,"amount should not be less than RS .0")
 						end	
 					end
 
@@ -207,25 +240,22 @@ class Transaction < ActiveRecord::Base
 	end
 	end
 	
-	def update_acc_balance
+	def update_current_account_balance
 		if !self.created_at_changed?
 			account=Account.find_by(id: self.account.id)
 			if (self.transaction_type_was == "credit")
 				current_balance = account.current_balance - self.amount_was
-				
 			else
 				current_balance = account.current_balance + self.amount_was
-				
 			end
 			if (self.transaction_type=="credit")
 				#current_balance = account.current_balance - self.amount_was
 				account.current_balance = self.amount + current_balance
-				
 			else (self.transaction_type=="debit")
 				#current_balance = account.current_balance + self.amount_was 
 				account.current_balance = current_balance - self.amount
-				
 			end
+			#account.current_balance = self.balance
 			account.save
 		end
 	end		
@@ -340,10 +370,6 @@ class Transaction < ActiveRecord::Base
 			#year should be increse to next index
 			start_year = start_year + 1
 		end
-		# cr_dr={}
-		# types=["credit","debit"]
-		# cr_dr[types]=
-		#return data
 		return data_debit
 		#return cr_dr
 	end	

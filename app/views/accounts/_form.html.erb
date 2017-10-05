@@ -17,11 +17,19 @@
     <p id ="accountError"></p>
   </div>
 
+<% if !@account.new_record? %>
+  <div class="field">
+    <%= f.label :opening_balance %><br>
+    <%= f.text_field :opening_balance,class:"col-sm-6",:readonly => true %><br/><br/> 
+    <p id ="opening_balanceError"></p>
+  </div>
+<%else %>
   <div class="field">
     <%= f.label :opening_balance %><br>
     <%= f.text_field :opening_balance,class:"col-sm-6" %><br/><br/> 
     <p id ="opening_balanceError"></p>
   </div>
+<% end %>  
 
   <div class="field">
     <%= f.label :bank_id %><br>
@@ -55,11 +63,19 @@
     <%= f.label :Others %>
   </div><br/>
 
+<% if !@account.new_record? %>
   <div class="field">
+    <%= f.label :current_balance %><br>
+    <%= f.text_field :current_balance,class:"col-sm-6" ,:readonly => true%><br/><br/> 
+    <p id ="current_balanceError"></p>
+  </div>
+<% else %>
+ <div class="field">
     <%= f.label :current_balance %><br>
     <%= f.text_field :current_balance,class:"col-sm-6" %><br/><br/> 
     <p id ="current_balanceError"></p>
-  </div>
+  </div>  
+<% end %>  
 
   <div class="field">
     <%= f.label :IFSC %><br>
@@ -109,11 +125,23 @@
     }
   }
 
+  // current_balanceHandle.onblur = function(){
+  //   if(current_balanceHandle.value == ""){
+  //     current_balanceErrorHandle.innerHTML = "Can't be blank";
+  //   }else{
+  //     current_balanceErrorHandle.innerHTML = "";
+  //   }
+  // }
+
   current_balanceHandle.onblur = function(){
     if(current_balanceHandle.value == ""){
       current_balanceErrorHandle.innerHTML = "Can't be blank";
     }else{
-      current_balanceErrorHandle.innerHTML = "";
+      if(opening_balanceHandle.value == current_balanceHandle.value ){
+        current_balanceErrorHandle.innerHTML = "";
+      }else{
+        current_balanceErrorHandle.innerHTML = "amount should match with opening balance amount";
+      }
     }
   }
 

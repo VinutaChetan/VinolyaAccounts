@@ -1,7 +1,7 @@
 <div class="container">
-                  <table class ="table table-striped" id="myTable">
-                    <thead>
-                       <tr>
+    <table class ="table table-bordered" >
+        <thead>
+            <tr >
                         <th class="text-success">SI.no</th>
                         <th class="text-success">Transaction Date</th>
                         <th class="text-success">Instrument Date</th>
@@ -15,10 +15,11 @@
                         <th class="text-success">Remark</th>  
                       </tr>
                     </thead>
-
+                   
                     <tbody id="myTable">
                        <% i = 1 %>
-                      <%Transaction.order('created_at DESC').where('transaction_date>= ? AND transaction_date <= ? AND account_id = ?',Date.today.beginning_of_week() ,Date.today.end_of_week(), params[:id]).each do |val|%>
+                      <%@transactions.each do |val|%>
+                      
 
                       <%# if val.account.acc_no == params[:acc_no]%>
                         
@@ -42,6 +43,12 @@
                   </table>             
    </div>
 
-<script type="text/javascript">
-   $('#myTable').DataTable();  
-</script>
+   <input type="button" value="Print this page" onclick="printpage()" class="btn btn-success">
+
+
+<script>
+    function printpage()
+      {
+      window.print()
+      }
+    </script>

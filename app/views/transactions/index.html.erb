@@ -152,6 +152,7 @@
  searchHandle.disabled = true;
   var startHandle = document.getElementById('start');
   var endHandle = document.getElementById('end');
+
   var search_dateErrorHandle = document.getElementById('search_dateError');
   
   endHandle.onchange = function(){
@@ -192,6 +193,13 @@
           output +="<option value =" + account.id + ">" + account.acc_no + "</option>";
         });
         accountHandle.innerHTML=output;
+        if (accountHandle.innerHTML == ""){
+          validator.acc_no = false;
+          searchHandle.disabled = true;
+        }else{
+          validator.acc_no = true;
+          enableSubmit();
+        }
       }
     }
     xhr.send();
@@ -199,15 +207,6 @@
 
 
 
-accountHandle.onchange = function(){
-  if(accountHandle.value == ""){
-   
-  }else{
-    validator.acc_no = true;  
-    enableSubmit();
-  }
-
-}
 
 
 function enableSubmit(){

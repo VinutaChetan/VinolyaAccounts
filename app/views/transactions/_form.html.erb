@@ -363,16 +363,21 @@
             }
 
             if(checked_credit){
-              var balance1 = <%= current_account.current_balance %> - Number(before_balance);
-              console.log(balance1);
-              var netbal1 = balance1 - transamountHandle.value ;
-              console.log(netbal1)
-              if(netbal1 < 0){
-                trans_amountErrorHandle.innerHTML = "amount can't be greater than " + balance1 ;
-                validator.amount = false;
+              val = <%=current_account.current_balance %>
+              if( val == 0 ){
+                trans_amountErrorHandle.innerHTML = "you can't debit because amount is Rs.0" ;
               }else{
-                trans_amountErrorHandle.innerHTML = "";
-                validator.amount =true;
+                var balance1 = <%= current_account.current_balance %> - Number(before_balance);
+                console.log(balance1);
+                var netbal1 = balance1 - transamountHandle.value ;
+                console.log(netbal1)
+                if(netbal1 < 0){
+                  trans_amountErrorHandle.innerHTML = "amount can't be greater than " + balance1 ;
+                  validator.amount = false;
+                }else{
+                  trans_amountErrorHandle.innerHTML = "";
+                  validator.amount =true;
+                }
               }
             }
 
@@ -388,22 +393,27 @@
           //   validator.amount =true;
           // }
           }
-          if(debitHandle.checked == true ){
-            if( "<%=  current_account.acc_type %>" != 'Over Draft'){
-              console.log("hi");
-            var first_time_debit = <%= current_account.current_balance %> - transamountHandle.value;
-            console.log("hello");
-                if(first_time_debit < 0 ){
-                  console.log("gm");
-                  trans_amountErrorHandle.innerHTML = "amount can't be greater than " + <%= current_account.current_balance %>;
-                  console.log("gn");
-                }
-            }
-          }else{
-          trans_amountErrorHandle.innerHTML = "";
-                validator.amount =true;
-          }
 
+    // this is for why i am getting UI error 
+          
+          // if(debitHandle.checked == true ){
+          //   if( "<%=  current_account.acc_type %>" != 'Over Draft'){
+          //     console.log("hi");
+          //     var first_time_debit = <%= current_account.current_balance %> - transamountHandle.value;
+          //     console.log("hello");
+          //     if(first_time_debit < 0 ){
+          //       console.log("gm");
+          //       trans_amountErrorHandle.innerHTML = "amount can't be greater than " + <%= current_account.current_balance %>;
+          //       console.log("gn");
+          //     }
+          //     else  {
+          //       trans_amountErrorHandle.innerHTML = "";
+          //       console.log("mgn");
+          //       validator.amount =true;
+          //     }
+          //   }
+          // }
+          
         } 
         // validator.amount =true;
 

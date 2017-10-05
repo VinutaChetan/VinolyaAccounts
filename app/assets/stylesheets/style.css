@@ -22,7 +22,7 @@ tbody.myTable {
     background-color: white;
 }
 
-select#account_branch_id {
+select#account_branch_id,#account_bank_id {
     width: 50%;
 }
 

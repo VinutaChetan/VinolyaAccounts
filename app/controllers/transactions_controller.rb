@@ -76,10 +76,11 @@ class TransactionsController < ApplicationController
       @perticular = Perticular.new
       @transaction.formulate_date(params[:transaction][:formatted_date])
       @transaction.formulateinstru_date(params[:transaction][:formattedinstru_date])
-      amount_was = @transaction.amount_was
-      binding.pry
+      #amount_was = @transaction.amount_was
+      #binding.pry
       if @transaction.update(transaction_params)
-        @transaction.cascade(amount_was)
+        @transaction.cascade
+        #@transaction.update_current_account_balance
         format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
         format.json { render :show, status: :ok, location: @transaction }
         format.js
@@ -170,6 +171,7 @@ class TransactionsController < ApplicationController
 
   def softdelete_pp
     @transactions=Transaction.only_deleted
+    binding.pry
   end 
 
   def daily_statement
@@ -194,6 +196,14 @@ class TransactionsController < ApplicationController
         end
       end  
   end
+
+  def weekly_results_pp
+    @transactions=Transaction.where('transaction_date>= ? AND transaction_date <= ? AND account_id = ?',Date.today.beginning_of_week() ,Date.today.end_of_week(), params[:account_id])
+  end  
+
+  def daily_results_pp
+    @transactions =Transaction.where('transaction_date=? AND account_id=?',Date.today, params[:account_id])
+  end  
 
  
   private

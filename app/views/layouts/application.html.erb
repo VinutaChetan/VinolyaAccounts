@@ -52,7 +52,8 @@
 
 <%if user_signed_in? %>
 <!--This condition for Dashboard-->
-<% unless controller.controller_name=="dashboards" %>
+<% unless controller.controller_name=="dashboards" || controller.action_name == 'weekly_results_pp' %>
+
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -197,7 +198,7 @@
      <%#if controller.controller_name=="transactions" %>
         <!-- <li><%#=link_to "Transactions",transactions_path%><span class="divider"></span></li>  -->
     <%#end%> 
-
+  <% unless controller.action_name == 'weekly_results_pp' || controller.action_name == 'daily_results_pp'  %>
     <%if controller.controller_name=="transactions" and controller.action_name !="print_preview" and controller.action_name !="weekly_pp"%>
         <li><%=link_to "Transactions",transactions_path%><span class="divider"></span></li>  
     <%end%> 
@@ -214,7 +215,7 @@
            
       <li><%=link_to params[:month],transactions_monthwise_path(:year=> params[:year],:month => params[:month])%></li> 
     <%end%>
-
+  <% end%>
 
     <%if controller.controller_name=="perticulars" %>
         <li><%=link_to "Particulars",perticulars_path%><span class="divider"></span></li> 
@@ -256,6 +257,7 @@
  
 <div class="col-md-8">
 <div class= "session">
+  <% unless controller.action_name == 'weekly_results_pp' || controller.action_name == 'daily_results_pp'  %>
   <% if controller.controller_name =="transactions" and controller.action_name!="print_preview" %>
     <% if  user_signed_in? && controller.controller_name!="dashboards"  %>
       <% if current_account != nil %>
@@ -271,6 +273,7 @@
       <% end %>
     <%end%>  
   <%end%>
+  <% end %>
 </div> 
 </div>
 

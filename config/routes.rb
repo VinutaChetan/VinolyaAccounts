@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get 'transactions/weekly_results'
   get 'transactions/daily_results'
   get 'transactions/weekly_results_pp'
+  get 'transactions/daily_results_pp'
 
   #get "transactions/log_in_session"
   # get "log_out_session" => "sessions#destroy", :as => "log_out_session"
