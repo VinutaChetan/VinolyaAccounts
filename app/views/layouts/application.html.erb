@@ -34,7 +34,7 @@
 
 </script>
 
- <% unless controller.action_name == "print_preview" || request.path == "/transactions/weekly_pp" || request.path == "/transactions/daily_pp" || controller.action_name =="softdelete_pp"%> 
+ <% unless controller.action_name == "print_preview" || request.path == "/transactions/weekly_pp" || request.path == "/transactions/daily_pp" || controller.action_name =="softdelete_pp"||request.path=="/transactions/search_printpreview"%> 
  
 <center>
 	<% if user_signed_in? %>
@@ -198,7 +198,7 @@
      <%#if controller.controller_name=="transactions" %>
         <!-- <li><%#=link_to "Transactions",transactions_path%><span class="divider"></span></li>  -->
     <%#end%> 
-  <% unless controller.action_name == 'weekly_results_pp' || controller.action_name == 'daily_results_pp'  %>
+  <% unless controller.action_name == 'weekly_results_pp' || controller.action_name == 'daily_results_pp' || controller.action_name =='search_printpreview'  %>
     <%if controller.controller_name=="transactions" and controller.action_name !="print_preview" and controller.action_name !="weekly_pp"%>
         <li><%=link_to "Transactions",transactions_path%><span class="divider"></span></li>  
     <%end%> 

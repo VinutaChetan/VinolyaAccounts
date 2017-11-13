@@ -15,6 +15,7 @@
                 <th style="padding: 10px;">Particular</th>
                 <th style="padding: 10px;">Amount</th>
                 <th style="padding: 10px;">Transaction type</th>
+                <th style="padding: 10px;">Balance</th> 
                 <th style="padding: 10px;">Remark</th>                        
             </tr>    
         </thead>
@@ -33,6 +34,7 @@
                 <td style="padding: 10px;"><%=trans.perticular.try(:name)%></td>
                 <td style="padding: 10px;"><%= trans.amount%></td>
                 <td style="padding: 10px;"><%= trans.transaction_type %></td>
+                <td style="padding: 10px;"><%= trans.balance%></td>
                 <td style="padding: 10px;"><%= trans.remark %></td>    
 
             </tr>

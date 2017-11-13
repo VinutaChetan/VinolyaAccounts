@@ -19,6 +19,7 @@ class Transaction < ActiveRecord::Base
 	validate :set_balance, :on => :create 
 	
 	after_destroy :update_current_balance
+	before_destroy :update_balance
 
 	validate :check_balance, :on =>:create
 	validate :update_check_balance,:on =>:update
@@ -26,6 +27,29 @@ class Transaction < ActiveRecord::Base
 	# def amount_was
 	# 	return self.amount
 	# end
+	def update_balance
+		tran = Transaction.where( 'account_id = ? AND created_at > ?',self.account_id, self.created_at)
+		tran.each do |trans|
+			if(self.transaction_type == "debit")
+				if(trans.transaction_type == "credit")
+					trans.balance = trans.balance + self.amount
+				else 
+					trans.balance = trans.balance - self.amount	
+				end	
+			else
+				binding.pry
+				if(trans.transaction_type == "credit")
+					trans.balance = trans.balance - self.amount
+					binding.pry
+				else 
+					trans.balance = trans.balance + self.amount	
+					binding.pry
+				end	
+			end	
+			trans.save
+		end	
+
+	end	
 	
 	def set_balance
 		if(self.transaction_type == "credit")
@@ -63,14 +87,8 @@ class Transaction < ActiveRecord::Base
 	# 		end
 	# 	# end
 	#  end	
-
-	def cascade
-		t = Transaction.where( 'account_id = ? AND created_at < ?',self.account_id , self.created_at).last
-		if t.present?
-			t.balance
-			temp = t.balance
-			tran = Transaction.where( 'account_id = ? AND created_at >= ?',self.account_id, self.created_at)
-			tran.each do |trans|
+	def check_bal(tran,temp)
+		tran.each do |trans|
 				if(trans.transaction_type == "credit" )
 					trans.balance= temp + trans.amount
 				else 
@@ -79,6 +97,15 @@ class Transaction < ActiveRecord::Base
 				trans.save
 				temp=trans.balance
 			end	
+	end	
+
+	def cascade
+		t = Transaction.where( 'account_id = ? AND created_at < ?',self.account_id , self.created_at).last
+		if t.present?
+			t.balance
+			temp = t.balance
+			tran = Transaction.where( 'account_id = ? AND created_at >= ?',self.account_id, self.created_at)
+			check_bal(tran,temp)
 		else
 			if(self.transaction_type == "credit" )
 				self.balance = self.account.opening_balance + self.amount
@@ -88,18 +115,7 @@ class Transaction < ActiveRecord::Base
 			self.save
 			temp = self.balance
 			tran = Transaction.where( 'account_id = ? AND created_at > ?',self.account_id, self.created_at)
-			binding.pry
-			tran.each do |trans|
-				if(trans.transaction_type == "credit" )
-					trans.balance= temp + trans.amount
-					binding.pry
-				else 
-					trans.balance= temp - trans.amount	
-					binding.pry
-				end	
-				trans.save
-				temp=trans.balance
-			end	
+			check_bal(tran,temp)
 		end	
 	end	
 
@@ -384,6 +400,25 @@ class Transaction < ActiveRecord::Base
 			account.current_balance =account.current_balance-self.amount
 			account.save
 		end
+
+		tran = Transaction.where( 'account_id = ? AND created_at > ?',self.account_id, self.created_at)
+		tran.each do |trans|
+			if(self.transaction_type == "debit")
+				if(trans.transaction_type == "credit")
+					trans.balance = trans.balance - self.amount
+				else 
+					trans.balance = trans.balance + self.amount	
+				end	
+			else
+				if(trans.transaction_type == "credit")
+					trans.balance = trans.balance + self.amount
+				else 
+					trans.balance = trans.balance - self.amount	
+				end	
+			end	
+			trans.save
+		end	
+
 	end
 
 end

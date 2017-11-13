@@ -2,17 +2,19 @@
     <table class ="table table-bordered" >
         <thead>
             <tr >
-            	<th>SI.no</th>
-                <th>Transaction Date</th>
+                <th>SI.no</th>
                 <th>Company Name</th>
                 <th>Account Number</th>
-                <th>Particular</th>
-                <th>Transaction type</th>
-                <th>Amount</th>
-                <th>Transaction kind</th>
+                <th>Transaction Date</th>
                 <th>Instrument Date</th>
+                <th>Transaction kind</th>
                 <th>Instrument Number</th>
-                <th>Remark</th>                        
+                <th>Particular</th>
+                <th>Amount</th>
+                <th>Transaction type</th>
+                <th>Balance</th>
+                <th>Remark</th> 
+                                     
             </tr>    
         </thead>
         
@@ -22,17 +24,17 @@
 
     		<tr>
                 <td><%=index+1%></td>
-                <td><%=trans.transaction_date.strftime(" %d-%m-%Y") if trans.transaction_date!= nil %></td>
                 <td><%=trans.company.try(:name)%></td>
                 <td><%=trans.account.acc_no%></td>
-                <td><%=trans.perticular.try(:name)%></td>
-                <td><%= trans.transaction_type %></td>
-                <td><%= trans.amount%></td>
-                <td><%= trans.transaction_kind %></td>
+                <td><%=trans.transaction_date.strftime(" %d-%m-%Y") if trans.transaction_date!= nil %></td>
                 <td><%= trans.instrument_date.strftime(" %d-%m-%Y") if trans.instrument_date!= nil  %></td>
+                <td><%= trans.transaction_kind %></td>
                 <td><%= trans.instrument_number%></td>
+                <td><%=trans.perticular.try(:name)%></td>
+                <td><%= trans.amount%></td>
+                <td><%= trans.transaction_type %></td>
+                <td><%= trans.balance%></td>
                 <td><%= trans.remark %></td>    
-
             </tr>
             <%end%>
                

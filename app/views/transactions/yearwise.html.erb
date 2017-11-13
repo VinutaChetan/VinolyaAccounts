@@ -163,6 +163,7 @@
                         <th class="text-success">Particular</th>
                         <th class="text-success">Amount</th>
                         <th class="text-success">Transaction type</th>
+                        <th class="text-success">Balance</th>
                         <th class="text-success">Remark</th>  
                       </tr>
                     </thead>
@@ -180,6 +181,7 @@
                           <td>  <%=trans.perticular.try(:name)%></td>
                           <td>  <%=trans.amount%></td>
                           <td>  <%=trans.transaction_type%></td>
+                          <td>  <%=trans.balance%></td>
                           <td>  <%=trans.remark%></td>
                           
                          </tr> 

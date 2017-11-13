@@ -14,6 +14,7 @@ Total transactions for the Company : <%=current_account.company.name%>  of  Acco
                         <th>Particular</th>
                         <th>Amount</th>
                         <th>Transaction type</th>
+                        <th>Balance</th>
                         <th>Remark</th> 
                         
                       </tr>
@@ -35,6 +36,7 @@ Total transactions for the Company : <%=current_account.company.name%>  of  Acco
                         <td><%= val.perticular.name%></td>
                         <td><%= val.amount%></td>
                         <td><%= val.transaction_type %></td>
+                        <td><%=val.balance%></td>
                         <td><%= val.remark %></td>
                         
                       </tr> 

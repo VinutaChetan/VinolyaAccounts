@@ -11,6 +11,7 @@
                         <th style="padding: 10px;">Transaction kind</th>
                         <th style="padding: 10px;">Instrument Date</th>
                         <th style="padding: 10px;">Instrument Number</th>
+                        <th class="text-success">Balance</th>
                         <th style="padding: 10px;">Remark</th>
                         <% if current_user.role=="admin"%>
                         <th class="text-success">Restore</th> 
@@ -51,6 +52,7 @@
                         <td style="padding: 10px;"><%= val.transaction_kind %></td>
                         <td style="padding: 10px;"><%= val.instrument_date.strftime("%d-%m-%Y") if val.instrument_date != nil %></td>
                         <td style="padding: 10px;"><%= val.instrument_number%></td>
+                        <td style="padding: 10px;"><%=val.balance%></td>
                         <td style="padding: 10px;"><%= val.remark %></td>
                         <% if current_user.role=="admin"%>
                         <td style="padding: 10px;"><%= link_to "Restore",transactions_restore_path(transaction_id: val.id) %></td>

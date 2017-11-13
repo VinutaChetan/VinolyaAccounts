@@ -171,7 +171,7 @@ class TransactionsController < ApplicationController
 
   def softdelete_pp
     @transactions=Transaction.only_deleted
-    binding.pry
+    #binding.pry
   end 
 
   def daily_statement

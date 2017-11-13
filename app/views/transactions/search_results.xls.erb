@@ -13,6 +13,7 @@ The transaction details from  <%=@transactions.first.transaction_date.strftime("
                 <th>Particular</th>
                 <th>Amount</th>
                 <th>Transaction type</th>
+                <th>Balance</th>
                 <th>Remark</th> 
                 
             </tr>
@@ -32,6 +33,7 @@ The transaction details from  <%=@transactions.first.transaction_date.strftime("
                 <td><%=trans.perticular.try(:name)%></td>
                 <td><%= trans.amount%></td>
                 <td><%= trans.transaction_type %></td>
+                <td><%= trans.balance%></td>
                 <td><%= trans.remark %></td>    
 
             </tr>
